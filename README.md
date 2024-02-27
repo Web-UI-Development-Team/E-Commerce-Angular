@@ -1,4 +1,4 @@
-<h1>NodeJS Team Project</h1>
+<h1>Angular Team Project</h1>
 
 <h2>Team Members</h2>
 
@@ -10,25 +10,25 @@
     <il>Nadine Mohamed<br></il>
 </ul>
 
-<h2>Deadline: 2024/02/18</h2>
+<h2>Deadline: 2024/03/-</h2>
 
 <h2>ToDo List</h2>
 
 <ul>
     <il>
-        - Waleed: Product & Admin Endpoints <br>
+        - Waleed:  <br>
     </il>
     <il>
-        - Yasmen: Payment, Search and Filter Endpoints<br>
+        - Yasmen: <br>
     </il>
     <il>
-        - Mariam: Shopping Cart, Order Endpoints<br>
+        - Mariam: <br>
     </il>
     <il>
-        - Esraa: Reviews, Ratings & Category Endpoints<br>
+        - Esraa: <br>
     </il>
     <il>
-        - Nadine: Authentication & User Profile Endpoints<br>
+        - Nadine: <br>
     </il>
 </ul>
 
