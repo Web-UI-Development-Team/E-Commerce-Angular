@@ -10,25 +10,24 @@
     <il>Nadine Mohamed<br></il>
 </ul>
 
-<h2>Deadline: 2024/03/-</h2>
+<h2>Deadline: 2024/03/10</h2>
 
 <h2>ToDo List</h2>
 
 <ul>
     <il>
-        - Waleed:  <br>
+        - Waleed: User Profile, Cart<br>
     </il>
     <il>
-        - Yasmen: <br>
+        - Yasmen: Dashboard, Products ( SearSearching By Product Name )<br>
     </il>
     <il>
-        - Mariam: <br>
+        - Mariam: Products ( Pagination - Sorting By Price, Category (RxJS) ), Navbar<br>
     </il>
     <il>
-        - Esraa: <br>
+        - Esraa: Orders, Order Details<br>
     </il>
     <il>
-        - Nadine: <br>
+        - Nadine: Authentication ( Sign In & Sign Up (Interceptor - Guards) ), About, Contact Us<br>
     </il>
 </ul>
-
