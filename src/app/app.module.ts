@@ -24,6 +24,8 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+import { NotFound404Component } from './not-found404/not-found404.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     CartComponent,
     CartItemComponent,
+    HomeComponent,
+    NotFound404Component,
   ],
   imports: [
     BrowserModule,
