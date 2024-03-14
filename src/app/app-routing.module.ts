@@ -9,6 +9,7 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { OrdersComponent } from './order/orders/orders.component';
 
 const routes: Routes = [
   {path:"",redirectTo:"/home",pathMatch:'full'},
@@ -19,9 +20,10 @@ const routes: Routes = [
     // {path:"productDetails/:id",component:ProductDetailsComponent}
   ]},
   {path:"about",component:AboutComponent},
-  {path:"dashboard",component:DashboardComponent},
+  {path:"dashboard",component:DashboardComponent}, 
   {path:"contactUs",component:ContactUsComponent},
-  {path:"**",component:NotFound404Component}
+  {path:"checkout",component:OrdersComponent},
+  {path:"**",component:NotFound404Component},
 
 ];
 
