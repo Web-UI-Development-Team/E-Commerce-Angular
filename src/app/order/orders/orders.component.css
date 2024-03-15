@@ -1,0 +1,10 @@
+p {
+  color: red;
+}
+.form-row .control-label::after {
+  content: "*";
+  color: red;
+  position: relative;
+  top: 2px;
+  left: 2px;
+}
