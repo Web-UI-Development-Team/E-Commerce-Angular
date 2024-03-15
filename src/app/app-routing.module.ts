@@ -10,6 +10,7 @@ import { CartComponent } from './cart/cart.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OrdersComponent } from './order/orders/orders.component';
+import { OrderDetailsComponent } from './order/order-details/order-details.component';
 
 const routes: Routes = [
   {path:"",redirectTo:"/home",pathMatch:'full'},
@@ -22,7 +23,9 @@ const routes: Routes = [
   {path:"about",component:AboutComponent},
   {path:"dashboard",component:DashboardComponent}, 
   {path:"contactUs",component:ContactUsComponent},
-  {path:"checkout",component:OrdersComponent},
+  {path:"checkout",component:OrdersComponent}, 
+  {path:"orderDetails",component:OrderDetailsComponent}, 
+
   {path:"**",component:NotFound404Component},
 
 ];
