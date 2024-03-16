@@ -1,8 +1,8 @@
-export interface Order 
+export interface Order  
     {
-    image : string,
+    image : string, 
     productName : string,
-    productId : number,
+    productId : number, 
     quantity : number,
     price : number,
     date : Date
