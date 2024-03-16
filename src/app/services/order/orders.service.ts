@@ -10,7 +10,7 @@ export class OrdersService {
   constructor(private http : HttpClient) { } 
 
   getOrders(){  
-    return this.http.get<any>('http://localhost:3010/api/v1/orders'); 
+    return this.http.get<Order[]>('http://localhost:3010/api/v1/orders'); 
   } 
 
 }

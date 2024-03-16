@@ -1,39 +1,60 @@
-<!-- <div>img</div>
-<div>name</div>
-<div>id</div>
-<div>price</div>
-<div>quan</div>
-<div>date</div> -->
+
 
 <h2>Orders details</h2>
 
-<!-- <ul>
-    <li>hyy</li>
-    <li *ngFor="let order of orders">
-        id : {{order.productId}} 
-        name : {{order.productName}}
-        price : {{order.price}}  
-    </li>
-</ul> -->
-<!-- <div class="container">
+<table class="table table-striped table-white">
+  <thead>
+    <tr>
+      <th scope="col">status</th>
+      <th scope="col">dateOfOrder</th>
+      <th scope="col">totalPrice</th>
+      <th scope="col">product</th>
+      <th scope="col">quantity</th> 
+    </tr>
+  </thead> 
+  <tbody  > 
+    <tr *ngFor="let order of orders ; let i = index" > 
+      <th scope="row">{{order.status}}</th>
+      <td>{{order.dateOfOrder | date}}</td>
+      <td>{{order.totalPrice}}</td> 
+      <td>{{ order.orderItems[i].product }}</td>
+
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<!-- <div class="container" *ngFor="let order of orders">
     <div class="row">
-      <div class="col-md">
-        ProductId 
-      </div>
+      <div class="col" *ngFor="let orderDetail of order.orderItems">
+        <div class="col">
+          <p>name</p>
+          {{orderDetail.product}}
+        </div>
+        <div class="col">
+          <p>quantity</p>
+          {{orderDetail.quantity}}
+        </div>
+
       <div class="col">
-        img
+        <p>status</p>
+
+        {{order.status}}    
       </div>
+
       <div class="col">
-        name
+        <p>date</p>
+        {{order.dateOfOrder | date}}   
       </div>
+
       <div class="col">
-        quantity
+        <p>total</p>
+        {{order.totalPrice}}
       </div>
-      <div class="col">
-        price
-      </div> <div class="col">
-        date
-      </div>
+
       <div class="col">
         <button>cancel</button>
       </div>

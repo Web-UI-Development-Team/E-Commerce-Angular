@@ -8,19 +8,22 @@ import { Order } from '../../../modles/order.modle';
   styleUrl: './order-details.component.css'
 }) 
 export class OrderDetailsComponent implements OnInit  { 
-  orders : any 
+  orders : Order[] = [] ;
+  
   constructor(private orderService : OrdersService){} 
 
   ngOnInit(): void { 
 
-      this.orderService.getOrders().subscribe((data)=>{
-        console.log(data); 
+      this.orderService.getOrders().subscribe((data)=>{ 
+        this.orders = data ;   
+        console.log(data);
         
       }) 
   }  
   
 
 } 
+
 
 
 

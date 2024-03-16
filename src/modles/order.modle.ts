@@ -1,11 +1,12 @@
 export interface Order  
     {
-    image : string, 
-    productName : string,
-    productId : number, 
-    quantity : number,
-    price : number,
-    date : Date
+        orderItems:[{ 
+            product: string,
+            quantity : number
+        }], 
+        status : string,
+        totalPrice : number,
+        dateOfOrder : Date,
 }
     
 
