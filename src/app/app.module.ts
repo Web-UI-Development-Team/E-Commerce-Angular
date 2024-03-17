@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
+import {  ReactiveFormsModule } from '@angular/forms'; 
 import {
   BrowserModule,
-  provideClientHydration,
-} from '@angular/platform-browser';
+  provideClientHydration,} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +26,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { NotFound404Component } from './not-found404/not-found404.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,9 @@ import { NotFound404Component } from './not-found404/not-found404.component';
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule
   ],
   providers: [
     provideClientHydration(),
