@@ -21,6 +21,11 @@ export class OrdersComponent {
   })
 
   OnSumbit() {
+    this.isSubmitted = true ; 
+    if(this.UserForm.invalid){
+      console.log('invalid');
+      return
+    }
     this.router.navigateByUrl('orderDetails');
   }
 }

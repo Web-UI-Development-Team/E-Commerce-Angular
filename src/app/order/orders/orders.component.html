@@ -17,23 +17,25 @@
     <div class="form-row m-3">
       <div class="col-md-6 mb-3">
         <label class=" control-label" for="validationDefault01" >First name</label>
-        <input type="text" class="form-control mt-2 " id="validationDefault01" formControlName="firstName"> 
+        <input type="text" class="form-control mt-2 " id="validationDefault01" formControlName="firstName"
+        [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"> 
               <!-- validation -->
-              <div class="text-danger" *ngIf="UserForm.controls['firstName'].invalid && (UserForm.controls['firstName'].touched || UserForm.controls['firstName'].dirty)">
+              <div class="text-danger" *ngIf="UserForm.controls['firstName'].invalid && (isSubmitted || UserForm.controls['firstName'].touched || UserForm.controls['firstName'].dirty)">
                 <span *ngIf="UserForm.controls['firstName'].errors?.['required']">
                   This field is required 
                 </span>
               </div>
       </div>
 
-
-
       <div class="col-md-6 mb-3">
         <label class=" control-label" for="validationDefault02" >Last name</label>
-        <input type="text" class="form-control mt-2 " id="validationDefault02" formControlName="lastName">
+        <input type="text" class="form-control mt-2 " id="validationDefault02" formControlName="lastName"
+        [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
+
+        >
         <!-- validation -->
-        <div class="text-danger" *ngIf="UserForm.controls['lastName'].invalid && (UserForm.controls['lastName'].touched || UserForm.controls['lastName'].dirty)">
-        <span *ngIf="UserForm.controls['firstName'].errors?.['required']" >
+        <div class="text-danger" *ngIf="UserForm.controls['lastName'].invalid && (isSubmitted || UserForm.controls['lastName'].touched || UserForm.controls['lastName'].dirty)">
+        <span *ngIf="UserForm.controls['lastName'].errors?.['required']" >
           This field is required 
         </span>
         </div>
@@ -44,9 +46,12 @@
 
         <div class="col-md-6 mb-3">
             <label class=" control-label" for="validationDefault03" >Phone Number</label>
-            <input type="text" class="form-control mt-2 " id="validationDefault03"  formControlName="phoneNumber">
+            <input type="text" class="form-control mt-2 " id="validationDefault03"  formControlName="phoneNumber"
+            [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
+
+            >
              <!-- validation -->
-        <div class="text-danger" *ngIf="UserForm.controls['phoneNumber'].invalid && (UserForm.controls['phoneNumber'].touched || UserForm.controls['phoneNumber'].dirty)">
+        <div class="text-danger" *ngIf="UserForm.controls['phoneNumber'].invalid  && (isSubmitted || UserForm.controls['phoneNumber'].touched || UserForm.controls['phoneNumber'].dirty)">
           <span *ngIf="UserForm.controls['phoneNumber'].errors?.['required']" >This field is required  </span>
           <span *ngIf="UserForm.controls['phoneNumber'].errors?.['maxlength']" >max length is 11 charcters</span>
           </div>
@@ -55,9 +60,12 @@
 
       <div class="col-md-6 mb-3">
         <label class=" control-label" for="validationDefault03" >City</label>
-        <input type="text" class="form-control mt-2 " id="validationDefault03"  formControlName="city">
+        <input type="text" class="form-control mt-2 " id="validationDefault03"  formControlName="city"
+        [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
+
+        >
          <!-- validation -->
-         <div class="text-danger" *ngIf="UserForm.controls['city'].invalid && (UserForm.controls['city'].touched || UserForm.controls['city'].dirty)">
+         <div class="text-danger" *ngIf="UserForm.controls['city'].invalid && (isSubmitted || UserForm.controls['city'].touched || UserForm.controls['city'].dirty)">
           <span *ngIf="UserForm.controls['city'].errors?.['required']" >
             This field is required 
           </span>
@@ -66,10 +74,13 @@
 
       <div class="col-md-6 mb-3">
         <label class=" control-label" for="validationDefault04">State</label>
-        <input type="text" class="form-control mt-2 " id="validationDefault04"  formControlName="state">
+        <input  type="text" class="form-control mt-2 " id="validationDefault04" formControlName="state"
+        [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
+
+        >
          <!-- validation -->
-         <div class="text-danger" *ngIf="UserForm.controls['state'].invalid && (UserForm.controls['state'].touched || UserForm.controls['state'].dirty)">
-          <span *ngIf="UserForm.controls['state'].errors?.['required']" >
+         <div class="text-danger" *ngIf="UserForm.controls['state'].invalid && (isSubmitted || UserForm.controls['state'].touched || UserForm.controls['state'].dirty)">
+          <span  *ngIf="UserForm.controls['state'].errors?.['required']" >
             This field is required 
           </span>
           </div>
@@ -77,9 +88,11 @@
 
       <div class="col-md-6 mb-3">
         <label class=" control-label" for="validationDefault05" >Zip</label>
-        <input type="text" class="form-control mt-2 " id="validationDefault05"  formControlName="zip">
+        <input type="text" class="form-control mt-2 " id="validationDefault05"  formControlName="zip"
+        [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}" 
+        >
          <!-- validation -->
-         <div class="text-danger" *ngIf="UserForm.controls['zip'].invalid && (UserForm.controls['zip'].touched || UserForm.controls['zip'].dirty)">
+         <div class="text-danger" *ngIf="UserForm.controls['zip'].invalid && (isSubmitted ||UserForm.controls['zip'].touched || UserForm.controls['zip'].dirty)">
           <span *ngIf="UserForm.controls['zip'].errors?.['required']" >
             This field is required 
           </span>
