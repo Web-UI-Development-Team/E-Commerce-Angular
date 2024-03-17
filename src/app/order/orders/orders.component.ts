@@ -12,12 +12,12 @@ export class OrdersComponent {
 
     isSubmitted : boolean = false;
     UserForm = new FormGroup({
-    firstName: new FormControl('',[Validators.required]),
-    lastName: new FormControl('',[Validators.required]),
-    phoneNumber: new FormControl('',[Validators.required,Validators.maxLength(11)]),
-    city: new FormControl('',[Validators.required]),
-    state: new FormControl('',Validators.required),
-    zip: new FormControl('',[Validators.required]),
+    firstName: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
+    lastName: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
+    phoneNumber: new FormControl('',[Validators.required,Validators.maxLength(11), Validators.pattern('^[0-9]+$')]),
+    city: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]), 
+    state: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
+    zip: new FormControl('',[Validators.required , Validators.pattern('^[0-9]+$')]),
   })
 
   OnSumbit() {

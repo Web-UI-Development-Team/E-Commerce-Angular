@@ -23,7 +23,11 @@
               <div class="text-danger" *ngIf="UserForm.controls['firstName'].invalid && (isSubmitted || UserForm.controls['firstName'].touched || UserForm.controls['firstName'].dirty)">
                 <span *ngIf="UserForm.controls['firstName'].errors?.['required']">
                   This field is required 
+                </span> 
+                <span *ngIf="UserForm.controls['firstName'].errors?.['pattern']"> 
+                 Please Enter charcters only 
                 </span>
+                
               </div>
       </div>
 
@@ -38,6 +42,9 @@
         <span *ngIf="UserForm.controls['lastName'].errors?.['required']" >
           This field is required 
         </span>
+        <span *ngIf="UserForm.controls['lastName'].errors?.['pattern']"> 
+          Please Enter charcters only 
+         </span>
         </div>
       </div>
     </div>
@@ -54,7 +61,10 @@
         <div class="text-danger" *ngIf="UserForm.controls['phoneNumber'].invalid  && (isSubmitted || UserForm.controls['phoneNumber'].touched || UserForm.controls['phoneNumber'].dirty)">
           <span *ngIf="UserForm.controls['phoneNumber'].errors?.['required']" >This field is required  </span>
           <span *ngIf="UserForm.controls['phoneNumber'].errors?.['maxlength']" >max length is 11 charcters</span>
-          </div>
+          <span *ngIf="UserForm.controls['phoneNumber'].errors?.['pattern']"> 
+            Please Enter numbers only 
+           </span>
+        </div>
         </div>
     </div>
 
@@ -69,6 +79,9 @@
           <span *ngIf="UserForm.controls['city'].errors?.['required']" >
             This field is required 
           </span>
+          <span *ngIf="UserForm.controls['city'].errors?.['pattern']"> 
+            Please Enter charcters only 
+           </span>
           </div>
       </div>
 
@@ -83,6 +96,9 @@
           <span  *ngIf="UserForm.controls['state'].errors?.['required']" >
             This field is required 
           </span>
+          <span *ngIf="UserForm.controls['state'].errors?.['pattern']"> 
+            Please Enter charcters only 
+           </span>
           </div>
       </div>
 
@@ -96,6 +112,9 @@
           <span *ngIf="UserForm.controls['zip'].errors?.['required']" >
             This field is required 
           </span>
+          <span *ngIf="UserForm.controls['zip'].errors?.['pattern']"> 
+            Please Enter numbers only 
+           </span>
           </div> 
       </div>
     <!--  -->
