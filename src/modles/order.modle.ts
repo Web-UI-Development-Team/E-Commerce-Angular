@@ -1,7 +1,8 @@
 export interface Order  
     {
         orderItems:[{ 
-            product: string,
+            title: string,
+            price : number
             quantity : number
         }], 
         status : string,

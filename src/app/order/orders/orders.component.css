@@ -1,24 +1,26 @@
 p {
   color: red;
 }
-.form-row .control-label::after {
+.form-row .control-label::after { 
   content: "*";
   color: red;
   position: relative;
   top: 2px;
   left: 2px;
 }
+.circle {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid red;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+}
+span {
+  margin-top: 10px;
+  color: red;
+}
 input.ng-invalid.ng-touched {
   border: 1px solid red;
 }
-/* input.ng-valid.ng-untouched {
-  border: 2px solid rgb(121, 231, 121);
-
-
-
-   <input type="text" class="form-control mt-2" id="validationDefault01" formControlName="firstName"
-      [ngClass]="{ 'ng-invalid ng-touched': isSubmitted && UserForm.get('firstName').invalid }">
-    <!-- Validation error message -->
-    <div class="text-danger" *ngIf="isSubmitted && UserForm.get('firstName').invalid">
-    </div>
-} */
