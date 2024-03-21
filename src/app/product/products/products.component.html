@@ -1,1 +1,55 @@
-<button  class="btn btn-outline-primary m-2 p-2">Product Details</button>
+<!-- Products -->
+
+<section>
+  <div class="container my-5">
+    <header class="mb-4">
+      <h2 class="text-bold ">Products</h2>
+    </header>
+
+    <div class="row" >
+      
+      <div  class="col-lg-3 col-md-6 col-sm-6 " *ngFor="let prd of product" >
+        <div class="card my-2 shadow-0" *ngIf="!loading" >
+          
+          <a href="#" class="img-wrap">
+            <img
+              src={{prd.thumbnail}}
+              class="card-img-top"
+              style="aspect-ratio: 1 / 1"
+            />
+          </a>
+          <div class="card-body p-2 pt-3">
+            <a
+              href="#!"
+              class="btn btn-outline-dark border px-2 pt-2 float-end  "
+              ><i class="fas fa-heart fa-lg px-1  text-danger   "></i
+            ></a>
+            <h5 class="card-title">{{prd.title}}</h5>
+            <p class="card-text mb-0">Brand: {{prd.brand}}</p>
+            <p class="text">${{prd.price}}</p>
+            <div class="d-flex justify-content-between">
+              <button (click)="showDetails(prd._id)"  class="btn btn-outline-success btn-sm ">More Details</button>
+              <button   (click)="addProductToCart(prd._id)"  class="btn btn-success btn-sm ">Add <i class="fas fa-shopping-cart m-1 me-md-2"></i></button>
+
+             
+
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+ 
+    </div>
+   
+  </div>
+
+  <div class="text-center" *ngIf="loading">
+    <app-loader></app-loader>
+  </div>
+</section>
+<!-- Products -->
+
+
+
+

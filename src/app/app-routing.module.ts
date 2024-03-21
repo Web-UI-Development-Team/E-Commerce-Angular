@@ -15,9 +15,9 @@ const routes: Routes = [
   {path:"signIn",component:SignInComponent},
   {path:"cart",component:CartComponent},
   {path:"home",component:HomeComponent},
-  {path:"products",component:ProductsComponent,children:[
-    // {path:"productDetails/:id",component:ProductDetailsComponent}
-  ]},
+  {path:"products",component:ProductsComponent},
+  {path:"productDetails/:id",component:ProductDetailsComponent},
+  
   {path:"about",component:AboutComponent},
   {path:"dashboard",component:DashboardComponent},
   {path:"contactUs",component:ContactUsComponent},

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICart } from '../../../modles/cart.modle';
 import { CartService } from '../../services/cart/cart.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cart-item',
@@ -8,7 +9,7 @@ import { CartService } from '../../services/cart/cart.service';
   styleUrl: './cart-item.component.css',
 })
 export class CartItemComponent implements OnInit {
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService,private activatedRouter:ActivatedRoute) {}
 
   @Input() cartItem: ICart = {
     product: {
@@ -33,6 +34,9 @@ export class CartItemComponent implements OnInit {
   isQuantityEdited: boolean = false;
 
   ngOnInit() {
+  
+  
+   
     this.isQuantityEdited = this.cartItem.quantity > 1;
   }
 
@@ -43,4 +47,9 @@ export class CartItemComponent implements OnInit {
   onChangeQuantity() {
     this.cartService.calculateTotal();
   }
+  
+
+
+
+
 }
