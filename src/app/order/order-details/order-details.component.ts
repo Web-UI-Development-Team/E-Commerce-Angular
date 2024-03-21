@@ -15,56 +15,39 @@ export class OrderDetailsComponent implements OnInit  {
   
   constructor(private orderService : OrdersService , private route : ActivatedRoute){} 
 
-  ngOnInit(): void {    
-    
-      this.orderService.getOrders().subscribe((data)=>{ 
-        this.orders = data ;   
-        console.log(data[0]._id); 
-
-      }) //
-
-    }//oninit 
-
-    onCancelOrder(orderId:string , status : string){
-      console.log(orderId); 
-      
-      this.orderService.cancelOrder(orderId , status).subscribe({
-        next : (res)=>{
-          console.log('cancled' , res); 
-        },
-        error :(err)=>{
-          console.log('error' , err);
-          
-        }
-       
-      })
-    }
-
-
-  }
-      
-
-      // this.route.paramMap.subscribe(params =>{
-      //   const id = params.get('id')
-      //   if(id) {
-      //     this.orderId = id;
-      //     this.onCancelOrder(this.orderId)
-      //   }else{
-      //     console.log('error');
-          
-      //   }
-      // })
-  
+  ngOnInit(): void {   
  
-  // //
-  // onCancelOrder(orderId : string){ 
-  //   this.orderService.cancelOrder(orderId).subscribe(
-  //     respose => {
-  //       console.log('cancled' , respose);
-  //   }
-  //   )
-  // }
-  
+    this.orderService.getOrders().subscribe((data)=>{          
+      // console.log(data[0]._id); to log id of order
+      this.orders = data;
+      // data = data.filter(order=>order.status= 'pendin')
+      console.log(data); 
+
+    }) 
+      }//oninit 
+
+     
+    
+
+    onCancelOrder(orderId:string , status : string){  
+      if(confirm('do you need to cancel this order')) {
+        console.log('cancled');
+        this.orderService.cancelOrder(orderId , status).subscribe({
+          next : (res)=>{
+            console.log('cancled' , res); 
+            const cancelOrderIndex = this.orders.findIndex(order => order._id === orderId) //  
+            this.orders.splice(cancelOrderIndex,1) ;
+      
+          },
+          error :(err)=>{
+            console.log('error' , err);
+          }
+        })
+      }
+     
+    }
+  }   
+
 
 
 

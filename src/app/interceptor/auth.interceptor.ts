@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     req = req.clone({
       setHeaders: {
-        'jwt' : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndhbGVlZC5hbG1lbmF3eUBvdXRsb29rLmNvbSIsImlhdCI6MTcxMTAyNzQ3OSwiZXhwIjoxNzExMDMxMDc5fQ.RNXrNZvkCV-4544gfxd3RZ4OulKiAoZpqHWA_1DkLUY"
+        'jwt' : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndhbGVlZC5hbG1lbmF3eUBvdXRsb29rLmNvbSIsImlhdCI6MTcxMTAzMTMyNSwiZXhwIjoxNzExMDM0OTI1fQ.lPwmgkCaQfPD8pJv1YVmgcj-AheW-ewRa3htPavdrmc"
       },
     });
 

@@ -13,7 +13,7 @@ export class OrdersService {
   } 
   cancelOrder(orderId:string , newStatus:string ){  
     const newBody = {status : newStatus} 
-    return this.http.patch<Order>(`http://localhost:3010/api/v1/orders/${orderId}/cancel`,newBody)
+    return this.http.patch<Order>(`http://localhost:3010/api/v1/orders/${orderId}/cancel`,newBody) 
   } 
 
 }
