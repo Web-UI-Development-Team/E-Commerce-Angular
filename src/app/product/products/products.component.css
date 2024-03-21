@@ -1,0 +1,8 @@
+.card:hover{
+    transform: scale(1.1);
+    
+}
+.text{
+    font-weight: bold;
+    /* color: rgb(14, 87, 14); */
+}
