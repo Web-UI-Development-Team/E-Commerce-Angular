@@ -10,7 +10,7 @@ import { FormControl, FormGroup, Validators} from '@angular/forms';
 export class OrdersComponent {
   constructor(private router: Router ) {} 
 
-    isSubmitted : boolean = false;
+    isSubmitted : boolean = false; 
     UserForm = new FormGroup({
     firstName: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
     lastName: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
@@ -20,9 +20,9 @@ export class OrdersComponent {
     zip: new FormControl('',[Validators.required , Validators.pattern('^[0-9]+$')]),
   })
 
-  OnSumbit() {
+  OnSumbit() { 
     this.isSubmitted = true ; 
-    if(this.UserForm.invalid){
+    if(this.UserForm.invalid){ 
       console.log('invalid');
       return
     }

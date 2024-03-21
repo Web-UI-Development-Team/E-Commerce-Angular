@@ -17,7 +17,7 @@
     <div class="form-row m-3">
       <div class="col-md-6 mb-3">
         <label class=" control-label" for="validationDefault01" >First name</label>
-        <input type="text" class="form-control mt-2 " id="validationDefault01" formControlName="firstName"
+        <input type="text" class="form-control mt-2 "  formControlName="firstName"
         [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"> 
               <!-- validation -->
               <div class="text-danger" *ngIf="UserForm.controls['firstName'].invalid && (isSubmitted || UserForm.controls['firstName'].touched || UserForm.controls['firstName'].dirty)">
@@ -33,7 +33,7 @@
 
       <div class="col-md-6 mb-3">
         <label class=" control-label" for="validationDefault02" >Last name</label>
-        <input type="text" class="form-control mt-2 " id="validationDefault02" formControlName="lastName"
+        <input type="text" class="form-control mt-2 "  formControlName="lastName"
         [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
 
         >
@@ -53,7 +53,7 @@
 
         <div class="col-md-6 mb-3">
             <label class=" control-label" for="validationDefault03" >Phone Number</label>
-            <input type="text" class="form-control mt-2 " id="validationDefault03"  formControlName="phoneNumber"
+            <input type="text" class="form-control mt-2 " formControlName="phoneNumber"
             [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
 
             > 
@@ -72,7 +72,7 @@
 
       <div class="col-md-6 mb-3">
         <label class=" control-label" for="validationDefault03" >City</label>
-        <input type="text" class="form-control mt-2 " id="validationDefault03"  formControlName="city"
+        <input type="text" class="form-control mt-2 "   formControlName="city"
         [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
 
         >
@@ -89,7 +89,7 @@
 
       <div class="col-md-6 mb-3">
         <label class=" control-label" for="validationDefault04">State</label>
-        <input  type="text" class="form-control mt-2 " id="validationDefault04" formControlName="state"
+        <input  type="text" class="form-control mt-2 " formControlName="state"
         [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
 
         >
@@ -106,7 +106,7 @@
 
       <div class="col-md-6 mb-3">
         <label class=" control-label" for="validationDefault05" >Zip</label>
-        <input type="text" class="form-control mt-2 " id="validationDefault05"  formControlName="zip"
+        <input type="text" class="form-control mt-2 "   formControlName="zip"
         [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}" 
         >
          <!-- validation -->

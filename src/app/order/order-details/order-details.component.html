@@ -24,7 +24,7 @@
 <!-- ///////////// -->
       <td>
         <span
-          *ngFor="let orderDetail of order.orderItems"
+          *ngFor="let orderDetail of order.orderItems" 
           style="display: block"
         >
           {{ orderDetail.price }}
@@ -42,10 +42,12 @@
       <!-- ///// -->
       <td>{{ order.dateOfOrder | date }}</td>
       <td>{{ order.status }}</td>
-      <td>{{ order.totalPrice }}</td>
+      <td>{{ order.totalPrice }}</td> 
+      <td>
+        <button (click)="onCancelOrder(order._id,'cancled')">cancel</button> 
+      </td>
     </tr> 
   </tbody>
 </table>
-<button (click)="onCancelOrder(orderId)">cancel</button>
 
 

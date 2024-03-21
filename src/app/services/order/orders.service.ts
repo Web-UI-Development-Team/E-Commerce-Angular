@@ -11,9 +11,9 @@ export class OrdersService {
   getOrders(){  
     return this.http.get<Order[]>('http://localhost:3010/api/v1/orders'); 
   } 
-  cancelOrder(orderId:string){
-    return this.http.delete(`http://localhost:3010/api/v1/orders/${orderId}/cancel`)
-  }
+  cancelOrder(orderId:string , newStatus:string ){  
+    const newBody = {status : newStatus} 
+    return this.http.patch<Order>(`http://localhost:3010/api/v1/orders/${orderId}/cancel`,newBody)
+  } 
 
 }
-// /:id/cancel

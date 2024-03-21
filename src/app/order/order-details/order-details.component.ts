@@ -11,39 +11,62 @@ import { ActivatedRoute } from '@angular/router';
 export class OrderDetailsComponent implements OnInit  { 
   orders : Order[] = [] ;
   orderId: any;
+  status : any;
   
   constructor(private orderService : OrdersService , private route : ActivatedRoute){} 
 
-  ngOnInit(): void { 
+  ngOnInit(): void {    
+    
       this.orderService.getOrders().subscribe((data)=>{ 
         this.orders = data ;   
-        console.log(data); 
-      }) 
-      this.route.paramMap.subscribe(params =>{
-        const id = params.get('id')
-        if(id) {
-          this.orderId = id;
-          this.onCancelOrder(this.orderId)
-        }else{
-          console.log('error');
+        console.log(data[0]._id); 
+
+      }) //
+
+    }//oninit 
+
+    onCancelOrder(orderId:string , status : string){
+      console.log(orderId); 
+      
+      this.orderService.cancelOrder(orderId , status).subscribe({
+        next : (res)=>{
+          console.log('cancled' , res); 
+        },
+        error :(err)=>{
+          console.log('error' , err);
           
         }
+       
       })
-  } 
- 
-  // //
-  onCancelOrder(orderId : string){
-    this.orderService.cancelOrder(orderId).subscribe(
-      respose => {
-        console.log('cancled' , respose);
     }
-    )
-  
+
 
   }
+      
+
+      // this.route.paramMap.subscribe(params =>{
+      //   const id = params.get('id')
+      //   if(id) {
+      //     this.orderId = id;
+      //     this.onCancelOrder(this.orderId)
+      //   }else{
+      //     console.log('error');
+          
+      //   }
+      // })
+  
+ 
+  // //
+  // onCancelOrder(orderId : string){ 
+  //   this.orderService.cancelOrder(orderId).subscribe(
+  //     respose => {
+  //       console.log('cancled' , respose);
+  //   }
+  //   )
+  // }
   
 
-} 
+
 
 
 
