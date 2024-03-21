@@ -56,7 +56,7 @@
             <input type="text" class="form-control mt-2 " id="validationDefault03"  formControlName="phoneNumber"
             [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
 
-            >
+            > 
              <!-- validation -->
         <div class="text-danger" *ngIf="UserForm.controls['phoneNumber'].invalid  && (isSubmitted || UserForm.controls['phoneNumber'].touched || UserForm.controls['phoneNumber'].dirty)">
           <span *ngIf="UserForm.controls['phoneNumber'].errors?.['required']">  <span class="circle">!</span> This field is required  </span>
@@ -120,7 +120,7 @@
           </div> 
       </div>
 </div>
-    <!--  -->
+    
 
     <button (click)="OnSumbit()" class="btn btn-primary m-3" type="submit">Continue</button>
   </form>
