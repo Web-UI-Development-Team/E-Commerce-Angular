@@ -24,6 +24,7 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { UserFormComponent } from './user-profile/user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     CartComponent,
     CartItemComponent,
+    UserFormComponent,
   ],
   imports: [
     BrowserModule,

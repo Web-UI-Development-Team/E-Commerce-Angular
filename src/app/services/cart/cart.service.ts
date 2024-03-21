@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ICart } from '../../../modles/cart.modle';
 import { CartRequestService } from './cart.request.service';
+import { faLariSign } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,7 @@ export class CartService {
         createdAt: '',
         updatedAt: '',
       },
+      isInWishList: false,
       quantity: 0,
     },
   ];
@@ -58,11 +60,15 @@ export class CartService {
     );
   }
 
-  removeCart(productId: string) {
-    this.cartItems = this.cartItems.filter(
-      item => item.product._id !== productId
-    )
-    
+  updataWishList(product: string) {
+    this.cartRequestService.updateWishListRequest(product).subscribe(
+      data => console.log(data)
+    );
+  }
+
+  removeCart(productId: string, index: number) {
+    this.cartItems.splice(index, 1)
+
     this.cartRequestService.removeCartRequest(productId).subscribe(
       data => console.log(data)
     )

@@ -27,4 +27,8 @@ export class CartComponent implements OnInit {
   trackByProductId(index: number, cartItem: ICart): string {
     return cartItem.product._id;
   }
+
+  test() {
+    console.log(this.cartItems);
+  }
 }

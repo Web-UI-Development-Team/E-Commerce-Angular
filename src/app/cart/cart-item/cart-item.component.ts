@@ -27,17 +27,30 @@ export class CartItemComponent implements OnInit {
       createdAt: '',
       updatedAt: '',
     },
+    isInWishList: false,
     quantity: 0,
   };
 
   isQuantityEdited: boolean = false;
+  buttonStyle: string = '';
 
   ngOnInit() {
     this.isQuantityEdited = this.cartItem.quantity > 1;
+    this.buttonStyle = this.cartItem.isInWishList ? 'text-danger' : '';
   }
 
   onClickRemove() {
-    this.cartService.removeCart(this.cartItem.product._id);
+    const index = this.cartService.cartItems.findIndex(
+      (item) => item.product._id === this.cartItem.product._id
+    );
+
+    this.cartService.removeCart(this.cartItem.product._id, index);
+  }
+
+  onClickHeartIcon() {
+    this.cartService.updataWishList(this.cartItem.product._id);
+    this.cartItem.isInWishList = !this.cartItem.isInWishList;
+    this.buttonStyle = this.cartItem.isInWishList ? 'text-danger' : '';
   }
 
   onChangeQuantity() {

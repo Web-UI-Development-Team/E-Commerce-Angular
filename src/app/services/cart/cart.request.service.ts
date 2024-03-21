@@ -16,14 +16,22 @@ export class CartRequestService {
   }
 
   updateCartRequest(carts: IPostCart[]) {
-    return this.http.patch<string>(
-      'http://localhost:3010/api/v1/cart',
-      {carts}
+    return this.http.patch<string>('http://localhost:3010/api/v1/cart', {
+      carts,
+    });
+  }
+
+  updateWishListRequest(product: string) {
+    return this.http.post<string>(
+      'http://localhost:3010/api/v1/profile/wish-list',
+      { product }
     );
   }
 
   removeCartRequest(productId: string) {
-    return this.http.delete<string>("http://localhost:3010/api/v1/cart/" + productId);
+    return this.http.delete<string>(
+      'http://localhost:3010/api/v1/cart/' + productId
+    );
   }
 
   clearCartRequest() {}
