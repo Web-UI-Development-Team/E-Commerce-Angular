@@ -85,4 +85,6 @@ export class CartService {
     this.total.price = prices.reduce((preVal, curVal) => preVal + curVal);
     this.total.discount = discounts.reduce((preVal, curVal) => preVal + curVal);
   }
+
+ 
 }

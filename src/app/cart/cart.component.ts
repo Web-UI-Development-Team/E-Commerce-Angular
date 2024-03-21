@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart/cart.service';
 import { Observable, of } from 'rxjs';
 import { ICart } from '../../modles/cart.modle';
+import { ActivatedRoute } from '@angular/router';
+import { CartRequestService } from '../services/cart/cart.request.service';
 
 @Component({
   selector: 'app-cart',
@@ -9,13 +11,15 @@ import { ICart } from '../../modles/cart.modle';
   styleUrl: './cart.component.css',
 })
 export class CartComponent implements OnInit {
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService,private cartReqService:CartRequestService ) {}
 
   cartItems: ICart[] = this.cartService.cartItems;
 
   total = this.cartService.total;
 
   ngOnInit() {
+
+
     this.cartService.getUserCart();
     this.cartItems = this.cartService.cartItems;
   }
@@ -31,4 +35,7 @@ export class CartComponent implements OnInit {
   test() {
     console.log(this.cartItems);
   }
+  // addproductToCart(productId,quantity){
+  //   this.cartReqService.addToCart()
+  // }
 }
