@@ -9,56 +9,12 @@ import { faLariSign } from '@fortawesome/free-solid-svg-icons';
 export class CartService {
   constructor(private cartRequestService: CartRequestService) {}
 
-  cartItems: ICart[] = [
-    {
-      product: {
-        _id: '',
-        title: '',
-        description: '',
-        price: 0,
-        discount: 0,
-        stock: 0,
-        brand: '',
-        category: '',
-        thumbnail: '',
-        images: [''],
-        rating: 0,
-        reviews: [''],
-        createdAt: '',
-        updatedAt: '',
-      },
-      isInWishList: false,
-      quantity: 0,
-    },
-  ];
+  cartItems: ICart[] = [];
 
   total = {
     price: 0,
     discount: 0,
   };
-
-  getUserCart() {
-    this.cartRequestService.getUserCartRequest().subscribe((data) => {
-      this.cartItems = data;
-
-      if(data[0])
-      {
-        this.calculateTotal();
-      }
-    });
-  }
-
-  updateCart() {
-    let carts = this.cartItems.map(
-      item => {
-        return {productId: item.product._id, quantity: +item.quantity}
-      }
-    )
-
-    this.cartRequestService.updateCartRequest(carts).subscribe(
-      data => console.log(data)
-    );
-  }
 
   updataWishList(product: string) {
     this.cartRequestService.updateWishListRequest(product).subscribe(
@@ -86,5 +42,5 @@ export class CartService {
     this.total.discount = discounts.reduce((preVal, curVal) => preVal + curVal);
   }
 
- 
+
 }
