@@ -35,6 +35,10 @@ import { FormEditProductComponent } from './dashboard/products-dashboard/formEdi
 import { AddProductComponent } from './dashboard/products-dashboard/addNewProduct/add-product/add-product.component';
 import { AddNewUserComponent } from './dashboard/users-dashboard/add-new-user/add-new-user.component';
 import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-user.component';
+import { UserFormComponent } from './user-profile/user-form/user-form.component';
+import { HomeComponent } from './home/home.component';
+import { NotFound404Component } from './not-found404/not-found404.component';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,7 @@ import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-us
     FooterComponent,
     CartComponent,
     CartItemComponent,
+    UserFormComponent,
     HomeComponent,
     NotFound404Component,
     SideBarComponent,
@@ -64,6 +69,7 @@ import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-us
     AddProductComponent,
     AddNewUserComponent,
     EditUserComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

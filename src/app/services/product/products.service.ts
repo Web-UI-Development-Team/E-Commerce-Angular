@@ -1,8 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IProduct } from '../../../modles/product.modle';
 import { ProductsRequestsService } from './products-requests.service';
 import { error } from 'console';
 import { IUpdateProduct } from '../../../modles/updateProduct.modle';
+
 
 @Injectable({
   providedIn: 'root',
@@ -11,13 +13,15 @@ export class ProductsService {
   allProducts: IProduct[] = [];
   product: IProduct;
 
-  constructor(private productRequestService: ProductsRequestsService) {}
+  constructor(private productRequestService: ProductsRequestsService, private httpClient:HttpClient ) {}
 
-  getAllProducts() {
-    this.productRequestService.getAllProductsRequest().subscribe((data) => {
-      this.allProducts = data;
-    });
+
+  getAllProducts(){
+   return this.httpClient.get('http://localhost:3010/api/v1/products');
   }
+  /*getProductsById(prdId:any){
+    return this.httpClient.get(`http://localhost:3010/api/v1/products/${prdId}`)
+  }*/
 
   getProductById(id: string) {
     this.productRequestService.getProductByIdRequest(id).subscribe(
@@ -51,4 +55,5 @@ export class ProductsService {
       .deleteProductRequest(product)
       .subscribe((data) => console.log(data));
   }
+
 }
