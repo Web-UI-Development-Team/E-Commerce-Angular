@@ -1,7 +1,11 @@
 export interface IUser {
-  name: string,
-  email: string,
-  phone: string,
-  image: string,
-  wishList: string []
+  _id: string;
+  image: string;
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  isAdmin: boolean;
+  isDeleted: boolean;
+  wishList?: string[];
 }
