@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { UserRequestsService } from '../../services/users/user-requests.service';
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
+import { range } from '../../utils/range';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @Component({
   selector: 'app-users-dashboard',
@@ -20,16 +22,31 @@ export class UsersDashboardComponent implements OnInit {
   allUsers: IUser[];
   user: IUser;
 
+  numberOfUsers = 15;
+  numberOfUserInPage = 5;
+  numberOfPages = Math.ceil(this.numberOfUsers / this.numberOfUserInPage);
+  pages: any = [];
+
   ngOnInit() {
-    this.usersRequest.getAllUsersRequest().subscribe((data) => {
+    this.usersRequest.getAllUsersRequest(1).subscribe((data) => {
       console.log(data);
       this.allUsers = data;
       console.log(this.allUsers);
     });
+    this.pages = range(this.numberOfPages);
+  }
+
+  currentPage(pageNumber: number) {
+    this.usersRequest.getAllUsersRequest(pageNumber).subscribe((data) => {
+      console.log(data);
+      this.allUsers = data;
+    });
   }
 
   deleteUser(user: IUser) {
-    console.log(user);
+    const index = this.allUsers.findIndex((item) => item._id === user._id);
+    this.allUsers.splice(index, 1);
+
     this.usersRequest.deletUserRequest(user).subscribe((data) => {
       console.log(data);
     });
@@ -39,7 +56,7 @@ export class UsersDashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(AddNewUserComponent);
   }
 
-  goToEditUserPage(user: IUser) {
-    this.router.navigate([`/dashboard/editUser/${user._id}`]);
+  openEditUserPopup(user: IUser) {
+    this.dialog.open(EditUserComponent, { data: { userId: user._id } });
   }
 }

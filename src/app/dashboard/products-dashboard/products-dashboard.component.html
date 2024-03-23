@@ -17,7 +17,7 @@
           <button
             type="button"
             class="btn btn-primary"
-            (click)="goToEditProductpage(product)"
+            (click)="openEditProductPopup(product)"
           >
             Edit
           </button>
@@ -28,4 +28,13 @@
       </div>
     </div>
   </div>
+</div>
+<div>
+  <button
+    class="btn btn-primary"
+    (click)="currentPage(value)"
+    *ngFor="let value of pages"
+  >
+    {{ value }}
+  </button>
 </div>

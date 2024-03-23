@@ -36,9 +36,8 @@ import { AddProductComponent } from './dashboard/products-dashboard/addNewProduc
 import { AddNewUserComponent } from './dashboard/users-dashboard/add-new-user/add-new-user.component';
 import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-user.component';
 import { UserFormComponent } from './user-profile/user-form/user-form.component';
-import { HomeComponent } from './home/home.component';
-import { NotFound404Component } from './not-found404/not-found404.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { OrdersDashboardComponent } from './dashboard/orders-dashboard/orders-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +69,7 @@ import { LoaderComponent } from './shared/loader/loader.component';
     AddNewUserComponent,
     EditUserComponent,
     LoaderComponent,
+    OrdersDashboardComponent,
   ],
   imports: [
     BrowserModule,

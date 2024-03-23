@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -12,6 +12,8 @@ import { nameRegex } from '../../../regex/name';
 import { emailRegex } from '../../../regex/email';
 import { phoneNumberRegex } from '../../../regex/phone';
 import { IUpdateUser } from '../../../../modles/updateUser.modle';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-user',
@@ -25,10 +27,12 @@ export class EditUserComponent implements OnInit {
   userId: string;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { userId: string },
     private formBuilder: FormBuilder,
     private userRequestService: UserRequestsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialogRef: MatDialogRef<EditUserComponent>
   ) {
     this.userForm = this.formBuilder.group({
       image: new FormControl('', [Validators.required]),
@@ -58,14 +62,13 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((param) => {
-      const id = param.get('id');
-      console.log(id);
-      if (id) {
-        this.userId = id;
-        this.getUserById(id);
-      }
-    });
+    //const id = param.get('id');
+    const id = this.data.userId;
+    console.log(id);
+    if (id) {
+      this.userId = id;
+      this.getUserById(id);
+    }
   }
 
   getUserById(id: string) {
@@ -73,15 +76,19 @@ export class EditUserComponent implements OnInit {
       (data: IUser) => {
         this.user = data;
         console.log(data);
+        this.userForm.patchValue({
+          ...this.user,
+        });
+        this.originalUser = { ...this.user };
       },
       (error) => {
         console.log(error);
       }
     );
-    this.userForm.patchValue({
-      ...this.user,
-    });
-    this.originalUser = { ...this.user };
+  }
+
+  closePopUp(): void {
+    this.dialogRef.close();
   }
 
   getFormControl(controlName: string) {

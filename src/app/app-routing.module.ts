@@ -17,6 +17,7 @@ import { FormEditProductComponent } from './dashboard/products-dashboard/formEdi
 import { AddProductComponent } from './dashboard/products-dashboard/addNewProduct/add-product/add-product.component';
 import { AddNewUserComponent } from './dashboard/users-dashboard/add-new-user/add-new-user.component';
 import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-user.component';
+import { OrdersDashboardComponent } from './dashboard/orders-dashboard/orders-dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -47,12 +48,6 @@ const routes: Routes = [
       {
         path: 'products',
         component: ProductsDashboardComponent,
-        // children: [
-        //   {
-        //     path: 'add',
-        //     component: AddProductComponent,
-        //   },
-        // ],
       },
       {
         path: 'users',
@@ -61,6 +56,10 @@ const routes: Routes = [
       {
         path: 'categories',
         component: CategoriesDashboardComponent,
+      },
+      {
+        path: 'orders',
+        component: OrdersDashboardComponent,
       },
       {
         path: 'editProduct/:id',

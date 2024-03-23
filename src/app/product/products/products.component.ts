@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../../modles/product.modle';
-import { ProductsService } from '../../services/product/products.service';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { Router } from '@angular/router';
 import { CartRequestService } from '../../services/cart/cart.request.service';
+import { ProductsRequestsService } from '../../services/product/products-requests.service';
 
 @Component({
   selector: 'app-products',
@@ -16,7 +16,7 @@ export class ProductsComponent implements OnInit {
   isClicked: boolean = false;
 
   constructor(
-    private productService: ProductsService,
+    private productRequestServices: ProductsRequestsService,
     private router: Router,
     private cartReqService: CartRequestService
   ) {}
@@ -27,7 +27,7 @@ export class ProductsComponent implements OnInit {
   }
   getProducts() {
     this.loading = true;
-    this.productService.getAllProducts().subscribe(
+    this.productRequestServices.getAllProductsRequest(1).subscribe(
       (res: any) => {
         // console.log(res);
         this.product = res;

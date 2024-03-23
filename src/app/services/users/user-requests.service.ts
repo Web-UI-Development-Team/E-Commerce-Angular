@@ -10,8 +10,10 @@ import { IUpdateUser } from '../../../modles/updateUser.modle';
 export class UserRequestsService {
   constructor(private httpClient: HttpClient) {}
 
-  getAllUsersRequest() {
-    return this.httpClient.get<IUser[]>('http://localhost:3010/api/v1/users/');
+  getAllUsersRequest(pageNumber: number) {
+    return this.httpClient.get<IUser[]>(
+      `http://localhost:3010/api/v1/users/?page=${pageNumber}`
+    );
   }
 
   getUserByIdRequest(_id: string) {

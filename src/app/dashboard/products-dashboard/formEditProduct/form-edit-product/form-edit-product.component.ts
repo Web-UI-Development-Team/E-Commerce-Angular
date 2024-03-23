@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsRequestsService } from '../../../../services/product/products-requests.service';
 import {
@@ -8,8 +8,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { title } from 'process';
-import { ProductsService } from '../../../../services/product/products.service';
 import { IUpdateProduct } from '../../../../../modles/updateProduct.modle';
+import { IProduct } from '../../../../../modles/product.modle';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-form-edit-product',
@@ -25,10 +27,12 @@ export class FormEditProductComponent implements OnInit {
   numberPattern = /^[0-9]+$/;
 
   constructor(
-    private productService: ProductsService,
+    @Inject(MAT_DIALOG_DATA) public data: { productId: string },
     private formBuilder: FormBuilder,
+    private productRequestServices: ProductsRequestsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialogRef: MatDialogRef<FormEditProductComponent>
   ) {
     this.productForm = this.formBuilder.group({
       title: new FormControl('', [
@@ -73,29 +77,39 @@ export class FormEditProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((param) => {
-      const id = param.get('id');
-      if (id) {
-        this.getProduct(id);
-        this.productId = id;
-      }
-    });
+    //const id = param.get('id');
+    const id = this.data.productId;
+    if (id) {
+      this.getProduct(id);
+      this.productId = id;
+    }
   }
 
   getFormControl(controlName: string) {
     return this.productForm.get(controlName);
   }
 
+  closePopUp(): void {
+    this.dialogRef.close();
+  }
+
   getProduct(id: string) {
     console.log(id);
-    this.productService.getProductById(id);
-    this.product = this.productService.product;
-    this.productForm.patchValue({
-      ...this.product,
-      category: this.product.category.nameCategory,
-    });
-    //this.productForm.patchValue(this.product);
-    this.originalProduct = { ...this.product };
+    this.productRequestServices.getProductByIdRequest(id).subscribe(
+      (data: IProduct) => {
+        this.product = data;
+        console.log(data);
+        this.productForm.patchValue({
+          ...this.product,
+          category: this.product.category.nameCategory,
+        });
+
+        this.originalProduct = { ...this.product };
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   updateProduct() {
@@ -113,7 +127,9 @@ export class FormEditProductComponent implements OnInit {
     this.product = this.productForm.value;
     console.log(updatedProductData);
     console.log(this.product);
-    this.productService.updateProductData(updatedProductData, this.productId);
+    this.productRequestServices
+      .updateProductDataRequest(updatedProductData, this.productId)
+      .subscribe((data) => console.log(data));
     this.router.navigate(['/dashboard/products']);
   }
 }
