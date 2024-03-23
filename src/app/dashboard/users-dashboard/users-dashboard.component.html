@@ -1,0 +1,39 @@
+<button class="btn btn-primary" (click)="openAddUserPopup()">
+  Add new User
+</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">E-mail</th>
+      <th scope="col">Phone</th>
+      <th scope="col">IsAdmin</th>
+      <th scope="col">IsDeleted</th>
+      <th scope="col">Delete</th>
+      <th scope="col">Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of allUsers">
+      <td scope="row">
+        <img [src]="" alt="userImg" />
+      </td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.phone }}</td>
+      <td>{{ user.isAdmin }}</td>
+      <td>{{ user.isDeleted }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="goToEditUserPage(user)">
+          Edit
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-primary" (click)="deleteUser(user)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
