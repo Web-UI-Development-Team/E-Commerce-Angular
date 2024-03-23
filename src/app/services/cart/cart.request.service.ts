@@ -2,6 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICart, IPostCart } from '../../../modles/cart.modle';
 import { Observable, of } from 'rxjs';
+import { IAuth } from '../../../modles/auth.modle';
+import { ILogin } from '../../../modles/login.modle';
+import { IProduct } from '../../../modles/product.modle';
 
 @Injectable({
   providedIn: 'root',
