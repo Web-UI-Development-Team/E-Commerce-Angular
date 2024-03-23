@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, Output, input } from '@angular/core';
 import { IProduct } from '../../../modles/product.modle';
-import { ProductsService } from '../../services/product/products.service';
+import { Router } from '@angular/router';
+import { CartRequestService } from '../../services/cart/cart.request.service';
+import { ProductsRequestsService } from '../../services/product/products-requests.service';
 import { ICart } from '../../../modles/cart.modle';
 
 @Component({
@@ -11,7 +13,11 @@ import { ICart } from '../../../modles/cart.modle';
 export class ProductsComponent implements OnInit {
   product: IProduct[] = [];
   loading: boolean = false;
-
+  constructor(
+    private productRequestServices: ProductsRequestsService,
+    private router: Router,
+    private cartReqService: CartRequestService
+  ) {}
   @Input() cartItem: ICart = {
     product: {
       _id: '',
@@ -34,8 +40,6 @@ export class ProductsComponent implements OnInit {
   };
   clickedButtonIndex: number | null = null;
 
-  constructor(private productService: ProductsService) {}
-
   ngOnInit(): void {
     // this.loading==false
     this.getProducts();
@@ -46,7 +50,7 @@ export class ProductsComponent implements OnInit {
   }
   getProducts() {
     this.loading = true;
-    this.productService.getAllProducts().subscribe(
+    this.productRequestServices.getAllProductsRequest(1).subscribe(
       (res: any) => {
         // console.log(res);
         this.product = res;

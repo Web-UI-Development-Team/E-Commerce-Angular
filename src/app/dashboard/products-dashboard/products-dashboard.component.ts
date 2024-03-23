@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../../modles/product.modle';
-import { ProductsService } from '../../services/product/products.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProductComponent } from './addNewProduct/add-product/add-product.component';
+import { ProductsRequestsService } from '../../services/product/products-requests.service';
+import { range } from '../../utils/range';
+import { FormEditProductComponent } from './formEditProduct/form-edit-product/form-edit-product.component';
 
 @Component({
   selector: 'app-products-dashboard',
@@ -12,37 +14,62 @@ import { AddProductComponent } from './addNewProduct/add-product/add-product.com
 })
 export class ProductsDashboardComponent implements OnInit {
   constructor(
-    private productService: ProductsService,
+    private productRequestsServices: ProductsRequestsService,
     private router: Router,
     private dialog: MatDialog
   ) {}
 
-  allProducts: IProduct[] = this.productService.allProducts;
+  allProducts: IProduct[];
+
+  numberOfProducts = 30;
+  numberOfProductsInPage = 4;
+
+  numberOfPages = Math.ceil(
+    this.numberOfProducts / this.numberOfProductsInPage
+  );
+  pages: any = [];
 
   ngOnInit() {
-    this.productService.getAllProducts();
-    this.allProducts = this.productService.allProducts;
-    console.log(this.allProducts);
-    console.log(this.allProducts.length);
+    this.productRequestsServices.getAllProductsRequest(1).subscribe((data) => {
+      console.log(data);
+      this.allProducts = data;
+      console.log(this.allProducts);
+    });
+    this.pages = range(this.numberOfPages);
+    console.log(this.pages);
   }
 
-  // goToAddProductpage() {
-  //   console.log('hello');
-  //   this.router.navigate(['/dashboard/addProduct']);
-  // }
+  currentPage(pageNumber: number) {
+    this.productRequestsServices
+      .getAllProductsRequest(pageNumber)
+      .subscribe((data) => {
+        console.log(data);
+        this.allProducts = data;
+      });
+  }
 
   openAddProductPopup() {
     const dialogRef = this.dialog.open(AddProductComponent);
   }
 
-  goToEditProductpage(product: IProduct) {
-    console.log(product._id);
-    this.router.navigate([`/dashboard/editProduct/${product._id}`]);
+  openEditProductPopup(product: IProduct) {
+    this.dialog.open(FormEditProductComponent, {
+      data: { productId: product._id },
+    });
   }
 
   deleteProduct(product: IProduct) {
+    const index = this.allProducts.findIndex(
+      (item) => item._id === product._id
+    );
+    this.allProducts.splice(index, 1);
+    console.log(index);
     console.log(product._id);
     console.log('deleted');
-    this.productService.deleteProduct(product);
+    this.productRequestsServices
+      .deleteProductRequest(product)
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 }

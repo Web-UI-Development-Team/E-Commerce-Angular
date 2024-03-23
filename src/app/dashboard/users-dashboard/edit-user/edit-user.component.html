@@ -1,4 +1,5 @@
 <form [formGroup]="userForm" (ngSubmit)="updateUser()">
+  <button class="btn btn-primary" (click)="closePopUp()">Close</button>
   <div class="form-group">
     <label for="image" class="form-label">Image</label>
     <input
