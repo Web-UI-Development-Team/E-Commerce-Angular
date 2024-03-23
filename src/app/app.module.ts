@@ -27,7 +27,6 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { NotFound404Component } from './not-found404/not-found404.component';
 import { CommonModule } from '@angular/common';
-
 @NgModule({
   declarations: [
     AppComponent,

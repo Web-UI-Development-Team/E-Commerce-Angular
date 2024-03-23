@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrdersService } from '../../services/order/orders.service';
 import { Order } from '../../../modles/order.modle';
 import { ActivatedRoute } from '@angular/router';
-
+import {faX} from '@fortawesome/free-solid-svg-icons'
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
@@ -12,6 +12,7 @@ export class OrderDetailsComponent implements OnInit  {
   orders : Order[] = [] ;
   orderId: any;
   status : any;
+  faX=faX
   
   constructor(private orderService : OrdersService , private route : ActivatedRoute){} 
 
@@ -19,8 +20,8 @@ export class OrderDetailsComponent implements OnInit  {
  
     this.orderService.getOrders().subscribe((data)=>{          
       // console.log(data[0]._id); to log id of order
+      data = data.filter(order=>order.status == "Pending"); 
       this.orders = data;
-      // data = data.filter(order=>order.status= 'pendin')
       console.log(data); 
 
     }) 
