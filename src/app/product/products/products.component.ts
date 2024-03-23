@@ -61,6 +61,8 @@ export class ProductsComponent implements OnInit {
   }
   getProducts() {
     this.loading = true;
+
+    
     this.productService.getAllProducts().subscribe(
       (res: any) => {
         // console.log(res);

@@ -1,15 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartRequestService } from '../../services/cart/cart.request.service';
 import { CartService } from '../../services/cart/cart.service';
 import { IProduct } from '../../../modles/product.modle';
+import { log } from 'console';
 
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.css'
 })
-export class ProductCardComponent {
+export class ProductCardComponent implements OnInit {
   isClicked:boolean = false;
   buttonStyle:any='';
 
@@ -35,17 +36,37 @@ export class ProductCardComponent {
     private cartReqService: CartRequestService,
     private cartService: CartService
   ) {}
+  ngOnInit(): void {
+    this.cartReqService.getUserCartRequest().subscribe((res)=>{
+      res.map((prd)=>{
+        // console.log(prd.product._id);
+        
+        if(prd.product._id==this.prd._id ){
+          // console.log("hiii");
+          
+          this.isClicked=true
+          
+        }
+      })
+
+    })
+  }
+
 
   showDetails(productId: any) {
     this.router.navigate(['/productDetails', productId]);
   }
-  
+
   addProductToCart(product:any) {
    
     this.isClicked= !this.isClicked
     this.cartService.cartItems.push({product:this.prd,quantity:1,isInWishList:false})
+    
+    
+    
+    
     this.cartReqService.addToCart(product).subscribe((res) => {
-      console.log(res);
+      // console.log(res);
     
     });
   }
