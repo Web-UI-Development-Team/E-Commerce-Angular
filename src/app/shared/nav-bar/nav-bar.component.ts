@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -13,6 +13,6 @@ export class NavBarComponent implements OnInit {
   isAuth: boolean = false;
 
   ngOnInit() {
-    this.isAuth = this.authService.isAuthenticated()
+    this.isAuth = this.authService.isAuthenticated();
   }
 }

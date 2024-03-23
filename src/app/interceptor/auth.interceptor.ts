@@ -12,9 +12,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(
-    private cookieService: CookieService
-  ) {}
+  constructor(private cookieService: CookieService) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler

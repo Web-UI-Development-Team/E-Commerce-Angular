@@ -1,4 +1,5 @@
 <form [formGroup]="productForm" (ngSubmit)="updateProduct()">
+  <button class="btn btn-primary" (click)="closePopUp()">Close</button>
   <div class="form-group">
     <label for="title" class="form-label">Title</label>
     <input

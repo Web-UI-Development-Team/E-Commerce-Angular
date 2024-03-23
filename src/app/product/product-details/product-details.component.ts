@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../../modles/product.modle';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductsService } from '../../services/product/products.service';
 import { ProductsRequestsService } from '../../services/product/products-requests.service';
 
 @Component({
@@ -15,8 +14,8 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private activatedRouter: ActivatedRoute,
-    private productsRequestsService: ProductsRequestsService,
-    private router: Router
+    private router: Router,
+    private productsRequestsService: ProductsRequestsService
   ) {}
 
   ngOnInit(): void {

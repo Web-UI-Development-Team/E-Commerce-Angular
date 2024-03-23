@@ -9,18 +9,20 @@ export class UserProfileService {
   constructor(private userProfileRequestService: UserProfileRequestService) {}
 
   user: IProfile = {
-    name: "",
-    email: "",
-    phone: "",
-    image: "",
-    wishList: []
-  }
+    name: '',
+    email: '',
+    phone: '',
+    image: '',
+    wishList: [],
+  };
 
   patchUser() {
-    this.userProfileRequestService.patchUserRequest({name: "Waleed Hesham"}).subscribe({
-      next: data => console.log(data),
-      error: error => console.log(error),
-      complete: () => console.log("done")
-    })
+    this.userProfileRequestService
+      .patchUserRequest({ name: 'Waleed Hesham' })
+      .subscribe({
+        next: (data) => console.log(data),
+        error: (error) => console.log(error),
+        complete: () => console.log('done'),
+      });
   }
 }

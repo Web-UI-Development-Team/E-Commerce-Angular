@@ -8,30 +8,30 @@ import { log } from 'console';
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
-  styleUrl: './product-card.component.css'
+  styleUrl: './product-card.component.css',
 })
 export class ProductCardComponent implements OnInit {
   isClicked:boolean = false;
   buttonStyle:any='';
 
-  @Input()prd:IProduct={_id: '',
-  title: '',
-  description: '',
-  price: 0,
-  discount: 0,
-  stock: 0,
-  brand: '',
-  category: '',
-  thumbnail: '',
-  images: [''],
-  rating: 0,
-  reviews: [''],
-  createdAt: '',
-  updatedAt: '',
-  }
+  @Input() prd: IProduct = {
+    _id: '',
+    title: '',
+    description: '',
+    price: 0,
+    discount: 0,
+    stock: 0,
+    brand: '',
+    category: '',
+    thumbnail: '',
+    images: [''],
+    rating: 0,
+    reviews: [''],
+    createdAt: '',
+    updatedAt: '',
+  };
 
   constructor(
-   
     private router: Router,
     private cartReqService: CartRequestService,
     private cartService: CartService
@@ -70,6 +70,4 @@ export class ProductCardComponent implements OnInit {
     
     });
   }
-
-
 }

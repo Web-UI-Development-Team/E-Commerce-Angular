@@ -5,9 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ProductsService } from '../../../../services/product/products.service';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ProductsRequestsService } from '../../../../services/product/products-requests.service';
 
 @Component({
   selector: 'app-add-product',
@@ -17,7 +17,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class AddProductComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private productService: ProductsService,
+    private productRequestServices: ProductsRequestsService,
     private router: Router,
     public dialogRef: MatDialogRef<AddProductComponent>
   ) {}
@@ -97,7 +97,7 @@ export class AddProductComponent implements OnInit {
     console.log(this.productForm);
     console.log(this.productForm.value);
     this.productForm.value.images = this.initialFormValues.images;
-    this.productService.addNewProduct(this.productForm.value);
+    this.productRequestServices.addNewProductRequest(this.productForm.value);
     this.router.navigate(['/dashboard/products']);
   }
 }

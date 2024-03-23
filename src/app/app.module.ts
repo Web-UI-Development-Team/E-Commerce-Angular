@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import {  ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
   BrowserModule,
-  provideClientHydration,} from '@angular/platform-browser';
+  provideClientHydration,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import { AddNewUserComponent } from './dashboard/users-dashboard/add-new-user/ad
 import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-user.component';
 import { UserFormComponent } from './user-profile/user-form/user-form.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { OrdersDashboardComponent } from './dashboard/orders-dashboard/orders-dashboard.component';
 import { ProductCardComponent } from './product/product-card/product-card.component';
 import { AccountComponent } from './user-profile/account/account.component';
 import { WishListComponent } from './wish-list/wish-list.component';
@@ -72,6 +74,7 @@ import { WishListComponent } from './wish-list/wish-list.component';
     AddNewUserComponent,
     EditUserComponent,
     LoaderComponent,
+    OrdersDashboardComponent,
     ProductCardComponent,
     AccountComponent,
     WishListComponent,
@@ -83,7 +86,7 @@ import { WishListComponent } from './wish-list/wish-list.component';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
   ],
   providers: [
     provideClientHydration(),
