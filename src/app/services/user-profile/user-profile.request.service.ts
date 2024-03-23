@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUpdatedUser, IUser } from '../../../modles/user.modle';
+import { IEditProfile, IProfile } from '../../../modles/profile.modle';
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +9,11 @@ import { IUpdatedUser, IUser } from '../../../modles/user.modle';
 export class UserProfileRequestService {
   constructor(private http: HttpClient) {}
 
-  getUserDataRequest(): Observable<IUser> {
-    return this.http.get<IUser>('http://localhost:3010/api/v1/profile');
+  getUserDataRequest(): Observable<IProfile> {
+    return this.http.get<IProfile>('http://localhost:3010/api/v1/profile');
   }
 
-  patchUserRequest(updatedProfileData: IUpdatedUser): Observable<any> {
+  patchUserRequest(updatedProfileData: IEditProfile): Observable<any> {
     return this.http.patch<any>('http://localhost:3010/api/v1/profile', updatedProfileData);
   }
 }

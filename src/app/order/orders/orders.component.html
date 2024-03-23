@@ -1,1 +1,126 @@
-<p>orders works!</p>
+<form class="p-5" [formGroup] = "UserForm" > 
+    <div class="form-row m-3">
+        <p>Shipping Address</p>
+        <label class=" control-label" for="validationDefault03">Country / Region</label>
+    <select class="form-control p-2 mt-2 ">
+        <option>Cairo</option>
+        <option>Alex</option>
+        <option>Tanta</option>
+        <option>Giza</option>
+        <option>Mansoura</option>
+        <option>El-mahalla</option>
+        <option>Ismailiya</option>
+
+      </select>
+    </div>
+
+    <div class="form-row m-3">
+      <div class="col-md-6 mb-3">
+        <label class=" control-label" for="validationDefault01" >First name</label>
+        <input type="text" class="form-control mt-2 "  formControlName="firstName"
+        [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"> 
+              <!-- validation -->
+              <div class="text-danger" *ngIf="UserForm.controls['firstName'].invalid && (isSubmitted || UserForm.controls['firstName'].touched || UserForm.controls['firstName'].dirty)">
+                 <span *ngIf="UserForm.controls['firstName'].errors?.['required']">
+                 <span class="circle">!</span> This field is required 
+                </span> 
+                <span *ngIf="UserForm.controls['firstName'].errors?.['pattern']"> 
+                  <span class="circle">!</span> Please Enter charcters only 
+                </span>
+                
+              </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class=" control-label" for="validationDefault02" >Last name</label>
+        <input type="text" class="form-control mt-2 "  formControlName="lastName"
+        [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
+
+        >
+        <!-- validation -->
+        <div class="text-danger" *ngIf="UserForm.controls['lastName'].invalid && (isSubmitted || UserForm.controls['lastName'].touched || UserForm.controls['lastName'].dirty)">
+        <span *ngIf="UserForm.controls['lastName'].errors?.['required']" >
+          <span class="circle">!</span>  This field is required 
+        </span>
+        <span *ngIf="UserForm.controls['lastName'].errors?.['pattern']"> 
+          <span class="circle">!</span>  Please Enter charcters only 
+         </span>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="form-row m-3">
+
+        <div class="col-md-6 mb-3">
+            <label class=" control-label" for="validationDefault03" >Phone Number</label>
+            <input type="text" class="form-control mt-2 " formControlName="phoneNumber"
+            [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
+
+            > 
+             <!-- validation -->
+        <div class="text-danger" *ngIf="UserForm.controls['phoneNumber'].invalid  && (isSubmitted || UserForm.controls['phoneNumber'].touched || UserForm.controls['phoneNumber'].dirty)">
+          <span *ngIf="UserForm.controls['phoneNumber'].errors?.['required']">  <span class="circle">!</span> This field is required  </span>
+          <span *ngIf="UserForm.controls['phoneNumber'].errors?.['maxlength']"> <span class="circle">!</span> max length is 11 number</span>
+          <span *ngIf="UserForm.controls['phoneNumber'].errors?.['pattern']"> 
+            <span class="circle">!</span>  Please Enter numbers only 
+           </span>
+        </div>
+        </div>
+    </div>
+<!-- ////////// -->
+<div class="form-row m-3">
+
+      <div class="col-md-6 mb-3">
+        <label class=" control-label" for="validationDefault03" >City</label>
+        <input type="text" class="form-control mt-2 "   formControlName="city"
+        [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
+
+        >
+         <!-- validation -->
+         <div class="text-danger" *ngIf="UserForm.controls['city'].invalid && (isSubmitted || UserForm.controls['city'].touched || UserForm.controls['city'].dirty)">
+          <span *ngIf="UserForm.controls['city'].errors?.['required']" >
+            <span class="circle">!</span>  This field is required 
+          </span>
+          <span *ngIf="UserForm.controls['city'].errors?.['pattern']"> 
+            <span class="circle">!</span> Please Enter charcters only 
+           </span>
+          </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class=" control-label" for="validationDefault04">State</label>
+        <input  type="text" class="form-control mt-2 " formControlName="state"
+        [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}"
+
+        >
+         <!-- validation -->
+         <div class="text-danger" *ngIf="UserForm.controls['state'].invalid && (isSubmitted || UserForm.controls['state'].touched || UserForm.controls['state'].dirty)">
+          <span  *ngIf="UserForm.controls['state'].errors?.['required']" >
+            <span class="circle">!</span> This field is required 
+          </span>
+          <span *ngIf="UserForm.controls['state'].errors?.['pattern']"> 
+            <span class="circle">!</span>  Please Enter charcters only 
+           </span>
+          </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class=" control-label" for="validationDefault05" >Zip</label>
+        <input type="text" class="form-control mt-2 "   formControlName="zip"
+        [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}" 
+        >
+         <!-- validation -->
+         <div class="text-danger" *ngIf="UserForm.controls['zip'].invalid && (isSubmitted ||UserForm.controls['zip'].touched || UserForm.controls['zip'].dirty)">
+          <span *ngIf="UserForm.controls['zip'].errors?.['required']" >
+            <span class="circle">!</span> This field is required 
+          </span>
+          <span *ngIf="UserForm.controls['zip'].errors?.['pattern']"> 
+            <span class="circle">!</span>  Please Enter numbers only 
+           </span>
+          </div> 
+      </div>
+</div>
+    
+
+    <button (click)="OnSumbit()" class="btn btn-primary m-3" type="submit">Continue</button>
+  </form>

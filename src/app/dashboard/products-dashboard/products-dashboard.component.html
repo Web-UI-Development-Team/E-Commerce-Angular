@@ -1,0 +1,31 @@
+<div class="container">
+  <button class="btn btn-primary" (click)="openAddProductPopup()">
+    Add new product
+  </button>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let product of allProducts">
+      <div class="card mb-4" style="height: 24rem">
+        <img
+          class="card-img-top"
+          [src]="product.images[0]"
+          alt="Card image cap"
+          style="width: 100%; height: 200px; object-fit: cover"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.title }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="goToEditProductpage(product)"
+          >
+            Edit
+          </button>
+          <button class="btn btn-primary" (click)="deleteProduct(product)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

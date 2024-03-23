@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfileService } from '../services/user-profile/user-profile.service';
-import { IUser } from '../../modles/user.modle';
 import { UserProfileRequestService } from '../services/user-profile/user-profile.request.service';
-import { error } from 'console';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { IProfile } from '../../modles/profile.modle';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,8 +16,7 @@ export class UserProfileComponent implements OnInit {
     public router: Router
   ) {}
 
-  user: IUser = {
-    _id: '',
+  user: IProfile = {
     name: '',
     email: '',
     phone: '',
@@ -35,7 +33,7 @@ export class UserProfileComponent implements OnInit {
       this.user = this.userProfileService.user;
     }
 
-    console.log(this.router.url)
+    console.log(this.router.url);
   }
 
   getUserData() {

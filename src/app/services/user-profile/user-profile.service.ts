@@ -1,7 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { UserProfileRequestService } from './user-profile.request.service';
-import { IUser } from '../../../modles/user.modle';
-import { error } from 'console';
+import { IProfile } from '../../../modles/profile.modle';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +8,7 @@ import { error } from 'console';
 export class UserProfileService {
   constructor(private userProfileRequestService: UserProfileRequestService) {}
 
-  user: IUser = {
-    _id: "",
+  user: IProfile = {
     name: "",
     email: "",
     phone: "",
