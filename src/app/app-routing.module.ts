@@ -9,6 +9,8 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { Sign } from 'node:crypto';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { HomeDashboardComponent } from './dashboard/home-dashboard/home-dashboard.component';
 import { ProductsDashboardComponent } from './dashboard/products-dashboard/products-dashboard.component';
 import { UsersDashboardComponent } from './dashboard/users-dashboard/users-dashboard.component';
@@ -21,6 +23,7 @@ import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-us
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'signIn', component: SignInComponent },
+  {path:"signUp",component:SignUpComponent},
   { path: 'cart', component: CartComponent },
   { path: 'home', component: HomeComponent },
   {
