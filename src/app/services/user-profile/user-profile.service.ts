@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { UserProfileRequestService } from './user-profile.request.service';
-import { IUser } from '../../../modles/user.modle';
+import { IProfile } from '../../../modles/profile.modle';
 
 @Injectable({
   providedIn: 'root',
@@ -8,27 +8,21 @@ import { IUser } from '../../../modles/user.modle';
 export class UserProfileService {
   constructor(private userProfileRequestService: UserProfileRequestService) {}
 
-  user: IUser = {
-    _id: '',
+  user: IProfile = {
     name: '',
-    password: '',
-    isAdmin: false,
-    isDeleted: false,
     email: '',
     phone: '',
     image: '',
     wishList: [],
   };
 
-  getUserData() {
+  patchUser() {
     this.userProfileRequestService
-      .getUserDataRequest()
-      .subscribe((data) => (this.user = { ...data }));
-  }
-
-  postProduct() {
-    this.userProfileRequestService
-      .postProductRequest()
-      .subscribe((data) => console.log(data));
+      .patchUserRequest({ name: 'Waleed Hesham' })
+      .subscribe({
+        next: (data) => console.log(data),
+        error: (error) => console.log(error),
+        complete: () => console.log('done'),
+      });
   }
 }

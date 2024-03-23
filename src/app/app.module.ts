@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
   BrowserModule,
   provideClientHydration,
@@ -23,9 +24,10 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { NotFound404Component } from './not-found404/not-found404.component';
+import { CommonModule } from '@angular/common';
 import { SideBarComponent } from './dashboard/side-bar/side-bar.component';
 import { HomeDashboardComponent } from './dashboard/home-dashboard/home-dashboard.component';
 import { UsersDashboardComponent } from './dashboard/users-dashboard/users-dashboard.component';
@@ -38,6 +40,9 @@ import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-us
 import { UserFormComponent } from './user-profile/user-form/user-form.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { OrdersDashboardComponent } from './dashboard/orders-dashboard/orders-dashboard.component';
+import { ProductCardComponent } from './product/product-card/product-card.component';
+import { AccountComponent } from './user-profile/account/account.component';
+import { WishListComponent } from './wish-list/wish-list.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +75,9 @@ import { OrdersDashboardComponent } from './dashboard/orders-dashboard/orders-da
     EditUserComponent,
     LoaderComponent,
     OrdersDashboardComponent,
+    ProductCardComponent,
+    AccountComponent,
+    WishListComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +86,7 @@ import { OrdersDashboardComponent } from './dashboard/orders-dashboard/orders-da
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonModule,
   ],
   providers: [
     provideClientHydration(),

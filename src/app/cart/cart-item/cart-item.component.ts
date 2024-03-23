@@ -37,8 +37,6 @@ export class CartItemComponent implements OnInit {
 
   ngOnInit() {
   
-  
-   
     this.isQuantityEdited = this.cartItem.quantity > 1;
     this.buttonStyle = this.cartItem.isInWishList ? 'text-danger' : '';
   }

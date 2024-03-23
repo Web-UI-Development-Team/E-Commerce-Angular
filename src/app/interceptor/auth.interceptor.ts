@@ -4,6 +4,7 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -11,13 +12,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthInterceptor implements HttpInterceptor {
+  constructor(private cookieService: CookieService) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     req = req.clone({
       setHeaders: {
-        jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndhbGVlZC5hbG1lbmF3eUBvdXRsb29rLmNvbSIsImlhdCI6MTcxMTE1ODA0MywiZXhwIjoxNzExMjQ0NDQzfQ.oztQnL--0T7evlqVVnEfZm4NYD9BsTTUK5a42Re5rmE',
+        jwt: this.cookieService.get('token'),
       },
     });
 

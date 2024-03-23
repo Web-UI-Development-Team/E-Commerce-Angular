@@ -15,7 +15,7 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private activatedRouter: ActivatedRoute,
     private router: Router,
-    private productServiceRequest: ProductsRequestsService
+    private productsRequestsService: ProductsRequestsService
   ) {}
 
   ngOnInit(): void {
@@ -27,10 +27,10 @@ export class ProductDetailsComponent implements OnInit {
   }
   getProductById(id: any) {
     this.loading = true;
-    this.productServiceRequest.getProductByIdRequest(id).subscribe(
+    this.productsRequestsService.getProductByIdRequest(id).subscribe(
       (res: any) => {
         this.productDetails = res;
-        console.log(this.productDetails);
+        // console.log(this.productDetails);
         this.loading = false;
       },
       (err) => {

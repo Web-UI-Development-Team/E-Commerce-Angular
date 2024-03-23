@@ -1,1 +1,42 @@
-<p>user-form works!</p>
+<div class="container h-">
+  <div class="row flex-column justify-content-center">
+    <div class="col-md-6">
+      <form class="row g-3" [formGroup]="updateForm" class="m-3" (ngSubmit)="onSubmit()">
+        <label for="inputEmail4" class="form-label">Name</label>
+        <input type="text" class="form-control" id="inputEmail4" formControlName="name" [value]="user.name"
+          [class.is-valid]="name?.valid">
+
+        <div class="alert alert-warning" [hidden]="name?.valid || name?.untouched">
+          <small *ngIf="name?.errors?.['required']">
+            Full Name is required
+          </small>
+
+          <small *ngIf="name?.errors?.['pattern']">
+            Full Name must be 3 letter at least, <b> {{name?.errors?.['pattern'].actualValue}} </b> doesn't match
+          </small>
+        </div>
+
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Email</label>
+          <input type="text" class="form-control" id="inputEmail4" formControlName="email" [value]="user.email">
+
+          <div class="alert alert-warning" [hidden]="email?.valid || email?.untouched">
+            <small *ngIf="email?.errors?.['required']">
+              email is required
+            </small>
+            <small *ngIf="email?.errors?.['EmailNotValid']">
+              Email must contains &#64;Example.com, <b> {{email?.errors?.['EmailNotValid'].value}} </b> doesn't match
+            </small>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label for="inputPhone" class="form-label">Phone</label>
+          <input type="tel" class="form-control" id="inputPhone" [value]="user.phone">
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary" (click)="onClick()">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>

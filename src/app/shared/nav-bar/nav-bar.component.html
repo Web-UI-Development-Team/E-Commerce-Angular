@@ -5,7 +5,7 @@
       <div class="row gy-3">
         <!-- Left elements -->
         <div class="col-lg-2 col-sm-4 col-4">
-          <a href="" target="_blank" class="float-start">
+          <a routerLink="/home" class="float-start">
             <img
               src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
               height="35"
@@ -19,22 +19,19 @@
         <div class="order-lg-last col-lg-5 col-sm-8 col-8">
           <div class="d-flex float-end">
             <a
-              routerLink="/signIn"
+              [routerLink]="isAuth ? '/profile/account' : '/signIn'"
               class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"
             >
               <i class="fas fa-user-alt m-1 me-md-2"></i>
-              <p class="d-none d-md-block mb-0">Sign in</p>
+              <p class="d-none d-md-block mb-0">
+                {{ isAuth ? "Profile" : "SignIn" }}
+              </p>
             </a>
-            <a
-              routerLink="/fav"
-              class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"
-            >
-              <i class="fas fa-heart m-1 me-md-2"></i>
-              <p class="d-none d-md-block mb-0">Wishlist</p>
-            </a>
+
             <a
               routerLink="/cart"
               class="border rounded py-1 px-3 nav-link d-flex align-items-center"
+              *ngIf="isAuth"
             >
               <i class="fas fa-shopping-cart m-1 me-md-2"></i>
               <p class="d-none d-md-block mb-0">My cart</p>
@@ -52,11 +49,13 @@
                 id="form1"
                 class="form-control"
                 placeholder="Search"
-                #searchInput
-                autocomplete="off"
               />
             </div>
-            <button type="button" class="btn btn-primary shadow-0">
+            <button
+              type="button"
+              class="btn btn-primary shadow-0"
+              title="search"
+            >
               <i class="fas fa-search"></i>
             </button>
           </div>
@@ -112,6 +111,7 @@
               class="nav-link"
               routerLink="/contactUs"
               routerLinkActive="active"
+              *ngIf="isAuth"
               >Contact Us</a
             >
           </li>
@@ -120,7 +120,17 @@
               class="nav-link"
               routerLink="/dashboard"
               routerLinkActive="active"
+              *ngIf="isAuth"
               >Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/checkout"
+              routerLinkActive="active"
+              *ngIf="isAuth"
+              >checkout</a
             >
           </li>
           <!-- <li class="nav-item">

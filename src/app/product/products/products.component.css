@@ -4,7 +4,7 @@ img {
 }
 
 .card {
-  height: 500px;
+  /* height: 500px; */
   transition: all 0.2s;
 }
 

@@ -5,13 +5,12 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { IUser } from '../../../../modles/user.modle';
+import { IUpdateUser, IUser } from '../../../../modles/user.modle';
 import { UserRequestsService } from '../../../services/users/user-requests.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { nameRegex } from '../../../regex/name';
 import { emailRegex } from '../../../regex/email';
 import { phoneNumberRegex } from '../../../regex/phone';
-import { IUpdateUser } from '../../../../modles/updateUser.modle';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 

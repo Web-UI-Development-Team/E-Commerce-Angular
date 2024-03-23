@@ -47,10 +47,7 @@ export class CartComponent implements OnInit {
   test() {
     console.log(this.cartItems);
   }
-  // addproductToCart(productId,quantity){
-  //   this.cartReqService.addToCart()
-  // }
-
+  
   getUserCart() {
     this.cartRequestService.getUserCartRequest().subscribe({
       next: (data) => (this.cartItems = data),

@@ -1,9 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IUser } from '../../../modles/user.modle';
-import { Observable } from 'rxjs';
-import { IUpdateUser } from '../../../modles/updateUser.modle';
-
+import { IUpdateUser, IUser } from '../../../modles/user.modle';
 @Injectable({
   providedIn: 'root',
 })

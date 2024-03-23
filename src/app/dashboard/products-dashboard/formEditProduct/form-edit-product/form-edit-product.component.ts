@@ -7,9 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { title } from 'process';
-import { IUpdateProduct } from '../../../../../modles/updateProduct.modle';
-import { IProduct } from '../../../../../modles/product.modle';
+import { IProduct, IUpdateProduct } from '../../../../../modles/product.modle';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 
