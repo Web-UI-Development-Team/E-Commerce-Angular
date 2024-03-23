@@ -13,10 +13,7 @@
     <div class="col-xl-8 col-12 border rounded p-4">
       <div class="container">
         <div class="row d-flex justify-content-md-between justify-content-center">
-          <div
-          class="col-12 col-md-6 rounded-circle"
-          [ngStyle]="userImageStyle"
-          ></div>
+          <div class="col-12 col-md-6 rounded-circle" [ngStyle]="userImageStyle"></div>
           <span class="col-12 col-md-6 text-bold h3 text-md-end text-center mt-md-0 mt-3">{{user.name}}</span>
 
           <div class="col-12 d-flex justify-content-between mt-4">
@@ -24,7 +21,9 @@
               <p><span class="text-bold">Email:</span> {{user.email}} </p>
               <p><span class="text-bold">Phone:</span> +{{user.phone}}</p>
             </div>
-            <i class="fa-solid fa-pen-to-square text-end h4 text-warning" id="edit-button" (click)="onClick()"></i>
+            <a routerLink="edit-profile" *ngIf="router.url === '/account'">
+              <i class="fa-solid fa-pen-to-square text-end h4 text-primary" id="edit-button"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -32,10 +31,7 @@
       <hr>
 
       <div class="row">
-        <p class="col-12 text-danger text-center">
-          Old Orders Will Be Here
-        </p>
-        <button (click)="onClick()">Click</button>
+        <router-outlet></router-outlet>
       </div>
     </div>
   </div>

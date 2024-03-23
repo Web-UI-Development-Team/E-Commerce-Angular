@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { UserProfileService } from '../../services/user-profile/user-profile.service';
+import { Router } from '@angular/router';
+import { relative } from 'path';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-user-form',
@@ -6,5 +10,12 @@ import { Component } from '@angular/core';
   styleUrl: './user-form.component.css'
 })
 export class UserFormComponent {
+  constructor(private userProfileService: UserProfileService, private location: Location) {}
 
+  userChecker = {...this.userProfileService.user};
+
+  onClick() {
+    this.userProfileService.patchUser();
+    this.location.back();
+  }
 }

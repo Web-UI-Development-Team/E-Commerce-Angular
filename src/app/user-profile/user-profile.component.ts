@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfileService } from '../services/user-profile/user-profile.service';
 import { IUser } from '../../modles/user.modle';
+import { UserProfileRequestService } from '../services/user-profile/user-profile.request.service';
+import { error } from 'console';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,26 +11,51 @@ import { IUser } from '../../modles/user.modle';
   styleUrl: './user-profile.component.css',
 })
 export class UserProfileComponent implements OnInit {
-  constructor(private userProfileService: UserProfileService) {}
+  constructor(
+    private userProfileRequestService: UserProfileRequestService,
+    private userProfileService: UserProfileService,
+    public router: Router
+  ) {}
 
-  user: IUser = this.userProfileService.user;
+  user: IUser = {
+    _id: '',
+    name: '',
+    email: '',
+    phone: '',
+    image: '',
+    wishList: [],
+  };
+
   userImageStyle: any;
 
   ngOnInit(): void {
-    this.userProfileService.getUserData();
-    this.user = this.userProfileService.user;
+    if (!this.userProfileService.user.name) {
+      this.getUserData();
+    } else {
+      this.user = this.userProfileService.user;
+    }
 
-    this.userImageStyle = {
-      width: '100px',
-      height: '100px',
-      backgroundColor: 'black',
-      backgroundImage: `url(${this.user.image})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    };
+    console.log(this.router.url)
   }
 
-  onClick() {
-    this.userProfileService.postProduct();
+  getUserData() {
+    this.userProfileRequestService.getUserDataRequest().subscribe({
+      next: (data) => (this.user = data),
+      error: (error) => console.log(error),
+      complete: () => {
+        this.userImageStyle = {
+          width: '100px',
+          height: '100px',
+          backgroundColor: 'black',
+          backgroundImage: `url(${this.user.image})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        };
+
+        console.log(this.user);
+
+        this.userProfileService.user = this.user;
+      },
+    });
   }
 }

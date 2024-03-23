@@ -1,1 +1,30 @@
-<p>user-form works!</p>
+<div class="container h-">
+  <div class="row flex-column justify-content-center">
+    <form class="row g-3">
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Name</label>
+        <input type="text" class="form-control" id="inputEmail4">
+      </div>
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input type="text" class="form-control" id="inputEmail4">
+      </div>
+      <div class="col-12">
+        <label for="inputPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword">
+      </div>
+      <div class="col-12">
+        <label for="inputPassword2" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="inputPassword2">
+      </div>
+      <div class="col-md-12">
+        <label for="inputPhone" class="form-label">Phone</label>
+        <input type="tel" class="form-control" id="inputPhone">
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary" (click)="onClick()">Update</button>
+      </div>
+    </form>
+  </div>
+</div>

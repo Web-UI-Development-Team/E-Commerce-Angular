@@ -9,24 +9,28 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserFormComponent } from './user-profile/user-form/user-form.component';
 
 const routes: Routes = [
-  {path:"",redirectTo:"/home",pathMatch:'full'},
-  {path:"signIn",component:SignInComponent},
-  {path:"cart",component:CartComponent},
-  {path:"home",component:HomeComponent},
-  {path:"products",component:ProductsComponent},
-  {path:"productDetails/:id",component:ProductDetailsComponent},
-  
-  {path:"about",component:AboutComponent},
-  {path:"dashboard",component:DashboardComponent},
-  {path:"contactUs",component:ContactUsComponent},
-  {path:"**",component:NotFound404Component}
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'signIn', component: SignInComponent },
+  { path: 'account', component: UserProfileComponent, children: [
+    {path: 'edit-profile', component: UserFormComponent}
+  ]},
+  { path: 'cart', component: CartComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'products', component: ProductsComponent },
+  { path: 'productDetails/:id', component: ProductDetailsComponent },
 
+  { path: 'about', component: AboutComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'contactUs', component: ContactUsComponent },
+  { path: '**', component: NotFound404Component },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
