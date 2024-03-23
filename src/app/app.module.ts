@@ -27,6 +27,8 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { NotFound404Component } from './not-found404/not-found404.component';
 import { CommonModule } from '@angular/common';
+<<<<<<< HEAD
+=======
 import { SideBarComponent } from './dashboard/side-bar/side-bar.component';
 import { HomeDashboardComponent } from './dashboard/home-dashboard/home-dashboard.component';
 import { UsersDashboardComponent } from './dashboard/users-dashboard/users-dashboard.component';
@@ -42,6 +44,7 @@ import { AccountComponent } from './user-profile/account/account.component';
 import { WishListComponent } from './wish-list/wish-list.component';
 
 
+>>>>>>> 1013ff59f91e11da8461da7387ebed6150ba0fee
 @NgModule({
   declarations: [
     AppComponent,
