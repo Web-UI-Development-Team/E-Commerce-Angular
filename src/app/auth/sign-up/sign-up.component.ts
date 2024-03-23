@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   ValidationErrors,
   ValidatorFn,
@@ -12,6 +11,7 @@ import {
 } from '@angular/forms';
 import { error } from 'console';
 import { IRegister } from '../../../modles/auth.modle';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,13 +19,18 @@ import { IRegister } from '../../../modles/auth.modle';
   styleUrl: './sign-up.component.css',
 })
 export class SignUpComponent {
-  SignUpComponent: FormGroup;
+  registerForm: FormGroup;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {
-    this.SignUpComponent = fb.group(
+    if (this.cookieService.get('token')) {
+      this.router.navigate(['/home']);
+    }
+
+    this.registerForm = fb.group(
       {
         name: ['', [Validators.required, Validators.pattern('[A-Z a-z]{3,}')]],
         email: ['', [Validators.required, this.existEmailValidator()]],
@@ -38,40 +43,23 @@ export class SignUpComponent {
   }
 
   get name() {
-    return this.SignUpComponent.get('name');
+    return this.registerForm.get('name');
   }
 
   get email() {
-    return this.SignUpComponent.get('email');
+    return this.registerForm.get('email');
   }
 
   get phone() {
-    return this.SignUpComponent.get('phone');
+    return this.registerForm.get('phone');
   }
 
   get password() {
-    return this.SignUpComponent.get('password');
+    return this.registerForm.get('password');
   }
 
   get confirmPassword() {
-    return this.SignUpComponent.get('confirmPassword');
-  }
-
-  submit() {
-    let userModel: IRegister = this.SignUpComponent.value as IRegister;
-    delete userModel.confirmPassword;
-    // console.log(userModel);
-    this.authService.createNewUserRequest(userModel).subscribe({
-      next: (data) => {
-        console.log(data);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        this.router.navigate(['..']);
-      },
-    });
+    return this.registerForm.get('confirmPassword');
   }
 
   existEmailValidator(): ValidatorFn {
@@ -102,5 +90,22 @@ export class SignUpComponent {
       };
       return passControl?.value == confirmPassControl?.value ? null : valErr;
     };
+  }
+
+  submit() {
+    let userModel: IRegister = this.registerForm.value as IRegister;
+    delete userModel.confirmPassword;
+    // console.log(userModel);
+    this.authService.createNewUserRequest(userModel).subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        this.router.navigate(['/signIn']);
+      },
+    });
   }
 }

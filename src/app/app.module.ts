@@ -38,6 +38,8 @@ import { AddNewUserComponent } from './dashboard/users-dashboard/add-new-user/ad
 import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-user.component';
 import { UserFormComponent } from './user-profile/user-form/user-form.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { AccountComponent } from './user-profile/account/account.component';
+import { WishListComponent } from './wish-list/wish-list.component';
 
 
 @NgModule({
@@ -70,6 +72,8 @@ import { LoaderComponent } from './shared/loader/loader.component';
     AddNewUserComponent,
     EditUserComponent,
     LoaderComponent,
+    AccountComponent,
+    WishListComponent,
   ],
   imports: [
     BrowserModule,

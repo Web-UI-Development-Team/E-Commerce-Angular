@@ -14,11 +14,14 @@
         <!-- Center elements -->
         <div class="order-lg-last col-lg-5 col-sm-8 col-8">
           <div class="d-flex float-end">
-            <a routerLink="/account" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <i
+
+            <a [routerLink]="isAuth ? '/profile/account' : '/signIn'"
+              class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <i
                 class="fas fa-user-alt m-1 me-md-2"></i>
-              <p class="d-none d-md-block mb-0">Account</p>
+              <p class="d-none d-md-block mb-0">{{isAuth ? 'Profile' : 'SignIn'}}</p>
             </a>
-            <a routerLink="/cart" class="border rounded py-1 px-3 nav-link d-flex align-items-center"> <i
+
+            <a routerLink="/cart" class="border rounded py-1 px-3 nav-link d-flex align-items-center" *ngIf="isAuth"> <i
                 class="fas fa-shopping-cart m-1 me-md-2"></i>
               <p class="d-none d-md-block mb-0">My cart</p>
             </a>
@@ -68,13 +71,13 @@
             <a class="nav-link " routerLink="/about" routerLinkActive="active">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " routerLink="/contactUs" routerLinkActive="active">Contact Us</a>
+            <a class="nav-link " routerLink="/contactUs" routerLinkActive="active" *ngIf="isAuth">Contact Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+            <a class="nav-link " routerLink="/dashboard" routerLinkActive="active" *ngIf="isAuth">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " routerLink="/checkout" routerLinkActive="active">checkout</a>
+            <a class="nav-link " routerLink="/checkout" routerLinkActive="active" *ngIf="isAuth">checkout</a>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link text-dark" href="#">Projects</a>

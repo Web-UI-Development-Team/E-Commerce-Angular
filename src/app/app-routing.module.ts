@@ -22,23 +22,35 @@ import { FormEditProductComponent } from './dashboard/products-dashboard/formEdi
 import { AddProductComponent } from './dashboard/products-dashboard/addNewProduct/add-product/add-product.component';
 import { AddNewUserComponent } from './dashboard/users-dashboard/add-new-user/add-new-user.component';
 import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-user.component';
+import { AuthGuard } from './guards/auth-guard.service';
+import { WishListComponent } from './wish-list/wish-list.component';
+import { AccountComponent } from './user-profile/account/account.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'signIn', component: SignInComponent },
   { path: 'signUp', component: SignUpComponent },
-  {
-    path: 'account',
-    component: UserProfileComponent,
-    children: [{ path: 'edit-profile', component: UserFormComponent }],
-  },
   { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'productDetails/:id', component: ProductDetailsComponent },
-  { path: 'cart', component: CartComponent },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'account', component: AccountComponent, children: [
+        { path: 'edit', component: UserFormComponent }
+      ]},
+      { path: 'orders', component: OrderDetailsComponent },
+      { path: 'orders-history', component: OrderDetailsComponent },
+      { path: 'wish-list', component: WishListComponent },
+    ],
+  },
+  { path: 'cart', canActivate: [AuthGuard], component: CartComponent },
+  { path: 'contactUs', canActivate: [AuthGuard], component: ContactUsComponent },
+  { path: 'checkout', canActivate: [AuthGuard], component: OrdersComponent },
+
   { path: 'about', component: AboutComponent },
-  { path: 'contactUs', component: ContactUsComponent },
-  { path: 'checkout', component: OrdersComponent },
   { path: 'orderDetails', component: OrderDetailsComponent },
   {
     path: 'dashboard',
@@ -89,7 +101,6 @@ const routes: Routes = [
       },
     ],
   },
-  { path: 'contactUs', component: ContactUsComponent },
   { path: '**', component: NotFound404Component },
 ];
 @NgModule({
