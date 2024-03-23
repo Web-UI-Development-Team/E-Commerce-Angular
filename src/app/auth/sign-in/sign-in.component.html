@@ -1,1 +1,32 @@
-<p>sign-in works!</p>
+<form [formGroup]="LoginComponent" class="m-3">
+    
+    <div class="mb-3">
+        <label for="uemail" class="form-label">Email</label>
+        <input type="email" formControlName="email" class="form-control" id="uemail" name="E-mail">
+        <div class="alert alert-warning" [hidden]="email?.valid || email?.untouched">
+            <small *ngIf="email?.errors?.['required']">
+                email is required
+            </small>
+            <!-- <small *ngIf="email?.errors?.['EmailNotValid']">
+                Email must contains &#64;Example.com, <b> {{email?.errors?.['EmailNotValid'].value}} </b> doesn't match
+            </small> -->
+        </div>
+        <!-- <button [disabled]="SignInComponent.invalid" type="submit" class="btn btn-primary">submit</button> -->
+
+</div>
+
+<div class="mb-3">
+    <label for="upassword" class="form-label">Password</label>
+    <input type="password" formControlName="password" class="form-control" id="upassword" name="Password">
+    <!-- <div class="alert alert-warning" [hidden]="email?.valid || email?.untouched">
+        <small *ngIf="email?.errors?.['required']">
+            email is required
+        </small> -->
+        <!-- <small *ngIf="email?.errors?.['EmailNotValid']">
+            Email must contains &#64;Example.com, <b> {{email?.errors?.['EmailNotValid'].value}} </b> doesn't match
+        </small> -->
+    <!-- </div> -->
+    <!-- <button [disabled]="SignInComponent.invalid" type="submit" class="btn btn-primary">submit</button> -->
+
+</div>
+</form>

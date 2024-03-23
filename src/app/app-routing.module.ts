@@ -11,27 +11,90 @@ import { ProductDetailsComponent } from './product/product-details/product-detai
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OrdersComponent } from './order/orders/orders.component';
 import { OrderDetailsComponent } from './order/order-details/order-details.component';
+import { Sign } from 'node:crypto';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { HomeDashboardComponent } from './dashboard/home-dashboard/home-dashboard.component';
+import { ProductsDashboardComponent } from './dashboard/products-dashboard/products-dashboard.component';
+import { UsersDashboardComponent } from './dashboard/users-dashboard/users-dashboard.component';
+import { CategoriesDashboardComponent } from './dashboard/categories-dashboard/categories-dashboard.component';
+import { FormEditProductComponent } from './dashboard/products-dashboard/formEditProduct/form-edit-product/form-edit-product.component';
+import { AddProductComponent } from './dashboard/products-dashboard/addNewProduct/add-product/add-product.component';
+import { AddNewUserComponent } from './dashboard/users-dashboard/add-new-user/add-new-user.component';
+import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-user.component';
 
 const routes: Routes = [
-  {path:"",redirectTo:"/home",pathMatch:'full'},
-  {path:"signIn",component:SignInComponent},
-  {path:"cart",component:CartComponent},
-  {path:"home",component:HomeComponent},
-  {path:"products",component:ProductsComponent,children:[
-    // {path:"productDetails/:id",component:ProductDetailsComponent}
-  ]},
-  {path:"about",component:AboutComponent},
-  {path:"dashboard",component:DashboardComponent}, 
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'signIn', component: SignInComponent },
+  {path:"signUp",component:SignUpComponent},
+  { path: 'cart', component: CartComponent },
+  { path: 'home', component: HomeComponent },
+    {path:"about",component:AboutComponent},
   {path:"contactUs",component:ContactUsComponent},
   {path:"checkout",component:OrdersComponent}, 
   {path:"orderDetails",component:OrderDetailsComponent}, 
 
-  {path:"**",component:NotFound404Component},
-
-];
+  {
+    path: 'products',
+    component: ProductsComponent,
+    children: [
+      // {path:"productDetails/:id",component:ProductDetailsComponent}
+    ],
+  },
+  { path: 'about', component: AboutComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    children: [
+      // {
+      //   path: '',
+      //   redirectTo: '/home',
+      //   pathMatch: 'full',
+      // },
+      {
+        path: 'home',
+        component: HomeDashboardComponent,
+      },
+      {
+        path: 'products',
+        component: ProductsDashboardComponent,
+        // children: [
+        //   {
+        //     path: 'add',
+        //     component: AddProductComponent,
+        //   },
+        // ],
+      },
+      {
+        path: 'users',
+        component: UsersDashboardComponent,
+      },
+      {
+        path: 'categories',
+        component: CategoriesDashboardComponent,
+      },
+      {
+        path: 'editProduct/:id',
+        component: FormEditProductComponent,
+      },
+      {
+        path: 'addProduct',
+        component: AddProductComponent,
+      },
+      {
+        path: 'addUser',
+        component: AddNewUserComponent,
+      },
+      {
+        path: 'editUser/:id',
+        component: EditUserComponent,
+      },
+    ],
+  },
+  { path: 'contactUs', component: ContactUsComponent },
+  { path: '**', component: NotFound404Component },
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
