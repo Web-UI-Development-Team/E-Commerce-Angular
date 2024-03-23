@@ -1,1 +1,53 @@
-<p>order-details works!</p>
+<h2>Orders details</h2>
+
+<table class="table table-striped table-white ">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Date</th>
+      <th scope="col">status</th>
+      <th scope="col">totalPrice</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders; let i = index">
+      <th>
+        <span
+          *ngFor="let orderDetail of order.orderItems"
+          style="display: block; width: 50px;"
+        >
+          {{ orderDetail.title }}
+        </span>
+      </th>
+<!-- ///////////// -->
+      <td>
+        <span
+          *ngFor="let orderDetail of order.orderItems" 
+          style="display: block"
+        >
+          {{ orderDetail.price }}
+        </span>
+      </td>
+
+      <td>
+        <span
+          *ngFor="let orderDetail of order.orderItems"
+          style="display: block"
+        >
+          {{ orderDetail.quantity }}
+        </span>
+      </td>
+      <!-- ///// -->
+      <td>{{ order.dateOfOrder | date }}</td>
+      <td>{{ order.status }}</td>
+      <td>{{ order.totalPrice }}</td> 
+      <td>
+        <button (click)="onCancelOrder(order._id,'cancled')">cancel</button> 
+      </td>
+    </tr> 
+  </tbody>
+</table>
+
+

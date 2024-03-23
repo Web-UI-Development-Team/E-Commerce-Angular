@@ -9,6 +9,8 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { OrdersComponent } from './order/orders/orders.component';
+import { OrderDetailsComponent } from './order/order-details/order-details.component';
 import { Sign } from 'node:crypto';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { HomeDashboardComponent } from './dashboard/home-dashboard/home-dashboard.component';
@@ -26,6 +28,11 @@ const routes: Routes = [
   {path:"signUp",component:SignUpComponent},
   { path: 'cart', component: CartComponent },
   { path: 'home', component: HomeComponent },
+    {path:"about",component:AboutComponent},
+  {path:"contactUs",component:ContactUsComponent},
+  {path:"checkout",component:OrdersComponent}, 
+  {path:"orderDetails",component:OrderDetailsComponent}, 
+
   {
     path: 'products',
     component: ProductsComponent,
@@ -85,7 +92,6 @@ const routes: Routes = [
   },
   { path: 'contactUs', component: ContactUsComponent },
   { path: '**', component: NotFound404Component },
-];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
