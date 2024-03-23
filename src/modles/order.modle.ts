@@ -1,15 +1,13 @@
-export interface Order  
+export interface Order {
+  orderItems: [
     {
-        orderItems:[{ 
-            title: string,
-            price : number
-            quantity : number
-        }], 
-        _id : string,
-        status : string,
-        totalPrice : number,
-        dateOfOrder : Date,
+      title: string;
+      price: number;
+      quantity: number;
+    }
+  ];
+  _id: string;
+  status: string;
+  totalPrice: number;
+  dateOfOrder: Date;
 }
-    
-
-

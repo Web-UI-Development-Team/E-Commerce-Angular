@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {  ReactiveFormsModule } from '@angular/forms'; 
+import {  ReactiveFormsModule } from '@angular/forms';
 import {
   BrowserModule,
   provideClientHydration,} from '@angular/platform-browser';
@@ -27,6 +27,24 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { NotFound404Component } from './not-found404/not-found404.component';
 import { CommonModule } from '@angular/common';
+<<<<<<< HEAD
+=======
+import { SideBarComponent } from './dashboard/side-bar/side-bar.component';
+import { HomeDashboardComponent } from './dashboard/home-dashboard/home-dashboard.component';
+import { UsersDashboardComponent } from './dashboard/users-dashboard/users-dashboard.component';
+import { ProductsDashboardComponent } from './dashboard/products-dashboard/products-dashboard.component';
+import { CategoriesDashboardComponent } from './dashboard/categories-dashboard/categories-dashboard.component';
+import { FormEditProductComponent } from './dashboard/products-dashboard/formEditProduct/form-edit-product/form-edit-product.component';
+import { AddProductComponent } from './dashboard/products-dashboard/addNewProduct/add-product/add-product.component';
+import { AddNewUserComponent } from './dashboard/users-dashboard/add-new-user/add-new-user.component';
+import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-user.component';
+import { UserFormComponent } from './user-profile/user-form/user-form.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { AccountComponent } from './user-profile/account/account.component';
+import { WishListComponent } from './wish-list/wish-list.component';
+
+
+>>>>>>> 1013ff59f91e11da8461da7387ebed6150ba0fee
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,8 +62,21 @@ import { CommonModule } from '@angular/common';
     FooterComponent,
     CartComponent,
     CartItemComponent,
+    UserFormComponent,
     HomeComponent,
     NotFound404Component,
+    SideBarComponent,
+    HomeDashboardComponent,
+    UsersDashboardComponent,
+    ProductsDashboardComponent,
+    CategoriesDashboardComponent,
+    FormEditProductComponent,
+    AddProductComponent,
+    AddNewUserComponent,
+    EditUserComponent,
+    LoaderComponent,
+    AccountComponent,
+    WishListComponent,
   ],
   imports: [
     BrowserModule,
