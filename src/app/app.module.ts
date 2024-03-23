@@ -24,9 +24,11 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { UserFormComponent } from './user-profile/user-form/user-form.component';
 import { HomeComponent } from './home/home.component';
 import { NotFound404Component } from './not-found404/not-found404.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { ProductCardComponent } from './product/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -45,9 +47,11 @@ import { LoaderComponent } from './shared/loader/loader.component';
     FooterComponent,
     CartComponent,
     CartItemComponent,
+    UserFormComponent,
     HomeComponent,
     NotFound404Component,
     LoaderComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,7 @@ import { LoaderComponent } from './shared/loader/loader.component';
     HttpClientModule,
     FontAwesomeModule,
     FormsModule
-    
+
   ],
   providers: [
     provideClientHydration(),

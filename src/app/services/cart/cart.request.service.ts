@@ -4,7 +4,7 @@ import { ICart, IPostCart } from '../../../modles/cart.modle';
 import { Observable, of } from 'rxjs';
 import { IAuth } from '../../../modles/auth.modle';
 import { ILogin } from '../../../modles/login.modle';
-
+import { IProduct } from '../../../modles/product.modle';
 
 @Injectable({
   providedIn: 'root',
@@ -12,23 +12,31 @@ import { ILogin } from '../../../modles/login.modle';
 export class CartRequestService {
   constructor(private http: HttpClient) {}
 
-  addToCart(product:any){
-   return this.http.post('http://localhost:3010/api/v1/cart/add', product);
-  };
-
   getUserCartRequest(): Observable<ICart[]> {
     return this.http.get<ICart[]>('http://localhost:3010/api/v1/cart');
   }
 
+  addToCart(product: IProduct) {
+    return this.http.post('http://localhost:3010/api/v1/cart/add', { product });
+  }
+
   updateCartRequest(carts: IPostCart[]) {
-    return this.http.patch<string>(
-      'http://localhost:3010/api/v1/cart',
-      {carts}
+    return this.http.patch<string>('http://localhost:3010/api/v1/cart', {
+      carts,
+    });
+  }
+
+  updateWishListRequest(product: string) {
+    return this.http.post<string>(
+      'http://localhost:3010/api/v1/profile/wish-list',
+      { product }
     );
   }
 
   removeCartRequest(productId: string) {
-    return this.http.delete<string>("http://localhost:3010/api/v1/cart/" + productId);
+    return this.http.delete<string>(
+      'http://localhost:3010/api/v1/cart/' + productId
+    );
   }
 
   clearCartRequest() {}
