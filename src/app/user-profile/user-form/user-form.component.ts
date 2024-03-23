@@ -1,10 +1,88 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserProfileService } from '../../services/user-profile/user-profile.service';
+import { Router } from '@angular/router';
+import { relative } from 'path';
+import { Location } from '@angular/common';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import { AuthService } from '../../services/auth/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import { IEditProfile, IProfile } from '../../../modles/profile.modle';
+import { IUser } from '../../../modles/user.modle';
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrl: './user-form.component.css'
+  styleUrl: './user-form.component.css',
 })
-export class UserFormComponent {
+export class UserFormComponent implements OnInit {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private cookieService: CookieService,
+    private userProfileService: UserProfileService,
+    private location: Location
+  ) {}
 
+  user: IProfile = {
+    name: "",
+    email: "",
+    phone: "",
+    image: "",
+    wishList: []
+  }
+
+  ngOnInit(): void {
+    this.user = this.userProfileService.user;
+
+    this.updateForm = this.formBuilder.group(
+      {
+        name: [this.user.name, [Validators.required, Validators.pattern('[A-Z a-z]{3,}')]],
+        email: [this.user.email, [Validators.required, this.existEmailValidator()]],
+        phone: [this.user.phone, [Validators.required, Validators.pattern('[0-9]{12}')]],
+      }
+    );
+  }
+
+  updateForm: FormGroup;
+
+  get name() {
+    return this.updateForm.get('name');
+  }
+
+  get email() {
+    return this.updateForm.get('email');
+  }
+
+  get phone() {
+    return this.updateForm.get('phone');
+  }
+
+  existEmailValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      let emailVal: string = control.value;
+      let ValidationErrors = { EmailNotValid: { value: emailVal } };
+      if (emailVal.length == 0 && control.untouched) return null;
+      return emailVal.includes('@gmail.com') ? null : ValidationErrors;
+    };
+  }
+
+  onSubmit() {
+    let userModel: IEditProfile = this.updateForm.value as IEditProfile;
+    delete userModel.confirmPassword;
+
+    console.log(userModel);
+  }
+
+  onClick() {
+    this.userProfileService.patchUser();
+    this.location.back();
+  }
 }

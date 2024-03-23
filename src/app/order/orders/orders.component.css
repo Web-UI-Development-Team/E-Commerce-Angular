@@ -1,0 +1,26 @@
+p {
+  color: red;
+}
+.form-row .control-label::after { 
+  content: "*";
+  color: red;
+  position: relative;
+  top: 2px;
+  left: 2px;
+}
+.circle {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid red;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+}
+span {
+  margin-top: 10px;
+  color: red;
+}
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

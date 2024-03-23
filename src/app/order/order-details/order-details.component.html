@@ -1,1 +1,56 @@
-<p>order-details works!</p>
+<div class="parent">
+  <h2>Orders <span>details</span></h2>
+
+<table class="table table-white ">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>price</th>
+      <th>Quantity</th> 
+      <th>Date</th>
+      <th>status</th>
+      <th>totalPrice</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders; let i = index">
+      <td>
+        <span *ngFor="let orderDetail of order.orderItems" style="display: inline-block">
+          {{ orderDetail.title }}
+        </span>
+      </td>
+      
+<!-- ///////////// -->
+      <td>
+        <span
+          *ngFor="let orderDetail of order.orderItems" 
+          style="display: block"
+        >
+          {{ orderDetail.price }}
+        </span>
+      </td>
+
+      <td>
+        <span
+          *ngFor="let orderDetail of order.orderItems"
+          style="display: block"
+        >
+          {{ orderDetail.quantity }} 
+        </span>
+      </td>
+      <!-- ///// -->
+      <td>{{ order.dateOfOrder | date }}</td>
+      <td>{{ order.status }}</td>
+      <td>{{ order.totalPrice }}</td> 
+      <td>
+        <fa-icon [icon] ="faX" (click)="onCancelOrder(order._id,'cancled')" ></fa-icon>
+        <!-- <button (click)="onCancelOrder(order._id,'cancled')">cancel</button>  -->
+      </td>
+    </tr> 
+  </tbody>
+</table>
+
+
+
+</div>

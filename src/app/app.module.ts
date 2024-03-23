@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
+import {  ReactiveFormsModule } from '@angular/forms';
 import {
   BrowserModule,
-  provideClientHydration,
-} from '@angular/platform-browser';
+  provideClientHydration,} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,11 +24,23 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-import { UserFormComponent } from './user-profile/user-form/user-form.component';
 import { HomeComponent } from './home/home.component';
 import { NotFound404Component } from './not-found404/not-found404.component';
+import { CommonModule } from '@angular/common';
+import { SideBarComponent } from './dashboard/side-bar/side-bar.component';
+import { HomeDashboardComponent } from './dashboard/home-dashboard/home-dashboard.component';
+import { UsersDashboardComponent } from './dashboard/users-dashboard/users-dashboard.component';
+import { ProductsDashboardComponent } from './dashboard/products-dashboard/products-dashboard.component';
+import { CategoriesDashboardComponent } from './dashboard/categories-dashboard/categories-dashboard.component';
+import { FormEditProductComponent } from './dashboard/products-dashboard/formEditProduct/form-edit-product/form-edit-product.component';
+import { AddProductComponent } from './dashboard/products-dashboard/addNewProduct/add-product/add-product.component';
+import { AddNewUserComponent } from './dashboard/users-dashboard/add-new-user/add-new-user.component';
+import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-user.component';
+import { UserFormComponent } from './user-profile/user-form/user-form.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { ProductCardComponent } from './product/product-card/product-card.component';
+import { AccountComponent } from './user-profile/account/account.component';
+import { WishListComponent } from './wish-list/wish-list.component';
 
 @NgModule({
   declarations: [
@@ -50,16 +62,28 @@ import { ProductCardComponent } from './product/product-card/product-card.compon
     UserFormComponent,
     HomeComponent,
     NotFound404Component,
+    SideBarComponent,
+    HomeDashboardComponent,
+    UsersDashboardComponent,
+    ProductsDashboardComponent,
+    CategoriesDashboardComponent,
+    FormEditProductComponent,
+    AddProductComponent,
+    AddNewUserComponent,
+    EditUserComponent,
     LoaderComponent,
     ProductCardComponent,
+    AccountComponent,
+    WishListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-    FormsModule
-
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule
   ],
   providers: [
     provideClientHydration(),
