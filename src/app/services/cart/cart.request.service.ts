@@ -10,7 +10,8 @@ export class CartRequestService {
   constructor(private http: HttpClient) {}
 
   addToCart(product: any) {
-    return this.http.post('http://localhost:3010/api/v1/cart/add', product);
+    console.log(product);
+    return this.http.post('http://localhost:3010/api/v1/cart/add', { product });
   }
 
   getUserCartRequest(): Observable<ICart[]> {
