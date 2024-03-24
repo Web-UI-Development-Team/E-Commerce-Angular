@@ -1,7 +1,7 @@
 <form class="p-5" [formGroup]="UserForm">
-  <div class="form-row m-3">
-    <p>Shipping Address</p>
-    <label class=" control-label" for="validationDefault03">Country / Region</label>
+  <div class="form-row m-3" style="width: 100%;" >
+    <div class="col-md-6">
+      <label class=" control-label" for="validationDefault03">Country / Region</label>
     <select class="form-control p-2 mt-2 ">
       <option>Cairo</option>
       <option>Alex</option>
@@ -10,12 +10,12 @@
       <option>Mansoura</option>
       <option>El-mahalla</option>
       <option>Ismailiya</option>
-
     </select>
+    </div>
   </div>
 
-  <div class="form-row m-3">
-    <div class="col-md-6 mb-3">
+  <div class="form-row m-3" style="width: 99%; display: flex; gap: 10px;">
+    <div class="col-md-3 mb-3">
       <label class=" control-label" for="validationDefault01">First name</label>
       <input type="text" class="form-control mt-2 " formControlName="firstName"
         [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}">
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="col-md-6 mb-3">
+    <div class="col-md-3 mb-3">
       <label class=" control-label" for="validationDefault02">Last name</label>
       <input type="text" class="form-control mt-2 " formControlName="lastName"
         [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}">
@@ -49,9 +49,9 @@
     </div>
   </div>
   <!--  -->
-  <div class="form-row m-3">
+  <div class="form-row m-3" style="width: 100%;">
 
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-3" >
       <label class=" control-label" for="validationDefault03">Phone Number</label>
       <input type="text" class="form-control mt-2 " formControlName="phoneNumber"
         [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}">
@@ -69,7 +69,7 @@
     </div>
   </div>
   <!-- ////////// -->
-  <div class="form-row m-3">
+  <div class="form-row m-3"  style="width: 100%;">
 
     <div class="col-md-6 mb-3">
       <label class=" control-label" for="validationDefault03">City</label>
