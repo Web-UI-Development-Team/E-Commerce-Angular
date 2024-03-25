@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap");
+@import "./../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+
+:root {
+  --primary: #ff4500;
+  --secondery: #382e2e;
+  --lightGrey: #f1f1f1;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+}

@@ -6,36 +6,24 @@
         <!-- Left elements -->
         <div class="col-lg-2 col-sm-4 col-4">
           <a routerLink="/home" class="float-start">
-            <img
-              src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
-              height="35"
-              alt="logo"
-            />
+            <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="35" alt="logo" />
           </a>
         </div>
         <!-- Left elements -->
 
         <!-- Center elements -->
         <div class="order-lg-last col-lg-5 col-sm-8 col-8">
-          <div class="d-flex float-end">
-            <a
-              [routerLink]="isAuth ? '/profile/account' : '/signIn'"
-              class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"
-            >
+          <div class="d-flex float-end icons">
+            <a [routerLink]="isAuth ? '/profile/account' : '/signIn'" class="nav-icon">
               <i class="fas fa-user-alt m-1 me-md-2"></i>
-              <p class="d-none d-md-block mb-0">
-                {{ isAuth ? "Profile" : "SignIn" }}
-              </p>
             </a>
 
-            <a
-              routerLink="/cart"
-              class="border rounded py-1 px-3 nav-link d-flex align-items-center"
-              *ngIf="isAuth"
-            >
+            <div class="mx-3"></div>
+
+            <a routerLink="/cart" *ngIf="isAuth" class="nav-icon">
               <i class="fas fa-shopping-cart m-1 me-md-2"></i>
-              <p class="d-none d-md-block mb-0">My cart</p>
             </a>
+            <div *ngIf="isAuth" class="cart">{{cartService.cartItems.length}}</div>
           </div>
         </div>
         <!-- Center elements -->
@@ -44,18 +32,9 @@
         <div class="col-lg-5 col-md-12 col-12">
           <div class="input-group float-center">
             <div class="form-outline">
-              <input
-                type="search"
-                id="form1"
-                class="form-control"
-                placeholder="Search"
-              />
+              <input type="search" id="form1" class="form-control" placeholder="Search" />
             </div>
-            <button
-              type="button"
-              class="btn btn-primary shadow-0"
-              title="search"
-            >
+            <button type="button" class="btn btn-primary shadow-0" title="search">
               <i class="fas fa-search"></i>
             </button>
           </div>
@@ -71,15 +50,9 @@
     <!-- Container wrapper -->
     <div class="container justify-content-center justify-content-md-between">
       <!-- Toggle button -->
-      <button
-        class="navbar-toggler border py-2 text-dark"
-        type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#navbarLeftAlignExample"
-        aria-controls="navbarLeftAlignExample"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler border py-2 text-dark" type="button" data-mdb-toggle="collapse"
+        data-mdb-target="#navbarLeftAlignExample" aria-controls="navbarLeftAlignExample" aria-expanded="false"
+        aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
 
@@ -88,51 +61,21 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a
-              class="nav-link active"
-              aria-current="page"
-              routerLink="/home"
-              routerLinkActive="active"
-              >Home</a
-            >
+            <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/products" routerLinkActive="active"
-              >Products</a
-            >
+            <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/about" routerLinkActive="active"
-              >About</a
-            >
+            <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/contactUs"
-              routerLinkActive="active"
-              *ngIf="isAuth"
-              >Contact Us</a
-            >
+            <a class="nav-link" routerLink="/contactUs" routerLinkActive="active" *ngIf="isAuth">Contact Us</a>
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/dashboard"
-              routerLinkActive="active"
-              *ngIf="isAuth"
-              >Dashboard</a
-            >
+            <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" *ngIf="role === 'admin'">Dashboard</a>
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/checkout"
-              routerLinkActive="active"
-              *ngIf="isAuth"
-              >checkout</a
-            >
-          </li>
+
           <!-- <li class="nav-item">
             <a class="nav-link text-dark" href="#">Projects</a>
           </li>
