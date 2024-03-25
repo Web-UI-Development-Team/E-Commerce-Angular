@@ -1,26 +1,27 @@
-p {
-  color: red;
-}
+
 .form-row .control-label::after { 
   content: "*";
-  color: red;
+  color:rgb(217, 9, 9);
   position: relative;
   top: 2px;
   left: 2px;
 }
 .circle {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 1px solid red;
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgb(217, 9, 9);
   border-radius: 50%;
   text-align: center;
-  line-height: 20px;
+  line-height: 16px;
 }
 span {
   margin-top: 10px;
-  color: red;
+  color: rgb(217, 9, 9);
 }
 input.ng-invalid.ng-touched {
-  border: 1px solid red;
+  border: 1px solid rgb(217, 9, 9) ;
+}
+.is-invalid {
+  border-color: rgb(217, 9, 9);
 }
