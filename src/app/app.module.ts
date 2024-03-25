@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import {  ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 import {
   BrowserModule,
   provideClientHydration,} from '@angular/platform-browser';
@@ -40,6 +41,7 @@ import { UserFormComponent } from './user-profile/user-form/user-form.component'
 import { LoaderComponent } from './shared/loader/loader.component';
 import { AccountComponent } from './user-profile/account/account.component';
 import { WishListComponent } from './wish-list/wish-list.component';
+import { PopUpComponent } from './order/pop-up/pop-up.component';
 
 
 @NgModule({
@@ -74,6 +76,7 @@ import { WishListComponent } from './wish-list/wish-list.component';
     LoaderComponent,
     AccountComponent,
     WishListComponent,
+    PopUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +85,8 @@ import { WishListComponent } from './wish-list/wish-list.component';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    MatDialogModule
   ],
   providers: [
     provideClientHydration(),

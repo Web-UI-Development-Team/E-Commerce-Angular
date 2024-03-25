@@ -3,6 +3,8 @@ import { OrdersService } from '../../services/order/orders.service';
 import { Order } from '../../../modles/order.modle';
 import { ActivatedRoute } from '@angular/router';
 import {faX} from '@fortawesome/free-solid-svg-icons'
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpComponent } from '../pop-up/pop-up.component';
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
@@ -14,7 +16,7 @@ export class OrderDetailsComponent implements OnInit  {
   status : any;
   faX=faX
   
-  constructor(private orderService : OrdersService , private route : ActivatedRoute){} 
+  constructor(private orderService : OrdersService , private route : ActivatedRoute , private MatDialog : MatDialog){} 
 
   ngOnInit(): void {   
  
@@ -31,21 +33,22 @@ export class OrderDetailsComponent implements OnInit  {
     
 
     onCancelOrder(orderId:string , status : string){  
-      if(confirm('do you need to cancel this order')) {
-        console.log('cancled');
+      let refOPenDiallog = this.openDialog();
         this.orderService.cancelOrder(orderId , status).subscribe({
           next : (res)=>{
             console.log('cancled' , res); 
             const cancelOrderIndex = this.orders.findIndex(order => order._id === orderId) //  
             this.orders.splice(cancelOrderIndex,1) ;
       
-          },
+          }, 
           error :(err)=>{
             console.log('error' , err);
           }
         })
-      }
      
+    }
+    openDialog(){
+      this.MatDialog.open(PopUpComponent)
     }
   }   
 
