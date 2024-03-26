@@ -1,12 +1,18 @@
 <header>
   <!-- Jumbotron -->
-  <div class="p-3 text-center bg-white border-bottom">
+
+
+
+  <div class="p-3 text-center bg-white border-bottom border-light">
     <div class="container">
       <div class="row gy-3">
         <!-- Left elements -->
-        <div class="col-lg-2 col-sm-4 col-4">
+        <div class="col-1">
           <a routerLink="/home" class="float-start">
-            <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="35" alt="logo" />
+
+            <img
+              src="https://th.bing.com/th/id/R.49346454c6c44e6b885f5e39afbb877b?rik=fvlRg8JDjsHTPA&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2fjcx%2fLXp%2fjcxLXprai.png&ehk=Lc5rvfUMX9aE3MlCzaRiqgzcL6juOCY0WzKg0S1EhUQ%3d&risl=&pid=ImgRaw&r=0"
+              width="55" alt="logo" />
           </a>
         </div>
         <!-- Left elements -->
@@ -29,86 +35,61 @@
         <!-- Center elements -->
 
         <!-- Right elements -->
-        <div class="col-lg-5 col-md-12 col-12">
-          <div class="input-group float-center">
-            <div class="form-outline">
-              <input type="search" id="form1" class="form-control" placeholder="Search" />
+
+        <div class="col-lg-6 col-md-12 col-12">
+          <div class="input-group float-center ">
+            <div class="form-outline position-relative w-75 ">
+              <input type="search" id="form1" class="form-control border rounded-5 bg-body-secondary"
+                placeholder="Search" />
+              <div> <i class="fas fa-search position-absolute" id="search"></i></div>
             </div>
-            <button type="button" class="btn btn-primary shadow-0" title="search">
-              <i class="fas fa-search"></i>
-            </button>
           </div>
         </div>
         <!-- Right elements -->
       </div>
     </div>
   </div>
+
   <!-- Jumbotron -->
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white  border-bottom border-light shadow-sm ">
     <!-- Container wrapper -->
-    <div class="container justify-content-center justify-content-md-between">
-      <!-- Toggle button -->
-      <button class="navbar-toggler border py-2 text-dark" type="button" data-mdb-toggle="collapse"
-        data-mdb-target="#navbarLeftAlignExample" aria-controls="navbarLeftAlignExample" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
 
-      <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse" id="navbarLeftAlignExample">
+    <div class="container d-flex justify-content-around align-items-center  ">
+      <div>
+        <pre>                             </pre>
+      </div>
+
+      <div class="collapse navbar-collapse p-2 " id="navbarLeftAlignExample">
         <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/contactUs" routerLinkActive="active" *ngIf="isAuth">Contact Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" *ngIf="role === 'admin'">Dashboard</a>
-          </li>
 
-          <!-- <li class="nav-item">
-            <a class="nav-link text-dark" href="#">Projects</a>
+            <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-dark" href="#">Menu item</a>
+            <a class="nav-link" routerLink="/products" routerLinkActive="active">PRODUCTS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-dark" href="#">Menu name</a>
-          </li> -->
-
-          <!-- Navbar dropdown -->
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-              Others
-            </a>
-            Dropdown menu
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li>
-                <a class="dropdown-item" href="#">Action</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Another action</a>
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </li>
-            </ul>
-          </li> -->
+            <a class="nav-link" routerLink="/about" routerLinkActive="active">ABOUT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/contactUs" routerLinkActive="active" *ngIf="isAuth">CONTACT US</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" *ngIf="role === 'admin'">DASHBOARD</a>
+          </li>
         </ul>
         <!-- Left links -->
+      </div>
+      <div>
+        <i class="fa-solid fa-house px-3 icon " routerLink="/home"></i>
+        <i class="fa-solid fa-heart px-3 icon"></i>
+        <i class="fa-solid fa-bag-shopping px-3 icon"></i>
       </div>
     </div>
     <!-- Container wrapper -->
   </nav>
 </header>
+

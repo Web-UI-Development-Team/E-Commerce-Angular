@@ -11,6 +11,7 @@ import { IProduct } from '../../../../modles/product.modle';
 })
 export class ProductCardComponent implements OnInit {
   isClicked: boolean = false;
+  buttonShow:boolean=false;
   buttonStyle: any = '';
 
   @Input() prd: IProduct = {
@@ -59,5 +60,13 @@ export class ProductCardComponent implements OnInit {
       next: (data) => console.log(data),
       error: (error) => console.log(error),
     });
+  }
+
+  showButton(id:any){
+    this.buttonShow= true;
+
+  }
+  hideButton(id:any){
+    this.buttonShow= false;
   }
 }

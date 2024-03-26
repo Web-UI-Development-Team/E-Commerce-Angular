@@ -1,8 +1,8 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../../services/auth/auth.service';
 import { CartRequestService } from '../../services/cart/cart.request.service';
 import { CartService } from '../../services/cart/cart.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,8 +16,11 @@ export class NavBarComponent implements OnInit {
     public cartService: CartService
   ) {}
 
+  active:boolean=false;
   isAuth: boolean = false;
   role: string = '';
+
+
 
   ngOnInit() {
     this.isAuth = this.authService.isAuthenticated();

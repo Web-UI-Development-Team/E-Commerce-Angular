@@ -11,11 +11,11 @@ import { ICart } from '../../../../modles/cart.modle';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  products: IProduct[] = [];
-  loading: boolean = false;
   constructor(
     private productRequestServices: ProductsRequestsService,
-    private router: Router
+    private productService: ProductsRequestsService,
+    private router: Router,
+    private cartReqService: CartRequestService
   ) {}
 
   @Input() cartItem: ICart = {
@@ -39,6 +39,8 @@ export class ProductsComponent implements OnInit {
     quantity: 0,
   };
   clickedButtonIndex: number | null = null;
+  products: IProduct[] = [];
+  loading: boolean = false;
 
   ngOnInit(): void {
     // this.loading==false
@@ -51,7 +53,7 @@ export class ProductsComponent implements OnInit {
   getProducts() {
     this.loading = true;
 
-    this.productRequestServices.getAllProductsRequest(1).subscribe(
+    this.productRequestServices.getAllProductsRequest(4).subscribe(
       (res: any) => {
         // console.log(res);
         this.products = res.products;

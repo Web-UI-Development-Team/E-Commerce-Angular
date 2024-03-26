@@ -1,0 +1,36 @@
+.bCard:hover{
+  box-shadow: 0px 0px 8px 8px rgb(241, 238, 238);
+}
+.text {
+  font-weight: bold;
+ /* color: orangered; */
+}
+
+.btn1{
+  background-color:white;
+  color: orangered;
+  border: none;
+  height: 40px;
+}
+
+.btn1:hover{
+  background-color: orangered;
+  color: white;
+}
+
+.bbtn{
+  background-color: orangered;
+  color: white;
+  /* width: 266px; */
+  width: 100%;
+  border: none;
+  height: 40px;
+  top: 85%;
+
+  left: 0;
+}
+
+.click{
+  background-color:orangered;
+  opacity: 0.6;
+}
