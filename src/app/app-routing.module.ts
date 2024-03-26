@@ -24,7 +24,7 @@ import { AddNewUserComponent } from './dashboard/users-dashboard/add-new-user/ad
 import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-user.component';
 import { OrdersDashboardComponent } from './dashboard/orders-dashboard/orders-dashboard.component';
 import { AuthGuard } from './services/guards/auth-guard.service';
-import { WishListComponent } from './wish-list/wish-list.component';
+import { WishListComponent } from './pages/wish-list/wish-list.component';
 import { AccountComponent } from './pages/user-profile/account/account.component';
 import { AdminGuard } from './services/guards/admin-guard.service';
 

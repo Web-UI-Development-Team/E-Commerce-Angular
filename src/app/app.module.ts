@@ -39,7 +39,7 @@ import { UserFormComponent } from './pages/user-profile/user-form/user-form.comp
 import { LoaderComponent } from './shared/loader/loader.component';
 import { ProductCardComponent } from './pages/product/product-card/product-card.component';
 import { AccountComponent } from './pages/user-profile/account/account.component';
-import { WishListComponent } from './wish-list/wish-list.component';
+import { WishListComponent } from './pages/wish-list/wish-list.component';
 import { QuantityComponent } from './shared/elements/quantity/quantity.component';
 import { SliderComponent } from './shared/elements/slider/slider.component';
 import { HomeDashboardComponent } from './dashboard/home-dashboard/home-dashboard.component';
