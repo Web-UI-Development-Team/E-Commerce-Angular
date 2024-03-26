@@ -1,0 +1,18 @@
+.boxdata{
+  background-color: #fff;
+  box-shadow: 0 6px 15px 0 rgba(36, 37 38, 0.08);
+  border: 2px solid #f5f5f5;
+  border-radius: 10px;
+  width: 49%;
+  padding: 15px;
+  cursor: pointer;
+}
+.title{
+  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+}
+.icon{
+  font-size: 50px;
+  color: #ff4500;
+}

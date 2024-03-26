@@ -97,7 +97,16 @@ export class AddProductComponent implements OnInit {
     console.log(this.productForm);
     console.log(this.productForm.value);
     this.productForm.value.images = this.initialFormValues.images;
-    this.productRequestServices.addNewProductRequest(this.productForm.value);
-    this.router.navigate(['/dashboard/products']);
+    this.productRequestServices
+      .addNewProductRequest(this.productForm.value)
+      .subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    this.dialogRef.close();
   }
 }

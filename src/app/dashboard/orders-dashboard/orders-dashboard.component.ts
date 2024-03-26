@@ -13,26 +13,15 @@ export class OrdersDashboardComponent implements OnInit {
     private userRequestServices: UserRequestsService
   ) {}
 
-  allOrders: any;
-  usersIds: string[] = [];
-  userNames: string[] = [];
+  allOrders: any = [];
 
   ngOnInit() {
-    this.ordersRequestsServices.getAllOrders().subscribe((data) => {
+    this.ordersRequestsServices.getAllOrders().subscribe((data: any) => {
       this.allOrders = data;
-      console.log(this.allOrders);
-      this.allOrders.forEach((order: any) => {
-        this.usersIds.push(order.user);
+      this.allOrders.forEach((data: any) => {
+        data.dateOfOrder = data.dateOfOrder.split('T')[0];
+        console.log(data.dateOfOrder);
       });
-      console.log(this.usersIds);
-      this.usersIds.forEach((userId: string) => {
-        this.userRequestServices
-          .getUserByIdRequest(userId)
-          .subscribe((data) => {
-            this.userNames.push(data.name);
-          });
-      });
-      console.log(this.userNames);
     });
   }
 }

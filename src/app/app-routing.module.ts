@@ -65,13 +65,13 @@ const routes: Routes = [
     canActivateChild: [AdminGuard],
     canActivate: [AdminGuard],
     children: [
-      // {
-      //   path: '',
-      //   redirectTo: '/home',
-      //   pathMatch: 'full',
-      // },
       {
-        path: 'home',
+        path: '',
+        redirectTo: 'homedashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'homedashboard',
         component: HomeDashboardComponent,
       },
       {
