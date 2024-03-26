@@ -1,26 +1,58 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">OrderID</th>
-      <th scope="col">UserName</th>
-      <th scope="col">products</th>
-      <th scope="col">TotalPrice</th>
-      <th scope="col">Date</th>
-      <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let order of allOrders; let i = index">
-      <td>{{ order._id }}</td>
-      <td>{{ userNames[i] }}</td>
-      <td>
-        <ul>
-          <li *ngFor="let product of order.orderItems">{{ product.title }}</li>
-        </ul>
-      </td>
-      <td>{{ order.totalPrice }}</td>
-      <td>{{ order.dateOfOrder }}</td>
-      <td>{{ order.status }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+  <table class="table w-100">
+    <thead class="w-100">
+      <tr>
+        <th class="text-center" scope="col-2">#</th>
+        <th class="text-center" scope="col-2">UserName</th>
+        <th class="text-center" scope="col-2">Products</th>
+        <th class="text-center" scope="col-2">TotalPrice</th>
+        <th class="text-center" scope="col-2">Date</th>
+        <th class="text-center" scope="col-2">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of allOrders; let i = index" class="">
+        <td class="text-center" style="width: 10% !important">
+          <p
+            class="d-inline-block text-truncate"
+            style="max-width: 100px"
+            [title]="order._id"
+          >
+            {{ order._id }}
+          </p>
+        </td>
+        <td class="text-center" style="width: 25% !important">
+          <p
+            [title]="order.user.name"
+            class="d-inline-block text-truncate"
+            style="max-width: 200px"
+          >
+            {{ order.user.name }}
+          </p>
+        </td>
+        <td style="width: 25% !important">
+          <ul>
+            <li *ngFor="let product of order.orderItems">
+              <p
+                [title]="product.title"
+                class="text-truncate"
+                style="max-width: 150px"
+              >
+                {{ product.title }}
+              </p>
+            </li>
+          </ul>
+        </td>
+        <td class="text-center" style="width: 10% !important">
+          {{ order.totalPrice }}
+        </td>
+        <td class="text-center" style="width: 20% !important">
+          {{ order.dateOfOrder }}
+        </td>
+        <td class="text-center" style="width: 10% !important">
+          {{ order.status }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

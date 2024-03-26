@@ -27,7 +27,10 @@ export class AddNewUserComponent {
   ) {}
 
   userForm: FormGroup = this.formBuilder.group({
-    image: new FormControl('', [Validators.required]),
+    image: new FormControl(
+      'https://www.nbc.com/sites/nbcblog/files/styles/scale_862/public/2023/07/rainn-wilson-the-office2.jpg',
+      [Validators.required]
+    ),
     name: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
@@ -62,19 +65,31 @@ export class AddNewUserComponent {
     //wishList: [''],
   };
 
+  ngOnInit() {}
+
   getFormControl(controlName: string) {
     return this.userForm.get(controlName);
   }
 
-  closePopUp(): void {
+  closePopUp() {
     this.dialogRef.close();
   }
 
   addNewUser() {
-    console.log(this.userForm.value);
-    this.userRequestService
-      .addNewUserRequest(this.userForm.value)
-      .subscribe((user: IUser) => console.log(user));
-    this.router.navigate(['/dashboard/users']);
+    if (this.userForm.valid) {
+      console.log(this.userForm.value);
+      this.userRequestService.addNewUserRequest(this.userForm.value).subscribe(
+        (user: IUser) => {
+          console.log(user);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+      this.dialogRef.close();
+    } else {
+      console.log(this.userForm.value);
+      console.log('invalid');
+    }
   }
 }

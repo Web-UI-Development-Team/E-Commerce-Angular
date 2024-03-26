@@ -22,25 +22,41 @@ export class UsersDashboardComponent implements OnInit {
   allUsers: IUser[];
   user: IUser;
 
-  numberOfUsers = 15;
-  numberOfUserInPage = 5;
-  numberOfPages = Math.ceil(this.numberOfUsers / this.numberOfUserInPage);
+  numberOfPages: number;
   pages: any = [];
+  page:number;
 
   ngOnInit() {
-    this.usersRequest.getAllUsersRequest(1).subscribe((data) => {
+    this.usersRequest.getAllUsersRequest(1).subscribe((data: any) => {
       console.log(data);
-      this.allUsers = data;
+      this.allUsers = data.users;
+      this.numberOfPages = data.pages;
       console.log(this.allUsers);
+      this.page =1;
+      this.pages = range(this.numberOfPages);
+      console.log(this.pages.length)
     });
-    this.pages = range(this.numberOfPages);
   }
 
   currentPage(pageNumber: number) {
-    this.usersRequest.getAllUsersRequest(pageNumber).subscribe((data) => {
+    this.usersRequest.getAllUsersRequest(pageNumber).subscribe((data: any) => {
       console.log(data);
-      this.allUsers = data;
+      this.allUsers = data.users;
+      console.log(this.allUsers);
+      this.page= pageNumber;
     });
+  }
+
+  nextPage(pageNumber:number){
+    console.log(pageNumber)
+    this.page = pageNumber+1;
+    this.currentPage(this.page);
+  }
+
+  prevPage(pageNumber:number){
+    console.log(pageNumber)
+    this.page = pageNumber-1;
+    this.currentPage(this.page);
   }
 
   deleteUser(user: IUser) {
@@ -53,7 +69,8 @@ export class UsersDashboardComponent implements OnInit {
   }
 
   openAddUserPopup() {
-    const dialogRef = this.dialog.open(AddNewUserComponent);
+    console.log("entered")
+    this.dialog.open(AddNewUserComponent);
   }
 
   openEditUserPopup(user: IUser) {
