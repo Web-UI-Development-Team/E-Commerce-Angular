@@ -16,9 +16,9 @@ export class UserProfileService {
     wishList: [],
   };
 
-  patchUser() {
+  patchUser(userModel: object) {
     this.userProfileRequestService
-      .patchUserRequest({ name: 'Waleed Hesham' })
+      .patchUserRequest(userModel)
       .subscribe({
         next: (data) => console.log(data),
         error: (error) => console.log(error),

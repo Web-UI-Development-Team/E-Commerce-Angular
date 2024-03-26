@@ -1,0 +1,19 @@
+.foot{
+    left: 0;
+    right: 0;
+    background-color: black;
+    
+}
+.btn{
+    background-color: orangered;
+    color: whitesmoke;
+    width: 100px;
+    left: 65%;
+    height: 45px;
+   
+    bottom: -4px;
+   
+}
+a{
+    text-decoration: none;
+}

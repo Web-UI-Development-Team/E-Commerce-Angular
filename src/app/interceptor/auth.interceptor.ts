@@ -19,7 +19,9 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     req = req.clone({
       setHeaders: {
+
         jwt: this.cookieService.get('token'),
+ 
       },
     });
 
