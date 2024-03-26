@@ -15,6 +15,7 @@ export class OrdersComponent {
     firstName: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
     lastName: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
     phoneNumber: new FormControl('',[Validators.required,Validators.maxLength(11), Validators.pattern('^[0-9]+$')]),
+    select : new FormControl('',[Validators.required]),
     city: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]), 
     state: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
     zip: new FormControl('',[Validators.required , Validators.pattern('^[0-9]+$')]),

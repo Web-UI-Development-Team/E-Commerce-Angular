@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdersService } from '../../../services/order/orders.service';
-import { Order } from '../../../../modles/order.modle';
 import { ActivatedRoute } from '@angular/router';
 import { faX } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material/dialog';
+import { OrdersService } from '../../../services/order/orders.service';
+import { Order } from '../../../../modles/order.modle';
+import { PopUpComponent } from '../pop-up/pop-up.component';
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
@@ -16,33 +18,34 @@ export class OrderDetailsComponent implements OnInit {
 
   constructor(
     private orderService: OrdersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private MatDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.orderService.getOrders().subscribe((data) => {
-      // console.log(data[0]._id); to log id of order
+    this.orderService.getOrdersUser().subscribe((data) => {
       data = data.filter((order) => order.status == 'Pending');
       this.orders = data;
       console.log(data);
     });
-  } //oninit
+  }
 
   onCancelOrder(orderId: string, status: string) {
-    if (confirm('do you need to cancel this order')) {
-      console.log('cancled');
-      this.orderService.cancelOrder(orderId, status).subscribe({
-        next: (res) => {
-          console.log('cancled', res);
-          const cancelOrderIndex = this.orders.findIndex(
-            (order) => order._id === orderId
-          ); //
-          this.orders.splice(cancelOrderIndex, 1);
-        },
-        error: (err) => {
-          console.log('error', err);
-        },
-      });
-    }
+    let refOPenDiallog = this.openDialog();
+    this.orderService.cancelOrder(orderId, status).subscribe({
+      next: (res) => {
+        console.log('cancled', res);
+        const cancelOrderIndex = this.orders.findIndex(
+          (order) => order._id === orderId
+        ); //
+        this.orders.splice(cancelOrderIndex, 1);
+      },
+      error: (err) => {
+        console.log('error', err);
+      },
+    });
+  }
+  openDialog() {
+    this.MatDialog.open(PopUpComponent);
   }
 }

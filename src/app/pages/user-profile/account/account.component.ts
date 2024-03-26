@@ -4,7 +4,6 @@ import { UserProfileRequestService } from '../../../services/user-profile/user-p
 import { Router } from '@angular/router';
 import { IProfile } from '../../../../modles/profile.modle';
 import { CookieService } from 'ngx-cookie-service';
-
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',

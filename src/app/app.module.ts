@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 import {
   BrowserModule,
   provideClientHydration,
@@ -45,6 +46,7 @@ import { SliderComponent } from './shared/elements/slider/slider.component';
 import { HomeDashboardComponent } from './dashboard/home-dashboard/home-dashboard.component';
 import { CategoriesDashboardComponent } from './dashboard/categories-dashboard/categories-dashboard.component';
 import { OrdersDashboardComponent } from './dashboard/orders-dashboard/orders-dashboard.component';
+import { PopUpComponent } from './pages/order/pop-up/pop-up.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,7 @@ import { OrdersDashboardComponent } from './dashboard/orders-dashboard/orders-da
     WishListComponent,
     QuantityComponent,
     SliderComponent,
+    PopUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +94,7 @@ import { OrdersDashboardComponent } from './dashboard/orders-dashboard/orders-da
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    MatDialogModule,
   ],
   providers: [
     provideClientHydration(),

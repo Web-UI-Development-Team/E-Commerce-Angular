@@ -1,21 +1,6 @@
 <form class="p-5" [formGroup]="UserForm">
-  <div class="form-row m-3">
-    <p>Shipping Address</p>
-    <label class=" control-label" for="validationDefault03">Country / Region</label>
-    <select class="form-control p-2 mt-2 ">
-      <option>Cairo</option>
-      <option>Alex</option>
-      <option>Tanta</option>
-      <option>Giza</option>
-      <option>Mansoura</option>
-      <option>El-mahalla</option>
-      <option>Ismailiya</option>
-
-    </select>
-  </div>
-
-  <div class="form-row m-3">
-    <div class="col-md-6 mb-3">
+  <div class="form-row m-3" style="width: 99%; display: flex; gap: 10px;">
+    <div class="col-md-3 ">
       <label class=" control-label" for="validationDefault01">First name</label>
       <input type="text" class="form-control mt-2 " formControlName="firstName"
         [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}">
@@ -28,11 +13,10 @@
         <span *ngIf="UserForm.controls['firstName'].errors?.['pattern']">
           <span class="circle">!</span> Please Enter charcters only
         </span>
-
       </div>
     </div>
 
-    <div class="col-md-6 mb-3">
+    <div class="col-md-3 ">
       <label class=" control-label" for="validationDefault02">Last name</label>
       <input type="text" class="form-control mt-2 " formControlName="lastName"
         [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}">
@@ -49,7 +33,7 @@
     </div>
   </div>
   <!--  -->
-  <div class="form-row m-3">
+  <div class="form-row m-3" style="width: 100%;">
 
     <div class="col-md-6 mb-3">
       <label class=" control-label" for="validationDefault03">Phone Number</label>
@@ -68,9 +52,33 @@
       </div>
     </div>
   </div>
-  <!-- ////////// -->
-  <div class="form-row m-3">
+  <!-- //////////// -->
 
+  <!-- //////////// -->
+  <div class="form-row m-3" style="width: 100%;">
+    <div class="col-md-6">
+      <label class=" control-label" for="validationDefault03">Country / Region</label>
+      <select class="form-control p-2 mt-2 " formControlName="select"
+        [ngClass]="{'is-invalid': UserForm.controls['select'].invalid && (isSubmitted || UserForm.controls['select'].touched)}">
+        ">
+        <option value="">Choose a country</option>
+        <option>Cairo</option>
+        <option>Alex</option>
+        <option>Tanta</option>
+        <option>Giza</option>
+        <option>Mansoura</option>
+        <option>El-mahalla</option>
+        <option>Ismailiya</option>
+      </select>
+      <div class="text-danger"
+        *ngIf="UserForm.controls['select'].invalid  && (isSubmitted || UserForm.controls['select'].touched)">
+        <span *ngIf="UserForm.controls['select'].errors?.['required']"> <span class="circle">!</span> This field is
+          required </span>
+      </div>
+    </div>
+  </div>
+  <!-- ////////// -->
+  <div class="form-row m-3" style="width: 100%;">
     <div class="col-md-6 mb-3">
       <label class=" control-label" for="validationDefault03">City</label>
       <input type="text" class="form-control mt-2 " formControlName="city"
@@ -121,5 +129,17 @@
   </div>
 
 
-  <button (click)="OnSumbit()" class="btn btn-primary m-3" type="submit">Continue</button>
+  <button (click)="OnSumbit()" class="btn btn-primary m-3" type="submit"
+    style="background:#ff4500; border: 0;">Continue</button>
 </form>
+
+<!-- <div class="pop-up">
+ <div>
+  <span>x</span>
+  <p>Are You sure cancel this order</p>
+ </div>
+  <div class="btn-popup">
+    <button>Cancel</button>
+    <button>Delete</button>
+  </div>
+</div> -->

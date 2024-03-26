@@ -1,51 +1,47 @@
 <div class="parent">
   <h2>Orders <span>details</span></h2>
 
-<table class="table table-white ">
+<table class="table">
   <thead>
-    <tr>
-      <th>Name</th>
+    <tr class="tr">
+      <th>Product</th>
       <th>price</th>
-      <th>Quantity</th> 
+      <th>Quan</th> 
       <th>Date</th>
       <th>status</th>
-      <th>totalPrice</th>
+      <th>total</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of orders; let i = index">
+    <tr *ngFor="let order of orders; let i = index"> 
       <td>
-        <span *ngFor="let orderDetail of order.orderItems" style="display: inline-block">
+        <p *ngFor="let orderDetail of order.orderItems">
           {{ orderDetail.title }}
-        </span>
+        </p> 
       </td>
       
 <!-- ///////////// -->
-      <td>
-        <span
-          *ngFor="let orderDetail of order.orderItems" 
-          style="display: block"
-        >
+      <td >
+        <p
+          *ngFor="let orderDetail of order.orderItems"         >
           {{ orderDetail.price }}
-        </span>
+        </p>
       </td>
-
       <td>
-        <span
+        <p 
           *ngFor="let orderDetail of order.orderItems"
           style="display: block"
         >
           {{ orderDetail.quantity }} 
-        </span>
+        </p>
       </td>
       <!-- ///// -->
-      <td>{{ order.dateOfOrder | date }}</td>
+      <td>{{ order.dateOfOrder | date:"MM/dd" }}</td> 
       <td>{{ order.status }}</td>
       <td>{{ order.totalPrice }}</td> 
       <td>
         <fa-icon [icon] ="faX" (click)="onCancelOrder(order._id,'cancled')" ></fa-icon>
-        <!-- <button (click)="onCancelOrder(order._id,'cancled')">cancel</button>  -->
       </td>
     </tr> 
   </tbody>
