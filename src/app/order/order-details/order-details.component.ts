@@ -3,8 +3,7 @@ import { OrdersService } from '../../services/order/orders.service';
 import { Order } from '../../../modles/order.modle';
 import { ActivatedRoute } from '@angular/router';
 import {faX} from '@fortawesome/free-solid-svg-icons'
-import { MatDialog } from '@angular/material/dialog';
-import { PopUpComponent } from '../pop-up/pop-up.component';
+import { PopUpService } from '../../services/pop-up/pop-up.service';
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
@@ -16,16 +15,10 @@ export class OrderDetailsComponent implements OnInit  {
   status : any;
   faX=faX
   
-  constructor(private orderService : OrdersService , private route : ActivatedRoute , private MatDialog : MatDialog){} 
+  constructor(private orderService : OrdersService , private route : ActivatedRoute , private popUpService : PopUpService ){} 
 
   ngOnInit(): void {   
-    // this.orderService.getOrders().subscribe((data)=>{          
-    //   // console.log(data[0]._id); to log id of order
-    //   data = data.filter(order=>order.status == "Pending"); 
-    //   this.orders = data;
-    //   console.log(data); 
-
-    // }) 
+  
     this.orderService.getOrdersUser().subscribe((data)=>{
       data = data.filter(order=>order.status == "Pending"); 
       this.orders = data;
@@ -38,8 +31,12 @@ export class OrderDetailsComponent implements OnInit  {
     
 
     onCancelOrder(orderId:string , status : string){  
-      let refOPenDiallog = this.openDialog();
-        this.orderService.cancelOrder(orderId , status).subscribe({
+        
+        this.popUpService.openDialog();
+
+        
+        if(confirm('are you sure')) {
+    this.orderService.cancelOrder(orderId , status).subscribe({
           next : (res)=>{
             console.log('cancled' , res); 
             const cancelOrderIndex = this.orders.findIndex(order => order._id === orderId) //  
@@ -49,12 +46,11 @@ export class OrderDetailsComponent implements OnInit  {
           error :(err)=>{
             console.log('error' , err);
           }
-        })
-     
+        }) 
+        }
+ 
     }
-    openDialog(){
-      this.MatDialog.open(PopUpComponent)
-    }
+   
   }   
 
 
