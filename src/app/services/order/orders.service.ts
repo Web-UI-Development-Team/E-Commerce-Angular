@@ -11,6 +11,9 @@ export class OrdersService {
   getOrders(){  
     return this.http.get<Order[]>('http://localhost:3010/api/v1/orders'); 
   } 
+  getOrdersUser(){  
+    return this.http.get<Order[]>('http://localhost:3010/api/v1/orders/user'); 
+  } 
   cancelOrder(orderId:string , newStatus:string ){  
     const newBody = {status : newStatus} 
     return this.http.patch<Order>(`http://localhost:3010/api/v1/orders/${orderId}/cancel`,newBody) 

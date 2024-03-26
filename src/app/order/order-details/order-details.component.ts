@@ -19,14 +19,19 @@ export class OrderDetailsComponent implements OnInit  {
   constructor(private orderService : OrdersService , private route : ActivatedRoute , private MatDialog : MatDialog){} 
 
   ngOnInit(): void {   
- 
-    this.orderService.getOrders().subscribe((data)=>{          
-      // console.log(data[0]._id); to log id of order
+    // this.orderService.getOrders().subscribe((data)=>{          
+    //   // console.log(data[0]._id); to log id of order
+    //   data = data.filter(order=>order.status == "Pending"); 
+    //   this.orders = data;
+    //   console.log(data); 
+
+    // }) 
+    this.orderService.getOrdersUser().subscribe((data)=>{
       data = data.filter(order=>order.status == "Pending"); 
       this.orders = data;
-      console.log(data); 
-
-    }) 
+      console.log(data);
+      
+    })
       }//oninit 
 
      

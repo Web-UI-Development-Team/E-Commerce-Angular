@@ -23,24 +23,22 @@
       
 <!-- ///////////// -->
       <td >
-        <span
-          *ngFor="let orderDetail of order.orderItems" 
-          style="display: block"
-        >
+        <p
+          *ngFor="let orderDetail of order.orderItems"         >
           {{ orderDetail.price }}
-        </span>
+        </p>
       </td>
       <td>
-        <span 
+        <p 
           *ngFor="let orderDetail of order.orderItems"
           style="display: block"
         >
           {{ orderDetail.quantity }} 
-        </span>
+        </p>
       </td>
       <!-- ///// -->
-    <td>3/26</td>
-      <!-- <td>{{ order.dateOfOrder | date }}</td> -->
+    <!-- <td>3/26</td> -->
+      <td>{{ order.dateOfOrder | date:"MM/dd" }}</td> 
       <td>{{ order.status }}</td>
       <td>{{ order.totalPrice }}</td> 
       <td>

@@ -1,6 +1,6 @@
 .form-row .control-label::after {
   content: "*";
-  color: rgb(217, 9, 9);
+  color: #ff4500;
   position: relative;
   top: 2px;
   left: 2px;
