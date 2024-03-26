@@ -36,11 +36,11 @@ fa-icon {
   cursor: pointer;
   background: #ff4500;
   color: #ffffff;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   display: inline-block;
   text-align: center;
   border-radius: 50%;
-  line-height: 30px;
-  margin-left: 10px;
+  line-height: 25px;
+  margin-left: 16px;
 }
