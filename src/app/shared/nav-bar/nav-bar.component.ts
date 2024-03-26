@@ -10,20 +10,12 @@ import { AuthService } from '../../services/auth/auth.service';
 import {
   Observable,
   catchError,
-  debounceTime,
-  distinctUntilChanged,
-  fromEvent,
   map,
-  startWith,
-  switchMap,
 } from 'rxjs';
 import { IProduct } from '../../../modles/product.modle';
 import { createHttpObservable } from '../../utils/createHttpObservable';
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
 import { CartRequestService } from '../../services/cart/cart.request.service';
 import { CartService } from '../../services/cart/cart.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -55,23 +47,6 @@ export class NavBarComponent implements OnInit {
         );
       },
     });
-  }
-
-  ngAfterViewInit() {
-    this.products$ = fromEvent<any>(this.input.nativeElement, 'keyup').pipe(
-      map((evevt) => {
-        console.log(evevt.target.value);
-        return evevt.target.value;
-      }),
-      startWith(''),
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap((search: any) => this.loadProducts(search)),
-      catchError((error) => {
-        console.error(error);
-        throw error;
-      })
-    );
   }
 
   loadProducts(search = 'i'): Observable<IProduct[]> {
