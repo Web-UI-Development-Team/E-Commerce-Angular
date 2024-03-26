@@ -63,13 +63,13 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     children: [
-      // {
-      //   path: '',
-      //   redirectTo: '/home',
-      //   pathMatch: 'full',
-      // },
       {
-        path: 'home',
+        path: '',
+        redirectTo: 'homedashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'homedashboard',
         component: HomeDashboardComponent,
       },
       {

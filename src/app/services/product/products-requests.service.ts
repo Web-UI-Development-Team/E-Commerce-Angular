@@ -15,6 +15,12 @@ export class ProductsRequestsService {
     );
   }
 
+  getProductsSearchRequest(search: string): Observable<any> {
+    return this.httpClient.get(
+      `http://localhost:3010/api/v1/products/search/product/${search}`
+    );
+  }
+
   getProductByIdRequest(_id: string): Observable<IProduct> {
     return this.httpClient.get<IProduct>(
       `http://localhost:3010/api/v1/products/${_id}`
@@ -22,6 +28,7 @@ export class ProductsRequestsService {
   }
 
   addNewProductRequest(data: IProduct) {
+    console.log(data);
     return this.httpClient.post<IProduct>(
       'http://localhost:3010/api/v1/products',
       data
