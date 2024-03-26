@@ -12,7 +12,9 @@ import { log } from 'console';
 })
 export class ProductCardComponent implements OnInit {
   isClicked:boolean = false;
-  buttonStyle:any='';
+  buttonShow:boolean=false;
+
+  
 
   @Input() prd: IProduct = {
     _id: '',
@@ -37,6 +39,8 @@ export class ProductCardComponent implements OnInit {
     private cartService: CartService
   ) {}
   ngOnInit(): void {
+    
+
     this.cartReqService.getUserCartRequest().subscribe((res)=>{
       res.map((prd)=>{
         // console.log(prd.product._id);
@@ -52,7 +56,14 @@ export class ProductCardComponent implements OnInit {
     })
   }
 
-
+  showButton(id:any){
+    this.buttonShow= true;
+    
+  }
+  hideButton(id:any){
+    this.buttonShow= false;
+    
+  }
   showDetails(productId: any) {
     this.router.navigate(['/productDetails', productId]);
   }

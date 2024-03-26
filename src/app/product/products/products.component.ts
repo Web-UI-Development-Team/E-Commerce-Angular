@@ -15,6 +15,7 @@ export class ProductsComponent implements OnInit {
   loading: boolean = false;
   constructor(
     private productRequestServices: ProductsRequestsService,
+    private productService: ProductsRequestsService,
     private router: Router,
     private cartReqService: CartRequestService
   ) {}
@@ -51,7 +52,7 @@ export class ProductsComponent implements OnInit {
   getProducts() {
     this.loading = true;
 
-    this.productService.getAllProducts().subscribe(
+    this.productService.getAllProductsRequest(4).subscribe(
       (res: any) => {
         // console.log(res);
         this.product = res;
