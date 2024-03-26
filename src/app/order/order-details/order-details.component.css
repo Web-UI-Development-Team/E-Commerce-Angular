@@ -7,11 +7,10 @@
 .parent {
   width: 100%;
   margin: 0 auto;
-  box-shadow: 2px 2px 4px 4px #8ea7a5;
 }
 
 h2 {
-  background: rgb(13, 135, 196);
+  background: #ff4500;
   color: #ffffff;
   height: 80px;
   padding: 20px;
@@ -21,21 +20,21 @@ h2 span {
   text-transform: capitalize;
 }
 th {
-  color: rgb(115, 115, 115);
+  color: #382e2e;
   height: 40px;
   line-height: 40px;
   border-bottom: 1px solid rgb(160, 160, 160);
   padding: 8px;
 }
 td {
-  color: rgb(169, 169, 169);
+  color: #382e2e;
   height: 40px;
   line-height: 40px;
   padding: 8px;
 }
 fa-icon {
   cursor: pointer;
-  background: red;
+  background: #ff4500;
   color: #ffffff;
   width: 30px;
   height: 30px;

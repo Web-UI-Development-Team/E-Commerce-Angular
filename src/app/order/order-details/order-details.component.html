@@ -1,7 +1,7 @@
 <div class="parent">
   <h2>Orders <span>details</span></h2>
 
-<table class="table table-white  ">
+<table class="table">
   <thead>
     <tr class="tr">
       <th>Product</th>
@@ -14,11 +14,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of orders; let i = index">
+    <tr *ngFor="let order of orders; let i = index"> 
       <td>
-        <span *ngFor="let orderDetail of order.orderItems" style="display: inline-block">
+        <p *ngFor="let orderDetail of order.orderItems">
           {{ orderDetail.title }}
-        </span>
+        </p> 
       </td>
       
 <!-- ///////////// -->
@@ -39,7 +39,8 @@
         </span>
       </td>
       <!-- ///// -->
-      <td>{{ order.dateOfOrder | date }}</td>
+    <td>3/26</td>
+      <!-- <td>{{ order.dateOfOrder | date }}</td> -->
       <td>{{ order.status }}</td>
       <td>{{ order.totalPrice }}</td> 
       <td>
