@@ -1,1 +1,11 @@
-<p>pop-up here</p>
+
+<div>
+  <div class="container">
+    <p (click)="clodeDialog()">x</p>
+    <span class="pContent">{{data.message}}</span>
+  </div>
+  <button mat-flat-button id="no" [mat-dialog-close]="false">Cancel</button>
+  <button mat-flat-button id="yes" [mat-dialog-close]="true">Delete</button>
+
+</div>
+
