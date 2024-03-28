@@ -10,7 +10,9 @@ export class PopUpService {
   constructor(private dialog: MatDialog) { }
   openDialog(msg:string){
    return this.dialog.open(PopUpComponent, {
-      width: '400px',
+      width: '390px',
+      height : '180px',
+      position : {left: '50%' , top: '-40%'},
       panelClass: 'confirm-dialog-container',
       disableClose: true,
       data : {
