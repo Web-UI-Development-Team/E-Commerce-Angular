@@ -49,8 +49,13 @@
         <td class="text-center" style="width: 20% !important">
           {{ order.dateOfOrder }}
         </td>
-        <td class="text-center" style="width: 10% !important">
-          {{ order.status }}
+        <td>
+          <select name="status" id="status">
+            <option *ngFor="let status of options" [value]="status">
+              {{ status }}
+            </option>
+          </select>
+          <!-- {{ order.status }} -->
         </td>
       </tr>
     </tbody>

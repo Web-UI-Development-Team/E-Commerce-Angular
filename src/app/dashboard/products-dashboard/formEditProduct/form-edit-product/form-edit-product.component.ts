@@ -128,6 +128,7 @@ export class FormEditProductComponent implements OnInit {
     this.productRequestServices
       .updateProductDataRequest(updatedProductData, this.productId)
       .subscribe((data) => console.log(data));
-    this.router.navigate(['/dashboard/products']);
+    // this.router.navigate(['/dashboard/products']);
+    this.dialogRef.close();
   }
 }
