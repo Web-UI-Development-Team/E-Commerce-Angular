@@ -1,3 +1,7 @@
+.deleted-user {
+  opacity: 0.5; /* Set the desired opacity value */
+}
+
 .text-truncate {
   position: relative;
   overflow: hidden;

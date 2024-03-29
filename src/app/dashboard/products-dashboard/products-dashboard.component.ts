@@ -6,65 +6,110 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IProduct } from '../../../modles/product.modle';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProductComponent } from './addNewProduct/add-product/add-product.component';
 import { ProductsRequestsService } from '../../services/product/products-requests.service';
 import { range } from '../../utils/range';
 import { FormEditProductComponent } from './formEditProduct/form-edit-product/form-edit-product.component';
-import { error } from 'console';
-import { FormControl, FormGroup } from '@angular/forms';
+// import {
+//   Observable,
+//   debounceTime,
+//   distinctUntilChanged,
+//   fromEvent,
+//   map,
+//   startWith,
+//   switchMap,
+// } from 'rxjs';
+import { Observable, fromEvent, of } from 'rxjs';
 import {
-  Observable,
+  catchError,
   debounceTime,
   distinctUntilChanged,
-  fromEvent,
   map,
   startWith,
   switchMap,
-} from 'rxjs';
+} from 'rxjs/operators';
 import { createHttpObservable } from '../../utils/createHttpObservable';
+import { HttpClient } from '@angular/common/http';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-products-dashboard',
   templateUrl: './products-dashboard.component.html',
   styleUrl: './products-dashboard.component.css',
 })
-export class ProductsDashboardComponent implements OnInit {
-  // searchForm: FormGroup = new FormGroup({
-  //   search: new FormControl(''),
-  // });
-
-  // searchedProduts: IProduct[] = [];
-
-  products$: Observable<IProduct[]>;
+export class ProductsDashboardComponent implements OnInit, AfterViewInit {
+  products$: Observable<any>;
   @ViewChild('searchInput', { static: true }) input: ElementRef;
+  searchFormControl: FormControl = new FormControl();
   constructor(
     private productRequestsServices: ProductsRequestsService,
-    private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private http: HttpClient
   ) {
-    // this.searchForm
-    //   .get('search')
-    //   ?.valueChanges.pipe(
-    //     debounceTime(400),
-    //     distinctUntilChanged(),
-    //     switchMap((value) =>
-    //       this.productRequestsServices.getProductsSearchRequest(value)
-    //     )
-    //   )
-    //   .subscribe((value) => {
-    //     console.log(value);
-    //     this.searchForm = value?.products;
-    //   });
+    // this.initSearchForm();
   }
 
-  allProducts: IProduct[];
+  allProducts: any;
   product: IProduct;
 
   numberOfPages: number;
   pages: any = [];
   page: number;
+
+  // initSearchForm(): void {
+  //   this.searchFormControl.valueChanges
+  //     .pipe(
+  //       debounceTime(1000),
+  //       distinctUntilChanged(),
+  //       switchMap((search: string): Observable<any[]> => {
+  //         if (search) {
+  //           return this.productRequestsServices
+  //             .getProductsSearchRequest(search)
+  //             .pipe(
+  //               catchError((error) => {
+  //                 console.error(error);
+  //                 return of([]);
+  //               })
+  //             );
+  //         } else {
+  //           console.log(this.allProducts);
+  //           return of([]);
+  //         }
+  //       }),
+  //       catchError((error) => {
+  //         console.log(error);
+  //         return of([]);
+  //       })
+  //     )
+  //     .subscribe((response: any[]) => {
+  //       this.allProducts = response;
+  //       console.log(response);
+  //     });
+  // }
+
+  ngAfterViewInit() {
+    this.searchFormControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap((search: any) => {
+        console.log(search);
+        return this.loadProducts(search);
+      })
+    );
+  }
+
+  loadProducts(search = ''): Observable<any> {
+    return createHttpObservable(
+      `http://localhost:3010/api/v1/products/search/product/${search}`
+    ).pipe(
+      map((res) => {
+        console.log(res);
+        return res['payload'];
+      })
+    );
+  }
 
   ngOnInit() {
     this.productRequestsServices
@@ -78,25 +123,6 @@ export class ProductsDashboardComponent implements OnInit {
         this.page = 1;
         this.pages = range(this.numberOfPages);
       });
-  }
-
-  // ngAfterViewInit() {
-  //   console.log(this.input.nativeElement.value);
-  //   this.products$ = fromEvent<any>(this.input.nativeElement, 'change').pipe(
-  //     map((event) => event.target.value),
-  //     startWith(''),
-  //     debounceTime(500),
-  //     distinctUntilChanged(),
-  //     switchMap((search) => this.loadProducts(search))
-  //   );
-  //   console.log(this.products$);
-  // }
-
-  loadProducts(search = ''): Observable<IProduct[]> {
-    console.log(search);
-    return createHttpObservable(
-      `http://localhost:3010/api/v1/products/search/product/${search}`
-    ).pipe(map((res) => res['payload']));
   }
 
   currentPage(pageNumber: number) {
@@ -131,7 +157,7 @@ export class ProductsDashboardComponent implements OnInit {
 
   deleteProduct(product: IProduct) {
     const index = this.allProducts.findIndex(
-      (item) => item._id === product._id
+      (item: any) => item._id === product._id
     );
     this.allProducts.splice(index, 1);
     console.log(index);
