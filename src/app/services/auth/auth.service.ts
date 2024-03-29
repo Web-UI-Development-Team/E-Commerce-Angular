@@ -16,13 +16,21 @@ export class AuthService {
   userAuth: IAuth = {
     token: '',
     message: '',
-    role: ''
+    role: '',
   };
 
-  createNewUserRequest(user: IRegister) {
+  createNewUserRequest(user: IRegister, image: File) {
+    const userData = new FormData();
+
+    userData.append('name', user.name);
+    userData.append('email', user.email);
+    userData.append('password', user.password);
+    userData.append('phone', `201583852538`);
+    userData.append('image', image);
+
     return this.httpClient.post(
       'http://localhost:3010/api/v1/users/register',
-      user
+      userData
     );
   }
 

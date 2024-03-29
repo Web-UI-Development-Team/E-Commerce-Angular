@@ -1,15 +1,11 @@
 <header>
   <!-- Jumbotron -->
-
-
-
   <div class="p-3 text-center bg-white border-bottom border-light">
     <div class="container">
       <div class="row gy-3">
         <!-- Left elements -->
         <div class="col-1">
           <a routerLink="/home" class="float-start">
-
             <img
               src="https://th.bing.com/th/id/R.49346454c6c44e6b885f5e39afbb877b?rik=fvlRg8JDjsHTPA&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2fjcx%2fLXp%2fjcxLXprai.png&ehk=Lc5rvfUMX9aE3MlCzaRiqgzcL6juOCY0WzKg0S1EhUQ%3d&risl=&pid=ImgRaw&r=0"
               width="55" alt="logo" />
@@ -22,6 +18,7 @@
           <div class="d-flex float-end icons">
             <a routerLink="isAuth ? '/profile/account' : '/signIn'" class="nav-icon">
               <i class="fas fa-user-alt m-1 me-md-2"></i>
+              <span *ngIf="!isAuth" class="signIn">SIGN IN</span>
             </a>
 
             <div class="mx-3"></div>
@@ -82,13 +79,7 @@
         </ul>
         <!-- Left links -->
       </div>
-      <div>
-        <i class="fa-solid fa-house px-3 icon " routerLink="/home"></i>
-        <i class="fa-solid fa-heart px-3 icon"></i>
-        <i class="fa-solid fa-bag-shopping px-3 icon"></i>
-      </div>
     </div>
     <!-- Container wrapper -->
   </nav>
 </header>
-

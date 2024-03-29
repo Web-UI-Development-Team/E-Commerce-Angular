@@ -12,7 +12,6 @@ import { EditUserComponent } from './edit-user/edit-user.component';
   templateUrl: './users-dashboard.component.html',
   styleUrl: './users-dashboard.component.css',
 })
-
 export class UsersDashboardComponent implements OnInit {
   constructor(
     private usersRequest: UserRequestsService,
@@ -25,7 +24,7 @@ export class UsersDashboardComponent implements OnInit {
 
   numberOfPages: number;
   pages: any = [];
-  page:number;
+  page: number;
 
   ngOnInit() {
     this.usersRequest.getAllUsersRequest(1).subscribe((data: any) => {
@@ -33,9 +32,9 @@ export class UsersDashboardComponent implements OnInit {
       this.allUsers = data.users;
       this.numberOfPages = data.pages;
       console.log(this.allUsers);
-      this.page =1;
+      this.page = 1;
       this.pages = range(this.numberOfPages);
-      console.log(this.pages.length)
+      console.log(this.pages.length);
     });
   }
 
@@ -44,33 +43,34 @@ export class UsersDashboardComponent implements OnInit {
       console.log(data);
       this.allUsers = data.users;
       console.log(this.allUsers);
-      this.page= pageNumber;
+      this.page = pageNumber;
     });
   }
 
-  nextPage(pageNumber:number){
-    console.log(pageNumber)
-    this.page = pageNumber+1;
+  nextPage(pageNumber: number) {
+    console.log(pageNumber);
+    this.page = pageNumber + 1;
     this.currentPage(this.page);
   }
 
-  prevPage(pageNumber:number){
-    console.log(pageNumber)
-    this.page = pageNumber-1;
+  prevPage(pageNumber: number) {
+    console.log(pageNumber);
+    this.page = pageNumber - 1;
     this.currentPage(this.page);
   }
 
   deleteUser(user: IUser) {
-    const index = this.allUsers.findIndex((item) => item._id === user._id);
-    this.allUsers.splice(index, 1);
-
-    this.usersRequest.deletUserRequest(user).subscribe((data) => {
-      console.log(data);
-    });
+    // const index = this.allUsers.findIndex((item) => item._id === user._id);
+    // this.allUsers.splice(index, 1);
+    user.isDeleted = true;
+    console.log(user.isDeleted);
+    // this.usersRequest.deletUserRequest(user).subscribe((data) => {
+    //   console.log(data);
+    // });
   }
 
   openAddUserPopup() {
-    console.log("entered")
+    console.log('entered');
     this.dialog.open(AddNewUserComponent);
   }
 

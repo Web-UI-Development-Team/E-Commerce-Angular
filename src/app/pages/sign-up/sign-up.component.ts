@@ -20,6 +20,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class SignUpComponent {
   registerForm: FormGroup;
+  imageData: String = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png';
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -35,6 +37,7 @@ export class SignUpComponent {
         name: ['', [Validators.required, Validators.pattern('[A-Z a-z]{3,}')]],
         email: ['', [Validators.required, this.existEmailValidator()]],
         phone: ['', [Validators.required, Validators.pattern('[0-9]{12}')]],
+        image: [''],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],
       },
@@ -54,6 +57,10 @@ export class SignUpComponent {
     return this.registerForm.get('phone');
   }
 
+  get image() {
+    return this.registerForm.get('image');
+  }
+
   get password() {
     return this.registerForm.get('password');
   }
@@ -62,12 +69,38 @@ export class SignUpComponent {
     return this.registerForm.get('confirmPassword');
   }
 
+  onFileSelect(event: Event) {
+    var file = (event.target as HTMLInputElement).files?.[0];
+
+    const allowedMimeTypes = [
+      'image/png',
+      'image/jpeg',
+      'image/jpg',
+      'image/webp',
+    ];
+
+    this.registerForm.patchValue({ image: file });
+
+    if (file && allowedMimeTypes.includes(file.type))
+    {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.imageData = reader.result as String;
+
+        console.log(this.imageData)
+      }
+
+      reader.readAsDataURL(file);
+    }
+  }
+
   existEmailValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       let emailVal: string = control.value;
       let ValidationErrors = { EmailNotValid: { value: emailVal } };
       if (emailVal.length == 0 && control.untouched) return null;
-      return emailVal.includes('@gmail.com') ? null : ValidationErrors;
+      return emailVal.includes('.com') ? null : ValidationErrors;
     };
   }
 
@@ -96,7 +129,7 @@ export class SignUpComponent {
     let userModel: IRegister = this.registerForm.value as IRegister;
     delete userModel.confirmPassword;
     // console.log(userModel);
-    this.authService.createNewUserRequest(userModel).subscribe({
+    this.authService.createNewUserRequest(userModel, this.registerForm.value.image).subscribe({
       next: (data) => {
         console.log(data);
       },

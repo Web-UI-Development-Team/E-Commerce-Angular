@@ -1,50 +1,156 @@
 <div class="center">
-  <div class="carousel-wrapper">
-    <!-- abstract radio buttons for slides -->
-    <input id="slide1" type="radio" name="controls" checked="checked" />
-    <input id="slide2" type="radio" name="controls" />
-    <input id="slide3" type="radio" name="controls" />
-    <input id="slide4" type="radio" name="controls" />
-    <input id="slide5" type="radio" name="controls" />
+  <div class="carousel">
+    <div class="list">
+      <div class="item">
+        <img src="../../../assets/banner-images/1.jpg" alt="">
 
-    <!-- navigation dots -->
-    <label for="slide1" class="nav-dot"></label>
-    <label for="slide2" class="nav-dot"></label>
-    <label for="slide3" class="nav-dot"></label>
-    <label for="slide4" class="nav-dot"></label>
-    <label for="slide5" class="nav-dot"></label>
+        <div class="content">
+          <div class="title">Unleash Your Creativity: The New MacBook Pro is Here</div>
+          <div class="desc">Experience groundbreaking performance with the all-new M2 chip. Tackle demanding workflows
+            with ease. Edit videos, render 3D graphics, and code like a pro. The new MacBook Pro is built for those who
+            push boundaries.</div>
+          <div class="buttons">
+            <button>SEE MORE</button>
+            <button>ALL PRODUCTS</button>
+          </div>
+        </div>
+      </div>
 
-    <!-- arrows -->
-    <label for="slide1" class="left-arrow"> < </label>
-    <label for="slide2" class="left-arrow"> < </label>
-    <label for="slide3" class="left-arrow"> < </label>
-    <label for="slide4" class="left-arrow"> < </label>
-    <label for="slide5" class="left-arrow"> < </label>
+      <div class="item">
+        <img src="../../../assets/banner-images/2.jpg" alt="">
 
-    <label for="slide1" class="right-arrow"> > </label>
-    <label for="slide2" class="right-arrow"> > </label>
-    <label for="slide3" class="right-arrow"> > </label>
-    <label for="slide4" class="right-arrow"> > </label>
-    <label for="slide5" class="right-arrow"> > </label>
+        <div class="content">
+          <div class="title">Capture Every Detail: Stunning Photos with the New Nikon Z Series Camera</div>
+          <div class="desc">Experience exceptional clarity and detail with the new Nikon Z Series camera. Its advanced
+            image sensor and powerful processor deliver stunning photos and videos, even in low-light conditions.</div>
+          <div class="buttons">
+            <button>SEE MORE</button>
+            <button>ALL PRODUCTS</button>
+          </div>
+        </div>
+      </div>
 
-    <div class="carousel">
-      <ul>
-        <li>
-          <img src="https://raw.githubusercontent.com/osef-art/osef-art.github.io/master/src/assets/wallpapers/canyon.jpg" />
-        </li>
-        <li>
-          <img src="https://m.media-amazon.com/images/I/31Y+R3Y3nvL._SL1000_.jpg" alt="">
-        </li>
-        <li>
-          <img src="https://raw.githubusercontent.com/osef-art/ministick/main/data/img/main/ministick-clip-3.gif" />
-        </li>
-        <li>
-          <img src="https://raw.githubusercontent.com/osef-art/osef-art.github.io/master/src/assets/wallpapers/smoke.jpg">
-        </li>
-        <li>
-          <img src="https://images.ctfassets.net/9l3tjzgyn9gr/photo-157575/d224d518da6c26515a470a9b7e490df8/157575-honey-bun-baby.jpg?fm=jpg&fl=progressive&q=50&w=1200" alt="">
-        </li>
-      </ul>
+      <div class="item">
+        <img src="../../../assets/banner-images/3.jpg" alt="">
+
+        <div class="content">
+          <div class="title">Dive into the Future: Discover Cutting-Edge Tech Products</div>
+          <div class="desc">Tired of the same old tech? We've got a selection of groundbreaking products that will
+            transform the way you interact with the world. Discover innovative solutions designed to streamline your
+            life, boost productivity, and unlock new possibilities.</div>
+          <div class="buttons">
+            <button>SEE MORE</button>
+            <button>ALL PRODUCTS</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="../../../assets/banner-images/4.jpg" alt="">
+
+        <div class="content">
+          <div class="title">Immerse Yourself in Sound: Experience the New Boss Headphones</div>
+          <div class="desc">Get lost in the details of your music with the new Boss headphones. Featuring premium
+            drivers and advanced noise cancellation, these headphones deliver an exceptional listening experience.</div>
+          <div class="buttons">
+            <button>SEE MORE</button>
+            <button>ALL PRODUCTS</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+
+  <div class="section__intro u-s-m-b-16 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section__text-wrap">
+            <h1 class="section__heading u-c-secondary u-s-m-b-12">
+              TOP TRENDING
+            </h1>
+
+            <span class="section__span u-c-silver">CHOOSE CATEGORY</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--====== End - Section Intro ======-->
+
+  <!--====== Section Content ======-->
+  <div class="section__content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="filter-category-container">
+            <div class="filter__category-wrapper">
+              <button class="btn filter__btn filter__btn--style-1" [class.js-checked]="!selectedCategory" type="button"
+                data-filter="*" (click)="getAllProducts()">
+                All
+              </button>
+            </div>
+            <div class="filter__category-wrapper" *ngFor="let category of allCategories">
+              <button class="btn filter__btn filter__btn--style-1" [class.js-checked]="selectedCategory === category"
+                type="button" data-filter=".headphone" (click)="getProductsByCategory(category)">
+                {{ category.nameCategory }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item products headphone mt-3"
+          *ngFor="let product of allProducts">
+          <div class="product-o product-o--hover-on product-o--radius">
+            <div class="product-o__wrap">
+              <a class="aspect aspect--bg-grey aspect--square u-d-block">
+                <img class="aspect__img" [src]="product.images[0]" alt="" /></a>
+              <div class="product-o__action-wrap">
+                <ul class="product-o__action-list">
+                  <li>
+                    <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top"
+                      title="Quick View" (click)="showDetails(product._id)"><i class="fas fa-search-plus"></i></a>
+                  </li>
+                  <li>
+                    <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top"
+                      title="Add to Cart" (click)="addProductToCart(product._id)"><i class="fas fa-plus-circle"></i></a>
+                  </li>
+                  <li>
+                    <a data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i
+                        class="fas fa-heart"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <span class="product-o__category">
+              {{ product.category.nameCategory }}</span>
+
+            <span class="product-o__name"> {{ product.title }}</span>
+            <div class="product-o__rating gl-rating-style">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+
+              <span class="product-o__review">(23)</span>
+            </div>
+
+            <span class="product-o__price">{{ product.price }}
+
+              <span class="product-o__discount">{{
+                product.discount
+                }}</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="load-more">
+            <button class="btn btn--e-brand" type="button">
+              <a class="text-decoration-none text-white" routerLink="/products">Load More</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

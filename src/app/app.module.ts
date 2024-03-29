@@ -48,6 +48,8 @@ import { CategoriesDashboardComponent } from './dashboard/categories-dashboard/c
 import { OrdersDashboardComponent } from './dashboard/orders-dashboard/orders-dashboard.component';
 import { PopUpComponent } from './pages/order/pop-up/pop-up.component';
 import { ProductReviewsComponent } from './pages/product/product-reviews/product-reviews.component';
+import { AddNewCategoryComponent } from './dashboard/categories-dashboard/add-new-category/add-new-category.component';
+import { EditCategoryComponent } from './dashboard/categories-dashboard/edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,8 @@ import { ProductReviewsComponent } from './pages/product/product-reviews/product
     SliderComponent,
     PopUpComponent,
     ProductReviewsComponent
+    AddNewCategoryComponent,
+    EditCategoryComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,10 @@
+.nav-icon {
+  text-decoration: none;
+}
+
 .nav-icon i {
   text-decoration: none;
+
   color: var(--secondery);
   transition: all 0.5s;
 
@@ -54,4 +59,12 @@
 }
 .active {
   color: var(--primary)
+}
+
+.signIn {
+  color: var(--primary);
+
+  font-size: 20px;
+
+  font-weight: bold;
 }

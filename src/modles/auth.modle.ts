@@ -4,6 +4,7 @@ export interface IRegister {
   password: string;
   confirmPassword?: string;
   phone: number;
+  image: File;
 }
 
 export interface ILogin {

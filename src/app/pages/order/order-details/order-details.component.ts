@@ -8,24 +8,24 @@ import { PopUpService } from '../../../services/pop-up/pop-up.service';
   selector: 'app-order-details',
   templateUrl : './order-details.component.html',
   styleUrl: './order-details.component.css'
-}) 
-export class OrderDetailsComponent implements OnInit  { 
+})
+export class OrderDetailsComponent implements OnInit  {
   orders : Order[] = [] ;
   orderId: any;
   status : any;
   faX=faX
-  
-  constructor(private orderService : OrdersService , private route : ActivatedRoute , private popUpService : PopUpService ){} 
 
-  ngOnInit(): void {   
-  
+  constructor(private orderService : OrdersService , private route : ActivatedRoute , private popUpService : PopUpService ){}
+
+  ngOnInit(): void {
+
     this.orderService.getOrdersUser().subscribe((data)=>{
-      data = data.filter(order=>order.status == "Pending"); 
+      data = data.filter(order=>order.status == "Pending");
       this.orders = data;
       console.log(data);
-      
+
     })
-      }//oninit 
+      }//oninit
      onCancelOrder(orderId: string, status: string) {
     this.popUpService.openDialog('Do you want to cancel this order ?').afterClosed().subscribe(res=>{
       if(res) {
@@ -41,17 +41,9 @@ export class OrderDetailsComponent implements OnInit  {
         },
       });
       }
-      
-    }); 
-    
+
+    });
+
   }
-   
-  }   
 
-
-
-
-
-
-
-
+  }
