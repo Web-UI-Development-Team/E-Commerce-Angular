@@ -14,6 +14,8 @@ export class OrdersDashboardComponent implements OnInit {
   ) {}
 
   allOrders: any = [];
+  options: string[] = ['Accepted', 'Pending', 'Canceled'];
+  selectedOption: string;
 
   ngOnInit() {
     this.ordersRequestsServices.getAllOrders().subscribe((data: any) => {
@@ -21,6 +23,8 @@ export class OrdersDashboardComponent implements OnInit {
       this.allOrders.forEach((data: any) => {
         data.dateOfOrder = data.dateOfOrder.split('T')[0];
         console.log(data.dateOfOrder);
+        this.selectedOption = data.status;
+        console.log(this.selectedOption);
       });
     });
   }

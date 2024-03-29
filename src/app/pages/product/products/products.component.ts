@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CartRequestService } from '../../../services/cart/cart.request.service';
 import { ProductsRequestsService } from '../../../services/product/products-requests.service';
 import { ICart } from '../../../../modles/cart.modle';
+import { range } from '../../../utils/range';
 
 @Component({
   selector: 'app-products',
@@ -41,6 +42,9 @@ export class ProductsComponent implements OnInit {
   clickedButtonIndex: number | null = null;
   products: IProduct[] = [];
   loading: boolean = false;
+  numberOfPages: number;
+  pages: any = [];
+  page: number;
 
   ngOnInit(): void {
     // this.loading==false
@@ -53,11 +57,14 @@ export class ProductsComponent implements OnInit {
   getProducts() {
     this.loading = true;
 
-    this.productRequestServices.getAllProductsRequest(4).subscribe(
+    this.productRequestServices.getAllProductsRequest(1).subscribe(
       (res: any) => {
         // console.log(res);
         this.products = res.products;
         this.loading = false;
+        this.numberOfPages = res.pages;
+        this.page = 1;
+        this.pages = range(this.numberOfPages);
       },
       (err) => {
         alert(err.message);
@@ -66,5 +73,25 @@ export class ProductsComponent implements OnInit {
         console.log(err.message);
       }
     );
+  }
+
+  currentPage(pageNumber: number) {
+    this.productRequestServices
+      .getAllProductsRequest(pageNumber)
+      .subscribe((data: any) => {
+        console.log(data);
+        this.products = data.products;
+      });
+  }
+
+  nextPage(pageNumber: number) {
+    this.page = pageNumber + 1;
+    this.currentPage(this.page);
+  }
+
+  prevPage(pageNumber: number) {
+    console.log(pageNumber);
+    this.page = pageNumber - 1;
+    this.currentPage(this.page);
   }
 }
