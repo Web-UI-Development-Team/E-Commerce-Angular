@@ -8,9 +8,6 @@ import { HttpClient } from '@angular/common/http';
 export class OrdersService { 
 
   constructor(private http : HttpClient) { } 
-  getOrders(){  
-    return this.http.get<Order[]>('http://localhost:3010/api/v1/orders'); 
-  } 
   getOrdersUser(){  
     return this.http.get<Order[]>('http://localhost:3010/api/v1/orders/user'); 
   } 
