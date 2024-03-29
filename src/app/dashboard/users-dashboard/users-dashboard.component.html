@@ -1,39 +1,102 @@
-<button class="btn btn-primary" (click)="openAddUserPopup()">
-  Add new User
-</button>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Image</th>
-      <th scope="col">Name</th>
-      <th scope="col">E-mail</th>
-      <th scope="col">Phone</th>
-      <th scope="col">IsAdmin</th>
-      <th scope="col">IsDeleted</th>
-      <th scope="col">Delete</th>
-      <th scope="col">Edit</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of allUsers">
-      <td scope="row">
-        <img [src]="" alt="userImg" />
-      </td>
-      <td>{{ user.name }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.phone }}</td>
-      <td>{{ user.isAdmin }}</td>
-      <td>{{ user.isDeleted }}</td>
-      <td>
-        <button class="btn btn-primary" (click)="goToEditUserPage(user)">
-          Edit
-        </button>
-      </td>
-      <td>
-        <button class="btn btn-primary" (click)="deleteUser(user)">
-          Delete
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+  <div class="row d-flex justify-content-between align-items-center mb-4">
+    <div class="col-xl-6 col-sm-3 col-12">
+      <form class="position-relative w-75">
+        <label for="w-100 "></label>
+
+        <input class="input-text input-text--border-radius input-text--style-1" type="text" id="main-search"
+          placeholder="Search" />
+
+        <button class="btn btn--icon fas fa-search main-search-button" type="submit"></button>
+      </form>
+    </div>
+    <div class="col-xl-3 col-sm-3 col-12">
+      <button class="btn button" (click)="openAddUserPopup()">
+        Add New User
+      </button>
+    </div>
+  </div>
+  <table class="table w-100">
+    <thead class="w-100">
+      <tr>
+        <th class="text-center" scope="col" style="width: 10% !important">
+          Image
+        </th>
+        <th class="text-center" scope="col" style="width: 25% !important">
+          Name
+        </th>
+        <th class="text-center" scope="col" style="width: 20% !important">
+          E-mail
+        </th>
+        <th class="text-center" scope="col" style="width: 10% !important">
+          Phone
+        </th>
+        <th class="text-center" scope="col" style="width: 10% !important">
+          IsAdmin
+        </th>
+        <th class="text-center" scope="col" style="width: 10% !important">
+          IsDeleted
+        </th>
+        <th class="text-center" scope="col" style="width: 5% !important"></th>
+        <th class="text-center" scope="col" style="width: 5% !important"></th>
+      </tr>
+    </thead>
+    <tbody class="w-100">
+      <tr *ngFor="let user of allUsers">
+        <td scope="col" class="text-center" style="width: 10%">
+          <img
+            src="https://www.nbc.com/sites/nbcblog/files/styles/scale_862/public/2023/07/rainn-wilson-the-office2.jpg"
+            alt="userImg" width="100%" class="rounded-circle" />
+        </td>
+        <td scope="col" class="text-center" style="width: 30% !important">
+          <p [title]="user.name" class="d-inline-block text-truncate" style="max-width: 150px">
+            {{ user.name }}
+          </p>
+        </td>
+        <td scope="col" class="text-center" style="width: 15% !important">
+          <p [title]="user.email" class="d-inline-block text-truncate" style="max-width: 150px">
+            {{ user.email }}
+          </p>
+        </td>
+        <td scope="col" class="text-center" style="width: 10% !important">
+          {{ user.phone }}
+        </td>
+        <td scope="col" class="text-center" style="width: 10% !important">
+          {{ user.isAdmin }}
+        </td>
+        <td scope="col" class="text-center" style="width: 10% !important">
+          {{ user.isDeleted }}
+        </td>
+        <td scope="col" class="text-center" style="width: 5% !important">
+          <div (click)="openEditUserPopup(user)" class="text-center">
+            <i class="fa-solid fa-pen-to-square icon"></i>
+          </div>
+        </td>
+        <td scope="col" class="text-center" style="width: 5% !important">
+          <div class="text-center" (click)="deleteUser(user)">
+            <i class="fa-solid fa-trash icon"></i>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example" style="bottom: 0; left: 0; right: 0">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" *ngIf="page > 1">
+        <a class="page-link" (click)="prevPage(page)" aria-label="Previous" style="color: #ff4500; cursor: pointer">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" style="color: #ff4500">{{ page }}</a>
+      </li>
+      <li class="page-item" *ngIf="page < pages.length" style="cursor: pointer">
+        <a class="page-link" (click)="nextPage(page)" aria-label="Next" style="color: #ff4500">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './product/products/products.component';
-import { AboutComponent } from './static-pages/about/about.component';
-import { ContactUsComponent } from './static-pages/contact-us/contact-us.component';
-import { NotFound404Component } from './not-found404/not-found404.component';
-import { SignInComponent } from './auth/sign-in/sign-in.component';
-import { CartComponent } from './cart/cart.component';
-import { ProductDetailsComponent } from './product/product-details/product-details.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ProductsComponent } from './pages/product/products/products.component';
+import { AboutComponent } from './pages/about/about.component';
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { NotFound404Component } from './pages/not-found404/not-found404.component';
+import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { ProductDetailsComponent } from './pages/product/product-details/product-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { UserFormComponent } from './user-profile/user-form/user-form.component';
-import { OrdersComponent } from './order/orders/orders.component';
-import { OrderDetailsComponent } from './order/order-details/order-details.component';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { UserFormComponent } from './pages/user-profile/user-form/user-form.component';
+import { OrdersComponent } from './pages/order/orders/orders.component';
+import { OrderDetailsComponent } from './pages/order/order-details/order-details.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { HomeDashboardComponent } from './dashboard/home-dashboard/home-dashboard.component';
 import { ProductsDashboardComponent } from './dashboard/products-dashboard/products-dashboard.component';
 import { UsersDashboardComponent } from './dashboard/users-dashboard/users-dashboard.component';
@@ -22,9 +22,11 @@ import { FormEditProductComponent } from './dashboard/products-dashboard/formEdi
 import { AddProductComponent } from './dashboard/products-dashboard/addNewProduct/add-product/add-product.component';
 import { AddNewUserComponent } from './dashboard/users-dashboard/add-new-user/add-new-user.component';
 import { EditUserComponent } from './dashboard/users-dashboard/edit-user/edit-user.component';
-import { AuthGuard } from './guards/auth-guard.service';
-import { WishListComponent } from './wish-list/wish-list.component';
-import { AccountComponent } from './user-profile/account/account.component';
+import { OrdersDashboardComponent } from './dashboard/orders-dashboard/orders-dashboard.component';
+import { AuthGuard } from './services/guards/auth-guard.service';
+import { WishListComponent } from './pages/wish-list/wish-list.component';
+import { AccountComponent } from './pages/user-profile/account/account.component';
+import { AdminGuard } from './services/guards/admin-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -38,42 +40,43 @@ const routes: Routes = [
     component: UserProfileComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'account', component: AccountComponent, children: [
-        { path: 'edit', component: UserFormComponent }
-      ]},
+      {
+        path: 'account',
+        component: AccountComponent,
+        children: [{ path: 'edit', component: UserFormComponent }],
+      },
       { path: 'orders', component: OrderDetailsComponent },
       { path: 'orders-history', component: OrderDetailsComponent },
       { path: 'wish-list', component: WishListComponent },
     ],
   },
   { path: 'cart', canActivate: [AuthGuard], component: CartComponent },
-  { path: 'contactUs', canActivate: [AuthGuard], component: ContactUsComponent },
+  {
+    path: 'contactUs',
+    canActivate: [AuthGuard],
+    component: ContactUsComponent,
+  },
   { path: 'checkout', canActivate: [AuthGuard], component: OrdersComponent },
 
   { path: 'about', component: AboutComponent },
-  { path: 'orderDetails', component: OrderDetailsComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivateChild: [AdminGuard],
+    canActivate: [AdminGuard],
     children: [
-      // {
-      //   path: '',
-      //   redirectTo: '/home',
-      //   pathMatch: 'full',
-      // },
       {
-        path: 'home',
+        path: '',
+        redirectTo: 'homedashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'homedashboard',
         component: HomeDashboardComponent,
       },
       {
         path: 'products',
         component: ProductsDashboardComponent,
-        // children: [
-        //   {
-        //     path: 'add',
-        //     component: AddProductComponent,
-        //   },
-        // ],
       },
       {
         path: 'users',
@@ -82,6 +85,10 @@ const routes: Routes = [
       {
         path: 'categories',
         component: CategoriesDashboardComponent,
+      },
+      {
+        path: 'orders',
+        component: OrdersDashboardComponent,
       },
       {
         path: 'editProduct/:id',

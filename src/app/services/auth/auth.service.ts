@@ -16,6 +16,7 @@ export class AuthService {
   userAuth: IAuth = {
     token: '',
     message: '',
+    role: ''
   };
 
   createNewUserRequest(user: IRegister) {
@@ -34,5 +35,9 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return this.cookieService.get('token') ? true : false;
+  }
+
+  role(): string {
+    return this.cookieService.get('role');
   }
 }

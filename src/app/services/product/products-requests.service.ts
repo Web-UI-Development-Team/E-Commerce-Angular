@@ -9,9 +9,15 @@ import { Observable } from 'rxjs';
 export class ProductsRequestsService {
   constructor(private httpClient: HttpClient) {}
 
-  getAllProductsRequest() {
+  getAllProductsRequest(pageNumber: number) {
     return this.httpClient.get<IProduct[]>(
-      'http://localhost:3010/api/v1/products'
+      `http://localhost:3010/api/v1/products/?page=${pageNumber}`
+    );
+  }
+
+  getProductsSearchRequest(search: string): Observable<any> {
+    return this.httpClient.get(
+      `http://localhost:3010/api/v1/products/search/product/${search}`
     );
   }
 
@@ -22,6 +28,7 @@ export class ProductsRequestsService {
   }
 
   addNewProductRequest(data: IProduct) {
+    console.log(data);
     return this.httpClient.post<IProduct>(
       'http://localhost:3010/api/v1/products',
       data

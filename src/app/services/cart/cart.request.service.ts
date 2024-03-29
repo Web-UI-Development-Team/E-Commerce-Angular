@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICart, IPostCart } from '../../../modles/cart.modle';
 import { Observable, of } from 'rxjs';
+import { IProduct } from '../../../modles/product.modle';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +10,9 @@ import { Observable, of } from 'rxjs';
 export class CartRequestService {
   constructor(private http: HttpClient) {}
 
-  addToCart(product: any) {
-    return this.http.post('http://localhost:3010/api/v1/cart/add', product);
+  addToCart(product: string) {
+    console.log(product);
+    return this.http.post('http://localhost:3010/api/v1/cart/add', { product });
   }
 
   getUserCartRequest(): Observable<ICart[]> {

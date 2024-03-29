@@ -6,7 +6,7 @@ import {faX} from '@fortawesome/free-solid-svg-icons'
 import { PopUpService } from '../../services/pop-up/pop-up.service';
 @Component({
   selector: 'app-order-details',
-  templateUrl: './order-details.component.html',
+  templateUrl : './order-details.component.html',
   styleUrl: './order-details.component.css'
 }) 
 export class OrderDetailsComponent implements OnInit  { 

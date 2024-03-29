@@ -1,6 +1,4 @@
 export interface IRegister {
-  // token: string,
-  // message: string
   name: string;
   email: string;
   password: string;
@@ -15,5 +13,6 @@ export interface ILogin {
 
 export interface IAuth {
   token: string,
-  message: string
+  message: string,
+  role: string
 }
