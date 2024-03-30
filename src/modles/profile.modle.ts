@@ -16,3 +16,7 @@ export interface IEditProfile {
   phone?: string,
   image?: string,
 }
+
+export interface IWishlist {
+  wishList: IProduct[];
+}

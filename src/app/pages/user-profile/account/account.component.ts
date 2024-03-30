@@ -3,7 +3,6 @@ import { UserProfileService } from '../../../services/user-profile/user-profile.
 import { UserProfileRequestService } from '../../../services/user-profile/user-profile.request.service';
 import { Router } from '@angular/router';
 import { IProfile } from '../../../../modles/profile.modle';
-import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',

@@ -15,7 +15,11 @@
 
   <app-quantity class="col-2 align-self-center" [item]="cartItem"></app-quantity>
 
-  <button title="remove" (click)="onClickRemove()" class="remove col-2 align-self-center">
+  <button title="remove" (click)="onClickHeartIcon()" class="remove col-1 align-self-center">
+    <i class="fa-solid fa-heart"></i>
+  </button>
+
+  <button title="remove" (click)="onClickRemove()" class="remove col-1 align-self-center">
     <i class="fa-solid fa-trash"></i>
   </button>
 

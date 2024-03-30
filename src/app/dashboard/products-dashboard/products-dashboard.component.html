@@ -9,6 +9,8 @@
           type="text"
           id="main-search"
           placeholder="Search"
+          #searchInput
+          [formControl]="searchFormControl"
         />
 
         <button
@@ -16,6 +18,17 @@
           type="submit"
         ></button>
       </form>
+
+      <!-- <form class="form-outline" data-mdb-input-init>
+        <input
+          id="search-focus"
+          placeholder="{{ 'Search' | translate }}"
+          [formControl]="searchFormControl"
+          type="search"
+          id="form1"
+          class="form-control"
+        />
+      </form> -->
     </div>
     <div class="col-xl-3 col-sm-3 col-12">
       <button class="btn button" (click)="openAddProductPopup()">
@@ -24,28 +37,45 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4" *ngFor="let product of allProducts">
-      <div class="card mb-4" style="height: 24rem">
-        <img
-          class="card-img-top"
-          [src]="product.images[0]"
-          alt="Card image cap"
-          style="width: 100%; height: 200px; object-fit: cover"
-        />
-        <div class="card-body">
-          <h5 class="card-title">{{ product.title }}</h5>
-          <p class="card-text">{{ product.description }}</p>
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="openEditProductPopup(product)"
-          >
-            Edit
-          </button>
-          <button class="btn btn-primary" (click)="deleteProduct(product)">
-            Delete
-          </button>
+    <div
+      class="col-xl-4 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item products headphone mt-4"
+      *ngFor="let product of allProducts"
+    >
+      <div class="product-o product-o--hover-on product-o--radius">
+        <div class="product-o__wrap">
+          <a class="aspect aspect--bg-grey aspect--square u-d-block">
+            <img class="aspect__img" [src]="product.images[0]" alt="image"
+          /></a>
+          <div class="product-o__action-wrap">
+            <ul class="product-o__action-list">
+              <li (click)="openEditProductPopup(product)">
+                <a><i class="fa-solid fa-pen-to-square"></i></a>
+              </li>
+              <li (click)="deleteProduct(product)">
+                <a><i class="fa-solid fa-trash"></i></a>
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <span class="product-o__category">{{
+          product.category.nameCategory
+        }}</span>
+
+        <span class="product-o__name">{{ product.title }}</span>
+        <div class="product-o__rating gl-rating-style">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i
+          ><i class="fas fa-star"></i><i class="fas fa-star"></i
+          ><i class="fas fa-star-half-alt"></i>
+
+          <span class="product-o__review">(23)</span>
+        </div>
+
+        <span class="product-o__price"
+          >{{ product.price }}
+
+          <span class="product-o__discount">{{ product.discount }}</span></span
+        >
       </div>
     </div>
   </div>

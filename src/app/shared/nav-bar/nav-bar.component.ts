@@ -1,17 +1,6 @@
-import {
-  Component,
-  ElementRef,
-  ViewChild,
-  OnInit,
-  AfterViewInit,
-} from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-import {
-  Observable,
-  catchError,
-  map,
-} from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map } from 'rxjs';
 import { IProduct } from '../../../modles/product.modle';
 import { createHttpObservable } from '../../utils/createHttpObservable';
 import { CartRequestService } from '../../services/cart/cart.request.service';
@@ -22,31 +11,39 @@ import { CartService } from '../../services/cart/cart.service';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
 })
-
 export class NavBarComponent implements OnInit {
+  active: boolean = false;
+  isAuth: boolean = false;
+  role: string = '';
+
   constructor(
     private authService: AuthService,
     private cartRequestService: CartRequestService,
     public cartService: CartService
-  ) {}
-
-  active:boolean=false;
-  isAuth: boolean = false;
-  role: string = '';
+  ) {
+    this.authService.isAuthenticated();
+    this.authService.isAuth.subscribe({
+      next: (val) => this.isAuth = val,
+      error: error => console.log(error)
+    });
+  }
 
   ngOnInit() {
-    this.isAuth = this.authService.isAuthenticated();
-    this.role = this.authService.role();
+    if (typeof window !== 'undefined') {
+      if (localStorage.getItem('token')) {
+        this.role = this.authService.role();
 
-    this.cartRequestService.getUserCartRequest().subscribe({
-      next: (carts) => (this.cartService.cartItems = carts),
-      error: (error) => console.log(error),
-      complete: () => {
-        this.cartService.productIds = this.cartService.cartItems.map(
-          (cart) => cart.product._id
-        );
-      },
-    });
+        this.cartRequestService.getUserCartRequest().subscribe({
+          next: (carts) => (this.cartService.cartItems = carts),
+          error: (error) => console.log(error),
+          complete: () => {
+            this.cartService.productIds = this.cartService.cartItems.map(
+              (cart) => cart.product._id
+            );
+          },
+        });
+      }
+    }
   }
 
   loadProducts(search = 'i'): Observable<IProduct[]> {
