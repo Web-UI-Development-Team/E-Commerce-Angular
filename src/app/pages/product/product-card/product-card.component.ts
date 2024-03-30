@@ -11,7 +11,9 @@ import { IProduct } from '../../../../modles/product.modle';
 })
 export class ProductCardComponent implements OnInit {
   isClicked: boolean = false;
-  buttonShow:boolean=false;
+  buttonShow: boolean = false;
+  buttonDisabled: boolean = false;
+
   buttonStyle: any = '';
 
   @Input() prd: IProduct = {
@@ -38,7 +40,7 @@ export class ProductCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.cartService.productIds);
+    // console.log(this.cartService.productIds);
     if (this.cartService.productIds.includes(this.prd._id)) {
       this.isClicked = true;
     }
@@ -50,6 +52,13 @@ export class ProductCardComponent implements OnInit {
 
   addProductToCart(productId: string) {
     this.isClicked = !this.isClicked;
+    this.buttonDisabled = true;
+
+    // if (this.cartService.productIds.includes(productId)) {
+
+    //   this.isClicked = true;
+    // }
+
     this.cartService.cartItems.push({
       product: this.prd,
       quantity: 1,
@@ -62,11 +71,10 @@ export class ProductCardComponent implements OnInit {
     });
   }
 
-  showButton(id:any){
-    this.buttonShow= true;
-
+  showButton(id: any) {
+    this.buttonShow = true;
   }
-  hideButton(id:any){
-    this.buttonShow= false;
+  hideButton(id: any) {
+    this.buttonShow = false;
   }
 }

@@ -4,16 +4,13 @@
     background-color: black;
     
 }
-.btn{
-    background-color: orangered;
-    color: whitesmoke;
-    width: 100px;
-    left: 65%;
-    height: 45px;
-   
-    bottom: -4px;
-   
-}
+
 a{
     text-decoration: none;
+}
+.lnk:hover{
+    color: orangered;
+}
+.text{
+    font-size: 20px;
 }

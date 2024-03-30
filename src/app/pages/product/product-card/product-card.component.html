@@ -5,7 +5,7 @@
         alt="product-img" />
     </a>
 
-    <button *ngIf="buttonShow" (click)="addProductToCart(prd._id)" [class.click]="isClicked"
+    <button *ngIf="buttonShow" (click)="addProductToCart(prd._id)" [class.click]="isClicked" [disabled]="buttonDisabled"
       class=" bbtn position-absolute ">
 
       Add <i class="fas fa-shopping-cart m-1 me-md-2"></i>
@@ -23,13 +23,7 @@
         More Details
       </button>
 
-      <!-- <button
-          (click)="addProductToCart(prd._id)"
-          [class.click]="isClicked"
-          class="btn  mx-3 position-absolute"
-        >
-          Add <i class="fas fa-shopping-cart m-1 me-md-2"></i>
-        </button> -->
+      
     </div>
   </div>
 </div>
