@@ -7,7 +7,6 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
 import { ILogin } from '../../../modles/auth.modle';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
@@ -23,17 +22,18 @@ export class SignInComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router,
-    private cookieService: CookieService
+    private router: Router
   ) {
-    if(this.cookieService.get('token'))
+    if(typeof window !== 'undefined')
     {
-      this.router.navigate(['/home']);
+      if (localStorage.getItem('token')) {
+        this.router.navigate(['/home']);
+      }
+      this.loginForm = formBuilder.group({
+        email: ['', Validators.required],
+        password: ['', Validators.required],
+      });
     }
-    this.loginForm = formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-    });
   }
 
   get email() {
@@ -58,12 +58,14 @@ export class SignInComponent {
 
     this.authService.loginRequest(user).subscribe({
       next: (data) => {
-        this.cookieService.set('token', data.token);
-        this.cookieService.set('role', `${data.role}`);
+        localStorage.setItem('token', data.token);
+        console.log('kkkkkkkkkkkkkk', localStorage.getItem('token'));
+        localStorage.setItem('role', `${data.role}`);
+        this.router.navigate(['home']);
       },
       error: (error) => console.log(error),
       complete: () => {
-        location.replace('/home');
+        this.authService.isAuthenticated();
       },
     });
   }

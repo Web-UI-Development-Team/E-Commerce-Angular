@@ -1,23 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IAuth, ILogin, IRegister } from '../../../modles/auth.modle';
-import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { BlobOptions } from 'buffer';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private httpClient: HttpClient,
-    private cookieService: CookieService
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   userAuth: IAuth = {
     token: '',
     message: '',
     role: '',
   };
+
+  isAuth = new BehaviorSubject(false);
 
   createNewUserRequest(user: IRegister, image: File) {
     const userData = new FormData();
@@ -41,11 +40,14 @@ export class AuthService {
     );
   }
 
-  isAuthenticated(): boolean {
-    return this.cookieService.get('token') ? true : false;
+  isAuthenticated(): any {
+    if (typeof window !== 'undefined') {
+      this.isAuth.next(localStorage.getItem('token') ? true : false);
+      return localStorage.getItem('token') ? true : false;
+    }
   }
 
   role(): string {
-    return this.cookieService.get('role');
+    return localStorage.getItem('role') ?? '';
   }
 }

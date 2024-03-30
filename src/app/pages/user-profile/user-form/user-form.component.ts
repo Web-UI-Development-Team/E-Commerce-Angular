@@ -12,7 +12,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
-import { CookieService } from 'ngx-cookie-service';
 import { IEditProfile, IProfile } from '../../../../modles/profile.modle';
 import { IUser } from '../../../../modles/user.modle';
 
@@ -26,7 +25,6 @@ export class UserFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private cookieService: CookieService,
     private userProfileService: UserProfileService,
     private location: Location
   ) {}

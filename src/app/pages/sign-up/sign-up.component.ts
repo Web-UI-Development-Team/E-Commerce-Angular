@@ -11,7 +11,6 @@ import {
 } from '@angular/forms';
 import { error } from 'console';
 import { IRegister } from '../../../modles/auth.modle';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sign-up',
@@ -26,9 +25,8 @@ export class SignUpComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private cookieService: CookieService
   ) {
-    if (this.cookieService.get('token')) {
+    if (localStorage.getItem('token')) {
       this.router.navigate(['/home']);
     }
 
