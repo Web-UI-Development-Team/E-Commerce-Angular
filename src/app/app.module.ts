@@ -88,7 +88,7 @@ import { EditCategoryComponent } from './dashboard/categories-dashboard/edit-cat
     QuantityComponent,
     SliderComponent,
     PopUpComponent,
-    ProductReviewsComponent
+    ProductReviewsComponent,
     AddNewCategoryComponent,
     EditCategoryComponent,
   ],

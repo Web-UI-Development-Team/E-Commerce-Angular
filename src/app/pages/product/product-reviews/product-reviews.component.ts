@@ -8,14 +8,22 @@ import { Reviews } from '../../../../modles/review.modle';
   styleUrl: './product-reviews.component.css'
 })
 export class ProductReviewsComponent implements OnInit {
-  reviews : Reviews[] 
+  reviews : Reviews[] = []
   productId:any
   constructor(private productReviews :ProductReviewService  ) {}
   ngOnInit(): void {
-      this.productReviews.getAllreviews(this.productId).subscribe(data=>{
-        this.reviews = data;
-        console.log(data);
-        
-      })
+    this.productReviews.getAllreviews(this.productId).subscribe((data:any)=>{
+      this.reviews = data;
+      console.log(data);
+      
+    })
+  }
+  show(){
+    
+    this.productReviews.getAllreviews(this.productId).subscribe((data:any)=>{
+      this.reviews = data;
+      console.log(data);
+      
+    })
   }
 }
