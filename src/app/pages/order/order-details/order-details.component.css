@@ -44,4 +44,9 @@
     line-height: 25px;
     margin-left: 16px;
   }
-  
+  .active {
+    color: green;
+  }
+  .pending {
+    color: red;
+  }

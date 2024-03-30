@@ -20,7 +20,7 @@ export class OrderDetailsComponent implements OnInit  {
   ngOnInit(): void {
 
     this.orderService.getOrdersUser().subscribe((data)=>{
-      data = data.filter(order=>order.status == "Pending");
+      data = data.filter(order=>order.status !== "cancled");
       this.orders = data;
       console.log(data);
 
