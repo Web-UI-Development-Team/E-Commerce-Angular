@@ -33,4 +33,10 @@
 .click{
   background-color:orangered;
   opacity: 0.6;
+  
+}
+.click:disabled{
+  background-color:orangered;
+  opacity: 0.6;
+  
 }

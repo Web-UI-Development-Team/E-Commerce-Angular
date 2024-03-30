@@ -11,6 +11,7 @@ import { ProductsRequestsService } from '../../../services/product/products-requ
 export class ProductDetailsComponent implements OnInit {
   productDetails: any = {};
   loading: boolean = false;
+  buttonShow: boolean = false;
 
   constructor(
     private activatedRouter: ActivatedRoute,
@@ -38,5 +39,12 @@ export class ProductDetailsComponent implements OnInit {
         alert(err.message);
       }
     );
+  }
+
+  showButton(id: any) {
+    this.buttonShow = true;
+  }
+  hideButton(id: any) {
+    this.buttonShow = false;
   }
 }
