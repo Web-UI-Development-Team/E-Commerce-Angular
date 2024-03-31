@@ -28,8 +28,8 @@
       </div>
 
       <div class="arrows">
-        <button id="prev" (click)="onClickPrev()"><</button>
-        <button id="next" (click)="onClickNext()">></button>
+        <button id="prev" (click)="onClickPrev()"></button>
+        <button id="next" (click)="onClickNext()"></button>
       </div>
     </div>
   </div>
@@ -83,11 +83,11 @@
                 <ul class="product-o__action-list">
                   <li>
                     <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top"
-                      title="Quick View" (click)="showDetails(product._id)"><i class="fas fa-search-plus"></i></a>
+                      title="Quick View" (click)="showDetails(product._id)"><i class="fa-solid fa-circle-info"></i></a>
                   </li>
                   <li>
                     <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top"
-                      title="Add to Cart" (click)="addProductToCart(product._id)"><i class="fas fa-plus-circle"></i></a>
+                      title="Add to Cart" (click)="addProductToCart(product._id)"><i class="fas fa-shopping-cart"></i></a>
                   </li>
                   <li>
                     <a data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i
