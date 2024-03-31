@@ -4,9 +4,6 @@ export function createHttpObservable(url: string): Observable<any> {
   return new Observable((observer) => {
     fetch(url)
       .then((response) => {
-        if (!response.ok) {
-          throw new Error('request failed');
-        }
         return response.json();
       })
       .then((body) => {
@@ -14,9 +11,25 @@ export function createHttpObservable(url: string): Observable<any> {
         observer.next(body);
         observer.complete();
       })
-      .catch((error) => {
-        console.error(error);
-        observer.error('something went wrong');
-      });
+      .catch((error) => {});
   });
 }
+
+// {
+//   fetch(url)
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error('request failed');
+//       }
+//       return response.json();
+//     })
+//     .then((body) => {
+//       console.log(body);
+//       observer.next(body);
+//       observer.complete();
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//       observer.error('something went wrong');
+//     });
+// }

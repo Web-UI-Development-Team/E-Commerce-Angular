@@ -54,11 +54,6 @@ export class ProductCardComponent implements OnInit {
     this.isClicked = !this.isClicked;
     this.buttonDisabled = true;
 
-    // if (this.cartService.productIds.includes(productId)) {
-
-    //   this.isClicked = true;
-    // }
-
     this.cartService.cartItems.push({
       product: this.prd,
       quantity: 1,

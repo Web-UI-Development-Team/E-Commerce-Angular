@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row gy-3">
         <!-- Left elements -->
-        <div class="col-1">
+        <div class="col-3">
           <a routerLink="/home" class="float-start">
             <img
               src="https://th.bing.com/th/id/R.49346454c6c44e6b885f5e39afbb877b?rik=fvlRg8JDjsHTPA&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2fjcx%2fLXp%2fjcxLXprai.png&ehk=Lc5rvfUMX9aE3MlCzaRiqgzcL6juOCY0WzKg0S1EhUQ%3d&risl=&pid=ImgRaw&r=0"
@@ -14,11 +14,10 @@
         <!-- Left elements -->
 
         <!-- Center elements -->
-        <div class="order-lg-last col-lg-6 col-sm-8 col-8">
+        <div class="order-lg-last col-3">
           <div class="d-flex float-end icons">
             <a [routerLink]="isAuth ? '/profile/account' : '/signIn'" class="nav-icon">
-              <i class="fas fa-user-alt m-1 me-md-2"></i>
-              <span *ngIf="!isAuth" class="signIn">SIGN IN</span>
+              <i *ngIf="isAuth" class="fas fa-user-alt m-1 me-md-2"></i>
             </a>
 
             <div class="mx-3"></div>
@@ -32,15 +31,20 @@
         <!-- Center elements -->
 
         <!-- Right elements -->
-        <div class="col-lg-5 col-md-12 col-12">
-          <div class="input-group float-center pad">
-            <div class="form-outline position-relative w-75  ">
-              <input type="search" id="form1" class="form-control border rounded-5 bg-body-secondary"
-                placeholder="Search" />
-              <div> <i class="fas fa-search position-absolute" id="search"></i></div>
+
+        <div class="form-outline position-relative col-6">
+          <input type="search" id="form1" class="form-control border rounded-5 bg-body-secondary"
+            placeholder="Search" #searchInput (focusout)="onFocusOut()"/>
+          <div> <i class="fas fa-search position-absolute" id="search"></i></div>
+
+          <div class="product-menu position-absolute">
+            <div *ngFor="let product of searchProducts">
+              <app-drop-menu [product]="product"></app-drop-menu>
             </div>
           </div>
         </div>
+
+
         <!-- Right elements -->
       </div>
     </div>
