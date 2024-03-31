@@ -46,11 +46,15 @@
   }
   .active {
     color: green;
+    font-weight: bold;
+
   }
   .pending {
-    color: yellow;
+    color: rgb(245, 245, 15);
+    font-weight: bold;
+
   }
   .cancled {
     color: red;
-
+    font-weight: bold;
   }

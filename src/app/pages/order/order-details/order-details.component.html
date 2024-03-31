@@ -37,7 +37,7 @@
         <!-- ///// -->
         <td>{{ order.dateOfOrder | date:"MM/dd" }}</td>
         <!-- <div [ngClass]="isActive ? 'active' : 'inactive'"></div> -->
-        <td [ngClass] = "{'active' : order.status === 'Active' , 'pending' : order.status === 'Pending' , 'cancled' :order.status === 'cancled'} ">{{ order.status }}</td>
+        <td [ngClass] = "{'active' : order.status === 'Accepted' , 'pending' : order.status === 'Pending' , 'cancled' :order.status === 'Canceled'} ">{{ order.status }}</td>
         <td>{{ order.totalPrice }}</td>
         <td>
           <fa-icon [icon]="faX" (click)="onCancelOrder(order._id,'cancled')"></fa-icon>
