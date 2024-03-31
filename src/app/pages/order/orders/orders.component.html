@@ -1,3 +1,4 @@
+
 <form class="p-5" [formGroup]="UserForm">
   <div class="form-row m-3" style="width: 99%; display: flex; gap: 10px;">
     <div class="col-md-3 ">
@@ -5,11 +6,13 @@
       <input type="text" class="form-control mt-2 " formControlName="firstName"
         [ngClass]="{ 'ng-invalid ng-touched': isSubmitted}">
       <!-- validation -->
+
       <div class="text-danger"
         *ngIf="UserForm.controls['firstName'].invalid && (isSubmitted || UserForm.controls['firstName'].touched || UserForm.controls['firstName'].dirty)">
         <span *ngIf="UserForm.controls['firstName'].errors?.['required']">
           <span class="circle">!</span> This field is required
         </span>
+
         <span *ngIf="UserForm.controls['firstName'].errors?.['pattern']">
           <span class="circle">!</span> Please Enter charcters only
         </span>
@@ -132,6 +135,7 @@
   <button (click)="OnSumbit()" class="btn btn-primary m-3" type="submit"
     style="background:#ff4500; border: 0;">Continue</button>
 </form>
+
 
 <!-- <div class="pop-up">
  <div>
