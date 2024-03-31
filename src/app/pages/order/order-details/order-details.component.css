@@ -48,5 +48,9 @@
     color: green;
   }
   .pending {
+    color: yellow;
+  }
+  .cancled {
     color: red;
+
   }
