@@ -8,7 +8,7 @@ export class ProductReviewService {
 
   constructor(private http : HttpClient) { }
   getreviewsById(productId:string){
-    return this.http.get<Reviews[]>(`http://localhost:3010/api/v1/products/65f65b6cbc8b5a64c143026c/reviews`);
+    return this.http.get<Reviews[]>(`http://localhost:3010/api/v1/products/${productId}/reviews`);
   }
 }
 // 65f65b6cbc8b5a64c143026c
