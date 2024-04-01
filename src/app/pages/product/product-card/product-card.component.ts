@@ -43,6 +43,8 @@ export class ProductCardComponent implements OnInit {
     // console.log(this.cartService.productIds);
     if (this.cartService.productIds.includes(this.prd._id)) {
       this.isClicked = true;
+      this.buttonDisabled = true;
+
     }
   }
 
@@ -65,10 +67,10 @@ export class ProductCardComponent implements OnInit {
     });
   }
 
-  showButton(id: any) {
-    this.buttonShow = true;
-  }
-  hideButton(id: any) {
-    this.buttonShow = false;
-  }
+  // showButton(id: any) {
+  //   this.buttonShow = true;
+  // }
+  // hideButton(id: any) {
+  //   this.buttonShow = false;
+  // }
 }
