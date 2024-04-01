@@ -1,28 +1,20 @@
-<!-- <p>product-reviews works!</p> -->
-<button (click)="show()">show order</button>
 
 
 
-
-   <div class="container">
-    <!-- <p>Reviews({{ review.length }})</p>  -->
-
-    <div class="col-md-6"> 
-      <div class="card">
-        <div class="card-body p-3" *ngFor="let review of reviews" > 
-          <h5 class="card-title" *ngFor="let r of review.reviews">
-            <!-- this product is good -->
-            {{r.title}}
-        </h5> 
-          <p class="card-text"  *ngFor="let r of review.reviews">
-            <!-- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse nam quae
-            aspernatur nisi aliquid provident aliquam animi, aut voluptates nihil sint
-            eveniet neque earum deleniti! Nesciunt repudiandae sed magnam eligendi? -->
-            {{r.comment}}
-          </p>
-        </div>
+ <div class="container">
+  <p>Reviews({{ reviewData.reviews.length }})</p> 
+  
+  <div class="col-md-6"> 
+    <div class="card">
+      <div class="card-body p-3" *ngFor="let review of reviewData.reviews">  
+        <!-- // reviewData:obj //reviews:array// -->
+        <h5 class="card-title" >
+          {{review.title}}
+      </h5> 
+        <p class="card-text">
+          {{review.comment}}
+        </p>
       </div>
     </div>
   </div>
-  
-  
+  </div> 

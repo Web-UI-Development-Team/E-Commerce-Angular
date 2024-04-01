@@ -1,27 +1,11 @@
-export interface Reviews {
-    
-        reviews : [
-            {
-                title : string,
-                 comment : string,
-                 product : string
-
-            }
-        ]
-        // user : {
-        //     _id : string
-        // },
-        // product : {
-        //     _id : string
-        // }
-    
-   
-}
-// review : [ 
-//     {
-//      title: string,
-//      comment: string,
-//      user: string,
-//      product: string
-//     }
-//     ]
+export interface ReviewObj {
+    reviews: Reviews[];
+  }
+  
+  export interface Reviews {
+    title: string;
+    comment: string;
+    user: string;
+    product: string;
+  }
+  
