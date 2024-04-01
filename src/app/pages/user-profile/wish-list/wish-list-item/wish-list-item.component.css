@@ -34,3 +34,7 @@ input {
   border-left: none;
   border-right: none;
 }
+
+.thumbnail {
+  cursor: pointer;
+}

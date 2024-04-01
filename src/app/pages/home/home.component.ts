@@ -63,20 +63,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (typeof window !== 'undefined') {
-      if (localStorage.getItem('token')) {
-        this.cartRequestService.getUserCartRequest().subscribe({
-          next: (carts) => (this.cartService.cartItems = carts),
-          error: (error) => console.log(error),
-          complete: () => {
-            this.cartService.productIds = this.cartService.cartItems.map(
-              (cart) => cart.product._id
-            );
-          },
-        });
-      }
-    }
-
     this.categoryRequestsServices
       .getAllCategoriesRequest()
       .subscribe((data: any) => {
@@ -110,7 +96,6 @@ export class HomeComponent implements OnInit {
     this.cartService.cartItems.push({
       product: product,
       quantity: 1,
-      isInWishList: false,
     });
     this.cartRequestService.addToCart(product._id).subscribe({
       next: (data) => console.log(data),

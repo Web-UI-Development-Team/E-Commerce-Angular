@@ -1,23 +1,48 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-import { BehaviorSubject, Observable, catchError, debounceTime, distinctUntilChanged, fromEvent, last, map, of, startWith, switchMap, takeLast, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  fromEvent,
+  last,
+  map,
+  of,
+  startWith,
+  switchMap,
+  takeLast,
+  takeUntil,
+} from 'rxjs';
 import { IProduct } from '../../../modles/product.modle';
 import { createHttpObservable } from '../../utils/createHttpObservable';
 import { CartRequestService } from '../../services/cart/cart.request.service';
 import { CartService } from '../../services/cart/cart.service';
 import { ProductsRequestsService } from '../../services/product/products-requests.service';
+import { UserProfileRequestService } from '../../services/user-profile/user-profile.request.service';
+import { UserProfileService } from '../../services/user-profile/user-profile.service';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
+  host: {
+    '(document:click)': 'onClick($event)',
+  },
 })
 export class NavBarComponent implements OnInit, AfterViewInit {
   active: boolean = false;
   isAuth: boolean = false;
   role: string = '';
   products$: any;
-  @ViewChild("searchInput", { static: true }) input: ElementRef;
+  @ViewChild('searchInput', { static: true }) input: ElementRef;
 
   searchProducts: IProduct[];
 
@@ -25,12 +50,15 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private cartRequestService: CartRequestService,
     public cartService: CartService,
-    private productsRequestsService: ProductsRequestsService
+    private productsRequestsService: ProductsRequestsService,
+    private userProfileService: UserProfileService,
+    private userProfileRequestService: UserProfileRequestService,
+    private _eref: ElementRef
   ) {
     this.authService.isAuthenticated();
     this.authService.isAuth.subscribe({
-      next: (val) => this.isAuth = val,
-      error: error => console.log(error)
+      next: (val) => (this.isAuth = val),
+      error: (error) => console.log(error),
     });
   }
 
@@ -48,22 +76,36 @@ export class NavBarComponent implements OnInit, AfterViewInit {
             );
           },
         });
+
+        this.userProfileRequestService.getWishlist().subscribe({
+          next: (data) => (this.userProfileService.wishList = data.wishList),
+          error: (error) => console.log(error),
+          complete: () => {
+            this.userProfileService.wishListProductIds =
+              this.userProfileService.wishList.map((product) => product._id);
+          },
+        });
       }
     }
   }
 
   ngAfterViewInit() {
-    this.products$ = fromEvent<any>(this.input.nativeElement, "keyup").pipe(
-      map((event) => {console.log(event.target.value); return event.target.value}),
-      startWith(""), // to send initial request
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap((search) => this.loadProducts(search))
-    ).subscribe()
+    this.products$ = fromEvent<any>(this.input.nativeElement, 'keyup')
+      .pipe(
+        map((event) => {
+          console.log(event.target.value);
+          return event.target.value;
+        }),
+        startWith(''), // to send initial request
+        debounceTime(400),
+        distinctUntilChanged(),
+        switchMap((search) => this.loadProducts(search))
+      )
+      .subscribe();
   }
 
   loadProducts(search: string): Observable<any> {
-    if(search) {
+    if (search) {
       return createHttpObservable(
         `http://localhost:3010/api/v1/products/search/product/${search}`
       ).pipe(
@@ -79,7 +121,9 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onFocusOut() {
-    this.searchProducts = [];
+  onClick(e: any) {
+    if (!this._eref.nativeElement.contains(e.target)) {
+      this.searchProducts = [];
+    }
   }
 }

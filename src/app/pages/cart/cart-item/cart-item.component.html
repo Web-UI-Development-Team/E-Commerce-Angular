@@ -1,7 +1,7 @@
 <div class="row mb-4 flex-row align-content-center justify-content-center">
   <div class="col-6">
     <div class="me-lg-5">
-      <div class="d-flex">
+      <div class="d-flex thumbnail" (click)="showDetails(cartItem.product._id)">
         <img [src]="cartItem.product.thumbnail" class="border rounded me-3" alt="thumbnail" />
         <div class="">
           <a href="#" class="nav-link">{{cartItem.product.title}}</a>
@@ -15,11 +15,11 @@
 
   <app-quantity class="col-2 align-self-center" [item]="cartItem"></app-quantity>
 
-  <button title="remove" (click)="onClickHeartIcon()" class="remove col-1 align-self-center">
-    <i class="fa-solid fa-heart"></i>
+  <button title="remove" (click)="onClickHeartIcon(cartItem.product._id)" class="remove col-1 align-self-center">
+    <i class="fa-solid fa-heart" [ngClass]="{'is-in-wishlist': isInWishList}"></i>
   </button>
 
-  <button title="remove" (click)="onClickRemove()" class="remove col-1 align-self-center">
+  <button title="remove" (click)="onClickRemove(cartItem.product._id)" class="remove col-1 align-self-center">
     <i class="fa-solid fa-trash"></i>
   </button>
 

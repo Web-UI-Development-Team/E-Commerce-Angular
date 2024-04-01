@@ -57,7 +57,6 @@ export class ProductCardComponent implements OnInit {
     this.cartService.cartItems.push({
       product: this.prd,
       quantity: 1,
-      isInWishList: false,
     });
 
     this.cartRequestService.addToCart(productId).subscribe({

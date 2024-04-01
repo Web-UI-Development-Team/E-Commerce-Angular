@@ -34,3 +34,11 @@ input {
   border-left: none;
   border-right: none;
 }
+
+.remove .is-in-wishlist {
+  color: var(--primary);
+}
+
+.thumbnail {
+  cursor: pointer;
+}

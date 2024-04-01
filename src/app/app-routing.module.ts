@@ -27,6 +27,7 @@ import { AuthGuard } from './services/guards/auth-guard.service';
 import { WishListComponent } from './pages/user-profile/wish-list/wish-list.component';
 import { AccountComponent } from './pages/user-profile/account/account.component';
 import { AdminGuard } from './services/guards/admin-guard.service';
+import { OrderDetailsHistoryComponent } from './pages/order/order-details-history/order-details-history.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -46,7 +47,7 @@ const routes: Routes = [
         children: [{ path: 'edit', component: UserFormComponent }],
       },
       { path: 'orders', component: OrderDetailsComponent },
-      { path: 'orders-history', component: OrderDetailsComponent },
+      { path: 'orders-history', component: OrderDetailsHistoryComponent },
       { path: 'wish-list', component: WishListComponent },
     ],
   },

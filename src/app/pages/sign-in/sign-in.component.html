@@ -35,6 +35,7 @@
             <b> {{email?.errors?.['EmailNotValid'].value}} </b> doesn't match
           </small>
         </div>
+
       </div>
 
       <div class="mb-3 p-2">
@@ -46,6 +47,10 @@
           id="password"
           name="Password"
         />
+
+        <div class="alert alert-warning" *ngIf="isFaild">
+          <small > incorrect email or password </small>
+        </div>
 
         <button
           [disabled]="loginForm.invalid"

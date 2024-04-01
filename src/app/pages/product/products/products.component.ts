@@ -36,9 +36,9 @@ export class ProductsComponent implements OnInit {
       createdAt: '',
       updatedAt: '',
     },
-    isInWishList: false,
     quantity: 0,
   };
+  
   clickedButtonIndex: number | null = null;
   products: IProduct[] = [];
   loading: boolean = false;

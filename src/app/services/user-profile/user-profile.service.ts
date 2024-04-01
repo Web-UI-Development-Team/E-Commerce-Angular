@@ -19,6 +19,8 @@ export class UserProfileService {
 
   wishList: IProduct[] = [];
 
+  wishListProductIds: string[] = [];
+
   patchUser(userModel: object) {
     this.userProfileRequestService
       .patchUserRequest(userModel)
