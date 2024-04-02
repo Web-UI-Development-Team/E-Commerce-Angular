@@ -33,8 +33,8 @@ export class SignUpComponent {
     this.registerForm = fb.group(
       {
         name: ['', [Validators.required, Validators.pattern('[A-Z a-z]{3,}')]],
-        email: ['', [Validators.required, this.existEmailValidator()]],
-        phone: ['', [Validators.required, Validators.pattern('[0-9]{12}')]],
+        email: ['', [Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}') ]],
+        phone: ['', [Validators.required, Validators.pattern('[0-9]{11}')]],
         image: [''],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],
@@ -93,14 +93,15 @@ export class SignUpComponent {
     }
   }
 
-  existEmailValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      let emailVal: string = control.value;
-      let ValidationErrors = { EmailNotValid: { value: emailVal } };
-      if (emailVal.length == 0 && control.untouched) return null;
-      return emailVal.includes('.com') ? null : ValidationErrors;
-    };
-  }
+  // this.existEmailValidator()
+  // existEmailValidator(): ValidatorFn {
+  //   return (control: AbstractControl): ValidationErrors | null => {
+  //     let emailVal: string = control.value;
+  //     let ValidationErrors = { EmailNotValid: { value: emailVal } };
+  //     if (emailVal.length == 0 && control.untouched) return null;
+  //     return emailVal.includes('.com') ? null : ValidationErrors;
+  //   };
+  // }
 
   passwordMatch(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {

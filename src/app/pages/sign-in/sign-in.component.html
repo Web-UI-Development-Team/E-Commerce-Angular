@@ -40,13 +40,13 @@
           [hidden]="email?.valid || email?.untouched"
         >
           <small *ngIf="email?.errors?.['required']"> email is required </small>
-          <small *ngIf="email?.errors?.['EmailNotValid']">
+          <small *ngIf="email?.errors?.['pattern']">
             Email must contains &#64;Example.com,
             <b> {{email?.errors?.['EmailNotValid'].value}} </b> doesn't match
           </small>
         </div>
       </div>
-
+      
       <div class="mb-3 p-2">
         <label for="password" class="form-label">Password*</label>
         <input

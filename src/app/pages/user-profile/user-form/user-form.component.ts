@@ -47,7 +47,7 @@ export class UserFormComponent implements OnInit {
       ],
       phone: [
         this.user.phone,
-        [Validators.required, Validators.pattern('[0-9]{12}')],
+        [Validators.required, Validators.pattern('[0-9]{11}')],
       ],
     });
   }
