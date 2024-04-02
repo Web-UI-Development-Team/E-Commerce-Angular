@@ -13,11 +13,13 @@ export class UserProfileService {
     name: '',
     email: '',
     phone: '',
-    image: '',
+    imagePath: '',
     wishList: [],
   };
 
   wishList: IProduct[] = [];
+
+  wishListProductIds: string[] = [];
 
   patchUser(userModel: object) {
     this.userProfileRequestService

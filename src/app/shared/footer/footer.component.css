@@ -3,6 +3,14 @@
   right: 0;
   background-color: black;
 }
+
+.lnk:hover{
+    color: orangered;
+}
+.text{
+    font-size: 20px;
+}
+
 .btn {
   background-color: orangered;
   color: whitesmoke;

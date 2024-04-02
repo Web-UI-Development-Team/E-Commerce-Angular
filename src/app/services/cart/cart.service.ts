@@ -26,8 +26,6 @@ export class CartService {
   removeCart(productId: string, index: number) {
     this.cartItems.splice(index, 1);
 
-    console.log(index);
-
     this.cartRequestService.removeCartRequest(productId).subscribe({
       next: (data) => console.log(data),
       error: (error) => console.log(error),

@@ -19,6 +19,7 @@ import { error } from 'console';
 })
 export class SignInComponent {
   loginForm: FormGroup;
+  isFaild = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,11 +61,10 @@ export class SignInComponent {
     this.authService.loginRequest(user).subscribe({
       next: (data) => {
         localStorage.setItem('token', data.token);
-        console.log('kkkkkkkkkkkkkk', localStorage.getItem('token'));
         localStorage.setItem('role', `${data.role}`);
         this.router.navigate(['home']);
       },
-      error: (error) => console.log(error),
+      error: (error) => this.isFaild = true,
       complete: () => {
         this.authService.isAuthenticated();
       },

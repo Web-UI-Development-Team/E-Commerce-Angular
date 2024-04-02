@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICart } from '../../../../modles/cart.modle';
 import { CartService } from '../../../services/cart/cart.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserProfileService } from '../../../services/user-profile/user-profile.service';
+import { UserProfileRequestService } from '../../../services/user-profile/user-profile.request.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart-item',
@@ -9,7 +12,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './cart-item.component.css',
 })
 export class CartItemComponent implements OnInit {
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private userProfileService: UserProfileService,
+    private userProfileRequestService: UserProfileRequestService,
+    private router: Router
+  ) {}
 
   @Input() cartItem: ICart = {
     product: {
@@ -28,30 +36,62 @@ export class CartItemComponent implements OnInit {
       createdAt: '',
       updatedAt: '',
     },
-    isInWishList: false,
     quantity: 0,
   };
 
   isQuantityEdited: boolean = false;
   buttonStyle: string = '';
+  isInWishList: boolean = false;
+  wishListRequest: Observable<any>;
 
   ngOnInit() {
     this.isQuantityEdited = this.cartItem.quantity > 1;
-    this.buttonStyle = this.cartItem.isInWishList ? 'text-danger' : '';
+
+    if (this.userProfileService.wishListProductIds.includes(this.cartItem.product._id)) {
+      this.isInWishList = true;
+    }
   }
 
-  onClickRemove() {
+  onClickRemove(productId: string) {
     const index = this.cartService.cartItems.findIndex(
-      (item) => item.product._id === this.cartItem.product._id
+      (item) => item.product._id === productId
     );
 
-    this.cartService.removeCart(this.cartItem.product._id, index);
+    this.cartService.removeCart(productId, index);
     this.cartService.calculateTotal();
   }
 
-  onClickHeartIcon() {
-    this.cartService.updataWishList(this.cartItem.product._id);
-    this.cartItem.isInWishList = !this.cartItem.isInWishList;
-    this.buttonStyle = this.cartItem.isInWishList ? 'text-danger' : '';
+  onClickHeartIcon(productId: string) {
+    if (this.isInWishList) {
+      let index = this.userProfileService.wishList.findIndex(
+        (product) => product._id == this.cartItem.product._id
+      );
+
+      this.userProfileService.wishList.splice(index, 1);
+
+      this.wishListRequest =
+        this.userProfileRequestService.updateWishListRequest(productId);
+
+      this.isInWishList = false;
+    } else {
+      this.userProfileService.wishList.push(this.cartItem.product);
+
+      this.wishListRequest =
+        this.userProfileRequestService.updateWishListRequest(productId);
+
+      this.isInWishList = true;
+    }
+
+    this.wishListRequest.subscribe({
+      next: (data) => console.log(data),
+      error: (error) => console.log(error),
+    });
+
+    this.userProfileService.wishListProductIds =
+      this.userProfileService.wishList.map((product) => product._id);
+  }
+
+  showDetails(productId: any) {
+    this.router.navigate(['/productDetails', productId]);
   }
 }

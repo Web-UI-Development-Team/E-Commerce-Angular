@@ -1,6 +1,6 @@
 export interface IUser {
   _id: string;
-  image: string;
+  imagePath: string;
   name: string;
   email: string;
   password: string;
@@ -12,7 +12,7 @@ export interface IUser {
 
 export interface IUpdateUser {
   _id?: string;
-  image?: string;
+  imagePath?: string;
   name?: string;
   email?: string;
   password?: string;

@@ -33,7 +33,7 @@ export class UserFormComponent implements OnInit {
     name: '',
     email: '',
     phone: '',
-    image: '',
+    imagePath: '',
     wishList: [],
   };
 

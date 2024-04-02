@@ -35,10 +35,11 @@ input {
   border-right: none;
 }
 
+.remove .is-in-cart,
 .remove .is-in-wishlist {
   color: var(--primary);
 }
 
 .thumbnail {
-  cursor: pointer;
+  cursor: pointer;;
 }
