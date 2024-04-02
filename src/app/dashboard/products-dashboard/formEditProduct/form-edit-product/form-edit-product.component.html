@@ -176,35 +176,6 @@
           </div>
         </div>
       </div>
-      <div class="thumbnail">
-        <div class="form-group">
-          <label for="thumbnail" class="form-label">Thumbnail</label>
-          <input
-            type="file"
-            class=""
-            id="thumbnail"
-            placeholder="Thumbnail"
-            formControlName="thumbnail"
-          />
-        </div>
-        <div
-          class="errors"
-          *ngIf="
-            getFormControl('thumbnail')?.touched &&
-            getFormControl('thumbnail')?.errors
-          "
-        >
-          <div *ngIf="getFormControl('thumbnail')?.errors?.['required']">
-            thumbnail is required
-          </div>
-          <div *ngIf="getFormControl('thumbnail')?.errors?.['minlength']">
-            Min length is
-            {{ getFormControl("thumbnail")?.errors?.["minlength"]["requiredLength"] }}
-            but you entered
-            {{ getFormControl("thumbnail")?.errors?.["minlength"]["actualLength"] }}
-          </div>
-        </div>
-      </div>
       <div class="description">
         <div class="form-group">
           <label for="description">Description</label>
@@ -231,6 +202,21 @@
             but you entered
             {{ getFormControl("description")?.errors?.["minlength"]["actualLength"] }}
           </div>
+        </div>
+      </div>
+      <div class="isDeleted">
+        <div
+          class="form-check col-6 d-flex align-items-center justify-content-start gap-2 custom-checkbox"
+        >
+          <input
+            class="form-check-input form-control"
+            name="isDeleted"
+            type="checkbox"
+            value="false"
+            id="isDeleted"
+            formControlName="isDeleted"
+          />
+          <label class="form-check-label" for="isDeleted"> IsDeleted </label>
         </div>
       </div>
       <div class="d-flex justify-content-end" style="margin-top: 10px">

@@ -31,7 +31,7 @@ export class EditCategoryComponent implements OnInit {
     this.categoryForm = this.formBuilder.group({
       nameCategory: new FormControl('', [
         Validators.required,
-        Validators.maxLength(500),
+        Validators.minLength(3),
       ]),
       description: new FormControl('', [
         Validators.required,

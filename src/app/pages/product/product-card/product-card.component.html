@@ -59,11 +59,18 @@
           <i class="fas fa-shopping-cart"></i>
         </button>
 
-        <li>
-          <a data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"
-            ><i class="fas fa-heart"></i
-          ></a>
-        </li>
+        <button
+          class="border-0 btnn mx-1"
+          data-modal="modal"
+          data-modal-id="#add-to-cart"
+          data-tooltip="tooltip"
+          data-placement="top"
+          title="Add to Cart"
+          [class.click]="isInWishlist"
+          (click)="toggleWishlist(prd._id)"
+        >
+          <i class="fas fa-heart"></i>
+        </button>
       </ul>
     </div>
   </div>

@@ -29,7 +29,7 @@ export class SignInComponent {
     if(typeof window !== 'undefined')
     {
       if (localStorage.getItem('token')) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/user/home']);
       }
       this.loginForm = formBuilder.group({
         email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}')] ],
@@ -62,7 +62,14 @@ export class SignInComponent {
       next: (data) => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', `${data.role}`);
-        this.router.navigate(['home']);
+
+        if(data.role !== 'admin')
+        {
+          this.router.navigate(['user', 'home']);
+        } else {
+          this.router.navigate(['admin', 'homedashboard']);
+        }
+
       },
       error: (error) => this.isFaild = true,
       complete: () => {

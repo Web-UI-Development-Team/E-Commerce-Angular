@@ -5,7 +5,7 @@
       <div class="row gy-3 justify-content-between">
         <!-- Left elements -->
         <div class="col-2">
-          <a routerLink="/home" class="float-start">
+          <a routerLink="/user/home" class="float-start">
             <img src="../../../assets/logo.png" width="55" alt="logo" />
           </a>
         </div>
@@ -13,14 +13,14 @@
 
         <!-- Center elements -->
         <div class="order-lg-last col-3  col-md-2 icons">
-          <a [routerLink]="isAuth ? '/profile/account' : '/signIn'" class="nav-icon">
+          <a [routerLink]="isAuth ? '/user/profile/account' : '/signIn'" class="nav-icon">
             <i class="fas fa-user-alt m-1 me-md-2"></i>
           </a>
 
           <div class="divider"></div>
 
           <div class="position-relative">
-            <a routerLink="/cart" *ngIf="isAuth" class="nav-icon">
+            <a routerLink="/user/cart" *ngIf="isAuth" class="nav-icon">
               <i class="fas fa-shopping-cart m-1 me-md-2"></i>
             </a>
             <div *ngIf="isAuth" class="cart">{{cartService.cartItems.length}}</div>
@@ -77,19 +77,16 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
           <li class="nav-item">
 
-            <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active">HOME</a>
+            <a class="nav-link active" aria-current="page" routerLink="/user/home" routerLinkActive="active">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/products" routerLinkActive="active">PRODUCTS</a>
+            <a class="nav-link" routerLink="/user/products" routerLinkActive="active">PRODUCTS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/about" routerLinkActive="active">ABOUT</a>
+            <a class="nav-link" routerLink="/user/about" routerLinkActive="active">ABOUT</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/contactUs" routerLinkActive="active" *ngIf="isAuth">CONTACT US</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" *ngIf="role === 'admin'">DASHBOARD</a>
+            <a class="nav-link" routerLink="/user/contactUs" routerLinkActive="active" *ngIf="isAuth">CONTACT US</a>
           </li>
         </ul>
         <!-- Left links -->

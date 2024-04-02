@@ -24,7 +24,7 @@ export class AddNewCategoryComponent {
   categoryForm: FormGroup = this.formBuilder.group({
     nameCategory: new FormControl('', [
       Validators.required,
-      Validators.max(500),
+      Validators.minLength(3),
     ]),
     description: new FormControl('', [
       Validators.required,

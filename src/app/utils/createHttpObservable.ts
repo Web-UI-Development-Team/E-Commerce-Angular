@@ -2,7 +2,9 @@ import { Observable } from 'rxjs';
 
 export function createHttpObservable(url: string): Observable<any> {
   return new Observable((observer) => {
-    fetch(url)
+    fetch(url, {
+      headers: {'jwt': localStorage.getItem('token') ?? ''}
+    })
       .then((response) => {
         return response.json();
       })

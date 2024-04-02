@@ -5,6 +5,7 @@ import { CartRequestService } from '../../../services/cart/cart.request.service'
 import { ProductsRequestsService } from '../../../services/product/products-requests.service';
 import { ICart } from '../../../../modles/cart.modle';
 import { range } from '../../../utils/range';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-products',
@@ -35,10 +36,11 @@ export class ProductsComponent implements OnInit {
       reviews: [''],
       createdAt: '',
       updatedAt: '',
+      isDeleted: false
     },
     quantity: 0,
   };
-  
+
   clickedButtonIndex: number | null = null;
   products: IProduct[] = [];
   loading: boolean = false;

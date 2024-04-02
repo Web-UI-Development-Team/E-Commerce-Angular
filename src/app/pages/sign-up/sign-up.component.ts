@@ -27,7 +27,7 @@ export class SignUpComponent {
     private router: Router,
   ) {
     if (localStorage.getItem('token')) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['user','home']);
     }
 
     this.registerForm = fb.group(

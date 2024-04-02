@@ -53,6 +53,8 @@ import { EditCategoryComponent } from './dashboard/categories-dashboard/edit-cat
 import { WishListItemComponent } from './pages/user-profile/wish-list/wish-list-item/wish-list-item.component';
 import { DropMenuComponent } from './shared/nav-bar/drop-menu/drop-menu.component';
 import { OrderDetailsHistoryComponent } from './pages/order/order-details-history/order-details-history.component';
+import { UserComponent } from './components/user/user.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +99,8 @@ import { OrderDetailsHistoryComponent } from './pages/order/order-details-histor
     WishListItemComponent,
     DropMenuComponent,
     OrderDetailsHistoryComponent,
+    UserComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

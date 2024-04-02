@@ -31,10 +31,6 @@ export class AccountComponent {
     } else {
       this.user = this.userProfileService.user;
     }
-
-    console.log(this.router.url);
-
-    console.log(this.user);
   }
 
   getUserData() {
@@ -50,8 +46,6 @@ export class AccountComponent {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         };
-
-        console.log(this.user);
 
         this.userProfileService.user = this.user;
       },

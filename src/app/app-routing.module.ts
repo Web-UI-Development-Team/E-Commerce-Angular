@@ -28,42 +28,46 @@ import { WishListComponent } from './pages/user-profile/wish-list/wish-list.comp
 import { AccountComponent } from './pages/user-profile/account/account.component';
 import { AdminGuard } from './services/guards/admin-guard.service';
 import { OrderDetailsHistoryComponent } from './pages/order/order-details-history/order-details-history.component';
+import { UserComponent } from './components/user/user.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/user/home', pathMatch: 'full' },
   { path: 'signIn', component: SignInComponent },
   { path: 'signUp', component: SignUpComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'products', component: ProductsComponent },
-  { path: 'productDetails/:id', component: ProductDetailsComponent },
-  {
-    path: 'profile',
-    component: UserProfileComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: 'account',
-        component: AccountComponent,
-        children: [{ path: 'edit', component: UserFormComponent }],
-      },
-      { path: 'orders', component: OrderDetailsComponent },
-      { path: 'orders-history', component: OrderDetailsHistoryComponent },
-      { path: 'wish-list', component: WishListComponent },
-    ],
-  },
-  { path: 'cart', canActivate: [AuthGuard], component: CartComponent },
-  {
-    path: 'contactUs',
-    canActivate: [AuthGuard],
-    component: ContactUsComponent,
-  },
-  { path: 'checkout', canActivate: [AuthGuard], component: OrdersComponent },
 
-  { path: 'about', component: AboutComponent },
+  {path: 'user', component: UserComponent, children: [
+    { path: 'home', component: HomeComponent },
+    { path: 'products', component: ProductsComponent },
+    { path: 'productDetails/:id', component: ProductDetailsComponent },
+    {
+      path: 'profile',
+      component: UserProfileComponent,
+
+      children: [
+        {
+          path: 'account',
+          component: AccountComponent,
+          children: [{ path: 'edit', component: UserFormComponent }],
+        },
+        { path: 'orders', component: OrderDetailsComponent },
+        { path: 'orders-history', component: OrderDetailsHistoryComponent },
+        { path: 'wish-list', component: WishListComponent },
+      ],
+    },
+    { path: 'cart',  component: CartComponent },
+    {
+      path: 'contactUs',
+
+      component: ContactUsComponent,
+    },
+    { path: 'checkout',  component: OrdersComponent },
+
+    { path: 'about', component: AboutComponent }
+  ]},
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivateChild: [AdminGuard],
+    path: 'admin',
+    component: AdminComponent,
     canActivate: [AdminGuard],
     children: [
       {

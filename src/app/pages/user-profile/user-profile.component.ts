@@ -23,6 +23,6 @@ export class UserProfileComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     this.authService.isAuthenticated();
-    this.router.navigate(['home']);
+    this.router.navigate(['user','home']);
   }
 }

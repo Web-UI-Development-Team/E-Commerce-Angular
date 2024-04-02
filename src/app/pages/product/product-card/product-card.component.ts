@@ -37,6 +37,7 @@ export class ProductCardComponent implements OnInit {
     reviews: [''],
     createdAt: '',
     updatedAt: '',
+    isDeleted: false
   };
 
   constructor(
@@ -60,10 +61,15 @@ export class ProductCardComponent implements OnInit {
   }
 
   showDetails(productId: any) {
-    this.router.navigate(['/productDetails', productId]);
+    this.router.navigate(['/user','productDetails', productId]);
   }
 
   addProductToCart(productId: string) {
+    if(!localStorage.getItem('token')){
+      this.router.navigate(['signIn']);
+      return;
+    }
+
     this.isClicked = !this.isClicked;
     this.buttonDisabled = true;
 
@@ -79,6 +85,11 @@ export class ProductCardComponent implements OnInit {
   }
 
   toggleWishlist(productId: string) {
+    if(!localStorage.getItem('token')){
+      this.router.navigate(['signIn']);
+      return;
+    }
+
     if (this.isInWishlist) {
       let index = this.userProfileService.wishList.findIndex(
         (product) => product._id == this.prd._id

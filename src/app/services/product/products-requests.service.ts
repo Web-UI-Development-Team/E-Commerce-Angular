@@ -28,10 +28,25 @@ export class ProductsRequestsService {
   }
 
   addNewProductRequest(data: IProduct) {
+    const productData = new FormData();
+
+    productData.append('title', data.title);
+    productData.append('description', data.description);
+    productData.append('brand', data.brand);
+    productData.append('price', `${data.price}`);
+    productData.append('stock', `${data.stock}`);
+    productData.append('category', data.category);
+    productData.append('thumbnail', data.thumbnail);
+
+    for (let i = 0; i < data.images.length; i++) {
+      productData.append('images', data.images[i]);
+      console.log(data.images[i])
+    }
+
     console.log(data);
     return this.httpClient.post<IProduct>(
       'http://localhost:3010/api/v1/products',
-      data
+      productData
     );
   }
 

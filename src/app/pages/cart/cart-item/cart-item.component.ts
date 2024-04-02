@@ -35,6 +35,7 @@ export class CartItemComponent implements OnInit {
       reviews: [''],
       createdAt: '',
       updatedAt: '',
+      isDeleted: false
     },
     quantity: 0,
   };

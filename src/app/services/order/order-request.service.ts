@@ -10,4 +10,11 @@ export class OrderRequestService {
   getAllOrders() {
     return this.httpClient.get('http://localhost:3010/api/v1/orders');
   }
+
+  updateOrderStatus(id: string, data: any) {
+    return this.httpClient.patch(
+      `http://localhost:3010/api/v1/orders/${id}`,
+      data
+    );
+  }
 }

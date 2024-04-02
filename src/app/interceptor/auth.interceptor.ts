@@ -17,6 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     if (typeof window !== 'undefined') {
+      console.log(localStorage.getItem('token'))
       req = req.clone({
         setHeaders: {
           jwt: localStorage.getItem('token') ?? '',
