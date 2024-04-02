@@ -43,11 +43,11 @@ export class UserFormComponent implements OnInit {
     this.updateForm = this.formBuilder.group({
       name: [
         this.user.name,
-        [Validators.required, Validators.pattern('[A-Z a-z]{3,}')],
+        [Validators.required, Validators.pattern('[A-Z a-z]{3,20}')],
       ],
       phone: [
         this.user.phone,
-        [Validators.required, Validators.pattern('[0-9]{12}')],
+        [Validators.required, Validators.pattern('[0-9]{11}')],
       ],
     });
   }
