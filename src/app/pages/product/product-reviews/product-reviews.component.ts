@@ -3,17 +3,29 @@ import { ProductReviewService } from '../../../services/reviews/product-review.s
 import { ActivatedRoute } from '@angular/router';
 import { ReviewObj, Reviews } from '../../../../modles/review.modle';
 import { Subscription } from 'rxjs';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-product-reviews',
   templateUrl: './product-reviews.component.html',
   styleUrl: './product-reviews.component.css'
 })
 export class ProductReviewsComponent implements OnInit , OnDestroy {
+  //icon
+  faThumbsUp = faThumbsUp;
+  faThumbsDown = faThumbsDown;
+  //icon
+  //counter
+  count = 0;
+  countTwo = 0;
+  //
   reviewData: ReviewObj = { reviews: [] }; 
    newReview:Reviews  = {
     // ...this.reviewData,
     title: '',
     comment: '',
+    dateOfReview : new Date(),
     user: '',
     product: ''
   }; 
@@ -31,6 +43,16 @@ export class ProductReviewsComponent implements OnInit , OnDestroy {
     }
   }
   //
+  increaeCount(){
+    this.count = this.count +1;
+    console.log(this.count);
+  }
+  //
+  descreaseCount(){
+    this.countTwo = this.count +1;
+    console.log(this.count);
+    
+  }
   addNewReview(){
     console.log('hi');
     
@@ -39,6 +61,7 @@ export class ProductReviewsComponent implements OnInit , OnDestroy {
     if(productId !== null) {
       this.productReviews.addNewReview(productId,this.newReview).subscribe((data:any)=>{
          this.reviewData.reviews.push(data);
+         
       });
     }
   }

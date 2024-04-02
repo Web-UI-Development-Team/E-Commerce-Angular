@@ -50,6 +50,7 @@ import { PopUpComponent } from './pages/order/pop-up/pop-up.component';
 import { ProductReviewsComponent } from './pages/product/product-reviews/product-reviews.component';
 import { AddNewCategoryComponent } from './dashboard/categories-dashboard/add-new-category/add-new-category.component';
 import { EditCategoryComponent } from './dashboard/categories-dashboard/edit-category/edit-category.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { EditCategoryComponent } from './dashboard/categories-dashboard/edit-cat
     ReactiveFormsModule,
     CommonModule,
     MatDialogModule,
+    MatIconModule
   ],
   providers: [
     provideClientHydration(),

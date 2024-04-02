@@ -3,6 +3,7 @@ import { Order } from '../../../../modles/order.modle';
 import { OrdersService } from '../../../services/order/orders.service';
 import { ActivatedRoute } from '@angular/router';
 import {faX} from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { PopUpService } from '../../../services/pop-up/pop-up.service';
 import { Subscription } from 'rxjs';
 @Component({
