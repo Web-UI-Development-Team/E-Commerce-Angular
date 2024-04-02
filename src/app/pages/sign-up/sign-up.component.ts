@@ -85,8 +85,6 @@ export class SignUpComponent {
 
       reader.onload = () => {
         this.imageData = reader.result as String;
-
-        console.log(this.imageData)
       }
 
       reader.readAsDataURL(file);

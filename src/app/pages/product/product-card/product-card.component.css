@@ -35,7 +35,7 @@
 
 .click{
   color:orangered;
-  
+
 }
 .btnn:disabled{
   color:orangered;
@@ -243,4 +243,8 @@ button:hover{
 }
 .gl-rating-style-2 > i:first-child {
   margin-left: 0;
+}
+
+.is-in-wishlist {
+  color: var(--primary);
 }

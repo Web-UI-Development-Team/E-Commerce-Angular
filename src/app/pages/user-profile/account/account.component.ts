@@ -19,7 +19,7 @@ export class AccountComponent {
     name: '',
     email: '',
     phone: '',
-    image: '',
+    imagePath: '',
     wishList: [],
   };
 
@@ -33,6 +33,8 @@ export class AccountComponent {
     }
 
     console.log(this.router.url);
+
+    console.log(this.user);
   }
 
   getUserData() {
@@ -44,7 +46,7 @@ export class AccountComponent {
           width: '100px',
           height: '100px',
           backgroundColor: 'black',
-          backgroundImage: `url(${this.user.image})`,
+          backgroundImage: `url(${this.user.imagePath})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         };

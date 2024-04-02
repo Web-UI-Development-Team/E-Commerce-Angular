@@ -13,7 +13,7 @@ export class UserProfileService {
     name: '',
     email: '',
     phone: '',
-    image: '',
+    imagePath: '',
     wishList: [],
   };
 
