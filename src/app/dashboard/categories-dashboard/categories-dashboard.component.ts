@@ -18,12 +18,15 @@ export class CategoriesDashboardComponent implements OnInit {
 
   allCategories: ICategory[];
   category: ICategory;
+  isLoading:boolean=false;
 
   ngOnInit() {
+    this.isLoading=true;
     this.categoryRequestsServices
       .getAllCategoriesRequest()
       .subscribe((data: any) => {
         console.log(data.data);
+        this.isLoading=false;
         this.allCategories = data.data;
       });
   }

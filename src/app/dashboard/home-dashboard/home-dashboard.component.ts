@@ -11,6 +11,7 @@ import { FormEditProductComponent } from '../products-dashboard/formEditProduct/
 })
 export class HomeDashboardComponent implements OnInit {
   allProducts: any;
+  isLoading:boolean=false;
 
   constructor(
     private productRequestsServices: ProductsRequestsService,
@@ -18,18 +19,23 @@ export class HomeDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoading=true;
     this.productRequestsServices
       .getAllProductsRequest(1)
       .subscribe((data: any) => {
         console.log(data);
         this.allProducts = data.products;
         console.log(this.allProducts);
+        this.isLoading=false;
       });
   }
 
   openEditProductPopup(product: IProduct) {
+   
     this.dialog.open(FormEditProductComponent, {
+     
       data: { productId: product._id },
     });
+   
   }
 }

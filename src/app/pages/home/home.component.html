@@ -1,12 +1,12 @@
 <div class="center">
-  <div class="carousel" [ngClass]="{'next': next, 'prev': prev}">
+  <div class="carousel" [ngClass]="{ next: next, prev: prev }">
     <div class="list">
       <div class="item">
-        <img [src]="bannerData[firstIndex].img" alt="">
+        <img [src]="bannerData[firstIndex].img" alt="" />
 
         <div class="content">
-          <div class="title">{{bannerData[firstIndex].title}}</div>
-          <div class="desc">{{bannerData[firstIndex].desc}}</div>
+          <div class="title">{{ bannerData[firstIndex].title }}</div>
+          <div class="desc">{{ bannerData[firstIndex].desc }}</div>
           <div class="buttons">
             <button>SEE MORE</button>
             <button>ALL PRODUCTS</button>
@@ -15,11 +15,11 @@
       </div>
 
       <div class="item">
-        <img [src]="bannerData[secIndex].img" alt="">
+        <img [src]="bannerData[secIndex].img" alt="" />
 
         <div class="content">
-          <div class="title">{{bannerData[secIndex].title}}</div>
-          <div class="desc">{{bannerData[secIndex].desc}}</div>
+          <div class="title">{{ bannerData[secIndex].title }}</div>
+          <div class="desc">{{ bannerData[secIndex].desc }}</div>
           <div class="buttons">
             <button>SEE MORE</button>
             <button>ALL PRODUCTS</button>
@@ -58,14 +58,27 @@
         <div class="col-lg-12">
           <div class="filter-category-container">
             <div class="filter__category-wrapper">
-              <button class="btn filter__btn filter__btn--style-1" [class.js-checked]="!selectedCategory" type="button"
-                data-filter="*" (click)="getAllProducts()">
+              <button
+                class="btn filter__btn filter__btn--style-1"
+                [class.js-checked]="!selectedCategory"
+                type="button"
+                data-filter="*"
+                (click)="getAllProducts()"
+              >
                 All
               </button>
             </div>
-            <div class="filter__category-wrapper" *ngFor="let category of allCategories">
-              <button class="btn filter__btn filter__btn--style-1" [class.js-checked]="selectedCategory === category"
-                type="button" data-filter=".headphone" (click)="getProductsByCategory(category)">
+            <div
+              class="filter__category-wrapper"
+              *ngFor="let category of allCategories"
+            >
+              <button
+                class="btn filter__btn filter__btn--style-1"
+                [class.js-checked]="selectedCategory === category"
+                type="button"
+                data-filter=".headphone"
+                (click)="getProductsByCategory(category)"
+              >
                 {{ category.nameCategory }}
               </button>
             </div>
@@ -73,46 +86,75 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item products headphone mt-3"
-          *ngFor="let product of allProducts">
+        <div
+          class="col-xl-4 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item products headphone mt-3"
+          *ngFor="let product of allProducts"
+        >
           <div class="product-o product-o--hover-on product-o--radius">
             <div class="product-o__wrap">
               <a class="aspect aspect--bg-grey aspect--square u-d-block">
-                <img class="aspect__img" [src]="product.images[0]" alt="" /></a>
+                <img class="aspect__img" [src]="product.images[0]" alt=""
+              /></a>
               <div class="product-o__action-wrap">
                 <ul class="product-o__action-list">
                   <li>
-                    <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top"
-                      title="Quick View" (click)="showDetails(product._id)"><i class="fa-solid fa-circle-info"></i></a>
+                    <a
+                      data-modal="modal"
+                      data-modal-id="#quick-look"
+                      data-tooltip="tooltip"
+                      data-placement="top"
+                      title="Quick View"
+                      (click)="showDetails(product._id)"
+                      ><i class="fa-solid fa-circle-info"></i
+                    ></a>
                   </li>
+                  <button
+                    class="border-0 btnn remove"
+                    data-modal="modal"
+                    data-modal-id="#add-to-cart"
+                    data-tooltip="tooltip"
+                    data-placement="top"
+                    title="Add to Cart"
+                    [class.click]="isClicked"
+                    (click)="toggleCart(product._id)"
+                  >
+                    <i
+                      class="fas fa-shopping-cart"
+                      [ngClass]="{ 'is-in-cart': isClicked }"
+                    ></i>
+                  </button>
                   <li>
-                    <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top"
-                      title="Add to Cart" (click)="addProductToCart(product._id)"><i class="fas fa-shopping-cart"></i></a>
-                  </li>
-                  <li>
-                    <a data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i
-                        class="fas fa-heart"></i></a>
+                    <a
+                      data-tooltip="tooltip"
+                      data-placement="top"
+                      title="Add to Wishlist"
+                      ><i class="fas fa-heart"></i
+                    ></a>
                   </li>
                 </ul>
               </div>
             </div>
 
             <span class="product-o__category">
-              {{ product.category.nameCategory }}</span>
+              {{ product.category.nameCategory }}</span
+            >
 
             <span class="product-o__name"> {{ product.title }}</span>
             <div class="product-o__rating gl-rating-style">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star-half-alt"></i>
 
               <span class="product-o__review">(23)</span>
             </div>
 
-            <span class="product-o__price">{{ product.price }}
+            <span class="product-o__price"
+              >{{ product.price }}
 
               <span class="product-o__discount">{{
                 product.discount
-                }}</span></span>
+              }}</span></span
+            >
           </div>
         </div>
       </div>
@@ -120,10 +162,13 @@
         <div class="col-lg-12">
           <div class="load-more">
             <button class="btn btn--e-brand" type="button">
-              <a class="text-decoration-none text-white" routerLink="/products">Load More</a>
+              <a class="text-decoration-none text-white" routerLink="/products"
+                >Load More</a
+              >
             </button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

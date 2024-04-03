@@ -343,7 +343,7 @@
 .product-o {
   padding: 20px;
   background-color: #ffffff;
-  height: 450px;
+ 
 }
 
 .product-o--hover-off {
@@ -423,7 +423,7 @@
   transform: translateY(50%);
   transition: all 0.3s ease 0.1s;
 }
-.product-o__action-list > li > a {
+.product-o__action-list > li >a ,.btnn {
   display: block;
   width: 35px;
   text-align: center;
@@ -435,10 +435,23 @@
   font-size: 12px;
   transition: all 0.3s ease 0s;
 }
-.product-o__action-list > li > a:hover {
+.product-o__action-list > li :hover {
   background-color: #333333;
   color: #ffffff;
 }
+
+.btnn:hover{
+  background-color: #333333;
+  color: #ffffff;
+}
+/* //////////////// */
+.click{
+  background-color: #ffffff;
+}
+.remove .is-in-cart{
+  color:orangered;
+}
+/* /////////////// */
 
 .product-o__category {
   display: block;

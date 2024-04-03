@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CartRequestService } from '../../../services/cart/cart.request.service';
 import { CartService } from '../../../services/cart/cart.service';
 import { IProduct } from '../../../../modles/product.modle';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-card',
@@ -12,7 +13,8 @@ import { IProduct } from '../../../../modles/product.modle';
 export class ProductCardComponent implements OnInit {
   isClicked: boolean = false;
   buttonShow: boolean = false;
-  buttonDisabled: boolean = false;
+  cartRequest: Observable<any>;
+
 
   buttonStyle: any = '';
 
@@ -43,29 +45,62 @@ export class ProductCardComponent implements OnInit {
     // console.log(this.cartService.productIds);
     if (this.cartService.productIds.includes(this.prd._id)) {
       this.isClicked = true;
-      this.buttonDisabled = true;
+      
 
     }
   }
+
+  toggleCart(productId: string) {
+    if (this.isClicked) {
+      let index = this.cartService.cartItems.findIndex(
+        (cart) => cart.product._id == this.prd._id
+      );
+
+      this.cartService.cartItems.splice(index, 1);
+
+      this.cartRequest = this.cartRequestService.removeCartRequest(productId);
+
+      this.isClicked = false;
+    } else {
+      this.cartService.cartItems.push({
+        product: this.prd,
+        quantity: 1,
+      });
+
+      this.cartRequest = this.cartRequestService.addToCart(productId);
+
+      this.isClicked = true;
+    }
+
+    this.cartRequest.subscribe({
+      next: (data) => console.log(data),
+      error: (error) => console.log(error),
+    });
+
+    this.cartService.productIds = this.cartService.cartItems.map(
+      (cart) => cart.product._id
+    );
+  }
 
   showDetails(productId: any) {
     this.router.navigate(['/productDetails', productId]);
   }
 
-  addProductToCart(productId: string) {
-    this.isClicked = !this.isClicked;
-    this.buttonDisabled = true;
+  // ////////////////////
+  // addProductToCart(productId: string) {
+  //   this.isClicked = true;
+    
 
-    this.cartService.cartItems.push({
-      product: this.prd,
-      quantity: 1,
-    });
+  //   this.cartService.cartItems.push({
+  //     product: this.prd,
+  //     quantity: 1,
+  //   });
 
-    this.cartRequestService.addToCart(productId).subscribe({
-      next: (data) => console.log(data),
-      error: (error) => console.log(error),
-    });
-  }
+  //   this.cartRequestService.addToCart(productId).subscribe({
+  //     next: (data) => console.log(data),
+  //     error: (error) => console.log(error),
+  //   });
+  // }
 
   // showButton(id: any) {
   //   this.buttonShow = true;

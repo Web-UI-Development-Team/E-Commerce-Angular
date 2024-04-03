@@ -53,6 +53,8 @@ import { EditCategoryComponent } from './dashboard/categories-dashboard/edit-cat
 import { WishListItemComponent } from './pages/user-profile/wish-list/wish-list-item/wish-list-item.component';
 import { DropMenuComponent } from './shared/nav-bar/drop-menu/drop-menu.component';
 import { OrderDetailsHistoryComponent } from './pages/order/order-details-history/order-details-history.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { UpComponent } from './up/up.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +99,7 @@ import { OrderDetailsHistoryComponent } from './pages/order/order-details-histor
     WishListItemComponent,
     DropMenuComponent,
     OrderDetailsHistoryComponent,
+    UpComponent,
   ],
   imports: [
     BrowserModule,
@@ -107,6 +110,7 @@ import { OrderDetailsHistoryComponent } from './pages/order/order-details-histor
     ReactiveFormsModule,
     CommonModule,
     MatDialogModule,
+    NgxSkeletonLoaderModule
   ],
   providers: [
     provideClientHydration(),

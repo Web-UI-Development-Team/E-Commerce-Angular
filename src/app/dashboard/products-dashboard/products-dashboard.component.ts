@@ -40,6 +40,7 @@ import { FormControl } from '@angular/forms';
 })
 export class ProductsDashboardComponent implements OnInit, AfterViewInit {
   products$: Observable<any>;
+
   @ViewChild('searchInput', { static: true }) input: ElementRef;
   searchFormControl: FormControl = new FormControl();
   constructor(
@@ -52,6 +53,7 @@ export class ProductsDashboardComponent implements OnInit, AfterViewInit {
 
   allProducts: any;
   product: IProduct;
+  isLoading:boolean=false;
 
   numberOfPages: number;
   pages: any = [];
@@ -112,9 +114,11 @@ export class ProductsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.isLoading=true;
     this.productRequestsServices
       .getAllProductsRequest(1)
       .subscribe((data: any) => {
+        this.isLoading=false;
         console.log(data);
         console.log(data.products);
         this.allProducts = data.products;

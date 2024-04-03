@@ -25,9 +25,12 @@ export class UsersDashboardComponent implements OnInit {
   numberOfPages: number;
   pages: any = [];
   page: number;
+  loading:boolean=false;
 
   ngOnInit() {
+    this.loading=true;
     this.usersRequest.getAllUsersRequest(1).subscribe((data: any) => {
+      this.loading=false
       console.log(data);
       this.allUsers = data.users;
       this.numberOfPages = data.pages;
