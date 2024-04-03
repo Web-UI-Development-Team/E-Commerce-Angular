@@ -41,6 +41,11 @@ export class DropMenuComponent implements OnInit {
   }
 
   toggleCart(productId: string) {
+    if (!localStorage.getItem('token')) {
+      this.router.navigate(['signIn']);
+      return;
+    }
+
     if (this.isInCart) {
       let index = this.cartService.cartItems.findIndex(
         (cart) => cart.product._id == this.product._id
@@ -73,6 +78,11 @@ export class DropMenuComponent implements OnInit {
   }
 
   toggleWishList(productId: string) {
+    if (!localStorage.getItem('token')) {
+      this.router.navigate(['signIn']);
+      return;
+    }
+
     if (this.isInWishlist) {
       let index = this.userProfileService.wishList.findIndex(
         (product) => product._id == this.product._id
@@ -80,13 +90,15 @@ export class DropMenuComponent implements OnInit {
 
       this.userProfileService.wishList.splice(index, 1);
 
-      this.wishListRequest = this.userProfileRequestService.updateWishListRequest(productId);
+      this.wishListRequest =
+        this.userProfileRequestService.updateWishListRequest(productId);
 
       this.isInWishlist = false;
     } else {
       this.userProfileService.wishList.push(this.product);
 
-      this.wishListRequest = this.userProfileRequestService.updateWishListRequest(productId);
+      this.wishListRequest =
+        this.userProfileRequestService.updateWishListRequest(productId);
 
       this.isInWishlist = true;
     }
@@ -96,13 +108,11 @@ export class DropMenuComponent implements OnInit {
       error: (error) => console.log(error),
     });
 
-    this.userProfileService.wishListProductIds = this.userProfileService.wishList.map(
-      (product) => product._id
-    );
+    this.userProfileService.wishListProductIds =
+      this.userProfileService.wishList.map((product) => product._id);
   }
 
   showDetails(productId: any) {
-    this.router.navigate(['/productDetails', productId]);
+    this.router.navigate(['user', 'productDetails', productId]);
   }
-
 }

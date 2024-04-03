@@ -41,7 +41,6 @@ export class AddProductComponent implements OnInit {
       Validators.pattern(this.numberPattern),
     ]),
     discount: new FormControl<Number>(0, [
-      Validators.required,
       Validators.pattern(this.numberPattern),
     ]),
     stock: new FormControl<Number>(0, [
@@ -59,39 +58,8 @@ export class AddProductComponent implements OnInit {
       Validators.maxLength(50),
     ]),
     thumbnail: new FormControl(''),
-    images: new FormControl(
-      [
-        [
-          'https://cdn.dummyjson.com/product-images/8/1.jpg',
-          'https://cdn.dummyjson.com/product-images/8/2.jpg',
-          'https://cdn.dummyjson.com/product-images/8/3.jpg',
-          'https://cdn.dummyjson.com/product-images/8/4.jpg',
-          'https://cdn.dummyjson.com/product-images/8/thumbnail.jpg',
-        ],
-      ],
-      [Validators.required]
-    ),
-    isDeleted: new FormControl<boolean>(false, [Validators.required]),
+    images: new FormControl([[]], [Validators.required]),
   });
-
-  initialFormValues = {
-    title: 'ssssssssssssssss',
-    description: ';lsdt;dfldsklkjgfdskjgl;kjsdl;fgj;sldkjfgl;kjds;lgf;',
-    price: 0,
-    discount: 0,
-    stock: 0,
-    brand: 'sdfsdfss',
-    category: 'smartphones',
-    thumbnail: '',
-    images: [
-      'https://cdn.dummyjson.com/product-images/8/1.jpg',
-      'https://cdn.dummyjson.com/product-images/8/2.jpg',
-      'https://cdn.dummyjson.com/product-images/8/3.jpg',
-      'https://cdn.dummyjson.com/product-images/8/4.jpg',
-      'https://cdn.dummyjson.com/product-images/8/thumbnail.jpg',
-    ],
-    isDeleted: false,
-  };
 
   ngOnInit(): void {
     //this.productService.addNewProduct(this.initialFormValues);
@@ -123,24 +91,7 @@ export class AddProductComponent implements OnInit {
   onFilseSelect(event: Event) {
     let files = (event.target as HTMLInputElement).files;
 
-    // const allowedMimeTypes = [
-    //   'image/png',
-    //   'image/jpeg',
-    //   'image/jpg',
-    //   'image/webp',
-    // ];
-
     this.productForm.patchValue({ images: files });
-
-    // if (file && allowedMimeTypes.includes(file.type)) {
-    //   const reader = new FileReader();
-    //   reader.onload = () => {
-    //     this.imageData = reader.result as string;
-
-    //     console.log(this.imageData);
-    //   };
-    //   reader.readAsDataURL(file);
-    // }
   }
 
   closePopUp(): void {
@@ -152,16 +103,6 @@ export class AddProductComponent implements OnInit {
   }
 
   addProduct() {
-    console.log(this.productForm);
-    console.log(this.productForm.value);
-
-    this.productForm.value.title = this.initialFormValues.title;
-    this.productForm.value.description = this.initialFormValues.description;
-    this.productForm.value.brand = this.initialFormValues.brand;
-    this.productForm.value.category = this.initialFormValues.category;
-    this.productForm.value.discount = this.initialFormValues.discount;
-    this.productForm.value.price = this.initialFormValues.price;
-    this.productForm.value.stock = this.initialFormValues.stock;
     this.productRequestServices
       .addNewProductRequest(this.productForm.value)
       .subscribe(

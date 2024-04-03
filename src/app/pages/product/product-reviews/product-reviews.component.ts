@@ -6,6 +6,7 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Review } from '../../../../modles/review.modle';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-product-reviews',
@@ -35,6 +36,7 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
   };
 
   constructor(
+    private authService: AuthService,
     private productReviewService: ProductReviewService,
     private activeRoute: ActivatedRoute
   ) {}
@@ -49,14 +51,18 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
           .getreviewsById(productId)
           .subscribe((data: any) => {
             this.reviews = data;
-            console.log(this.reviews);
           })
       );
 
-      this.productReviewService.isReviewd(productId).subscribe({
-        next: (data) => (this.isReviewed = data),
-        complete: () => console.log(this.isReviewed),
-      });
+      if(this.authService.isAuthenticated())
+      {
+        this.productReviewService.isReviewd(productId).subscribe({
+          next: (data) => (this.isReviewed = data),
+          complete: () => console.log(this.isReviewed),
+        });
+      } else {
+        this.isReviewed.isReviewed = true;
+      }
     } else {
       console.error('Product ID is null');
     }
@@ -75,7 +81,9 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
   //delete//
   onRemoveReview(productId: string) {
     this.productReviewService.removeDelete(productId).subscribe((data) => {
-      this.reviews = this.reviews.filter((review) => review.product !== productId);
+      this.reviews = this.reviews.filter(
+        (review) => review.product !== productId
+      );
 
       this.isReviewed = {
         isReviewed: false,

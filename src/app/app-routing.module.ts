@@ -36,39 +36,50 @@ const routes: Routes = [
   { path: 'signIn', component: SignInComponent },
   { path: 'signUp', component: SignUpComponent },
 
-  {path: 'user', component: UserComponent, children: [
-    { path: 'home', component: HomeComponent },
-    { path: 'products', component: ProductsComponent },
-    { path: 'productDetails/:id', component: ProductDetailsComponent },
-    {
-      path: 'profile',
-      component: UserProfileComponent,
+  {
+    path: 'user',
+    component: UserComponent,
+    children: [
+      { path: 'home', component: HomeComponent },
+      { path: 'products', component: ProductsComponent },
+      { path: 'productDetails/:id', component: ProductDetailsComponent },
+      {
+        path: 'profile',
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        component: UserProfileComponent,
 
-      children: [
-        {
-          path: 'account',
-          component: AccountComponent,
-          children: [{ path: 'edit', component: UserFormComponent }],
-        },
-        { path: 'orders', component: OrderDetailsComponent },
-        { path: 'orders-history', component: OrderDetailsHistoryComponent },
-        { path: 'wish-list', component: WishListComponent },
-      ],
-    },
-    { path: 'cart',  component: CartComponent },
-    {
-      path: 'contactUs',
+        children: [
+          {
+            path: 'account',
+            component: AccountComponent,
+            children: [{ path: 'edit', component: UserFormComponent }],
+          },
+          { path: 'orders', component: OrderDetailsComponent },
+          { path: 'orders-history', component: OrderDetailsHistoryComponent },
+          { path: 'wish-list', component: WishListComponent },
+        ],
+      },
+      { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+      {
+        path: 'contactUs',
+        canActivate: [AuthGuard],
+        component: ContactUsComponent,
+      },
+      {
+        path: 'checkout',
+        component: OrdersComponent,
+        canActivate: [AuthGuard],
+      },
 
-      component: ContactUsComponent,
-    },
-    { path: 'checkout',  component: OrdersComponent },
-
-    { path: 'about', component: AboutComponent }
-  ]},
+      { path: 'about', component: AboutComponent },
+    ],
+  },
   {
     path: 'admin',
     component: AdminComponent,
     canActivate: [AdminGuard],
+    canActivateChild: [AdminGuard],
     children: [
       {
         path: '',
