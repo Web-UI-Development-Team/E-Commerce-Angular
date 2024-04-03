@@ -4,10 +4,13 @@ export interface ReviewObj {
   }
   
   export interface Reviews {
+    _id: string;
     title: string;
     comment: string;
     dateOfReview : Date;
-    user: string;
+    user: {
+      name : string
+    };
     product: string;
   }
   

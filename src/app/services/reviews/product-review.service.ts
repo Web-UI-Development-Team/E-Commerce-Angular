@@ -11,6 +11,10 @@ export class ProductReviewService {
     return this.http.get<Reviews[]>(`http://localhost:3010/api/v1/products/${productId}/reviews`);
   }
   //
+  removeDelete(productId:string){
+    return this.http.delete<Reviews[]>(`http://localhost:3010/api/v1/products/${productId}/reviews`);
+  }
+  //
   addNewReview(productId:string,reviews:Reviews){
     return this.http.post<Reviews[]>(`http://localhost:3010/api/v1/products/${productId}/reviews`,reviews);
   }

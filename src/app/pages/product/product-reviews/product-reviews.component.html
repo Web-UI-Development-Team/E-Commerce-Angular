@@ -9,9 +9,10 @@
 </div>
 
 <!--  -->
-
 <div class="container">
   <p style="text-decoration: underline;">Reviews({{ reviewData.reviews.length }})</p> 
+</div>
+<div class="container">
 
   <div class="col-md-10">
     <div class="" *ngFor="let review of reviewData.reviews">
@@ -23,9 +24,9 @@
         {{ review.comment }}
       </span>
       <div class="py-3">
-        <span>By <span style="font-weight: bold">Esraa</span></span>
+        <span>By <span style="font-weight: bold">{{review.user.name}}</span></span>
         <span class="mx-3" style="color: #ff4500">|</span>
-        <span>{{ review.dateOfReview | date : "MM/dd/yy" }}</span>
+        <span>{{ review.dateOfReview | date : "M/d/yyyy" }}</span>
       </div>
       <div class="divReview">
         <p class="py-3">
@@ -38,9 +39,10 @@
             </span>
           </span>
         </p>
-        <a class="py-3">Remove</a>
+        <a (click)="onRemoveReview(review._id)" class="py-3">Remove</a>
       </div>
       <hr />
     </div>
   </div>
 </div>
+<!--  -->

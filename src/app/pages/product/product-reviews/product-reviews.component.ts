@@ -20,13 +20,17 @@ export class ProductReviewsComponent implements OnInit , OnDestroy {
   count = 0;
   countTwo = 0;
   //
+  productId :any
   reviewData: ReviewObj = { reviews: [] }; 
    newReview:Reviews  = {
     // ...this.reviewData,
+    _id:'',
     title: '',
     comment: '',
     dateOfReview : new Date(),
-    user: '',
+    user: {
+      name : ''
+    },
     product: ''
   }; 
   constructor(private productReviews: ProductReviewService, private activeRoute: ActivatedRoute) {}
@@ -42,7 +46,7 @@ export class ProductReviewsComponent implements OnInit , OnDestroy {
       console.error('Product ID is null');
     }
   }
-  //
+  //**counter to icon like **//
   increaeCount(){
     this.count = this.count +1;
     console.log(this.count);
@@ -51,8 +55,17 @@ export class ProductReviewsComponent implements OnInit , OnDestroy {
   descreaseCount(){
     this.countTwo = this.count +1;
     console.log(this.count);
-    
   }
+    //**counter to icon like **//
+  //delete//
+  onRemoveReview(productId: string){
+    this.productReviews.removeDelete(productId).subscribe(data=>{
+      console.log(data);
+      
+      this.reviewData.reviews.filter(review=> review._id !== productId);
+    })
+  }
+  ///// add
   addNewReview(){
     console.log('hi');
     
@@ -68,6 +81,7 @@ export class ProductReviewsComponent implements OnInit , OnDestroy {
 
 
 
+  //******/
   ngOnDestroy(): void {
       this.subscription$.unsubscribe();
   }
