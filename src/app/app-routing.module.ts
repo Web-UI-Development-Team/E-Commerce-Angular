@@ -30,6 +30,7 @@ import { AdminGuard } from './services/guards/admin-guard.service';
 import { OrderDetailsHistoryComponent } from './pages/order/order-details-history/order-details-history.component';
 import { UserComponent } from './components/user/user.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { ProductDetailsDashboardComponent } from './dashboard/products-dashboard/product-details-dashboard/product-details-dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/user/home', pathMatch: 'full' },
@@ -123,6 +124,11 @@ const routes: Routes = [
         component: EditUserComponent,
       },
     ],
+  },
+  {
+    path: 'productDtailsDashboard/:id',
+    component: ProductDetailsDashboardComponent,
+    canActivate: [AdminGuard],
   },
   { path: '**', component: NotFound404Component },
 ];

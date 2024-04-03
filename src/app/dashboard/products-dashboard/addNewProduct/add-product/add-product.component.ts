@@ -6,8 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProductsRequestsService } from '../../../../services/product/products-requests.service';
+import { SuccessPopUpComponent } from '../../../../shared/success-pop-up/success-pop-up.component';
+import { take, timer } from 'rxjs';
+import { PopUpErrorComponent } from '../../../../shared/pop-up-error/pop-up-error.component';
 
 @Component({
   selector: 'app-add-product',
@@ -21,7 +24,7 @@ export class AddProductComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private productRequestServices: ProductsRequestsService,
-    private router: Router,
+    private dialog: MatDialog,
     public dialogRef: MatDialogRef<AddProductComponent>
   ) {}
   numberPattern = /^[1-9]+$/;
@@ -102,17 +105,43 @@ export class AddProductComponent implements OnInit {
     return this.productForm.get(controlName);
   }
 
+  openSuccessPopUp() {
+    const dialog = this.dialog.open(SuccessPopUpComponent, {
+      data: { text: 'Added Successfully' },
+    });
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+        this.closePopUp();
+      });
+  }
+
+  openErrorPopUp() {
+    const dialog = this.dialog.open(PopUpErrorComponent);
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+      });
+  }
+
   addProduct() {
     this.productRequestServices
       .addNewProductRequest(this.productForm.value)
       .subscribe(
         (data) => {
-          console.log(data);
+          if (data) {
+            console.log(data);
+            this.openSuccessPopUp();
+          }
         },
         (error) => {
+          this.openErrorPopUp();
           console.log(error);
         }
       );
-    this.dialogRef.close();
   }
 }

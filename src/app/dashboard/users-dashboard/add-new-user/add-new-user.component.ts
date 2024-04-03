@@ -11,7 +11,10 @@ import { emailRegex } from '../../../regex/email';
 import { phoneNumberRegex } from '../../../regex/phone';
 import { IUser } from '../../../../modles/user.modle';
 import { nameRegex } from '../../../regex/name';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SuccessPopUpComponent } from '../../../shared/success-pop-up/success-pop-up.component';
+import { take, timer } from 'rxjs';
+import { PopUpErrorComponent } from '../../../shared/pop-up-error/pop-up-error.component';
 
 @Component({
   selector: 'app-add-new-user',
@@ -25,7 +28,7 @@ export class AddNewUserComponent {
   constructor(
     private formBuilder: FormBuilder,
     private userRequestService: UserRequestsService,
-    private router: Router,
+    private dialog: MatDialog,
     public dialogRef: MatDialogRef<AddNewUserComponent>
   ) {}
 
@@ -94,18 +97,44 @@ export class AddNewUserComponent {
     this.dialogRef.close();
   }
 
+  openSuccessPopUp() {
+    const dialog = this.dialog.open(SuccessPopUpComponent, {
+      data: { text: 'Added Successfully' },
+    });
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+        this.closePopUp();
+      });
+  }
+
+  openErrorPopUp() {
+    const dialog = this.dialog.open(PopUpErrorComponent);
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+      });
+  }
+
   addNewUser() {
     if (this.userForm.valid) {
       console.log(this.userForm.value);
       this.userRequestService.addNewUserRequest(this.userForm.value).subscribe(
         (user: IUser) => {
-          console.log(user);
+          if (user) {
+            console.log(user);
+            this.openSuccessPopUp();
+          }
         },
         (error) => {
+          this.openErrorPopUp();
           console.log(error);
         }
       );
-      this.dialogRef.close();
     } else {
       console.log(this.userForm.value);
       console.log('invalid');
