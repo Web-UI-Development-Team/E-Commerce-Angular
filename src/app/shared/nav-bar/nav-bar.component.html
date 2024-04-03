@@ -16,14 +16,17 @@
         <div class="order-lg-last col-3  col-md-2 icons">
           <a [routerLink]="isAuth ? '/user/profile/account' : '/signIn'" class="nav-icon">
             <i class="fas fa-user-alt m-1 me-md-2"></i>
+            <span *ngIf="!isAuth" class="sign-in">SIGN IN</span>
           </a>
 
           <div class="divider"></div>
 
           <div class="position-relative" *ngIf="isAuth && role === 'user'" >
+
             <a routerLink="/user/cart"class="nav-icon">
               <i class="fas fa-shopping-cart m-1 me-md-2"></i>
             </a>
+
             <div *ngIf="isAuth" class="cart">{{cartService.cartItems.length}}</div>
           </div>
         </div>

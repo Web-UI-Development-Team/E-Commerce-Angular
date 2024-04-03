@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { error } from 'console';
 import { IRegister } from '../../../modles/auth.modle';
+import { phoneNumberRegex } from '../../regex/phone';
 
 @Component({
   selector: 'app-sign-up',
@@ -34,7 +35,7 @@ export class SignUpComponent {
       {
         name: ['', [Validators.required, Validators.pattern('[A-Z a-z]{3,}')]],
         email: ['', [Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}') ]],
-        phone: ['', [Validators.required, Validators.pattern('[0-9]{11}')]],
+        phone: ['', [Validators.required, Validators.pattern(phoneNumberRegex)]],
         image: [''],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],

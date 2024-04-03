@@ -47,14 +47,9 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.usersRequest.getAllUsersRequest(1).subscribe((data: any) => {
+    this.usersRequest.getAllUsersRequest().subscribe((data: any) => {
       console.log(data);
-      this.allUsers = data.users;
-      this.numberOfPages = data.pages;
-      console.log(this.allUsers);
-      this.page = 1;
-      this.pages = range(this.numberOfPages);
-      console.log(this.pages.length);
+      this.allUsers = data;
     });
   }
 
@@ -85,9 +80,9 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
         })
       );
     } else {
-      this.usersRequest.getAllUsersRequest(1).subscribe((data: any) => {
+      this.usersRequest.getAllUsersRequest().subscribe((data: any) => {
         console.log(data);
-        this.allUsers = data.users;
+        this.allUsers = data;
       });
       console.log(this.allUsers);
       return this.allUsers;
@@ -95,9 +90,9 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
   }
 
   currentPage(pageNumber: number) {
-    this.usersRequest.getAllUsersRequest(pageNumber).subscribe((data: any) => {
+    this.usersRequest.getAllUsersRequest().subscribe((data: any) => {
       console.log(data);
-      this.allUsers = data.users;
+      this.allUsers = data;
       console.log(this.allUsers);
       this.page = pageNumber;
     });

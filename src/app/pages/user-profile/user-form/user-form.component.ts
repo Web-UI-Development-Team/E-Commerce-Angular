@@ -14,6 +14,7 @@ import {
 import { AuthService } from '../../../services/auth/auth.service';
 import { IEditProfile, IProfile } from '../../../../modles/profile.modle';
 import { IUser } from '../../../../modles/user.modle';
+import { phoneNumberRegex } from '../../../regex/phone';
 
 @Component({
   selector: 'app-user-form',
@@ -51,7 +52,7 @@ export class UserFormComponent implements OnInit {
       ],
       phone: [
         this.user.phone,
-        [Validators.pattern('[0-9]{11}')],
+        [Validators.pattern(phoneNumberRegex)],
       ],
       imgae: [
         ''

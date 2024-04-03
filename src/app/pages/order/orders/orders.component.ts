@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrderRequestService } from '../../../services/order/order-request.service';
+import { phoneNumberRegex } from '../../../regex/phone';
 
 @Component({
   selector: 'app-orders',
@@ -26,7 +27,7 @@ export class OrdersComponent {
     ]),
     phoneNumber: new FormControl('', [
       Validators.required,
-      Validators.pattern('[0-9]{12}'),
+      Validators.pattern(phoneNumberRegex),
     ]),
     city: new FormControl('', [Validators.required]),
     state: new FormControl('', [

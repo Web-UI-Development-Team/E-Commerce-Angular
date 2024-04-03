@@ -138,3 +138,8 @@ body{
   box-shadow: none;
   border: 1px solid var(--primary);
 }
+
+.sign-in {
+  text-decoration: none;
+  color: var(--secondery);
+}
