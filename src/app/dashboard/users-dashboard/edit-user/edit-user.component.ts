@@ -34,25 +34,18 @@ export class EditUserComponent implements OnInit {
     public dialogRef: MatDialogRef<EditUserComponent>
   ) {
     this.userForm = this.formBuilder.group({
-      image: new FormControl('', [Validators.required]),
+      imagePath: new FormControl('', [Validators.required]),
       name: new FormControl('', [
         Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(20),
         Validators.pattern(nameRegex),
       ]),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.pattern(emailRegex),
-      ]),
+      email: new FormControl({ value: '', disabled: true }),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
       ]),
       phone: new FormControl('', [
         Validators.required,
-        Validators.minLength(12),
-        Validators.maxLength(12),
         Validators.pattern(phoneNumberRegex),
       ]),
       isAdmin: new FormControl<boolean>(false, [Validators.required]),
@@ -110,6 +103,6 @@ export class EditUserComponent implements OnInit {
     this.userRequestService
       .updateUserDataRequest(updatedUserData, this.userId)
       .subscribe((data) => console.log(data));
-    this.router.navigate(['/dashboard/users']);
+    this.router.navigate(['/admin/users']);
   }
 }

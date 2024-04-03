@@ -18,7 +18,7 @@
     <tbody>
       <tr *ngFor="let order of orders; let i = index">
         <td>
-          <p *ngFor="let orderDetail of order.orderItems">
+          <p *ngFor="let orderDetail of order.orderItems" class="product">
             {{ orderDetail.title }}
           </p>
         </td>

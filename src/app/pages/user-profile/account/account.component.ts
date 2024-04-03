@@ -3,7 +3,6 @@ import { UserProfileService } from '../../../services/user-profile/user-profile.
 import { UserProfileRequestService } from '../../../services/user-profile/user-profile.request.service';
 import { Router } from '@angular/router';
 import { IProfile } from '../../../../modles/profile.modle';
-import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -20,7 +19,7 @@ export class AccountComponent {
     name: '',
     email: '',
     phone: '',
-    image: '',
+    imagePath: '',
     wishList: [],
   };
 
@@ -32,8 +31,6 @@ export class AccountComponent {
     } else {
       this.user = this.userProfileService.user;
     }
-
-    console.log(this.router.url);
   }
 
   getUserData() {
@@ -45,12 +42,10 @@ export class AccountComponent {
           width: '100px',
           height: '100px',
           backgroundColor: 'black',
-          backgroundImage: `url(${this.user.image})`,
+          backgroundImage: `url(${this.user.imagePath})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         };
-
-        console.log(this.user);
 
         this.userProfileService.user = this.user;
       },

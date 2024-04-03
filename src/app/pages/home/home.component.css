@@ -27,14 +27,21 @@
   padding-right: 30%;
   box-sizing: border-box;
   color: #fff;
-  text-shadow: 0 5px 10px #0004;
+  text-shadow: 0 5px 5px #0004;
+}
+
+.carousel .list .item .content .desc {
+  text-shadow: 0 5px 5px #0004;
 }
 
 .carousel .list .item .content .title {
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.5em;
   list-style: 1.3em;
+  margin-bottom: 100px;
+  margin-top: -50px;
   color: var(--primary);
+  text-transform: uppercase;
 }
 
 .carousel .list .item .content .buttons {
@@ -43,6 +50,7 @@
   grid-template-rows: 40px;
   gap: 5px;
   margin-top: 20px;
+  z-index: 100;
 }
 
 .carousel .list .item .content button {
@@ -58,6 +66,143 @@
   background-color: transparent;
   color: #eee;
   border: 1px solid #eee;
+}
+
+.arrows {
+  position: absolute;
+  top: 80%;
+  right: 52%;
+  width: 300px;
+  max-width: 30%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.arrows button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eee4;
+  border: none;
+  font-family: monospace;
+  color: #fff;
+  font-weight: bold;
+  font-size: large;
+  transition: 0.5s;
+  z-index: 100;
+}
+
+.arrows button:hover {
+  background-color: #eee;
+  color: #555;
+}
+
+.carousel .list .item:nth-child(1) {
+  z-index: 1;
+}
+
+.carousel .list .item:nth-child(1) .title,
+.carousel .list .item:nth-child(1) .desc,
+.carousel .list .item:nth-child(1) .buttons {
+  transform: translateY(50px);
+  filter: blur(20px);
+  opacity: 0;
+  animation: showContent 0.5s linear 1 forwards;
+}
+
+@keyframes showContent {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.carousel .list .item:nth-child(1) .title {
+  animation-delay: 0.6s;
+}
+.carousel .list .item:nth-child(1) .desc {
+  animation-delay: 0.8s;
+}
+.carousel .list .item:nth-child(1) .buttons {
+  animation-delay: 1s;
+}
+
+.carousel.next .list .item:nth-child(1) img {
+  position: absolute;
+  animation: showImage 0.8s linear 1 forwards;
+}
+
+@keyframes showImage {
+  to {
+    transform: translateX(100%);
+    filter: blur(20px);
+    opacity: 0;
+  }
+}
+
+.carousel.next .list .item:nth-child(1) .title,
+.carousel.next .list .item:nth-child(1) .desc,
+.carousel.next .list .item:nth-child(1) .buttons {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+  animation: contentIn 1s linear 1 forwards;
+}
+
+@keyframes contentIn {
+  to {
+    transform: translateX(150px);
+    filter: blur(20px);
+    opacity: 0;
+  }
+}
+
+.carousel.prev .list .item:nth-child(1) img{
+  position: absolute;
+  animation: outImage 0.8s linear 1 forwards;
+}
+
+@keyframes outImage {
+  to {
+    transform: translateX(-100%);
+    filter: blur(20px);
+    opacity: 0;
+  }
+}
+
+.carousel.prev .list .item:nth-child(1) .title,
+.carousel.prev .list .item:nth-child(1) .desc,
+.carousel.prev .list .item:nth-child(1) .buttons {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+  animation: contentOut 1s linear 1 forwards;
+}
+
+@keyframes contentOut {
+  to {
+    transform: translateX(-150px);
+    filter: blur(20px);
+    opacity: 0;
+  }
+}
+
+.carousel.prev .list .item:nth-child(2) .title,
+.carousel.prev .list .item:nth-child(2) .desc,
+.carousel.prev .list .item:nth-child(2) .buttons,
+.carousel.next .list .item:nth-child(2) .title,
+.carousel.next .list .item:nth-child(2) .desc,
+.carousel.next .list .item:nth-child(2) .buttons {
+  transform: translateX(-150px);
+  filter: blur(20px);
+  opacity: 0;
+}
+
+.carousel.next .arrows button,
+.carousel.prev .arrows button {
+  pointer-events: none;
 }
 
 .section__intro {
@@ -110,6 +255,7 @@
   color: #333333;
   font-weight: 600;
   background-color: transparent;
+  text-transform: capitalize;
 }
 .filter__btn--style-1:before {
   content: "";

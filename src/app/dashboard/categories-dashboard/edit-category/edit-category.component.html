@@ -17,22 +17,13 @@
           >
             <img [src]="category.icon" alt="img" style="width: 70%" />
           </div>
-          <button class="btn button">Change Image</button>
-          <!-- <div class="form-group">
-        <label for="image" class="form-label">Image</label>
-        <input
-          type="text"
-          class="form-control"
-          id="image"
-          placeholder="image"
-          formControlName="image"
-        />
-      </div> -->
         </div>
         <div class="col-6">
           <div class="categoryName">
             <div class="form-group">
-              <label for="nameCategory" class="form-label">Name</label>
+              <label for="nameCategory" class="form-label label"
+                >Category Name
+              </label>
               <input
                 type="text"
                 class="form-control"
@@ -47,14 +38,19 @@
                 getFormControl('nameCategory')?.errors
               "
             >
-              <div *ngIf="getFormControl('nameCategory')?.errors?.['required']">
-                name is required
+              <div
+                class="error"
+                *ngIf="getFormControl('nameCategory')?.errors?.['required']"
+              >
+                Category Name is required
               </div>
             </div>
           </div>
           <div class="description">
             <div class="form-group">
-              <label for="description">Description</label>
+              <label for="description" class="form-label label"
+                >Description</label
+              >
               <textarea
                 class="form-control"
                 id="description"
@@ -69,8 +65,11 @@
                 getFormControl('description')?.errors
               "
             >
-              <div *ngIf="getFormControl('description')?.errors?.['required']">
-                description is required
+              <div
+                class="error"
+                *ngIf="getFormControl('description')?.errors?.['required']"
+              >
+                Description is required
               </div>
             </div>
           </div>

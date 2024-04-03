@@ -39,9 +39,9 @@ import { FormControl } from '@angular/forms';
   styleUrl: './products-dashboard.component.css',
 })
 export class ProductsDashboardComponent implements OnInit, AfterViewInit {
-  products$: Observable<any>;
+  products$: any;
   @ViewChild('searchInput', { static: true }) input: ElementRef;
-  searchFormControl: FormControl = new FormControl();
+
   constructor(
     private productRequestsServices: ProductsRequestsService,
     private dialog: MatDialog,
@@ -57,60 +57,6 @@ export class ProductsDashboardComponent implements OnInit, AfterViewInit {
   pages: any = [];
   page: number;
 
-  // initSearchForm(): void {
-  //   this.searchFormControl.valueChanges
-  //     .pipe(
-  //       debounceTime(1000),
-  //       distinctUntilChanged(),
-  //       switchMap((search: string): Observable<any[]> => {
-  //         if (search) {
-  //           return this.productRequestsServices
-  //             .getProductsSearchRequest(search)
-  //             .pipe(
-  //               catchError((error) => {
-  //                 console.error(error);
-  //                 return of([]);
-  //               })
-  //             );
-  //         } else {
-  //           console.log(this.allProducts);
-  //           return of([]);
-  //         }
-  //       }),
-  //       catchError((error) => {
-  //         console.log(error);
-  //         return of([]);
-  //       })
-  //     )
-  //     .subscribe((response: any[]) => {
-  //       this.allProducts = response;
-  //       console.log(response);
-  //     });
-  // }
-
-  ngAfterViewInit() {
-    this.searchFormControl.valueChanges.pipe(
-      startWith(''),
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap((search: any) => {
-        console.log(search);
-        return this.loadProducts(search);
-      })
-    );
-  }
-
-  loadProducts(search = ''): Observable<any> {
-    return createHttpObservable(
-      `http://localhost:3010/api/v1/products/search/product/${search}`
-    ).pipe(
-      map((res) => {
-        console.log(res);
-        return res['payload'];
-      })
-    );
-  }
-
   ngOnInit() {
     this.productRequestsServices
       .getAllProductsRequest(1)
@@ -123,6 +69,45 @@ export class ProductsDashboardComponent implements OnInit, AfterViewInit {
         this.page = 1;
         this.pages = range(this.numberOfPages);
       });
+  }
+
+  ngAfterViewInit() {
+    this.products$ = fromEvent<any>(this.input.nativeElement, 'keyup')
+      .pipe(
+        map((event) => {
+          console.log(event.target.value);
+          return event.target.value;
+        }),
+        startWith(''),
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap((search) => this.loadProducts(search))
+      )
+      .subscribe();
+  }
+
+  loadProducts(search: string): Observable<any> {
+    if (search) {
+      return createHttpObservable(
+        `http://localhost:3010/api/v1/products/search/product/${search}`
+      ).pipe(
+        map((res) => {
+          console.log(res);
+          this.allProducts = res;
+          console.log(this.allProducts);
+          return res['payload'];
+        })
+      );
+    } else {
+      this.productRequestsServices
+        .getAllProductsRequest(1)
+        .subscribe((data: any) => {
+          console.log(data);
+          this.allProducts = data.products;
+        });
+      console.log(this.allProducts);
+      return this.allProducts;
+    }
   }
 
   currentPage(pageNumber: number) {
@@ -156,20 +141,27 @@ export class ProductsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   deleteProduct(product: IProduct) {
-    const index = this.allProducts.findIndex(
-      (item: any) => item._id === product._id
-    );
-    this.allProducts.splice(index, 1);
-    console.log(index);
-    console.log(product._id);
-    console.log('deleted');
-    this.productRequestsServices.deleteProductRequest(product).subscribe(
-      (data) => {
+    product.isDeleted = true;
+    console.log(product.isDeleted);
+    this.productRequestsServices
+      .updateProductDataRequest({ isDeleted: product.isDeleted }, product._id)
+      .subscribe((data) => {
         console.log(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      });
+    // const index = this.allProducts.findIndex(
+    //   (item: any) => item._id === product._id
+    // );
+    // this.allProducts.splice(index, 1);
+    // console.log(index);
+    // console.log(product._id);
+    // console.log('deleted');
+    // this.productRequestsServices.deleteProductRequest(product).subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
   }
 }

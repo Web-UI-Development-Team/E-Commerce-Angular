@@ -7,6 +7,7 @@ import { Reviews } from '../../../modles/review.modle';
 export class ProductReviewService {
 
   constructor(private http : HttpClient) { }
+
   getreviewsById(productId:string){
     return this.http.get<Reviews[]>(`http://localhost:3010/api/v1/products/${productId}/reviews`);
   }

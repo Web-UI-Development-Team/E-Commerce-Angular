@@ -12,9 +12,9 @@ export class OrdersComponent {
 
     isSubmitted : boolean = false; 
     UserForm = new FormGroup({
-    firstName: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
-    lastName: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
-    phoneNumber: new FormControl('',[Validators.required,Validators.maxLength(11), Validators.pattern('^[0-9]+$')]),
+    firstName: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z]{3,20}')]),
+    lastName: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]{3,20}')]),
+    phoneNumber: new FormControl('',[Validators.required,Validators.pattern('[0-9]{12}')]),
     select : new FormControl('',[Validators.required]),
     city: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]), 
     state: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),

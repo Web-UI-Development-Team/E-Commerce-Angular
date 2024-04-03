@@ -6,11 +6,10 @@
 
         <input
           class="input-text input-text--border-radius input-text--style-1"
-          type="text"
+          type="search"
           id="main-search"
           placeholder="Search"
           #searchInput
-          [formControl]="searchFormControl"
         />
 
         <button
@@ -18,28 +17,18 @@
           type="submit"
         ></button>
       </form>
-
-      <!-- <form class="form-outline" data-mdb-input-init>
-        <input
-          id="search-focus"
-          placeholder="{{ 'Search' | translate }}"
-          [formControl]="searchFormControl"
-          type="search"
-          id="form1"
-          class="form-control"
-        />
-      </form> -->
     </div>
     <div class="col-xl-3 col-sm-3 col-12">
       <button class="btn button" (click)="openAddProductPopup()">
-        Add New User
+        Add New Product
       </button>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-5">
     <div
       class="col-xl-4 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item products headphone mt-4"
       *ngFor="let product of allProducts"
+      [class.deleted-product]="product.isDeleted"
     >
       <div class="product-o product-o--hover-on product-o--radius">
         <div class="product-o__wrap">

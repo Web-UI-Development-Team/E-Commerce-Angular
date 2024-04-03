@@ -1,5 +1,7 @@
-<h2 class="d-flex justify-content-center">ALREADY REGISTERED?</h2>
-<div class="container min-vh-100 d-flex justify-content-center align-items-center">
+<h2 id="textCenter" class="d-flex justify-content-center ">ALREADY REGISTERED?</h2>
+<div
+  class="container min-vh-100 d-flex justify-content-center align-items-center"
+>
   <div class="card" style="width: 33rem">
     <form [formGroup]="loginForm" class="m-3" (ngSubmit)="submit()">
       <h4 class="mt-3 d-flex justify-content-center">I'M NEW CUSTOMER</h4>
@@ -8,7 +10,15 @@
         the checkout process faster, store shipping addresses, view and track
         your orders in your account and more.
       </p>
-      <button type="button" id="button1" class="" routerLink="/signUp" routerLinkActive="active">CREATE AN ACCOUNT</button>
+      <button
+        type="button"
+        id="button1"
+        class=""
+        routerLink="/signUp"
+        routerLinkActive="active"
+      >
+        CREATE AN ACCOUNT
+      </button>
 
       <h4 class="mt-3 d-flex justify-content-center">SIGNIN</h4>
       <p class="text-muted p-1 d-flex justify-content-center">
@@ -30,13 +40,14 @@
           [hidden]="email?.valid || email?.untouched"
         >
           <small *ngIf="email?.errors?.['required']"> email is required </small>
-          <small *ngIf="email?.errors?.['EmailNotValid']">
+          <small *ngIf="email?.errors?.['pattern']">
             Email must contains &#64;Example.com,
             <b> {{email?.errors?.['EmailNotValid'].value}} </b> doesn't match
           </small>
         </div>
-      </div>
 
+      </div>
+      
       <div class="mb-3 p-2">
         <label for="password" class="form-label">Password*</label>
         <input
@@ -46,6 +57,10 @@
           id="password"
           name="Password"
         />
+
+        <div class="alert alert-warning" *ngIf="isFaild">
+          <small > incorrect email or password </small>
+        </div>
 
         <button
           [disabled]="loginForm.invalid"

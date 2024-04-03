@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { CartRequestService } from '../../../services/cart/cart.request.service';
 import { CartService } from '../../../services/cart/cart.service';
 import { IProduct } from '../../../../modles/product.modle';
+import { UserProfileService } from '../../../services/user-profile/user-profile.service';
+import { UserProfileRequestService } from '../../../services/user-profile/user-profile.request.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-card',
@@ -11,8 +14,13 @@ import { IProduct } from '../../../../modles/product.modle';
 })
 export class ProductCardComponent implements OnInit {
   isClicked: boolean = false;
-  buttonShow:boolean=false;
+  isInWishlist: boolean = false;
+  buttonShow: boolean = false;
+  buttonDisabled: boolean = false;
+
   buttonStyle: any = '';
+
+  wishListRequest: Observable<any>;
 
   @Input() prd: IProduct = {
     _id: '',
@@ -29,31 +37,45 @@ export class ProductCardComponent implements OnInit {
     reviews: [''],
     createdAt: '',
     updatedAt: '',
+    isDeleted: false
   };
 
   constructor(
     private router: Router,
     private cartService: CartService,
-    private cartRequestService: CartRequestService
+    private cartRequestService: CartRequestService,
+    private userProfileService: UserProfileService,
+    private userProfileRequestService: UserProfileRequestService
   ) {}
 
   ngOnInit(): void {
-    console.log(this.cartService.productIds);
+    // console.log(this.cartService.productIds);
     if (this.cartService.productIds.includes(this.prd._id)) {
       this.isClicked = true;
+      this.buttonDisabled = true;
+    }
+
+    if (this.userProfileService.wishListProductIds.includes(this.prd._id)) {
+      this.isInWishlist = true;
     }
   }
 
   showDetails(productId: any) {
-    this.router.navigate(['/productDetails', productId]);
+    this.router.navigate(['/user','productDetails', productId]);
   }
 
   addProductToCart(productId: string) {
+    if(!localStorage.getItem('token')){
+      this.router.navigate(['signIn']);
+      return;
+    }
+
     this.isClicked = !this.isClicked;
+    this.buttonDisabled = true;
+
     this.cartService.cartItems.push({
       product: this.prd,
       quantity: 1,
-      isInWishList: false,
     });
 
     this.cartRequestService.addToCart(productId).subscribe({
@@ -62,11 +84,45 @@ export class ProductCardComponent implements OnInit {
     });
   }
 
-  showButton(id:any){
-    this.buttonShow= true;
+  toggleWishlist(productId: string) {
+    if(!localStorage.getItem('token')){
+      this.router.navigate(['signIn']);
+      return;
+    }
 
+    if (this.isInWishlist) {
+      let index = this.userProfileService.wishList.findIndex(
+        (product) => product._id == this.prd._id
+      );
+
+      this.userProfileService.wishList.splice(index, 1);
+
+      this.wishListRequest =
+        this.userProfileRequestService.updateWishListRequest(productId);
+
+      this.isInWishlist = false;
+    } else {
+      this.userProfileService.wishList.push(this.prd);
+
+      this.wishListRequest =
+        this.userProfileRequestService.updateWishListRequest(productId);
+
+      this.isInWishlist = true;
+    }
+
+    this.wishListRequest.subscribe({
+      next: (data) => console.log(data),
+      error: (error) => console.log(error),
+    });
+
+    this.userProfileService.wishListProductIds =
+      this.userProfileService.wishList.map((product) => product._id);
   }
-  hideButton(id:any){
-    this.buttonShow= false;
-  }
+
+  // showButton(id: any) {
+  //   this.buttonShow = true;
+  // }
+  // hideButton(id: any) {
+  //   this.buttonShow = false;
+  // }
 }

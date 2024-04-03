@@ -40,7 +40,7 @@ import { UserFormComponent } from './pages/user-profile/user-form/user-form.comp
 import { LoaderComponent } from './shared/loader/loader.component';
 import { ProductCardComponent } from './pages/product/product-card/product-card.component';
 import { AccountComponent } from './pages/user-profile/account/account.component';
-import { WishListComponent } from './pages/wish-list/wish-list.component';
+import { WishListComponent } from './pages/user-profile/wish-list/wish-list.component';
 import { QuantityComponent } from './shared/elements/quantity/quantity.component';
 import { SliderComponent } from './shared/elements/slider/slider.component';
 import { HomeDashboardComponent } from './dashboard/home-dashboard/home-dashboard.component';
@@ -51,6 +51,11 @@ import { ProductReviewsComponent } from './pages/product/product-reviews/product
 import { AddNewCategoryComponent } from './dashboard/categories-dashboard/add-new-category/add-new-category.component';
 import { EditCategoryComponent } from './dashboard/categories-dashboard/edit-category/edit-category.component';
 import {MatIconModule} from '@angular/material/icon';
+import { WishListItemComponent } from './pages/user-profile/wish-list/wish-list-item/wish-list-item.component';
+import { DropMenuComponent } from './shared/nav-bar/drop-menu/drop-menu.component';
+import { OrderDetailsHistoryComponent } from './pages/order/order-details-history/order-details-history.component';
+import { UserComponent } from './components/user/user.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +97,11 @@ import {MatIconModule} from '@angular/material/icon';
     ProductReviewsComponent,
     AddNewCategoryComponent,
     EditCategoryComponent,
+    WishListItemComponent,
+    DropMenuComponent,
+    OrderDetailsHistoryComponent,
+    UserComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

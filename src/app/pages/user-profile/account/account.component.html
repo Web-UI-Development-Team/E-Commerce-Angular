@@ -1,6 +1,8 @@
 <div class="container">
+
   <div class="row d-flex justify-content-md-between justify-content-center">
-    <div class="col-12 col-md-6 rounded-circle" [ngStyle]="userImageStyle"></div>
+    <!-- <div class="col-12 col-md-6 rounded-circle" [ngStyle]="userImageStyle"></div> -->
+    <img [src]="user.imagePath" alt="" class="col-12 col-md-6 rounded-circle user-image">
     <span class="col-12 col-md-6 text-bold h3 text-md-end text-center mt-md-0 mt-3">{{user.name}}</span>
 
     <div class="col-12 d-flex justify-content-between mt-4">
@@ -13,6 +15,7 @@
       </a>
     </div>
   </div>
+
 </div>
 
 <hr>

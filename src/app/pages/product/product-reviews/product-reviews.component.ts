@@ -9,8 +9,9 @@ import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-product-reviews',
   templateUrl: './product-reviews.component.html',
-  styleUrl: './product-reviews.component.css'
+  styleUrl: './product-reviews.component.css',
 })
+
 export class ProductReviewsComponent implements OnInit , OnDestroy {
   //icon
   faThumbsUp = faThumbsUp;
@@ -33,6 +34,7 @@ export class ProductReviewsComponent implements OnInit , OnDestroy {
     },
     product: ''
   }; 
+  
   constructor(private productReviews: ProductReviewService, private activeRoute: ActivatedRoute) {}
   subscription$ : Subscription = new Subscription();
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class ProductReviewsComponent implements OnInit , OnDestroy {
     } else {
       console.error('Product ID is null');
     }
-  }
+
   //**counter to icon like **//
   increaeCount(){
     this.count = this.count +1;

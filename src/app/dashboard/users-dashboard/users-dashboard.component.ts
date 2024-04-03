@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { IUser } from '../../../modles/user.modle';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,25 +12,39 @@ import { UserRequestsService } from '../../services/users/user-requests.service'
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
 import { range } from '../../utils/range';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import {
+  Observable,
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  fromEvent,
+  map,
+  startWith,
+  switchMap,
+  throwError,
+} from 'rxjs';
+import { createHttpObservable } from '../../utils/createHttpObservable';
 
 @Component({
   selector: 'app-users-dashboard',
   templateUrl: './users-dashboard.component.html',
   styleUrl: './users-dashboard.component.css',
 })
-export class UsersDashboardComponent implements OnInit {
-  constructor(
-    private usersRequest: UserRequestsService,
-    private router: Router,
-    private dialog: MatDialog
-  ) {}
+export class UsersDashboardComponent implements OnInit, AfterViewInit {
+  user$: any;
+  @ViewChild('searchinput', { static: true }) input: ElementRef;
 
-  allUsers: IUser[];
+  allUsers: any;
   user: IUser;
 
   numberOfPages: number;
   pages: any = [];
   page: number;
+  constructor(
+    private usersRequest: UserRequestsService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.usersRequest.getAllUsersRequest(1).subscribe((data: any) => {
@@ -36,6 +56,42 @@ export class UsersDashboardComponent implements OnInit {
       this.pages = range(this.numberOfPages);
       console.log(this.pages.length);
     });
+  }
+
+  ngAfterViewInit() {
+    this.user$ = fromEvent<any>(this.input.nativeElement, 'keyup')
+      .pipe(
+        map((event) => {
+          return event.target.value;
+        }),
+        startWith(''),
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap((search) => this.loadUsers(search)),
+      )
+      .subscribe();
+  }
+
+  loadUsers(search: string): Observable<any> {
+    if (search) {
+      return createHttpObservable(
+        `http://localhost:3010/api/v1/users/search/user/${search}`
+      ).pipe(
+        map((res) => {
+          console.log(res);
+          this.allUsers = res;
+          console.log(this.allUsers);
+          return res['payload'];
+        })
+      );
+    } else {
+      this.usersRequest.getAllUsersRequest(1).subscribe((data: any) => {
+        console.log(data);
+        this.allUsers = data.users;
+      });
+      console.log(this.allUsers);
+      return this.allUsers;
+    }
   }
 
   currentPage(pageNumber: number) {

@@ -7,10 +7,10 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
 import { ILogin } from '../../../modles/auth.modle';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { error } from 'console';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,21 +19,23 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent {
   loginForm: FormGroup;
+  isFaild = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router,
-    private cookieService: CookieService
+    private router: Router
   ) {
-    if(this.cookieService.get('token'))
+    if(typeof window !== 'undefined')
     {
-      this.router.navigate(['/home']);
+      if (localStorage.getItem('token')) {
+        this.router.navigate(['/user/home']);
+      }
+      this.loginForm = formBuilder.group({
+        email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}')] ],
+        password: ['', Validators.required],
+      });
     }
-    this.loginForm = formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-    });
   }
 
   get email() {
@@ -44,27 +46,36 @@ export class SignInComponent {
     return this.loginForm.get('password');
   }
 
-  existEmailValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      let emailVal: string = control.value;
-      let ValidationErrors = { EmailNotValid: { value: emailVal } };
-      if (emailVal.length == 0 && control.untouched) return null;
-      return emailVal.includes('@gmail.com') ? null : ValidationErrors;
-    };
-  }
+  // existEmailValidator(): ValidatorFn {
+  //   return (control: AbstractControl): ValidationErrors | null => {
+  //     let emailVal: string = control.value;
+  //     let ValidationErrors = { EmailNotValid: { value: emailVal } };
+  //     if (emailVal.length == 0 && control.untouched) return null;
+  //     return emailVal.includes('@gmail.com') ? null : ValidationErrors;
+  //   };
+  // }
 
   submit() {
     const user = this.loginForm.value as ILogin;
 
     this.authService.loginRequest(user).subscribe({
       next: (data) => {
-        this.cookieService.set('token', data.token);
-        this.cookieService.set('role', `${data.role}`);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('role', `${data.role}`);
+
+        if(data.role !== 'admin')
+        {
+          this.router.navigate(['user', 'home']);
+        } else {
+          this.router.navigate(['admin', 'homedashboard']);
+        }
+
       },
-      error: (error) => console.log(error),
+      error: (error) => this.isFaild = true,
       complete: () => {
-        location.replace('/home');
+        this.authService.isAuthenticated();
       },
     });
   }
+
 }

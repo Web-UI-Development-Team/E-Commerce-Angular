@@ -12,7 +12,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
-import { CookieService } from 'ngx-cookie-service';
 import { IEditProfile, IProfile } from '../../../../modles/profile.modle';
 import { IUser } from '../../../../modles/user.modle';
 
@@ -26,7 +25,6 @@ export class UserFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private cookieService: CookieService,
     private userProfileService: UserProfileService,
     private location: Location
   ) {}
@@ -35,7 +33,7 @@ export class UserFormComponent implements OnInit {
     name: '',
     email: '',
     phone: '',
-    image: '',
+    imagePath: '',
     wishList: [],
   };
 
@@ -45,11 +43,11 @@ export class UserFormComponent implements OnInit {
     this.updateForm = this.formBuilder.group({
       name: [
         this.user.name,
-        [Validators.required, Validators.pattern('[A-Z a-z]{3,}')],
+        [Validators.required, Validators.pattern('[A-Z a-z]{3,20}')],
       ],
       phone: [
         this.user.phone,
-        [Validators.required, Validators.pattern('[0-9]{12}')],
+        [Validators.required, Validators.pattern('[0-9]{11}')],
       ],
     });
   }

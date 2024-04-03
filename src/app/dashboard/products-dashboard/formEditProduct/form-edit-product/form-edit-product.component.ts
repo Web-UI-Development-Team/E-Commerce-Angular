@@ -71,6 +71,7 @@ export class FormEditProductComponent implements OnInit {
         Validators.maxLength(500),
       ]),
       images: new FormControl([''], [Validators.required]),
+      isDeleted: new FormControl<boolean>(false, [Validators.required]),
     });
   }
 

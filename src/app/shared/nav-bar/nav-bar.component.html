@@ -2,28 +2,26 @@
   <!-- Jumbotron -->
   <div class="p-3 text-center bg-white border-bottom border-light">
     <div class="container">
-      <div class="row gy-3">
+      <div class="row gy-3 justify-content-between">
         <!-- Left elements -->
-        <div class="col-1">
-          <a routerLink="/home" class="float-start">
-            <img
-              src="https://th.bing.com/th/id/R.49346454c6c44e6b885f5e39afbb877b?rik=fvlRg8JDjsHTPA&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2fjcx%2fLXp%2fjcxLXprai.png&ehk=Lc5rvfUMX9aE3MlCzaRiqgzcL6juOCY0WzKg0S1EhUQ%3d&risl=&pid=ImgRaw&r=0"
-              width="55" alt="logo" />
+        <div class="col-2">
+          <a routerLink="/user/home" class="float-start">
+            <img src="../../../assets/logo.png" width="55" alt="logo" />
           </a>
         </div>
         <!-- Left elements -->
 
         <!-- Center elements -->
-        <div class="order-lg-last col-lg-5 col-sm-8 col-8">
-          <div class="d-flex float-end icons">
-            <a [routerLink]="isAuth ? '/profile/account' : '/signIn'" class="nav-icon">
-              <i class="fas fa-user-alt m-1 me-md-2"></i>
-              <span *ngIf="!isAuth" class="signIn">SIGN IN</span>
-            </a>
 
-            <div class="mx-3"></div>
+        <div class="order-lg-last col-3  col-md-2 icons">
+          <a [routerLink]="isAuth ? '/user/profile/account' : '/signIn'" class="nav-icon">
+            <i class="fas fa-user-alt m-1 me-md-2"></i>
+          </a>
 
-            <a routerLink="/cart" *ngIf="isAuth" class="nav-icon">
+          <div class="divider"></div>
+
+          <div class="position-relative">
+            <a routerLink="/user/cart" *ngIf="isAuth" class="nav-icon">
               <i class="fas fa-shopping-cart m-1 me-md-2"></i>
             </a>
             <div *ngIf="isAuth" class="cart">{{cartService.cartItems.length}}</div>
@@ -32,15 +30,33 @@
         <!-- Center elements -->
 
         <!-- Right elements -->
-        <div class="col-lg-6 col-md-12 col-12">
-          <div class="input-group float-center ">
-            <div class="form-outline position-relative w-75 ">
-              <input type="search" id="form1" class="form-control border rounded-5 bg-body-secondary"
-                placeholder="Search" />
-              <div> <i class="fas fa-search position-absolute" id="search"></i></div>
+
+        <div class="col-md-6 position-relative" (focusout)="onClick($event)">
+          <div class="form">
+            <i class="fa fa-search"></i>
+            <input type="text" class="form-control form-input" placeholder="Search for products" #searchInput>
+          </div>
+
+          <div class="product-menu position-absolute">
+            <div *ngFor="let product of searchProducts">
+              <app-drop-menu [product]="product"></app-drop-menu>
             </div>
           </div>
         </div>
+
+        <!-- <div class="form-outline position-relative col-6">
+          <input type="search" id="form1" class="form-control border rounded-5 bg-body-secondary"
+            placeholder="Search" #searchInput/>
+          <div> <i class="fas fa-search position-absolute" id="search"></i></div>
+
+          <div class="product-menu position-absolute">
+            <div *ngFor="let product of searchProducts">
+              <app-drop-menu [product]="product"></app-drop-menu>
+            </div>
+          </div>
+        </div> -->
+
+
         <!-- Right elements -->
       </div>
     </div>
@@ -53,28 +69,25 @@
     <!-- Container wrapper -->
 
     <div class="container d-flex justify-content-around align-items-center  ">
-      <div>
+      <!-- <div>
         <pre>                             </pre>
-      </div>
+      </div> -->
 
-      <div class="collapse navbar-collapse p-2 " id="navbarLeftAlignExample">
+      <div class="collapse navbar-collapse " id="navbarLeftAlignExample">
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
           <li class="nav-item">
 
-            <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active">HOME</a>
+            <a class="nav-link active" aria-current="page" routerLink="/user/home" routerLinkActive="active">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/products" routerLinkActive="active">PRODUCTS</a>
+            <a class="nav-link" routerLink="/user/products" routerLinkActive="active">PRODUCTS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/about" routerLinkActive="active">ABOUT</a>
+            <a class="nav-link" routerLink="/user/about" routerLinkActive="active">ABOUT</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/contactUs" routerLinkActive="active" *ngIf="isAuth">CONTACT US</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" *ngIf="role === 'admin'">DASHBOARD</a>
+            <a class="nav-link" routerLink="/user/contactUs" routerLinkActive="active" *ngIf="isAuth">CONTACT US</a>
           </li>
         </ul>
         <!-- Left links -->
