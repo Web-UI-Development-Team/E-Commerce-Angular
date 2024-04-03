@@ -19,10 +19,8 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
   faThumbsDown = faThumbsDown;
   //icon
   //counter
-  count = 0;
-  countTwo = 0;
+  
   //
-  productId: any;
   reviews: Review[];
 
   reviewForm = new FormGroup({
@@ -34,6 +32,7 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
     isReviewed: false,
     reviewId: '',
   };
+  isUpdated = false;
 
   constructor(
     private authService: AuthService,
@@ -68,14 +67,24 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
     }
   }
   //**counter to icon like **//
-  increaeCount() {
-    this.count = this.count + 1;
-    console.log(this.count);
+  
+  iconReviews = [
+    {
+      count:0 , countTwo:0
+    },
+    {
+      count:0 , countTwo:0
+    }
+    
+  ]
+  increaeCount(index:number) {
+    this.iconReviews[index].count++;
+    console.log(this.iconReviews[index].count);
   }
   //
-  descreaseCount() {
-    this.countTwo = this.count + 1;
-    console.log(this.count);
+  descreaseCount(index:number) {
+    this.iconReviews[index].countTwo++;
+    console.log(this.iconReviews[index].countTwo);
   }
   //**counter to icon like **//
   //delete//
@@ -113,7 +122,30 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
         });
     }
   }
-
+  // idReview :string
+  showForm : boolean = false;
+  updateReview(){
+    
+    const productId = this.activeRoute.snapshot.paramMap.get('id');
+    const reviewData = {
+      title: this.reviewForm.value.title!,
+      comment: this.reviewForm.value.comment!,
+    };
+    
+    if(productId !== null) {
+      this.productReviewService.updateReview(productId,reviewData).subscribe((updatedData:any)=>{
+          const reviewIndex = this.reviews.findIndex(review=> review._id === updatedData._id)
+            this.reviews[reviewIndex] = updatedData;
+            this.isUpdated = true;
+      })
+    }
+  }
+  show(){
+    console.log('hhhh');
+    
+    this.showForm = !this.showForm;
+  }
+  
   //******/
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();

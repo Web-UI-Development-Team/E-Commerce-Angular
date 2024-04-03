@@ -1,15 +1,3 @@
-<form [formGroup]="reviewForm" (ngSubmit)="addNewReview()" *ngIf="!isReviewed.isReviewed">
-  <div class="mb-3">
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="titleHelp" formControlName="title"
-      placeholder="Title">
-    <div id="titleHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <textarea formControlName="comment" placeholder="Enter Your Comment" class="form-control"></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!reviewForm.valid">Add Review</button>
-</form>
-
 <div class="container">
   <p style="text-decoration: underline;">Reviews({{ reviews.length }})</p>
 </div>
@@ -17,7 +5,6 @@
 
   <div class="col-md-10">
     <div class="" *ngFor="let review of reviews">
-      <!-- // reviewData:obj //reviews:array// -->
       <h5 class="card-title py-3">
         {{ review.title }}
       </h5>
@@ -29,14 +16,14 @@
         <span class="mx-3" style="color: #ff4500">|</span>
         <span>{{ review.dateOfReview | date : "M/d/yyyy" }}</span>
       </div>
-      <div class="divReview">
+      <div class="divReview" *ngFor="let iconReview of iconReviews ; let i = index">
         <p class="py-3">
           Was this review helpful to you
           <span class="mx-3">
-            <fa-icon [icon]="faThumbsUp" (click)="increaeCount()"></fa-icon>
-            {{count}}
-            <span class="mx-4"><fa-icon [icon]="faThumbsDown" (click)="descreaseCount()"></fa-icon>
-              {{countTwo}}
+            <fa-icon [icon]="faThumbsUp" (click)="increaeCount(i)"></fa-icon>
+            {{iconReview.count}}
+            <span class="mx-4"><fa-icon [icon]="faThumbsDown" (click)="descreaseCount(i)"></fa-icon>
+              {{iconReview.countTwo}}
             </span>
           </span>
         </p>
@@ -46,4 +33,24 @@
     </div>
   </div>
 </div>
-<!--  -->
+<div class="container">
+  <div class="col-md-10 my-4">
+    <button class="add rounded  "(click)="show()" >Wrire Review</button>
+
+  </div>
+</div>
+
+
+<div class="container" *ngIf="showForm">
+<form [formGroup]="reviewForm" (ngSubmit)="addNewReview()" *ngIf="!isReviewed.isReviewed">
+  <div class="mb-3 col-md-6">
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="titleHelp" formControlName="title"
+      placeholder="Title">
+    <div id="titleHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3 col-md-6 ">
+    <textarea formControlName="comment" placeholder="Enter Your Comment" class="form-control py-3"></textarea>
+  </div>
+    <button style="color: #ff4500" type="submit"  class="btn rounded update" *ngIf="" [disabled]="!reviewForm.valid" >{{isReviewed ? 'Update'  : 'Add'}}</button>
+  </form>
+</div>

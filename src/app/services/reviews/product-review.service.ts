@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AddReivew, Review } from '../../../modles/review.modle';
+import { AddReivew, Review, UpdateReview } from '../../../modles/review.modle';
 @Injectable({
   providedIn: 'root',
 })
@@ -24,6 +24,9 @@ export class ProductReviewService {
       `http://localhost:3010/api/v1/products/${productId}/reviews`,
       reviews
     );
+  }
+  updateReview(productId:string ,  reviews:UpdateReview){
+    return this.http.patch<Review[]>(`http://localhost:3010/api/v1/products/${productId}/reviews`,reviews)
   }
   //
   isReviewd(productId: string) {

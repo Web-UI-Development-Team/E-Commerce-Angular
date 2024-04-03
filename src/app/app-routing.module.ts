@@ -42,7 +42,8 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
-      { path: 'productDetails/:id', component: ProductDetailsComponent },
+      { path: 'productDetails/:id', component: ProductDetailsComponent ,
+    },
       {
         path: 'profile',
         canActivate: [AuthGuard],
