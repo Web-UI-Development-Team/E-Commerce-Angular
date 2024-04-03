@@ -117,7 +117,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       );
     } else {
       this.searchProducts = [];
-      return this.productsRequestsService.getAllProductsRequest(0);
+      return this.productsRequestsService.getAllProductsRequest();
     }
   }
 

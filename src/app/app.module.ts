@@ -56,6 +56,9 @@ import { DropMenuComponent } from './shared/nav-bar/drop-menu/drop-menu.componen
 import { OrderDetailsHistoryComponent } from './pages/order/order-details-history/order-details-history.component';
 import { UserComponent } from './components/user/user.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { SuccessPopUpComponent } from './shared/success-pop-up/success-pop-up.component';
+import { PopUpErrorComponent } from './shared/pop-up-error/pop-up-error.component';
+import { ProductDetailsDashboardComponent } from './dashboard/products-dashboard/product-details-dashboard/product-details-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +105,9 @@ import { AdminComponent } from './components/admin/admin.component';
     OrderDetailsHistoryComponent,
     UserComponent,
     AdminComponent,
+    SuccessPopUpComponent,
+    PopUpErrorComponent,
+    ProductDetailsDashboardComponent,
   ],
   imports: [
     BrowserModule,

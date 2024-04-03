@@ -1,35 +1,40 @@
 <h2 class="m-2 text-bold">Product Details</h2>
 
-  <div
-    class="rounded m-auto row w-75 mt-4 cardDet pt-3"
-    (mouseleave)="hideButton(productDetails._id)"
-    (mouseover)="showButton(productDetails._id)"
-    *ngIf="!loading"
-  >
-    <div class="my-2 shadow-0 col-4  ">
-      <a class="img-wrap">
-        <img
-          src="{{ productDetails.thumbnail }}"
-          class="card-img-top  rounded"
-          style="aspect-ratio: 1 / 1"
-        />
-      </a>
-    </div>
+<div
+  class="rounded m-auto row w-75 mt-4 cardDet pt-3"
+  (mouseleave)="hideButton(productDetails._id)"
+  (mouseover)="showButton(productDetails._id)"
+  *ngIf="!loading"
+>
+  <div class="my-2 shadow-0 col-4">
+    <a class="img-wrap">
+      <img
+        src="{{ productDetails.thumbnail }}"
+        class="card-img-top rounded"
+        style="aspect-ratio: 1 / 1"
+      />
+    </a>
+  </div>
 
-    <div class="card-body col-8 p-2">
-      <p class="card-title text pb-1">{{ productDetails.title }}</p>
+  <div class="card-body col-8 p-2">
+    <p class="card-title text pb-1">{{ productDetails.title }}</p>
 
-      <label class="text">Description : </label>
-      <p class="card-text mb-0 d-inline">{{ productDetails.description }}</p>
-      <br />
-      <label class="text">Brand : </label>
-      <p class="card-text mb-0 d-inline">{{ productDetails.brand }}</p>
-      <br />
-      <label class="text">Price :</label>
-      <p class="d-inline price">${{ productDetails.price }}</p>
+    <label class="text">Description : </label>
+    <p class="card-text mb-0 d-inline">{{ productDetails.description }}</p>
+    <br />
+    <label class="text">Brand : </label>
+    <p class="card-text mb-0 d-inline">{{ productDetails.brand }}</p>
+    <br />
+    <label class="text">Price :</label>
+    <p class="d-inline price">${{ productDetails.price }}</p>
 
-      <div class="w-75 m-3" *ngIf="buttonShow">
-        <img
+    <div class="w-75 m-3" *ngIf="buttonShow">
+      <img
+        *ngFor="let image of productDetails.images"
+        class="w-25 p-3 rounded-5 img"
+        [src]="image"
+      />
+      <!-- <img
           class="w-25 p-3 rounded-5 img"
           src="{{ productDetails.images[0] }}"
           alt=""
@@ -48,16 +53,15 @@
           class="w-25 p-3 rounded-5 img"
           src="{{ productDetails.images[3] }}"
           alt=""
-        />
-      </div>
+        /> -->
     </div>
   </div>
+</div>
 
 <div class="d-flex justify-content-center align-items-center">
   <button routerLink="/user/products" class="back rounded m-2">
     Back To Products
   </button>
-
 </div>
 
 <div>

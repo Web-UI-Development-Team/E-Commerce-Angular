@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormEditProductComponent } from '../products-dashboard/formEditProduct/form-edit-product/form-edit-product.component';
 import { AdminService } from '../../services/admin/admin.service';
 
-
 @Component({
   selector: 'app-home-dashboard',
   templateUrl: './home-dashboard.component.html',
@@ -27,10 +26,10 @@ export class HomeDashboardComponent implements OnInit {
       this.dataLength = data;
     });
     this.productRequestsServices
-      .getAllProductsRequest(1)
+      .getAllProductsRequest()
       .subscribe((data: any) => {
         console.log(data);
-        this.allProducts = data.products;
+        this.allProducts = data;
         console.log(this.allProducts);
       });
   }

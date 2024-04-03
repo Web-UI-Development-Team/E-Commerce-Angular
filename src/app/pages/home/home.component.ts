@@ -14,7 +14,7 @@ import { IProduct } from '../../../modles/product.modle';
 })
 export class HomeComponent implements OnInit {
   allCategories: ICategory[];
-  allProducts: any;
+  allProducts: any = [];
   selectedCategory: ICategory | null;
   product: IProduct;
 
@@ -86,9 +86,9 @@ export class HomeComponent implements OnInit {
 
   getAllProducts() {
     this.productRequestsServices
-      .getAllProductsRequest(1)
+      .getAllProductsRequest()
       .subscribe((data: any) => {
-        this.allProducts = data.products;
+        this.allProducts = data;
       });
   }
 
