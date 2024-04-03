@@ -1,16 +1,14 @@
-export interface ReviewObj {
-  
-    reviews: Reviews[];
-  }
-  
-  export interface Reviews {
-    _id: string;
-    title: string;
-    comment: string;
-    dateOfReview : Date;
-    user: {
-      name : string
-    };
-    product: string;
-  }
-  
+import { IUser } from "./user.modle";
+
+export interface Review {
+  _id: string;
+  title: string;
+  comment: string;
+  dateOfReview: Date;
+  user: IUser;
+  product: string;
+}
+export interface AddReivew {
+  title: string;
+  comment: string;
+}

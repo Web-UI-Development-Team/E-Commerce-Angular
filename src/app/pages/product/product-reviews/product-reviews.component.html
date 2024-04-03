@@ -1,21 +1,22 @@
-<div class="col-md-4">
-  <textarea
-    class="form-control"
-    placeholder="Write your feedback"
-    rows="3"
-    [(ngModel)]="newReview.comment"
-  ></textarea>
-  <button class="btn btn-primary" (click)="addNewReview()">Add</button>
-</div>
-
+<form [formGroup]="reviewForm" (ngSubmit)="addNewReview()" *ngIf="!isReviewed.isReviewed">
+  <div class="mb-3">
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="titleHelp" formControlName="title"
+      placeholder="Title">
+    <div id="titleHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <textarea formControlName="comment" placeholder="Enter Your Comment" class="form-control"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!reviewForm.valid">Add Review</button>
+</form>
 
 <div class="container">
-  <p style="text-decoration: underline;">Reviews({{ reviewData.reviews.length }})</p> 
+  <p style="text-decoration: underline;">Reviews({{ reviews.length }})</p>
 </div>
 <div class="container">
 
   <div class="col-md-10">
-    <div class="" *ngFor="let review of reviewData.reviews">
+    <div class="" *ngFor="let review of reviews">
       <!-- // reviewData:obj //reviews:array// -->
       <h5 class="card-title py-3">
         {{ review.title }}
@@ -39,7 +40,7 @@
             </span>
           </span>
         </p>
-        <a (click)="onRemoveReview(review._id)" class="py-3">Remove</a>
+        <a (click)="onRemoveReview(review.product)" class="py-3" *ngIf="isReviewed.reviewId === review._id">Remove</a>
       </div>
       <hr />
     </div>
