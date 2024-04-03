@@ -27,7 +27,7 @@ export class AddProductComponent implements OnInit {
     private dialog: MatDialog,
     public dialogRef: MatDialogRef<AddProductComponent>
   ) {}
-  numberPattern = /^[1-9]+$/;
+  numberPattern = /^[0-9]+$/;
   productForm: FormGroup = this.formBuilder.group({
     title: new FormControl('', [
       Validators.required,
