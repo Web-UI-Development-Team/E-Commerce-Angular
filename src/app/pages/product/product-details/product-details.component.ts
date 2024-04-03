@@ -1,4 +1,13 @@
 import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+
+import {
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+
 import { IProduct } from '../../../../modles/product.modle';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsRequestsService } from '../../../services/product/products-requests.service';
@@ -45,6 +54,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy  {
 
   ngOnInit(): void {
     this.loading = true;
+
+    this.subscription = this.activatedRouter.params.subscribe({
+      next: (data) => this.getProductById(data['id']),
+    });
+
     const productId = this.activatedRouter.snapshot.paramMap.get('id');
     console.log(productId);
 
@@ -53,6 +67,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy  {
     
   }
   
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   getProductById(id: any) {
     this.loading = true;

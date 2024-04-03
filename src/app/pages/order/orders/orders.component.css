@@ -24,6 +24,11 @@ input.ng-invalid.ng-touched {
 .is-invalid {
   border-color: rgb(217, 9, 9);
 }
+
+.img {
+  width: 90%;
+}
+
 /* .pop-up {
   width: 350px;
   height: 200px;
@@ -54,4 +59,9 @@ input.ng-invalid.ng-touched {
 p {
   padding: 20px;
   font-size: 18px;
+} */
+
+/* #formCenter{
+  margin-left: 200px;
+
 } */

@@ -1,0 +1,12 @@
+.divReview {
+    display: flex;
+    justify-content: space-between;
+}
+.divReview a {
+    cursor: pointer;
+    color: #ff4500;
+    text-decoration: none;
+}
+fa-icon {
+    cursor: pointer;
+}

@@ -5,10 +5,17 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { IUpdateCategory } from '../../../../modles/category';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ICategory, IUpdateCategory } from '../../../../modles/category';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { CategoryRequestsService } from '../../../services/category/category-requests.service';
 import { Router } from '@angular/router';
+import { SuccessPopUpComponent } from '../../../shared/success-pop-up/success-pop-up.component';
+import { take, timer } from 'rxjs';
+import { PopUpErrorComponent } from '../../../shared/pop-up-error/pop-up-error.component';
 
 @Component({
   selector: 'app-edit-category',
@@ -25,22 +32,19 @@ export class EditCategoryComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { categoryId: string },
     private formBuilder: FormBuilder,
     private categoryRequestsService: CategoryRequestsService,
-    private router: Router,
+    private dialog: MatDialog,
     public dialogRef: MatDialogRef<EditCategoryComponent>
   ) {
     this.categoryForm = this.formBuilder.group({
       nameCategory: new FormControl('', [
         Validators.required,
-        Validators.maxLength(500),
+        Validators.minLength(3),
       ]),
       description: new FormControl('', [
         Validators.required,
         Validators.maxLength(2500),
       ]),
-      icon: new FormControl<String>(
-        'https://cdn-icons-png.freepik.com/512/190/190497.png',
-        [Validators.required]
-      ),
+      icon: new FormControl([''], [Validators.required]),
     });
   }
 
@@ -48,14 +52,14 @@ export class EditCategoryComponent implements OnInit {
     const id = this.data.categoryId;
     if (id) {
       console.log(id);
-      this.getCategory(id);
       this.categoryId = id;
+      this.getCategory(id);
     }
   }
 
   getCategory(id: string) {
     this.categoryRequestsService.getCategoryByIdRequest(id).subscribe(
-      (data) => {
+      (data: ICategory) => {
         console.log(data);
         this.category = data;
         this.categoryForm.patchValue({
@@ -77,6 +81,29 @@ export class EditCategoryComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  openErrorPopUp() {
+    const dialog = this.dialog.open(PopUpErrorComponent);
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+      });
+  }
+
+  openSuccessPopUp() {
+    const dialog = this.dialog.open(SuccessPopUpComponent, {
+      data: { text: 'Update Successfully' },
+    });
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+        this.closePopUp();
+      });
+  }
+
   updateCategory() {
     const updatedCategoryData: IUpdateCategory = {};
     Object.keys(this.categoryForm.controls).forEach((key: string) => {
@@ -88,11 +115,23 @@ export class EditCategoryComponent implements OnInit {
       ) {
         updatedCategoryData[key as keyof IUpdateCategory] = control.value;
       }
+      console.log(updatedCategoryData);
+      console.log(this.categoryId);
     });
     this.category = this.categoryForm.value;
     this.categoryRequestsService
       .updateCategoryDataRequest(updatedCategoryData, this.categoryId)
-      .subscribe((data) => console.log(data));
-    this.dialogRef.close();
+      .subscribe(
+        (data) => {
+          if (data) {
+            this.openSuccessPopUp();
+            console.log(data);
+          }
+        },
+        (error) => {
+          console.log(error);
+          this.openErrorPopUp();
+        }
+      );
   }
 }

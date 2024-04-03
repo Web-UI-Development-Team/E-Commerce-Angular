@@ -14,6 +14,7 @@ import {
 import { AuthService } from '../../../services/auth/auth.service';
 import { IEditProfile, IProfile } from '../../../../modles/profile.modle';
 import { IUser } from '../../../../modles/user.modle';
+import { phoneNumberRegex } from '../../../regex/phone';
 
 @Component({
   selector: 'app-user-form',
@@ -33,9 +34,13 @@ export class UserFormComponent implements OnInit {
     name: '',
     email: '',
     phone: '',
-    image: '',
+    imagePath: '',
     wishList: [],
   };
+
+  updateForm: FormGroup;
+
+  imageData: String;
 
   ngOnInit(): void {
     this.user = this.userProfileService.user;
@@ -43,16 +48,42 @@ export class UserFormComponent implements OnInit {
     this.updateForm = this.formBuilder.group({
       name: [
         this.user.name,
-        [Validators.required, Validators.pattern('[A-Z a-z]{3,}')],
+        [Validators.pattern('[A-Z a-z]{3,20}')],
       ],
       phone: [
         this.user.phone,
-        [Validators.required, Validators.pattern('[0-9]{12}')],
+        [Validators.pattern(phoneNumberRegex)],
       ],
+      imgae: [
+        ''
+      ]
     });
   }
 
-  updateForm: FormGroup;
+  onFileSelect(event: Event) {
+    var file = (event.target as HTMLInputElement).files?.[0];
+
+    const allowedMimeTypes = [
+      'image/png',
+      'image/jpeg',
+      'image/jpg',
+      'image/webp',
+    ];
+
+    this.updateForm.patchValue({ image: file });
+
+    if (file && allowedMimeTypes.includes(file.type))
+    {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.imageData = reader.result as String;
+      }
+
+      reader.readAsDataURL(file);
+    }
+  }
+
 
   get name() {
     return this.updateForm.get('name');
@@ -65,6 +96,9 @@ export class UserFormComponent implements OnInit {
   onSubmit() {
     let userModel: IEditProfile = this.updateForm.value as IEditProfile;
     delete userModel.confirmPassword;
+
+    let userData = new FormData();
+
 
     this.userProfileService.patchUser(userModel);
     this.location.back();

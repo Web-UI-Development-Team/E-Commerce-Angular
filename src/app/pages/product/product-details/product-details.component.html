@@ -42,6 +42,7 @@
   </div>
 
   <div class="card-body col-6 p-2">
+
     <p class="card-title text pb-1">{{ productDetails.title }}</p>
 
     <label class="text">Description : </label>
@@ -51,9 +52,8 @@
     <p class="card-text mb-0 d-inline">{{ productDetails.brand }}</p>
     <br />
     <label class="text">Price :</label>
-    <p class="d-inline price">EGP{{ productDetails.price }}</p>
 
-   
+    <p class="d-inline price">EGP{{ productDetails.price }}</p>
 
     <div class="d-flex mt-4 align-items-center">
       <div>
@@ -80,12 +80,12 @@
           [item]="cartItem"
         ></app-quantity>
       </div>
+
     </div>
 
    
   </div>
 </div>
-
 
 <div class="rounded bg-light  m-3 p-3 w-75 m-auto d-flex" *ngIf="loading" >
  

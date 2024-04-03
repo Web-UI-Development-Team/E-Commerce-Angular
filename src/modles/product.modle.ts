@@ -13,6 +13,7 @@ export interface IProduct {
   reviews: string[];
   createdAt: string;
   updatedAt: string;
+  isDeleted: boolean;
 }
 
 export interface IUpdateProduct {
@@ -30,4 +31,5 @@ export interface IUpdateProduct {
   reviews?: string[];
   createdAt?: string;
   updatedAt?: string;
+  isDeleted?: boolean;
 }

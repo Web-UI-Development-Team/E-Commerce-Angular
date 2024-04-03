@@ -8,8 +8,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { IProduct, IUpdateProduct } from '../../../../../modles/product.modle';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
+import { SuccessPopUpComponent } from '../../../../shared/success-pop-up/success-pop-up.component';
+import { take, timer } from 'rxjs';
+import { PopUpErrorComponent } from '../../../../shared/pop-up-error/pop-up-error.component';
 
 @Component({
   selector: 'app-form-edit-product',
@@ -28,8 +31,7 @@ export class FormEditProductComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { productId: string },
     private formBuilder: FormBuilder,
     private productRequestServices: ProductsRequestsService,
-    private router: Router,
-    private route: ActivatedRoute,
+    private dialog: MatDialog,
     public dialogRef: MatDialogRef<FormEditProductComponent>
   ) {
     this.productForm = this.formBuilder.group({
@@ -71,6 +73,7 @@ export class FormEditProductComponent implements OnInit {
         Validators.maxLength(500),
       ]),
       images: new FormControl([''], [Validators.required]),
+      isDeleted: new FormControl<boolean>(false, [Validators.required]),
     });
   }
 
@@ -110,6 +113,29 @@ export class FormEditProductComponent implements OnInit {
     );
   }
 
+  openSuccessPopUp() {
+    const dialog = this.dialog.open(SuccessPopUpComponent, {
+      data: { text: 'Update Successfully' },
+    });
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+        this.closePopUp();
+      });
+  }
+
+  openErrorPopUp() {
+    const dialog = this.dialog.open(PopUpErrorComponent);
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+      });
+  }
+
   updateProduct() {
     const updatedProductData: IUpdateProduct = {};
     Object.keys(this.productForm.controls).forEach((key: string) => {
@@ -127,8 +153,16 @@ export class FormEditProductComponent implements OnInit {
     console.log(this.product);
     this.productRequestServices
       .updateProductDataRequest(updatedProductData, this.productId)
-      .subscribe((data) => console.log(data));
-    // this.router.navigate(['/dashboard/products']);
-    this.dialogRef.close();
+      .subscribe(
+        (data) => {
+          if (data) {
+            this.openSuccessPopUp();
+          }
+        },
+        (error) => {
+          console.log(error);
+          this.openErrorPopUp();
+        }
+      );
   }
 }

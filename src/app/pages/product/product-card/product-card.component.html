@@ -12,7 +12,7 @@
     </button>
   </div>
   <div class=" card-body p-3 pt-3">
-   
+
     <h5 class="card-title ">{{ prd.title }}</h5>
     <p class="card-text mb-0">Brand: {{ prd.brand }}</p>
     <p class="text">${{ prd.price }}</p>
@@ -21,7 +21,7 @@
         More Details
       </button>
 
-      
+
     </div>
   </div>
 </div> -->
@@ -58,11 +58,18 @@
           <i class="fas fa-shopping-cart" [ngClass]="{'is-in-cart':isClicked}"></i>
         </button>
 
-        <li>
-          <a data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"
-            ><i class="fas fa-heart"></i
-          ></a>
-        </li>
+        <button
+          class="border-0 btnn mx-1"
+          data-modal="modal"
+          data-modal-id="#add-to-cart"
+          data-tooltip="tooltip"
+          data-placement="top"
+          title="Add to Cart"
+          [class.click]="isInWishlist"
+          (click)="toggleWishlist(prd._id)"
+        >
+          <i class="fas fa-heart"></i>
+        </button>
       </ul>
     </div>
   </div>

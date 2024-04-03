@@ -7,9 +7,9 @@ import { IUpdateUser, IUser } from '../../../modles/user.modle';
 export class UserRequestsService {
   constructor(private httpClient: HttpClient) {}
 
-  getAllUsersRequest(pageNumber: number) {
+  getAllUsersRequest() {
     return this.httpClient.get<IUser[]>(
-      `http://localhost:3010/api/v1/users/?page=${pageNumber}`
+      `http://localhost:3010/api/v1/users`
     );
   }
 

@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   allCategories: ICategory[];
-  allProducts: any;
+  allProducts: any = [];
   selectedCategory: ICategory | null;
   product: IProduct;
   cartRequest: Observable<any>;
@@ -126,9 +126,9 @@ export class HomeComponent implements OnInit {
 
   getAllProducts() {
     this.productRequestsServices
-      .getAllProductsRequest(1)
+      .getAllProductsRequest()
       .subscribe((data: any) => {
-        this.allProducts = data.products;
+        this.allProducts = data;
       });
   }
 
@@ -144,7 +144,7 @@ export class HomeComponent implements OnInit {
   // }
 
   showDetails(productId: any) {
-    this.router.navigate(['/productDetails', productId]);
+    this.router.navigate(['/user', 'productDetails', productId]);
   }
 
   onClickNext() {

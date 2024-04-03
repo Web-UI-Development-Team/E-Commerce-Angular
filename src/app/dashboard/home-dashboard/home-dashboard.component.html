@@ -1,24 +1,25 @@
 <div class="container" *ngIf="!isLoading">
   <div class="row d-flex justify-content-between align-items-center">
-    <div
-      class="col-xl-6 col-sm-3 col-12 boxdata"
-      routerLink="/dashboard/products"
-    >
+    <div class="col-xl-6 col-sm-3 col-12 boxdata" routerLink="/admin/products">
       <div class="row d-flex justify-content-between align-items-center">
         <div class="col-xl-6 col-12">
           <p class="title mb-2">Products</p>
-          <span style="font-size: 18px; color: #7f7f7f">30</span>
+          <span style="font-size: 18px; color: #7f7f7f">{{
+            dataLength.productsLength
+          }}</span>
         </div>
         <div class="col-xl-3 col-12">
           <i class="fa-solid fa-laptop icon"></i>
         </div>
       </div>
     </div>
-    <div class="col-xl-6 col-sm-3 col-12 boxdata" routerLink="/dashboard/users">
+    <div class="col-xl-6 col-sm-3 col-12 boxdata" routerLink="/admin/users">
       <div class="row d-flex justify-content-between align-items-center">
         <div class="col-xl-6 col-12">
           <p class="title mb-2">Users</p>
-          <span style="font-size: 18px; color: #7f7f7f">10</span>
+          <span style="font-size: 18px; color: #7f7f7f">{{
+            dataLength.usersLength
+          }}</span>
         </div>
         <div class="col-xl-3 col-12">
           <i class="fa-solid fa-user icon"></i>
@@ -64,9 +65,11 @@
         </div>
 
         <span class="product-o__price"
-          >{{ product.price }}
+          >{{ product.discount }}
 
-          <span class="product-o__discount">{{ product.discount }}</span></span
+          <span class="product-o__discount" *ngIf="product.price !== 0">{{
+            product.price
+          }}</span></span
         >
       </div>
     </div>

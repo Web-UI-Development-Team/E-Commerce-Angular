@@ -1,7 +1,30 @@
 <div class="container h-">
   <div class="row flex-column justify-content-center">
     <div class="col-md-6">
+      <div class="photo-container d-flex justify-content-center">
+        <div
+          [ngStyle]="{
+            'background-image': 'url(' + imageData + ')',
+            'background-size': 'cover',
+            width: '150px',
+            height: '150px',
+            'border-radius': '100px'
+          }"
+        ></div>
+      </div>
+
       <form [formGroup]="updateForm" class="m-3" (ngSubmit)="onSubmit()">
+
+        <div class="d-flex justify-content-center p-2">
+          <input
+            id="fileButton"
+            type="file"
+            alt="user-image"
+            (change)="onFileSelect($event)"
+            name="image"
+            title="upload-image"
+          />
+        </div>
 
         <div class="mb-3">
           <label for="fname" class="form-label">FullName</label>

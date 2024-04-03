@@ -13,31 +13,19 @@
     <tbody *ngIf="!loading">
       <tr *ngFor="let order of allOrders; let i = index" class="">
         <td class="text-center" style="width: 10% !important">
-          <p
-            class="d-inline-block text-truncate"
-            style="max-width: 100px"
-            [title]="order._id"
-          >
+          <p class="d-inline-block text-truncate" style="max-width: 100px" [title]="order._id">
             {{ order._id }}
           </p>
         </td>
         <td class="text-center" style="width: 25% !important">
-          <p
-            [title]="order.user.name"
-            class="d-inline-block text-truncate"
-            style="max-width: 200px"
-          >
+          <p [title]="order.user.name" class="d-inline-block text-truncate" style="max-width: 200px">
             {{ order.user.name }}
           </p>
         </td>
         <td style="width: 25% !important">
           <ul>
             <li *ngFor="let product of order.orderItems">
-              <p
-                [title]="product.title"
-                class="text-truncate"
-                style="max-width: 150px"
-              >
+              <p [title]="product.title" class="text-truncate" style="max-width: 150px">
                 {{ product.title }}
               </p>
             </li>
@@ -50,8 +38,9 @@
           {{ order.dateOfOrder }}
         </td>
         <td>
-          <select name="status" id="status">
-            <option *ngFor="let status of options" [value]="status">
+          <select name="status" id="status" (change)="updateOrderStatus(order._id, getValuesEvent($event))">
+            <option *ngFor="let status of options" [value]="status" [selected]="status === order.status"
+              [style.color]="giveStatusColor(status)">
               {{ status }}
             </option>
           </select>
@@ -79,3 +68,4 @@
     [theme]="{ width: '98%', height: '35px'}"
   ></ngx-skeleton-loader>
 </div>
+

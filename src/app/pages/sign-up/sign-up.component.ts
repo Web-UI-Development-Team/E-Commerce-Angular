@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { error } from 'console';
 import { IRegister } from '../../../modles/auth.modle';
+import { phoneNumberRegex } from '../../regex/phone';
 
 @Component({
   selector: 'app-sign-up',
@@ -27,14 +28,14 @@ export class SignUpComponent {
     private router: Router,
   ) {
     if (localStorage.getItem('token')) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['user','home']);
     }
 
     this.registerForm = fb.group(
       {
         name: ['', [Validators.required, Validators.pattern('[A-Z a-z]{3,}')]],
-        email: ['', [Validators.required, this.existEmailValidator()]],
-        phone: ['', [Validators.required, Validators.pattern('[0-9]{12}')]],
+        email: ['', [Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}') ]],
+        phone: ['', [Validators.required, Validators.pattern(phoneNumberRegex)]],
         image: [''],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],
@@ -85,22 +86,21 @@ export class SignUpComponent {
 
       reader.onload = () => {
         this.imageData = reader.result as String;
-
-        console.log(this.imageData)
       }
 
       reader.readAsDataURL(file);
     }
   }
 
-  existEmailValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      let emailVal: string = control.value;
-      let ValidationErrors = { EmailNotValid: { value: emailVal } };
-      if (emailVal.length == 0 && control.untouched) return null;
-      return emailVal.includes('.com') ? null : ValidationErrors;
-    };
-  }
+  // this.existEmailValidator()
+  // existEmailValidator(): ValidatorFn {
+  //   return (control: AbstractControl): ValidationErrors | null => {
+  //     let emailVal: string = control.value;
+  //     let ValidationErrors = { EmailNotValid: { value: emailVal } };
+  //     if (emailVal.length == 0 && control.untouched) return null;
+  //     return emailVal.includes('.com') ? null : ValidationErrors;
+  //   };
+  // }
 
   passwordMatch(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {

@@ -24,7 +24,7 @@ export class AuthService {
     userData.append('name', user.name);
     userData.append('email', user.email);
     userData.append('password', user.password);
-    userData.append('phone', `201583852538`);
+    userData.append('phone', `${user.phone}`);
     userData.append('image', image);
 
     return this.httpClient.post(
@@ -47,7 +47,9 @@ export class AuthService {
     }
   }
 
-  role(): string {
-    return localStorage.getItem('role') ?? '';
+  role(): any {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('role') ?? '';
+    }
   }
 }

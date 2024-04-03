@@ -34,7 +34,7 @@ export class CategoryRequestsService {
 
   updateCategoryDataRequest(data: IUpdateCategory, _id: string) {
     return this.httpClient.patch<IUpdateCategory>(
-      `http://localhost:3010/api/v1/${_id}`,
+      `http://localhost:3010/api/v1/categories/${_id}`,
       data
     );
   }

@@ -25,10 +25,10 @@
       class="mt-4"
     >
       <ul class="pagination justify-content-center">
-        <li class="page-item" *ngIf="page > 1" style="cursor: pointer">
+        <li class="page-item" *ngIf="selectedPage > 1" style="cursor: pointer">
           <a
             class="page-link"
-            (click)="prevPage(page)"
+            (click)="prevPage(selectedPage)"
             aria-label="Previous"
             style="color: #ff4500"
           >
@@ -37,16 +37,16 @@
           </a>
         </li>
         <li class="page-item">
-          <a class="page-link" style="color: #ff4500">{{ page }}</a>
+          <a class="page-link" style="color: #ff4500">{{ selectedPage }}</a>
         </li>
         <li
           class="page-item"
-          *ngIf="page < pages.length"
+          *ngIf="selectedPage < pages.length"
           style="cursor: pointer"
         >
           <a
             class="page-link"
-            (click)="nextPage(page)"
+            (click)="nextPage(selectedPage)"
             aria-label="Next"
             style="color: #ff4500"
           >

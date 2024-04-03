@@ -11,8 +11,12 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { nameRegex } from '../../../regex/name';
 import { emailRegex } from '../../../regex/email';
 import { phoneNumberRegex } from '../../../regex/phone';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
+import { SuccessPopUpComponent } from '../../../shared/success-pop-up/success-pop-up.component';
+import { take, timer } from 'rxjs';
+import { PopUpErrorComponent } from '../../../shared/pop-up-error/pop-up-error.component';
+import { error } from 'console';
 
 @Component({
   selector: 'app-edit-user',
@@ -29,30 +33,22 @@ export class EditUserComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { userId: string },
     private formBuilder: FormBuilder,
     private userRequestService: UserRequestsService,
-    private router: Router,
-    private route: ActivatedRoute,
+    private dialog: MatDialog,
     public dialogRef: MatDialogRef<EditUserComponent>
   ) {
     this.userForm = this.formBuilder.group({
-      image: new FormControl('', [Validators.required]),
+      imagePath: new FormControl('', [Validators.required]),
       name: new FormControl('', [
         Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(20),
         Validators.pattern(nameRegex),
       ]),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.pattern(emailRegex),
-      ]),
+      email: new FormControl({ value: '', disabled: true }),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
       ]),
       phone: new FormControl('', [
         Validators.required,
-        Validators.minLength(12),
-        Validators.maxLength(12),
         Validators.pattern(phoneNumberRegex),
       ]),
       isAdmin: new FormControl<boolean>(false, [Validators.required]),
@@ -90,6 +86,29 @@ export class EditUserComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  openSuccessPopUp() {
+    const dialog = this.dialog.open(SuccessPopUpComponent, {
+      data: { text: 'Update Successfully' },
+    });
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+        this.closePopUp();
+      });
+  }
+
+  openErrorPopUp() {
+    const dialog = this.dialog.open(PopUpErrorComponent);
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+      });
+  }
+
   getFormControl(controlName: string) {
     return this.userForm.get(controlName);
   }
@@ -109,7 +128,16 @@ export class EditUserComponent implements OnInit {
     this.user = this.userForm.value;
     this.userRequestService
       .updateUserDataRequest(updatedUserData, this.userId)
-      .subscribe((data) => console.log(data));
-    this.router.navigate(['/dashboard/users']);
+      .subscribe(
+        (data) => {
+          if (data) {
+            this.openSuccessPopUp();
+          }
+        },
+        (error) => {
+          console.log(error);
+          this.openErrorPopUp();
+        }
+      );
   }
 }

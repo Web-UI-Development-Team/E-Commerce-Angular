@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
 
   makePurches() {
     this.updateCart();
-    this.router.navigate(['/checkout']);
+    this.router.navigate(['user', 'checkout']);
   }
 
   trackByProductId(index: number, cartItem: ICart): string {

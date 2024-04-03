@@ -11,23 +11,12 @@
           <div
             class="d-flex flex-column justify-content-between align-items-center"
           >
-            <img [src]="user.image" alt="img" style="width: 70%" />
+            <img [src]="user.imagePath" alt="img" style="width: 70%" />
           </div>
-          <button class="btn button">Change Image</button>
-          <!-- <div class="form-group">
-        <label for="image" class="form-label">Image</label>
-        <input
-          type="text"
-          class="form-control"
-          id="image"
-          placeholder="image"
-          formControlName="image"
-        />
-      </div> -->
         </div>
         <div class="col-6">
           <div class="form-group">
-            <label for="name" class="form-label">Name</label>
+            <label for="name" class="form-label label">Name</label>
             <input
               type="text"
               class="form-control"
@@ -41,21 +30,23 @@
               getFormControl('name')?.touched && getFormControl('name')?.errors
             "
           >
-            <div *ngIf="getFormControl('name')?.errors?.['required']">
+            <div
+              class="error"
+              *ngIf="getFormControl('name')?.errors?.['required']"
+            >
               name is required
             </div>
-            <div *ngIf="getFormControl('name')?.errors?.['pattern']">
-              name must be only characters
-            </div>
-            <div *ngIf="getFormControl('name')?.errors?.['minlength']">
-              Min length is
-              {{ getFormControl("name")?.errors?.["minlength"]["requiredLength"] }}
-              but you entered
-              {{ getFormControl("name")?.errors?.["minlength"]["actualLength"] }}
+            <div
+              class="error"
+              *ngIf="getFormControl('name')?.errors?.['pattern']"
+            >
+              Name must be only characters and 3 letters at least ,
+              <b>{{getFormControl("name")?.errors?.['pattern'].actualValue}}</b>
+              , doesn't match
             </div>
           </div>
           <div class="form-group">
-            <label for="email" class="form-label">E-mail</label>
+            <label for="email" class="form-label label">E-mail</label>
             <input
               type="email"
               class="form-control"
@@ -70,21 +61,21 @@
               getFormControl('email')?.errors
             "
           >
-            <div *ngIf="getFormControl('email')?.errors?.['required']">
+            <div
+              class="error"
+              *ngIf="getFormControl('email')?.errors?.['required']"
+            >
               E-mail is required
             </div>
-            <div *ngIf="getFormControl('email')?.errors?.['pattern']">
+            <div
+              class="error"
+              *ngIf="getFormControl('email')?.errors?.['pattern']"
+            >
               Please enter a valid email address.
-            </div>
-            <div *ngIf="getFormControl('email')?.errors?.['minlength']">
-              Min length is
-              {{ getFormControl("email")?.errors?.["minlength"]["requiredLength"] }}
-              but you entered
-              {{ getFormControl("email")?.errors?.["minlength"]["actualLength"] }}
             </div>
           </div>
           <div class="form-group">
-            <label for=" phone" class="form-label">Phone</label>
+            <label for=" phone" class="form-label label">Phone</label>
             <input
               type="text"
               class="form-control"
@@ -99,17 +90,21 @@
               getFormControl('phone')?.errors
             "
           >
-            <div *ngIf="getFormControl('phone')?.errors?.['required']">
+            <div
+              class="error"
+              *ngIf="getFormControl('phone')?.errors?.['required']"
+            >
               phone is required
             </div>
-            <div *ngIf="getFormControl('phone')?.errors?.['pattern']">
-              phone must be only numbers
-            </div>
-            <div *ngIf="getFormControl('phone')?.errors?.['minlength']">
-              Min length is
-              {{ getFormControl("phone")?.errors?.["minlength"]["requiredLength"] }}
-              but you entered
-              {{ getFormControl("phone")?.errors?.["minlength"]["actualLength"] }}
+            <div
+              class="error"
+              *ngIf="getFormControl('phone')?.errors?.['pattern']"
+            >
+              Phone must be only numbers at 12 number at least,
+              <b
+                >{{getFormControl("phone")?.errors?.['pattern'].actualValue}}</b
+              >
+              , don't match
             </div>
           </div>
           <div class="row d-flex align-items-center justify-content-center">

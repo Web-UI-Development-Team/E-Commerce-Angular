@@ -4,7 +4,7 @@ export interface IProfile {
   name: string,
   email: string,
   phone: string,
-  image: string,
+  imagePath: string,
   wishList: IProduct[]
 }
 
@@ -14,7 +14,7 @@ export interface IEditProfile {
   password?: string,
   confirmPassword?: string,
   phone?: string,
-  image?: string,
+  imagePath?: string,
 }
 
 export interface IWishlist {

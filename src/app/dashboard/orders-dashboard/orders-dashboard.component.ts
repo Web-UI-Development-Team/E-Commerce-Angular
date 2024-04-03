@@ -27,8 +27,42 @@ export class OrdersDashboardComponent implements OnInit {
         data.dateOfOrder = data.dateOfOrder.split('T')[0];
         console.log(data.dateOfOrder);
         this.selectedOption = data.status;
-        console.log(this.selectedOption);
+        this.giveStatusColor(data.status);
       });
     });
+  }
+
+  getValuesEvent(event: Event): string {
+    const target = event.target as HTMLSelectElement;
+    console.log(target.value);
+    return target.value;
+  }
+
+  giveStatusColor(status: string): string {
+    switch (status) {
+      case 'Accepted':
+        return '#00CC00';
+      case 'Pending':
+        return '#0080FF';
+      case 'Canceled':
+        return '#FF0000';
+      default:
+        return 'black';
+    }
+  }
+
+  updateOrderStatus(id: string, status: string) {
+    console.log(id);
+    console.log(status);
+    this.ordersRequestsServices
+      .updateOrderStatus(id, { status: status })
+      .subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 }

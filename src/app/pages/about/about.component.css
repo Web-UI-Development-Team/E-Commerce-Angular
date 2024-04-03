@@ -15,3 +15,7 @@ button{
   display: inline-block;
   font-size: 13px;
 }
+
+.btnStyle {
+  background-color: var(--primary);
+}

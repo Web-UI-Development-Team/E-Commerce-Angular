@@ -6,8 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { CategoryRequestsService } from '../../../services/category/category-requests.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ICategory } from '../../../../modles/category';
+import { SuccessPopUpComponent } from '../../../shared/success-pop-up/success-pop-up.component';
+import { take, timer } from 'rxjs';
+import { PopUpErrorComponent } from '../../../shared/pop-up-error/pop-up-error.component';
 
 @Component({
   selector: 'app-add-new-category',
@@ -18,13 +21,14 @@ export class AddNewCategoryComponent {
   constructor(
     private formBuilder: FormBuilder,
     private categoryRequestsService: CategoryRequestsService,
+    private dialog: MatDialog,
     public dialogRef: MatDialogRef<AddNewCategoryComponent>
   ) {}
 
   categoryForm: FormGroup = this.formBuilder.group({
     nameCategory: new FormControl('', [
       Validators.required,
-      Validators.max(500),
+      Validators.minLength(3),
     ]),
     description: new FormControl('', [
       Validators.required,
@@ -50,6 +54,29 @@ export class AddNewCategoryComponent {
     this.dialogRef.close();
   }
 
+  openSuccessPopUp() {
+    const dialog = this.dialog.open(SuccessPopUpComponent, {
+      data: { text: 'Added Successfully' },
+    });
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+        this.closePopup();
+      });
+  }
+
+  openErrorPopUp() {
+    const dialog = this.dialog.open(PopUpErrorComponent);
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+      });
+  }
+
   addNewCategory() {
     if (this.categoryForm.valid) {
       console.log(this.categoryForm.value);
@@ -57,13 +84,16 @@ export class AddNewCategoryComponent {
         .addNewCategoryUpdate(this.categoryForm.value)
         .subscribe(
           (category: ICategory) => {
-            console.log(category);
+            if (category) {
+              console.log(category);
+              this.openSuccessPopUp();
+            }
           },
           (error) => {
+            this.openErrorPopUp();
             console.log(error);
           }
         );
-      this.dialogRef.close();
     } else {
       console.log(this.categoryForm.value);
       console.log('invalid');

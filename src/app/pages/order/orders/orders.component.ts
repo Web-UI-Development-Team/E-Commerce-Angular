@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { OrderRequestService } from '../../../services/order/order-request.service';
+import { phoneNumberRegex } from '../../../regex/phone';
 
 @Component({
   selector: 'app-orders',
@@ -8,25 +10,69 @@ import { FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrl: './orders.component.css',
 })
 export class OrdersComponent {
-  constructor(private router: Router ) {} 
+  constructor(
+    private router: Router,
+    private orderRequestService: OrderRequestService
+  ) {}
 
-    isSubmitted : boolean = false; 
-    UserForm = new FormGroup({
-    firstName: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
-    lastName: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
-    phoneNumber: new FormControl('',[Validators.required,Validators.maxLength(11), Validators.pattern('^[0-9]+$')]),
-    select : new FormControl('',[Validators.required]),
-    city: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]), 
-    state: new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z ]*')]),
-    zip: new FormControl('',[Validators.required , Validators.pattern('^[0-9]+$')]),
-  })
+  isSubmitted: boolean = false;
+  UserForm = new FormGroup({
+    firstName: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[a-zA-Z]{3,20}'),
+    ]),
+    lastName: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[a-zA-Z ]{3,20}'),
+    ]),
+    phoneNumber: new FormControl('', [
+      Validators.required,
+      Validators.pattern(phoneNumberRegex),
+    ]),
+    city: new FormControl('', [Validators.required]),
+    state: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[a-zA-Z ]*'),
+    ]),
+    address: new FormControl('', [Validators.required]),
+    zip: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[0-9]+$'),
+    ]),
+  });
 
-  OnSumbit() { 
-    this.isSubmitted = true ; 
-    if(this.UserForm.invalid){ 
+  orderId: string;
+
+  OnSumbit() {
+    this.isSubmitted = true;
+
+    if (this.UserForm.invalid) {
       console.log('invalid');
-      return
+      return;
     }
-    this.router.navigateByUrl('orderDetails');
+
+    this.orderRequestService
+      .createOrder({
+        fName: this.UserForm.value.firstName,
+        lName: this.UserForm.value.lastName,
+        shippingAddress: this.UserForm.value.address,
+        state: this.UserForm.value.state,
+        city: this.UserForm.value.city,
+        phone: this.UserForm.value.phoneNumber,
+        zip: this.UserForm.value.zip,
+      })
+      .subscribe({
+        next: (data: any) => this.orderId = data._id,
+        error: (error) => console.log(error),
+        complete: () => {
+          this.orderRequestService.checkoutSession(this.orderId).subscribe({
+            next: (stripe: any) => {
+              window.location.href = stripe.url;
+            }
+          })
+        },
+      });
+
+    // this.router.navigateByUrl('orderDetails');
   }
 }

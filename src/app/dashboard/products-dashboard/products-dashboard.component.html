@@ -6,11 +6,10 @@
 
         <input
           class="input-text input-text--border-radius input-text--style-1"
-          type="text"
+          type="search"
           id="main-search"
           placeholder="Search"
           #searchInput
-          [formControl]="searchFormControl"
         />
 
         <button
@@ -18,28 +17,18 @@
           type="submit"
         ></button>
       </form>
-
-      <!-- <form class="form-outline" data-mdb-input-init>
-        <input
-          id="search-focus"
-          placeholder="{{ 'Search' | translate }}"
-          [formControl]="searchFormControl"
-          type="search"
-          id="form1"
-          class="form-control"
-        />
-      </form> -->
     </div>
     <div class="col-xl-3 col-sm-3 col-12">
       <button class="btn button" (click)="openAddProductPopup()">
-        Add New User
+        Add New Product
       </button>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-5">
     <div
-      class="col-xl-4 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item products headphone mt-4"
-      *ngFor="let product of allProducts"
+      class="col-xl-3 col-lg-4 col-md-6 col-sm-12 u-s-m-b-30 filter__item products headphone mt-4"
+      *ngFor="let product of products"
+      [class.deleted-product]="product.isDeleted"
     >
       <div class="product-o product-o--hover-on product-o--radius">
         <div class="product-o__wrap">
@@ -53,6 +42,9 @@
               </li>
               <li (click)="deleteProduct(product)">
                 <a><i class="fa-solid fa-trash"></i></a>
+              </li>
+              <li (click)="gotoProductDetails(product._id)">
+                <a><i class="fa-solid fa-circle-info"></i></a>
               </li>
             </ul>
           </div>
@@ -84,10 +76,10 @@
     style="bottom: 0; left: 0; right: 0"
   >
     <ul class="pagination justify-content-center">
-      <li class="page-item" *ngIf="page > 1" style="cursor: pointer">
+      <li class="page-item" *ngIf="selectedPage > 1" style="cursor: pointer">
         <a
           class="page-link"
-          (click)="prevPage(page)"
+          (click)="prevPage(selectedPage)"
           aria-label="Previous"
           style="color: #ff4500"
         >
@@ -96,12 +88,16 @@
         </a>
       </li>
       <li class="page-item">
-        <a class="page-link" style="color: #ff4500">{{ page }}</a>
+        <a class="page-link" style="color: #ff4500">{{ selectedPage }}</a>
       </li>
-      <li class="page-item" *ngIf="page < pages.length" style="cursor: pointer">
+      <li
+        class="page-item"
+        *ngIf="selectedPage < pages.length"
+        style="cursor: pointer"
+      >
         <a
           class="page-link"
-          (click)="nextPage(page)"
+          (click)="nextPage(selectedPage)"
           aria-label="Next"
           style="color: #ff4500"
         >

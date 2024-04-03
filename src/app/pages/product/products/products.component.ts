@@ -5,6 +5,7 @@ import { CartRequestService } from '../../../services/cart/cart.request.service'
 import { ProductsRequestsService } from '../../../services/product/products-requests.service';
 import { ICart } from '../../../../modles/cart.modle';
 import { range } from '../../../utils/range';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-products',
@@ -14,7 +15,6 @@ import { range } from '../../../utils/range';
 export class ProductsComponent implements OnInit {
   constructor(
     private productRequestServices: ProductsRequestsService,
-    private productService: ProductsRequestsService,
     private router: Router,
     private cartReqService: CartRequestService
   ) {}
@@ -35,36 +35,41 @@ export class ProductsComponent implements OnInit {
       reviews: [''],
       createdAt: '',
       updatedAt: '',
+      isDeleted: false,
     },
     quantity: 0,
   };
-  
+
   clickedButtonIndex: number | null = null;
   products: IProduct[] = [];
+  allProducts: IProduct[] = [];
   loading: boolean = false;
+
   numberOfPages: number;
   pages: any = [];
-  page: number;
+  pageSize: number = 8;
+  pageStartIndex: number;
+  selectedPage = 1;
 
-  ngOnInit(): void {
+  ngOnInit() {
     // this.loading==false
     this.getProducts();
   }
 
   sortProductByPrice() {
-    this.products.sort((a, b) => a.price - b.price);
+    this.allProducts.sort((a, b) => a.price - b.price);
   }
   getProducts() {
     this.loading = true;
 
-    this.productRequestServices.getAllProductsRequest(1).subscribe(
+    this.productRequestServices.getAllProductsRequest().subscribe(
       (res: any) => {
         // console.log(res);
-        this.products = res.products;
-        this.loading = false;
-        this.numberOfPages = res.pages;
-        this.page = 1;
+        this.allProducts = res;
+        this.numberOfPages = Math.ceil(this.allProducts.length / this.pageSize);
+        this.pagination(this.selectedPage);
         this.pages = range(this.numberOfPages);
+        this.loading = false;
       },
       (err) => {
         alert(err.message);
@@ -75,23 +80,24 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  currentPage(pageNumber: number) {
-    this.productRequestServices
-      .getAllProductsRequest(pageNumber)
-      .subscribe((data: any) => {
-        console.log(data);
-        this.products = data.products;
-      });
+  pagination(selectedPage: number) {
+    const pageStartIndex = this.pageSize * (selectedPage - 1);
+    this.products = this.allProducts.slice(
+      pageStartIndex,
+      pageStartIndex + this.pageSize
+    );
+    console.log(this.products);
   }
 
-  nextPage(pageNumber: number) {
-    this.page = pageNumber + 1;
-    this.currentPage(this.page);
+  nextPage(currentPagePage: number) {
+    console.log(currentPagePage);
+    this.selectedPage = currentPagePage + 1;
+    this.pagination(this.selectedPage);
   }
 
-  prevPage(pageNumber: number) {
-    console.log(pageNumber);
-    this.page = pageNumber - 1;
-    this.currentPage(this.page);
+  prevPage(currentPage: number) {
+    console.log(currentPage);
+    this.selectedPage = currentPage - 1;
+    this.pagination(this.selectedPage);
   }
 }

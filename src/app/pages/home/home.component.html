@@ -28,8 +28,8 @@
       </div>
 
       <div class="arrows">
-        <button id="prev" (click)="onClickPrev()"></button>
-        <button id="next" (click)="onClickNext()"></button>
+        <button id="prev" (click)="onClickPrev()"><</button>
+        <button id="next" (click)="onClickNext()">></button>
       </div>
     </div>
   </div>
@@ -87,8 +87,8 @@
       </div>
       <div class="row">
         <div
-          class="col-xl-4 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item products headphone mt-3"
-          *ngFor="let product of allProducts"
+          class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item products headphone mt-3"
+          *ngFor="let product of allProducts.slice(0, 8)"
         >
           <div class="product-o product-o--hover-on product-o--radius">
             <div class="product-o__wrap">
@@ -123,6 +123,17 @@
                       [ngClass]="{ 'is-in-cart': isClicked }"
                     ></i>
                   </button>
+                  <li>
+                    <a
+                      data-modal="modal"
+                      data-modal-id="#add-to-cart"
+                      data-tooltip="tooltip"
+                      data-placement="top"
+                      title="Add to Cart"
+                      (click)="addProductToCart(product._id)"
+                      ><i class="fas fa-shopping-cart"></i
+                    ></a>
+                  </li>
                   <li>
                     <a
                       data-tooltip="tooltip"
@@ -162,7 +173,8 @@
         <div class="col-lg-12">
           <div class="load-more">
             <button class="btn btn--e-brand" type="button">
-              <a class="text-decoration-none text-white" routerLink="/products"
+
+              <a class="text-decoration-none text-white" routerLink="/user/products"
                 >Load More</a
               >
             </button>

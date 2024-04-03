@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 export class ProductsRequestsService {
   constructor(private httpClient: HttpClient) {}
 
-  getAllProductsRequest(pageNumber: number) {
+  getAllProductsRequest() {
     return this.httpClient.get<IProduct[]>(
-      `http://localhost:3010/api/v1/products/?page=${pageNumber}`
+      `http://localhost:3010/api/v1/products/`
     );
   }
 
@@ -28,10 +28,24 @@ export class ProductsRequestsService {
   }
 
   addNewProductRequest(data: IProduct) {
-    console.log(data);
+    const productData = new FormData();
+
+    productData.append('title', data.title);
+    productData.append('description', data.description);
+    productData.append('brand', data.brand);
+    productData.append('price', `${data.price}`);
+    productData.append('discount', `${data.discount}`);
+    productData.append('stock', `${data.stock}`);
+    productData.append('category', data.category);
+    productData.append('productImages', data.thumbnail);
+
+    for (let i = 0; i < data.images.length; i++) {
+      productData.append('productImages', data.images[i]);
+    }
+
     return this.httpClient.post<IProduct>(
       'http://localhost:3010/api/v1/products',
-      data
+      productData
     );
   }
 

@@ -35,6 +35,7 @@ export class CartItemComponent implements OnInit {
       reviews: [''],
       createdAt: '',
       updatedAt: '',
+      isDeleted: false
     },
     quantity: 0,
   };
@@ -92,6 +93,6 @@ export class CartItemComponent implements OnInit {
   }
 
   showDetails(productId: any) {
-    this.router.navigate(['/productDetails', productId]);
+    this.router.navigate(['/user', 'productDetails', productId]);
   }
 }

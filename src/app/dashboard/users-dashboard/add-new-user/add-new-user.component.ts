@@ -11,7 +11,10 @@ import { emailRegex } from '../../../regex/email';
 import { phoneNumberRegex } from '../../../regex/phone';
 import { IUser } from '../../../../modles/user.modle';
 import { nameRegex } from '../../../regex/name';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SuccessPopUpComponent } from '../../../shared/success-pop-up/success-pop-up.component';
+import { take, timer } from 'rxjs';
+import { PopUpErrorComponent } from '../../../shared/pop-up-error/pop-up-error.component';
 
 @Component({
   selector: 'app-add-new-user',
@@ -19,22 +22,20 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './add-new-user.component.css',
 })
 export class AddNewUserComponent {
+  imageData: String =
+    'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png';
+
   constructor(
     private formBuilder: FormBuilder,
     private userRequestService: UserRequestsService,
-    private router: Router,
+    private dialog: MatDialog,
     public dialogRef: MatDialogRef<AddNewUserComponent>
   ) {}
 
   userForm: FormGroup = this.formBuilder.group({
-    image: new FormControl(
-      'https://www.nbc.com/sites/nbcblog/files/styles/scale_862/public/2023/07/rainn-wilson-the-office2.jpg',
-      [Validators.required]
-    ),
+    imagePath: new FormControl(''),
     name: new FormControl('', [
       Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
       Validators.pattern(nameRegex),
     ]),
     email: new FormControl('', [
@@ -47,8 +48,6 @@ export class AddNewUserComponent {
     ]),
     phone: new FormControl('', [
       Validators.required,
-      Validators.minLength(12),
-      Validators.maxLength(12),
       Validators.pattern(phoneNumberRegex),
     ]),
     isAdmin: new FormControl<boolean>(false, [Validators.required]),
@@ -56,7 +55,7 @@ export class AddNewUserComponent {
   });
 
   initialFormValues = {
-    image: '',
+    imagePath: '',
     name: '',
     email: '',
     phone: '',
@@ -71,8 +70,54 @@ export class AddNewUserComponent {
     return this.userForm.get(controlName);
   }
 
+  onFileSelect(event: Event) {
+    let file = (event.target as HTMLInputElement).files?.[0];
+
+    const allowedMimeTypes = [
+      'image/png',
+      'image/jpeg',
+      'image/jpg',
+      'image/webp',
+    ];
+
+    this.userForm.patchValue({ imagePath: file });
+
+    if (file && allowedMimeTypes.includes(file.type)) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageData = reader.result as string;
+
+        console.log(this.imageData);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   closePopUp() {
     this.dialogRef.close();
+  }
+
+  openSuccessPopUp() {
+    const dialog = this.dialog.open(SuccessPopUpComponent, {
+      data: { text: 'Added Successfully' },
+    });
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+        this.closePopUp();
+      });
+  }
+
+  openErrorPopUp() {
+    const dialog = this.dialog.open(PopUpErrorComponent);
+
+    timer(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        dialog.close();
+      });
   }
 
   addNewUser() {
@@ -80,13 +125,16 @@ export class AddNewUserComponent {
       console.log(this.userForm.value);
       this.userRequestService.addNewUserRequest(this.userForm.value).subscribe(
         (user: IUser) => {
-          console.log(user);
+          if (user) {
+            console.log(user);
+            this.openSuccessPopUp();
+          }
         },
         (error) => {
+          this.openErrorPopUp();
           console.log(error);
         }
       );
-      this.dialogRef.close();
     } else {
       console.log(this.userForm.value);
       console.log('invalid');

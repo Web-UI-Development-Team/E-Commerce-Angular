@@ -32,7 +32,7 @@
         </td>
         <!-- ///// -->
         <td>{{ order.dateOfOrder | date:"MM/dd" }}</td>
-        <td>{{ order.status }}</td>
+        <td [ngClass] = "{'active' : order.status === 'Accepted' , 'pending' : order.status === 'Pending' , 'cancled' :order.status === 'Canceled'} ">{{ order.status }}</td>
         <td>{{ order.totalPrice }}</td>
       </tr>
     </tbody>

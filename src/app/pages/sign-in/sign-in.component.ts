@@ -10,6 +10,7 @@ import {
 import { ILogin } from '../../../modles/auth.modle';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { error } from 'console';
 
 @Component({
   selector: 'app-sign-in',
@@ -28,10 +29,10 @@ export class SignInComponent {
     if(typeof window !== 'undefined')
     {
       if (localStorage.getItem('token')) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/user/home']);
       }
       this.loginForm = formBuilder.group({
-        email: ['', Validators.required],
+        email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}')] ],
         password: ['', Validators.required],
       });
     }
@@ -45,14 +46,14 @@ export class SignInComponent {
     return this.loginForm.get('password');
   }
 
-  existEmailValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      let emailVal: string = control.value;
-      let ValidationErrors = { EmailNotValid: { value: emailVal } };
-      if (emailVal.length == 0 && control.untouched) return null;
-      return emailVal.includes('@gmail.com') ? null : ValidationErrors;
-    };
-  }
+  // existEmailValidator(): ValidatorFn {
+  //   return (control: AbstractControl): ValidationErrors | null => {
+  //     let emailVal: string = control.value;
+  //     let ValidationErrors = { EmailNotValid: { value: emailVal } };
+  //     if (emailVal.length == 0 && control.untouched) return null;
+  //     return emailVal.includes('@gmail.com') ? null : ValidationErrors;
+  //   };
+  // }
 
   submit() {
     const user = this.loginForm.value as ILogin;
@@ -61,7 +62,14 @@ export class SignInComponent {
       next: (data) => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', `${data.role}`);
-        this.router.navigate(['home']);
+
+        if(data.role !== 'admin')
+        {
+          this.router.navigate(['user', 'home']);
+        } else {
+          this.router.navigate(['admin', 'homedashboard']);
+        }
+
       },
       error: (error) => this.isFaild = true,
       complete: () => {
@@ -69,4 +77,5 @@ export class SignInComponent {
       },
     });
   }
+
 }
