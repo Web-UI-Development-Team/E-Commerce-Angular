@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
   }
 
   showDetails(productId: any) {
-    this.router.navigate(['/productDetails', productId]);
+    this.router.navigate(['/user', 'productDetails', productId]);
   }
 
   onClickNext() {

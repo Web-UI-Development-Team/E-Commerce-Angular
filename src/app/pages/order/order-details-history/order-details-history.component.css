@@ -44,7 +44,21 @@ fa-icon {
   line-height: 25px;
   margin-left: 16px;
 }
+.active {
+  color: green;
+  font-weight: bold;
+
+}
+.pending {
+  color: rgb(245, 245, 15);
+  font-weight: bold;
+
+}
+.cancled {
+  color: red;
+  font-weight: bold;
+}
 
 .product {
-  font-weight: bold;
+font-weight: bold;
 }

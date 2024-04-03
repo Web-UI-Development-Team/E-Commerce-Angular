@@ -1,4 +1,10 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { IProduct } from '../../../../modles/product.modle';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsRequestsService } from '../../../services/product/products-requests.service';
@@ -19,21 +25,23 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private activatedRouter: ActivatedRoute,
     private router: Router,
     private productsRequestsService: ProductsRequestsService
-  ) {
-    this.subscription = this.activatedRouter.params.subscribe({
-      next: (data) => this.getProductById(data['id'])
-    })
-  }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe()
-  }
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;
+
+    this.subscription = this.activatedRouter.params.subscribe({
+      next: (data) => this.getProductById(data['id']),
+    });
+
     const productId = this.activatedRouter.snapshot.paramMap.get('id');
     console.log(productId);
 
     this.getProductById(productId);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   getProductById(id: any) {

@@ -25,6 +25,10 @@ input.ng-invalid.ng-touched {
   border-color: rgb(217, 9, 9);
 }
 
+.img {
+  width: 90%;
+}
+
 /* .pop-up {
   width: 350px;
   height: 200px;
@@ -59,5 +63,5 @@ p {
 
 /* #formCenter{
   margin-left: 200px;
-  
+
 } */

@@ -28,13 +28,13 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription$.add(
       this.orderService.getOrdersUser().subscribe((data) => {
-        data = data.filter((order) => order.status !== 'Cancled');
+        data = data.filter((order) => order.status === 'Pending');
         this.orders = data;
         console.log(data);
       })
     );
   } //oninit
-  
+
   onCancelOrder(orderId: string, status: string) {
     this.popUpService
       .openDialog('Do you want to cancel this order ?')

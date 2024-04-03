@@ -93,6 +93,6 @@ export class CartItemComponent implements OnInit {
   }
 
   showDetails(productId: any) {
-    this.router.navigate(['/productDetails', productId]);
+    this.router.navigate(['/user', 'productDetails', productId]);
   }
 }

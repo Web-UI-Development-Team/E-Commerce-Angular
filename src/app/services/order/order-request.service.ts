@@ -17,4 +17,15 @@ export class OrderRequestService {
       data
     );
   }
+
+  createOrder(body: any) {
+    return this.httpClient.post('http://localhost:3010/api/v1/orders', body);
+  }
+
+  checkoutSession(orderId: string) {
+    return this.httpClient.post(
+      'http://localhost:3010/api/v1/stripe/create-checkout-session',
+      { orderId }
+    );
+  }
 }
