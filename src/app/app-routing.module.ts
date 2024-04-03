@@ -30,41 +30,46 @@ import { AdminGuard } from './services/guards/admin-guard.service';
 import { OrderDetailsHistoryComponent } from './pages/order/order-details-history/order-details-history.component';
 import { UserComponent } from './components/user/user.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { ProductDetailsDashboardComponent } from './dashboard/products-dashboard/product-details-dashboard/product-details-dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/user/home', pathMatch: 'full' },
   { path: 'signIn', component: SignInComponent },
   { path: 'signUp', component: SignUpComponent },
 
-  {path: 'user', component: UserComponent, children: [
-    { path: 'home', component: HomeComponent },
-    { path: 'products', component: ProductsComponent },
-    { path: 'productDetails/:id', component: ProductDetailsComponent },
-    {
-      path: 'profile',
-      component: UserProfileComponent,
+  {
+    path: 'user',
+    component: UserComponent,
+    children: [
+      { path: 'home', component: HomeComponent },
+      { path: 'products', component: ProductsComponent },
+      { path: 'productDetails/:id', component: ProductDetailsComponent },
+      {
+        path: 'profile',
+        component: UserProfileComponent,
 
-      children: [
-        {
-          path: 'account',
-          component: AccountComponent,
-          children: [{ path: 'edit', component: UserFormComponent }],
-        },
-        { path: 'orders', component: OrderDetailsComponent },
-        { path: 'orders-history', component: OrderDetailsHistoryComponent },
-        { path: 'wish-list', component: WishListComponent },
-      ],
-    },
-    { path: 'cart',  component: CartComponent },
-    {
-      path: 'contactUs',
+        children: [
+          {
+            path: 'account',
+            component: AccountComponent,
+            children: [{ path: 'edit', component: UserFormComponent }],
+          },
+          { path: 'orders', component: OrderDetailsComponent },
+          { path: 'orders-history', component: OrderDetailsHistoryComponent },
+          { path: 'wish-list', component: WishListComponent },
+        ],
+      },
+      { path: 'cart', component: CartComponent },
+      {
+        path: 'contactUs',
 
-      component: ContactUsComponent,
-    },
-    { path: 'checkout',  component: OrdersComponent },
+        component: ContactUsComponent,
+      },
+      { path: 'checkout', component: OrdersComponent },
 
-    { path: 'about', component: AboutComponent }
-  ]},
+      { path: 'about', component: AboutComponent },
+    ],
+  },
   {
     path: 'admin',
     component: AdminComponent,
@@ -112,6 +117,11 @@ const routes: Routes = [
         component: EditUserComponent,
       },
     ],
+  },
+  {
+    path: 'productDtailsDashboard/:id',
+    component: ProductDetailsDashboardComponent,
+    canActivate: [AdminGuard],
   },
   { path: '**', component: NotFound404Component },
 ];

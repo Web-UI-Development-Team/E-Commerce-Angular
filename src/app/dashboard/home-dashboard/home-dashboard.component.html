@@ -6,7 +6,7 @@
           <p class="title mb-2">Products</p>
           <span style="font-size: 18px; color: #7f7f7f">{{
             dataLength.productsLength
-            }}</span>
+          }}</span>
         </div>
         <div class="col-xl-3 col-12">
           <i class="fa-solid fa-laptop icon"></i>
@@ -19,7 +19,7 @@
           <p class="title mb-2">Users</p>
           <span style="font-size: 18px; color: #7f7f7f">{{
             dataLength.usersLength
-            }}</span>
+          }}</span>
         </div>
         <div class="col-xl-3 col-12">
           <i class="fa-solid fa-user icon"></i>
@@ -28,16 +28,21 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item products headphone mt-4"
-      *ngFor="let product of allProducts.slice(0, 3)">
+    <div
+      class="col-xl-4 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item products headphone mt-4"
+      *ngFor="let product of allProducts.slice(0, 3)"
+    >
       <div class="product-o product-o--hover-on product-o--radius">
         <div class="product-o__wrap">
           <a class="aspect aspect--bg-grey aspect--square u-d-block">
-            <img class="aspect__img" [src]="product.images[0]" alt="image" /></a>
+            <img class="aspect__img" [src]="product.images[0]" alt="image"
+          /></a>
           <div class="product-o__action-wrap">
             <ul class="product-o__action-list">
               <li>
-                <a (click)="openEditProductPopup(product)"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a (click)="openEditProductPopup(product)"
+                  ><i class="fa-solid fa-pen-to-square"></i
+                ></a>
               </li>
               <li>
                 <a><i class="fa-solid fa-trash"></i></a>
@@ -48,21 +53,24 @@
 
         <span class="product-o__category">{{
           product.category.nameCategory
-          }}</span>
+        }}</span>
 
         <span class="product-o__name">{{ product.title }}</span>
         <div class="product-o__rating gl-rating-style">
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-            class="fas fa-star-half-alt"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i
+          ><i class="fas fa-star"></i><i class="fas fa-star"></i
+          ><i class="fas fa-star-half-alt"></i>
 
           <span class="product-o__review">(23)</span>
         </div>
 
-        <span class="product-o__price">{{ product.discount }}
+        <span class="product-o__price"
+          >{{ product.discount }}
 
           <span class="product-o__discount" *ngIf="product.price !== 0">{{
             product.price
-            }}</span></span>
+          }}</span></span
+        >
       </div>
     </div>
   </div>

@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 export class ProductsRequestsService {
   constructor(private httpClient: HttpClient) {}
 
-  getAllProductsRequest(pageNumber: number) {
+  getAllProductsRequest() {
     return this.httpClient.get<IProduct[]>(
-      `http://localhost:3010/api/v1/products/?page=${pageNumber}`
+      `http://localhost:3010/api/v1/products/`
     );
   }
 
@@ -40,7 +40,7 @@ export class ProductsRequestsService {
 
     for (let i = 0; i < data.images.length; i++) {
       productData.append('images', data.images[i]);
-      console.log(data.images[i])
+      console.log(data.images[i]);
     }
 
     console.log(data);
