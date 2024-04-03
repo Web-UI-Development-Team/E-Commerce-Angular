@@ -28,7 +28,6 @@ import { Router } from '@angular/router';
   styleUrl: './products-dashboard.component.css',
 })
 export class ProductsDashboardComponent implements OnInit, AfterViewInit {
-  products$: Observable<any>;
   products$: any;
 
   @ViewChild('searchInput', { static: true }) input: ElementRef;

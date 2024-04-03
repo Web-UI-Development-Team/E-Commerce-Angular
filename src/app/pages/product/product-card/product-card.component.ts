@@ -59,7 +59,7 @@ export class ProductCardComponent implements OnInit {
       this.isInWishlist = true;
     }
   }
-  
+
   showDetails(productId: any) {
     this.router.navigate(['/user','productDetails', productId]);
   }
@@ -98,10 +98,6 @@ export class ProductCardComponent implements OnInit {
       (cart) => cart.product._id
     );
   }
-
-  showDetails(productId: any) {
-    this.router.navigate(['/productDetails', productId]);
-  }
 
   toggleWishlist(productId: string) {
     if(!localStorage.getItem('token')){

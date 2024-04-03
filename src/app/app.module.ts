@@ -121,7 +121,7 @@ import { ProductDetailsDashboardComponent } from './dashboard/products-dashboard
     ReactiveFormsModule,
     CommonModule,
     MatDialogModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
     MatIconModule
   ],
   providers: [
