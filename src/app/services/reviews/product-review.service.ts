@@ -7,7 +7,17 @@ import { Reviews } from '../../../modles/review.modle';
 export class ProductReviewService {
 
   constructor(private http : HttpClient) { }
-  getAllreviews(productId:string){
-    return this.http.get<Reviews[]>(`http://localhost:3010/api/v1/products/65f65b6cbc8b5a64c143026c/reviews`);
+
+  getreviewsById(productId:string){
+    return this.http.get<Reviews[]>(`http://localhost:3010/api/v1/products/${productId}/reviews`);
+  }
+  //
+  removeDelete(productId:string){
+    return this.http.delete<Reviews[]>(`http://localhost:3010/api/v1/products/${productId}/reviews`);
+  }
+  //
+  addNewReview(productId:string,reviews:Reviews){
+    return this.http.post<Reviews[]>(`http://localhost:3010/api/v1/products/${productId}/reviews`,reviews);
   }
 }
+// 65f65b6cbc8b5a64c143026c

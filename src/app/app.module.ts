@@ -50,6 +50,7 @@ import { PopUpComponent } from './pages/order/pop-up/pop-up.component';
 import { ProductReviewsComponent } from './pages/product/product-reviews/product-reviews.component';
 import { AddNewCategoryComponent } from './dashboard/categories-dashboard/add-new-category/add-new-category.component';
 import { EditCategoryComponent } from './dashboard/categories-dashboard/edit-category/edit-category.component';
+import {MatIconModule} from '@angular/material/icon';
 import { WishListItemComponent } from './pages/user-profile/wish-list/wish-list-item/wish-list-item.component';
 import { DropMenuComponent } from './shared/nav-bar/drop-menu/drop-menu.component';
 import { OrderDetailsHistoryComponent } from './pages/order/order-details-history/order-details-history.component';
@@ -111,6 +112,7 @@ import { AdminComponent } from './components/admin/admin.component';
     ReactiveFormsModule,
     CommonModule,
     MatDialogModule,
+    MatIconModule
   ],
   providers: [
     provideClientHydration(),
