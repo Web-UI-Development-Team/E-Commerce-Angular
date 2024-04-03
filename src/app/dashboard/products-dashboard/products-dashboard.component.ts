@@ -103,7 +103,7 @@ export class ProductsDashboardComponent implements OnInit, AfterViewInit {
         .getAllProductsRequest()
         .subscribe((data: any) => {
           console.log(data);
-          this.allProducts = data;
+          this.allProducts = data.filter((product: any) => !product.isDeleted);
           this.numberOfPages = Math.ceil(
             this.allProducts.length / this.pageSize
           );
@@ -149,6 +149,8 @@ export class ProductsDashboardComponent implements OnInit, AfterViewInit {
   deleteProduct(product: IProduct) {
     product.isDeleted = true;
     console.log(product.isDeleted);
+
+    console.log(product)
     this.productRequestsServices
       .updateProductDataRequest({ isDeleted: product.isDeleted }, product._id)
       .subscribe((data) => {
