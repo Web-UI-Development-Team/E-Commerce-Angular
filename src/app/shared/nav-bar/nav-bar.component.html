@@ -12,6 +12,7 @@
         <!-- Left elements -->
 
         <!-- Center elements -->
+
         <div class="order-lg-last col-3  col-md-2 icons">
           <a [routerLink]="isAuth ? '/user/profile/account' : '/signIn'" class="nav-icon">
             <i class="fas fa-user-alt m-1 me-md-2"></i>
@@ -19,8 +20,8 @@
 
           <div class="divider"></div>
 
-          <div class="position-relative">
-            <a routerLink="/user/cart" *ngIf="isAuth" class="nav-icon">
+          <div class="position-relative" *ngIf="isAuth && role === 'user'" >
+            <a routerLink="/user/cart"class="nav-icon">
               <i class="fas fa-shopping-cart m-1 me-md-2"></i>
             </a>
             <div *ngIf="isAuth" class="cart">{{cartService.cartItems.length}}</div>
@@ -86,7 +87,7 @@
             <a class="nav-link" routerLink="/user/about" routerLinkActive="active">ABOUT</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/user/contactUs" routerLinkActive="active" *ngIf="isAuth">CONTACT US</a>
+            <a class="nav-link" routerLink="/user/contactUs" routerLinkActive="active" *ngIf="isAuth && role === 'user'">CONTACT US</a>
           </li>
         </ul>
         <!-- Left links -->

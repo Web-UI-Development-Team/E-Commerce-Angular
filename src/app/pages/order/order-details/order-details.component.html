@@ -1,6 +1,7 @@
 
 <div class="parent">
   <h2>Order <span>details</span></h2>
+  
 
   <table class="table">
     <thead>
@@ -35,7 +36,8 @@
         </td>
         <!-- ///// -->
         <td>{{ order.dateOfOrder | date:"MM/dd" }}</td>
-        <td>{{ order.status }}</td>
+        <!-- <div [ngClass]="isActive ? 'active' : 'inactive'"></div> -->
+        <td [ngClass] = "{'active' : order.status === 'Accepted' , 'pending' : order.status === 'Pending' , 'cancled' :order.status === 'Canceled'} ">{{ order.status }}</td>
         <td>{{ order.totalPrice }}</td>
         <td>
           <fa-icon [icon]="faX" (click)="onCancelOrder(order._id,'cancled')"></fa-icon>

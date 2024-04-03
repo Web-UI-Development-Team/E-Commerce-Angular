@@ -46,6 +46,8 @@ const routes: Routes = [
       { path: 'productDetails/:id', component: ProductDetailsComponent },
       {
         path: 'profile',
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         component: UserProfileComponent,
 
         children: [
@@ -59,13 +61,17 @@ const routes: Routes = [
           { path: 'wish-list', component: WishListComponent },
         ],
       },
-      { path: 'cart', component: CartComponent },
+      { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
       {
         path: 'contactUs',
-
+        canActivate: [AuthGuard],
         component: ContactUsComponent,
       },
-      { path: 'checkout', component: OrdersComponent },
+      {
+        path: 'checkout',
+        component: OrdersComponent,
+        canActivate: [AuthGuard],
+      },
 
       { path: 'about', component: AboutComponent },
     ],
@@ -74,6 +80,7 @@ const routes: Routes = [
     path: 'admin',
     component: AdminComponent,
     canActivate: [AdminGuard],
+    canActivateChild: [AdminGuard],
     children: [
       {
         path: '',

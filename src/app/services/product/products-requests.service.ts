@@ -34,16 +34,15 @@ export class ProductsRequestsService {
     productData.append('description', data.description);
     productData.append('brand', data.brand);
     productData.append('price', `${data.price}`);
+    productData.append('discount', `${data.discount}`);
     productData.append('stock', `${data.stock}`);
     productData.append('category', data.category);
-    productData.append('thumbnail', data.thumbnail);
+    productData.append('productImages', data.thumbnail);
 
     for (let i = 0; i < data.images.length; i++) {
-      productData.append('images', data.images[i]);
-      console.log(data.images[i]);
+      productData.append('productImages', data.images[i]);
     }
 
-    console.log(data);
     return this.httpClient.post<IProduct>(
       'http://localhost:3010/api/v1/products',
       productData

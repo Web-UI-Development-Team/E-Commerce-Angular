@@ -24,6 +24,7 @@ input.ng-invalid.ng-touched {
 .is-invalid {
   border-color: rgb(217, 9, 9);
 }
+
 /* .pop-up {
   width: 350px;
   height: 200px;
