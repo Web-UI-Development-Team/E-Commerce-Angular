@@ -10,9 +10,9 @@ import { IProduct } from '../../../modles/product.modle';
 export class CartRequestService {
   constructor(private http: HttpClient) {}
 
-  addToCart(product: string) {
+  addToCart(product: string,quantity=1) {
     console.log(product);
-    return this.http.post('http://localhost:3010/api/v1/cart/add', { product });
+    return this.http.post('http://localhost:3010/api/v1/cart/add', { product,quantity });
   }
 
   getUserCartRequest(): Observable<ICart[]> {

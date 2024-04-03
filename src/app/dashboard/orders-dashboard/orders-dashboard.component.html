@@ -10,7 +10,7 @@
         <th class="text-center" scope="col-2">Status</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="!loading">
       <tr *ngFor="let order of allOrders; let i = index" class="">
         <td class="text-center" style="width: 10% !important">
           <p class="d-inline-block text-truncate" style="max-width: 100px" [title]="order._id">
@@ -50,3 +50,22 @@
     </tbody>
   </table>
 </div>
+
+<!-- <ngx-skeleton-loader
+  *ngIf="loading"
+  count="1"
+  appearance="line"
+  [theme]="{ height: '70px' }"
+></ngx-skeleton-loader> -->
+
+
+<div style="padding-left: 15px;">
+  <ngx-skeleton-loader
+    *ngIf="loading"
+    
+    count="8"
+    appearance="line"
+    [theme]="{ width: '98%', height: '35px'}"
+  ></ngx-skeleton-loader>
+</div>
+

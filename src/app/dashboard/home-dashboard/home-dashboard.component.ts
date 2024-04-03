@@ -12,6 +12,8 @@ import { AdminService } from '../../services/admin/admin.service';
 })
 export class HomeDashboardComponent implements OnInit {
   allProducts: any;
+
+  isLoading:boolean=false;
   dataLength: any;
   priceAfterDiscount: any = [];
 
@@ -22,21 +24,28 @@ export class HomeDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoading=true;
+
     this.adminServices.getDataLength().subscribe((data) => {
       this.dataLength = data;
     });
+
     this.productRequestsServices
       .getAllProductsRequest()
       .subscribe((data: any) => {
         console.log(data);
         this.allProducts = data;
         console.log(this.allProducts);
+        this.isLoading=false;
       });
   }
 
   openEditProductPopup(product: IProduct) {
+   
     this.dialog.open(FormEditProductComponent, {
+     
       data: { productId: product._id },
     });
+   
   }
 }

@@ -26,7 +26,7 @@
   </div>
 </div> -->
 
-<div class="product-o product-o--hover-on product-o--radius">
+<div class="product-o product-o--hover-on product-o--radius mt-5">
   <div class="product-o__wrap">
     <a class="aspect aspect--bg-grey aspect--square u-d-block">
       <img class="aspect__img" src="{{ prd.thumbnail }}" alt=""
@@ -46,17 +46,16 @@
         </li>
 
         <button
-          class="border-0 btnn"
+          class="border-0 btnn remove"
           data-modal="modal"
           data-modal-id="#add-to-cart"
           data-tooltip="tooltip"
           data-placement="top"
           title="Add to Cart"
-          [class.click]="isClicked"
-          [disabled]="buttonDisabled"
-          (click)="addProductToCart(prd._id)"
+         [class.click]="isClicked"
+          (click)="toggleCart(prd._id)"
         >
-          <i class="fas fa-shopping-cart"></i>
+          <i class="fas fa-shopping-cart" [ngClass]="{'is-in-cart':isClicked}"></i>
         </button>
 
         <button

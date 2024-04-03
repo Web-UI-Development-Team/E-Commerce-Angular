@@ -54,6 +54,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { WishListItemComponent } from './pages/user-profile/wish-list/wish-list-item/wish-list-item.component';
 import { DropMenuComponent } from './shared/nav-bar/drop-menu/drop-menu.component';
 import { OrderDetailsHistoryComponent } from './pages/order/order-details-history/order-details-history.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { UpComponent } from './up/up.component';
 import { UserComponent } from './components/user/user.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { SuccessPopUpComponent } from './shared/success-pop-up/success-pop-up.component';
@@ -103,6 +105,7 @@ import { ProductDetailsDashboardComponent } from './dashboard/products-dashboard
     WishListItemComponent,
     DropMenuComponent,
     OrderDetailsHistoryComponent,
+    UpComponent,
     UserComponent,
     AdminComponent,
     SuccessPopUpComponent,
@@ -118,6 +121,7 @@ import { ProductDetailsDashboardComponent } from './dashboard/products-dashboard
     ReactiveFormsModule,
     CommonModule,
     MatDialogModule,
+    NgxSkeletonLoaderModule
     MatIconModule
   ],
   providers: [

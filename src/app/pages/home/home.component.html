@@ -108,6 +108,21 @@
                       ><i class="fa-solid fa-circle-info"></i
                     ></a>
                   </li>
+                  <button
+                    class="border-0 btnn remove"
+                    data-modal="modal"
+                    data-modal-id="#add-to-cart"
+                    data-tooltip="tooltip"
+                    data-placement="top"
+                    title="Add to Cart"
+                    [class.click]="isClicked"
+                    (click)="toggleCart(product._id)"
+                  >
+                    <i
+                      class="fas fa-shopping-cart"
+                      [ngClass]="{ 'is-in-cart': isClicked }"
+                    ></i>
+                  </button>
                   <li>
                     <a
                       data-modal="modal"
@@ -158,9 +173,8 @@
         <div class="col-lg-12">
           <div class="load-more">
             <button class="btn btn--e-brand" type="button">
-              <a
-                class="text-decoration-none text-white"
-                routerLink="/user/products"
+
+              <a class="text-decoration-none text-white" routerLink="/user/products"
                 >Load More</a
               >
             </button>

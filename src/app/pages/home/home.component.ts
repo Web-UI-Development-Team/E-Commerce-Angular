@@ -6,6 +6,7 @@ import { ICategory } from '../../../modles/category';
 import { ProductsRequestsService } from '../../services/product/products-requests.service';
 import { Router } from '@angular/router';
 import { IProduct } from '../../../modles/product.modle';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,9 @@ export class HomeComponent implements OnInit {
   allProducts: any = [];
   selectedCategory: ICategory | null;
   product: IProduct;
+  cartRequest: Observable<any>;
 
+  isClicked:boolean=false;
   next = false;
   prev = false;
   firstIndex = 0;
@@ -63,13 +66,50 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     this.categoryRequestsServices
       .getAllCategoriesRequest()
       .subscribe((data: any) => {
         this.allCategories = data.data;
       });
     this.getAllProducts();
+
+    if (this.cartService.productIds.includes(this.allProducts._id)) {
+      this.isClicked = true;
+    } 
   }
+
+  toggleCart(productId: string) {
+    if (this.isClicked) {
+      let index = this.cartService.cartItems.findIndex(
+        (cart) => cart.product._id == this.allProducts._id
+      );
+
+      this.cartService.cartItems.splice(index, 1);
+
+      this.cartRequest = this.cartRequestService.removeCartRequest(productId);
+
+      this.isClicked = false;
+    } else {
+      this.cartService.cartItems.push({
+        product: this.allProducts,
+        quantity: 1,
+      });
+
+      this.cartRequest = this.cartRequestService.addToCart(productId);
+
+      this.isClicked = true;
+    }
+
+    this.cartRequest.subscribe({
+      next: (data) => console.log(data),
+      error: (error) => console.log(error),
+    });
+
+    this.cartService.productIds = this.cartService.cartItems.map(
+      (cart) => cart.product._id
+);
+}
 
   getProductsByCategory(category: ICategory) {
     console.log(category);
@@ -92,16 +132,16 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  addProductToCart(product: IProduct) {
-    this.cartService.cartItems.push({
-      product: product,
-      quantity: 1,
-    });
-    this.cartRequestService.addToCart(product._id).subscribe({
-      next: (data) => console.log(data),
-      error: (error) => console.log(error),
-    });
-  }
+  // addProductToCart(product: IProduct) {
+  //   this.cartService.cartItems.push({
+  //     product: product,
+  //     quantity: 1,
+  //   });
+  //   this.cartRequestService.addToCart(product._id).subscribe({
+  //     next: (data) => console.log(data),
+  //     error: (error) => console.log(error),
+  //   });
+  // }
 
   showDetails(productId: any) {
     this.router.navigate(['/user', 'productDetails', productId]);

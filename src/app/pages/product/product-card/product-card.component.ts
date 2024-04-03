@@ -16,7 +16,8 @@ export class ProductCardComponent implements OnInit {
   isClicked: boolean = false;
   isInWishlist: boolean = false;
   buttonShow: boolean = false;
-  buttonDisabled: boolean = false;
+  cartRequest: Observable<any>;
+
 
   buttonStyle: any = '';
 
@@ -52,36 +53,54 @@ export class ProductCardComponent implements OnInit {
     // console.log(this.cartService.productIds);
     if (this.cartService.productIds.includes(this.prd._id)) {
       this.isClicked = true;
-      this.buttonDisabled = true;
     }
 
     if (this.userProfileService.wishListProductIds.includes(this.prd._id)) {
       this.isInWishlist = true;
     }
   }
-
+  
   showDetails(productId: any) {
     this.router.navigate(['/user','productDetails', productId]);
   }
 
-  addProductToCart(productId: string) {
-    if(!localStorage.getItem('token')){
-      this.router.navigate(['signIn']);
-      return;
-    }
+
+  toggleCart(productId: string) {
+    if (this.isClicked) {
+      let index = this.cartService.cartItems.findIndex(
+        (cart) => cart.product._id == this.prd._id
+      );
+
+      this.cartService.cartItems.splice(index, 1);
 
     this.isClicked = !this.isClicked;
-    this.buttonDisabled = true;
 
-    this.cartService.cartItems.push({
-      product: this.prd,
-      quantity: 1,
-    });
+      this.cartRequest = this.cartRequestService.removeCartRequest(productId);
 
-    this.cartRequestService.addToCart(productId).subscribe({
+      this.isClicked = false;
+    } else {
+      this.cartService.cartItems.push({
+        product: this.prd,
+        quantity: 1,
+      });
+
+      this.cartRequest = this.cartRequestService.addToCart(productId);
+
+      this.isClicked = true;
+    }
+
+    this.cartRequest.subscribe({
       next: (data) => console.log(data),
       error: (error) => console.log(error),
     });
+
+    this.cartService.productIds = this.cartService.cartItems.map(
+      (cart) => cart.product._id
+    );
+  }
+
+  showDetails(productId: any) {
+    this.router.navigate(['/productDetails', productId]);
   }
 
   toggleWishlist(productId: string) {
@@ -119,10 +138,4 @@ export class ProductCardComponent implements OnInit {
       this.userProfileService.wishList.map((product) => product._id);
   }
 
-  // showButton(id: any) {
-  //   this.buttonShow = true;
-  // }
-  // hideButton(id: any) {
-  //   this.buttonShow = false;
-  // }
 }

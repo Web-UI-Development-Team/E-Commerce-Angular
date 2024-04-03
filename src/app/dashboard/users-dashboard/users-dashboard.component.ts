@@ -40,6 +40,8 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
   numberOfPages: number;
   pages: any = [];
   page: number;
+  loading:boolean=false;
+
   constructor(
     private usersRequest: UserRequestsService,
     private router: Router,
@@ -47,8 +49,10 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
+    this.loading=true;
+    
     this.usersRequest.getAllUsersRequest().subscribe((data: any) => {
-      console.log(data);
+      this.loading=false
       this.allUsers = data;
     });
   }
