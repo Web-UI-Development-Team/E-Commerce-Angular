@@ -64,13 +64,13 @@
           <span class="product-o__review">(23)</span>
         </div>
 
-        <span class="product-o__price" *ngIf="product.price !== 0"
-          >{{ product.price}}
+        <span class="product-o__price"
+        >EGP {{product.price - (product.price * (product.discount/100))  }} 
 
-          <span class="product-o__discount" >{{
-             product.discount
-          }}</span></span
-        >
+        <span class="product-o__discount">{{
+          product.price 
+        }}</span></span
+      >
       </div>
     </div>
   </div>
