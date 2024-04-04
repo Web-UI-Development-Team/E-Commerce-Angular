@@ -8,8 +8,8 @@
           <div class="title">{{ bannerData[firstIndex].title }}</div>
           <div class="desc">{{ bannerData[firstIndex].desc }}</div>
           <div class="buttons">
-            <button>SEE MORE</button>
-            <button>ALL PRODUCTS</button>
+            <button class="btn p-2 mx-2"  >SEE MORE</button>
+            <button class="btn p-2" routerLink="/user/products">ALL PRODUCTS</button>
           </div>
         </div>
       </div>
@@ -123,17 +123,7 @@
                       [ngClass]="{ 'is-in-cart': isClicked }"
                     ></i>
                   </button>
-                  <li>
-                    <a
-                      data-modal="modal"
-                      data-modal-id="#add-to-cart"
-                      data-tooltip="tooltip"
-                      data-placement="top"
-                      title="Add to Cart"
-                      (click)="toggleCart(product._id)"
-                      ><i class="fas fa-shopping-cart"></i
-                    ></a>
-                  </li>
+                 
                   <li>
                     <a
                       data-tooltip="tooltip"
@@ -150,7 +140,7 @@
               {{ product.category.nameCategory }}</span
             >
 
-            <span class="product-o__name"> {{ product.title }}</span>
+            <span class="product-o__name title"> {{ product.title }}</span>
             <div class="product-o__rating gl-rating-style">
               <i class="fas fa-star"></i><i class="fas fa-star"></i
               ><i class="fas fa-star"></i><i class="fas fa-star"></i
@@ -160,10 +150,10 @@
             </div>
 
             <span class="product-o__price"
-              >{{ product.price }}
+              >EGP {{product.price - (product.price * (product.discount/100))  }} 
 
               <span class="product-o__discount">{{
-                product.discount
+                product.price 
               }}</span></span
             >
           </div>
@@ -172,11 +162,8 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="load-more">
-            <button class="btn btn--e-brand" type="button">
-
-              <a class="text-decoration-none text-white" routerLink="/user/products"
-                >Load More</a
-              >
+            <button class="btn btn--e-brand" routerLink="/user/products" type="button">
+              Load More
             </button>
           </div>
         </div>
