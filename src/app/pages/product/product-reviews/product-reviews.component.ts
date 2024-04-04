@@ -19,7 +19,7 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
   faThumbsDown = faThumbsDown;
   //icon
   //counter
-  
+
   //
   reviews: Review[];
 
@@ -32,6 +32,7 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
     isReviewed: false,
     reviewId: '',
   };
+
   isUpdated = false;
 
   constructor(
@@ -59,6 +60,8 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
           next: (data) => (this.isReviewed = data),
           complete: () => console.log(this.isReviewed),
         });
+
+        console.log(this.isReviewed, "kkkkkkkkkkkkkkk")
       } else {
         this.isReviewed.isReviewed = true;
       }
@@ -67,7 +70,7 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
     }
   }
   //**counter to icon like **//
-  
+
   iconReviews = [
     {
       count:0 , countTwo:0
@@ -75,13 +78,14 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
     {
       count:0 , countTwo:0
     }
-    
   ]
+
   increaeCount(index:number) {
     this.iconReviews[index].count++;
     console.log(this.iconReviews[index].count);
   }
   //
+
   descreaseCount(index:number) {
     this.iconReviews[index].countTwo++;
     console.log(this.iconReviews[index].countTwo);
@@ -125,13 +129,13 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
   // idReview :string
   showForm : boolean = false;
   updateReview(){
-    
+
     const productId = this.activeRoute.snapshot.paramMap.get('id');
     const reviewData = {
       title: this.reviewForm.value.title!,
       comment: this.reviewForm.value.comment!,
     };
-    
+
     if(productId !== null) {
       this.productReviewService.updateReview(productId,reviewData).subscribe((updatedData:any)=>{
           const reviewIndex = this.reviews.findIndex(review=> review._id === updatedData._id)
@@ -142,10 +146,10 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
   }
   show(){
     console.log('hhhh');
-    
+
     this.showForm = !this.showForm;
   }
-  
+
   //******/
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();

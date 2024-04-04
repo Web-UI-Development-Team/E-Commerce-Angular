@@ -103,7 +103,7 @@ export class ProductsDashboardComponent implements OnInit, AfterViewInit {
         .getAllProductsRequest()
         .subscribe((data: any) => {
           console.log(data);
-          this.allProducts = data.filter((product: any) => !product.isDeleted);
+          this.allProducts = data;
           this.numberOfPages = Math.ceil(
             this.allProducts.length / this.pageSize
           );

@@ -50,7 +50,7 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.loading=true;
-    
+
     this.usersRequest.getAllUsersRequest().subscribe((data: any) => {
       this.loading=false
       this.allUsers = data;

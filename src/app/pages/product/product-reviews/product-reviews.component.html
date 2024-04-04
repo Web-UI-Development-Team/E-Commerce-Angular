@@ -35,22 +35,23 @@
 </div>
 <div class="container">
   <div class="col-md-10 my-4">
-    <button class="add rounded  "(click)="show()" >Wrire Review</button>
+    <button class="add rounded  " (click)="show()">Wrire Review</button>
 
   </div>
 </div>
 
 
 <div class="container" *ngIf="showForm">
-<form [formGroup]="reviewForm" (ngSubmit)="addNewReview()" *ngIf="!isReviewed.isReviewed">
-  <div class="mb-3 col-md-6">
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="titleHelp" formControlName="title"
-      placeholder="Title">
-    <div id="titleHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3 col-md-6 ">
-    <textarea formControlName="comment" placeholder="Enter Your Comment" class="form-control py-3"></textarea>
-  </div>
-    <button style="color: #ff4500" type="submit"  class="btn rounded update" *ngIf="" [disabled]="!reviewForm.valid" >{{isReviewed ? 'Update'  : 'Add'}}</button>
+  <form [formGroup]="reviewForm" (ngSubmit)="addNewReview()" *ngIf="!isReviewed.isReviewed">
+    <div class="mb-3 col-md-6">
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="titleHelp"
+        formControlName="title" placeholder="Title">
+      <div id="titleHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3 col-md-6 ">
+      <textarea formControlName="comment" placeholder="Enter Your Comment" class="form-control py-3"></textarea>
+    </div>
+    <button type="submit" class="btn rounded update my-4"
+      [disabled]="!reviewForm.valid">{{!isReviewed.isReviewed ? 'Update' : 'Add'}}</button>
   </form>
 </div>

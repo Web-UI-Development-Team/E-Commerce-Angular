@@ -1,4 +1,4 @@
-<div class="container" *ngIf="!loading">
+<div class="container">
   <div class="row d-flex justify-content-between align-items-center mb-4">
     <div class="col-xl-6 col-sm-3 col-12">
       <form class="position-relative w-75">
@@ -10,13 +10,13 @@
         <button class="btn btn--icon fas fa-search main-search-button" type="submit"></button>
       </form>
     </div>
-    <div class="col-xl-3 col-sm-3 col-12">
+    <div class="col-xl-3 col-sm-3 col-12" *ngIf="!loading">
       <button class="btn button" (click)="openAddUserPopup()">
         Add New User
       </button>
     </div>
   </div>
-  <table class="table w-100">
+  <table class="table w-100" *ngIf="!loading">
     <thead class="w-100">
       <tr>
         <th class="text-center" scope="col" style="width: 10% !important">
@@ -78,7 +78,8 @@
       </tr>
     </tbody>
   </table>
-  <nav aria-label="Page navigation example" style="bottom: 0; left: 0; right: 0; position: fixed">
+
+  <nav aria-label="Page navigation example" style="bottom: 0; left: 0; right: 0; position: fixed" *ngIf="!loading">
     <ul class="pagination justify-content-center">
       <li class="page-item" *ngIf="page > 1">
         <a class="page-link" (click)="prevPage(page)" aria-label="Previous" style="color: #ff4500; cursor: pointer">
