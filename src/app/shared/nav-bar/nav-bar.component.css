@@ -148,4 +148,5 @@ body{
 .sign-in {
   text-decoration: none;
   color: var(--secondery);
+  font-weight: bold;
 }

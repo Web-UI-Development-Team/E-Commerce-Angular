@@ -42,7 +42,7 @@ export class ProductsDashboardComponent implements OnInit, AfterViewInit {
   product: IProduct;
   products: any = [];
 
-  isLoading:boolean=false;
+  isLoading: boolean = false;
   numberOfPages: number;
   pages: any = [];
   pageSize: number = 8;
@@ -50,12 +50,11 @@ export class ProductsDashboardComponent implements OnInit, AfterViewInit {
   selectedPage = 1;
 
   ngOnInit() {
-    this.isLoading=true;
+    this.isLoading = true;
     this.productRequestsServices
       .getAllProductsRequest()
       .subscribe((data: any) => {
-
-        this.isLoading=false;
+        this.isLoading = false;
         this.allProducts = data;
         this.numberOfPages = Math.ceil(this.allProducts.length / this.pageSize);
         this.pagination(this.selectedPage);
@@ -84,18 +83,16 @@ export class ProductsDashboardComponent implements OnInit, AfterViewInit {
         `http://localhost:3010/api/v1/products/search/product/${search}`
       ).pipe(
         map((res) => {
-          if (res) {
-            console.log(res);
-            this.selectedPage = 1;
-            this.allProducts = res;
-            this.numberOfPages = Math.ceil(
-              this.allProducts.length / this.pageSize
-            );
-            this.pagination(this.selectedPage);
-            this.pages = range(this.numberOfPages);
-            console.log(this.products);
-            return res['payload'];
-          }
+          console.log(res);
+          this.selectedPage = 1;
+          this.allProducts = res;
+          this.numberOfPages = Math.ceil(
+            this.allProducts.length / this.pageSize
+          );
+          this.pagination(this.selectedPage);
+          this.pages = range(this.numberOfPages);
+          console.log(this.products);
+          return res['payload'];
         })
       );
     } else {
@@ -150,7 +147,7 @@ export class ProductsDashboardComponent implements OnInit, AfterViewInit {
     product.isDeleted = true;
     console.log(product.isDeleted);
 
-    console.log(product)
+    console.log(product);
     this.productRequestsServices
       .updateProductDataRequest({ isDeleted: product.isDeleted }, product._id)
       .subscribe((data) => {

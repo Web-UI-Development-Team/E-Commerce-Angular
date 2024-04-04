@@ -30,7 +30,7 @@
   <div class="row">
     <div
       class="col-xl-4 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item products headphone mt-4"
-      *ngFor="let product of allProducts.slice(0, 3)"
+      *ngFor="let product of allProducts"
     >
       <div class="product-o product-o--hover-on product-o--radius">
         <div class="product-o__wrap">
@@ -81,9 +81,9 @@
   *ngIf="isLoading"
 >
   <div class="p-4 bg-light rounded" style="width: 45%">
-    <div >
-       <ngx-skeleton-loader count="2" appearance="line"></ngx-skeleton-loader>
-        <!-- <ngx-skeleton-loader
+    <div>
+      <ngx-skeleton-loader count="2" appearance="line"></ngx-skeleton-loader>
+      <!-- <ngx-skeleton-loader
             appearance="line"
             class="px-5"
             [theme]="{
@@ -92,8 +92,6 @@
             }"
           ></ngx-skeleton-loader> -->
     </div>
-
-   
   </div>
   <div class="p-4 bg-light rounded" style="width: 45%">
     <ngx-skeleton-loader count="2" appearance="line"></ngx-skeleton-loader>

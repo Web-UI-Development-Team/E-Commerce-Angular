@@ -85,6 +85,11 @@ export class NavBarComponent implements OnInit, AfterViewInit {
               this.userProfileService.wishList.map((product) => product._id);
           },
         });
+
+        this.userProfileRequestService.getUserDataRequest().subscribe({
+          next: (data) => (this.userProfileService.user = data),
+          error: (error) => console.log(error),
+        });
       }
     }
   }
@@ -127,5 +132,5 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  
+
 }

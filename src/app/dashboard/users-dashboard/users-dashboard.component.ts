@@ -40,7 +40,7 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
   numberOfPages: number;
   pages: any = [];
   page: number;
-  loading:boolean=false;
+  loading: boolean = false;
 
   constructor(
     private usersRequest: UserRequestsService,
@@ -49,11 +49,12 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.loading=true;
+    this.loading = true;
 
     this.usersRequest.getAllUsersRequest().subscribe((data: any) => {
-      this.loading=false
+      this.loading = false;
       this.allUsers = data;
+      console.log(this.allUsers);
     });
   }
 
@@ -66,20 +67,20 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
         startWith(''),
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap((search) => this.loadUsers(search)),
+        switchMap((search) => this.loadUsers(search))
       )
       .subscribe();
   }
 
   loadUsers(search: string): Observable<any> {
-    
+
     if (search) {
       return createHttpObservable(
         `http://localhost:3010/api/v1/users/search/user/${search}`
       ).pipe(
         map((res) => {
           console.log(res);
-          
+
           this.allUsers = res;
           console.log(this.allUsers);
           return res['payload'];

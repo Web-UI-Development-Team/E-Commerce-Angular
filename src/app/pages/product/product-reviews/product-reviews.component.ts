@@ -54,14 +54,13 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
           })
       );
 
-      if(this.authService.isAuthenticated())
-      {
+      if (this.authService.isAuthenticated()) {
         this.productReviewService.isReviewd(productId).subscribe({
           next: (data) => (this.isReviewed = data),
           complete: () => console.log(this.isReviewed),
         });
 
-        console.log(this.isReviewed, "kkkkkkkkkkkkkkk")
+        console.log(this.isReviewed, 'kkkkkkkkkkkkkkk');
       } else {
         this.isReviewed.isReviewed = true;
       }
@@ -73,36 +72,32 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
 
   iconReviews = [
     {
-      count:0 , countTwo:0
+      count: 0,
+      countTwo: 0,
     },
-    {
-      count:0 , countTwo:0
-    }
-  ]
+  ];
 
-  increaeCount(index:number) {
+  increaeCount(index: number) {
     this.iconReviews[index].count++;
     console.log(this.iconReviews[index].count);
   }
   //
 
-  descreaseCount(index:number) {
+  descreaseCount(index: number) {
     this.iconReviews[index].countTwo++;
     console.log(this.iconReviews[index].countTwo);
   }
   //**counter to icon like **//
   //delete//
-  onRemoveReview(productId: string) {
-    this.productReviewService.removeDelete(productId).subscribe((data) => {
-      this.reviews = this.reviews.filter(
-        (review) => review.product !== productId
-      );
+  onRemoveReview(userId: string, productId: string) {
+    this.reviews = this.reviews.filter((review) => review.user._id !== userId);
 
-      this.isReviewed = {
-        isReviewed: false,
-        reviewId: '',
-      };
-    });
+    this.isReviewed = {
+      isReviewed: false,
+      reviewId: '',
+    };
+
+    this.productReviewService.removeDelete(productId).subscribe();
   }
   ///// add
   addNewReview() {
@@ -121,30 +116,33 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
 
           this.isReviewed = {
             isReviewed: true,
-            reviewId: '',
+            reviewId: data._id,
           };
         });
     }
   }
   // idReview :string
-  showForm : boolean = false;
-  updateReview(){
-
+  showForm: boolean = false;
+  updateReview() {
     const productId = this.activeRoute.snapshot.paramMap.get('id');
     const reviewData = {
       title: this.reviewForm.value.title!,
       comment: this.reviewForm.value.comment!,
     };
 
-    if(productId !== null) {
-      this.productReviewService.updateReview(productId,reviewData).subscribe((updatedData:any)=>{
-          const reviewIndex = this.reviews.findIndex(review=> review._id === updatedData._id)
-            this.reviews[reviewIndex] = updatedData;
-            this.isUpdated = true;
-      })
+    if (productId !== null) {
+      this.productReviewService
+        .updateReview(productId, reviewData)
+        .subscribe((updatedData: any) => {
+          const reviewIndex = this.reviews.findIndex(
+            (review) => review._id === updatedData._id
+          );
+          this.reviews[reviewIndex] = updatedData;
+          this.isUpdated = true;
+        });
     }
   }
-  show(){
+  show() {
     console.log('hhhh');
 
     this.showForm = !this.showForm;

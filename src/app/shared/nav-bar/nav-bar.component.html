@@ -10,9 +10,9 @@
           </a>
         </div>
 
-        <div class="order-lg-last col-3  col-md-2 icons">
+        <div class="order-lg-last col-3  col-md-2 icons d-flex justify-content-end align-items-center">
           <a [routerLink]="isAuth ? '/user/profile/account' : '/signIn'" class="nav-icon">
-            <i class="fas fa-user-alt m-1 me-md-2"></i>
+            <i *ngIf="isAuth" class="fas fa-user-alt m-1 me-md-2"></i>
             <span *ngIf="!isAuth" class="sign-in">SIGN IN</span>
           </a>
 
@@ -61,10 +61,10 @@
       aria-controls="navbarNav"
       aria-expanded="false"
       aria-label="Toggle navigation"
-      
+
     >
       <span class="navbar-toggler-icon"></span>
-     
+
     </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -101,7 +101,7 @@
         </ul>
       </div>
 
-     
+
     </div>
   </nav>
 </header>
