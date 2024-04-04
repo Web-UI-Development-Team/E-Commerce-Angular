@@ -55,7 +55,7 @@
           product.category.nameCategory
         }}</span>
 
-        <span class="product-o__name">{{ product.title }}</span>
+        <span class="product-o__name title">{{ product.title }}</span>
         <div class="product-o__rating gl-rating-style">
           <i class="fas fa-star"></i><i class="fas fa-star"></i
           ><i class="fas fa-star"></i><i class="fas fa-star"></i
@@ -64,11 +64,11 @@
           <span class="product-o__review">(23)</span>
         </div>
 
-        <span class="product-o__price"
-          >{{ product.discount }}
+        <span class="product-o__price" *ngIf="product.price !== 0"
+          >{{ product.price}}
 
-          <span class="product-o__discount" *ngIf="product.price !== 0">{{
-            product.price
+          <span class="product-o__discount" >{{
+             product.discount
           }}</span></span
         >
       </div>
