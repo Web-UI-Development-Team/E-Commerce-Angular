@@ -91,10 +91,11 @@
         
         <span class="product-o__review">(23)</span>
       </div>
-      <span class="product-o__price text"
-        >EGP
-        {{ prd.price }}
-    
-        <span class="product-o__discount">{{ prd.discount }}</span></span
-      >
+      <span class="product-o__price"
+              >EGP {{prd.price - (prd.price * (prd.discount/100))  }} 
+
+              <span class="product-o__discount">{{
+                prd.price 
+              }}</span></span
+            >
 </div>
