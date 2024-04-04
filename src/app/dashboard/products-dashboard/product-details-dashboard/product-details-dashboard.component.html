@@ -1,16 +1,16 @@
 <div class="app-content">
   <!--====== Section 1 ======-->
-  <div class="u-s-p-t-90">
+  <div class="p-3">
     <div class="container">
       <div class="row">
         <div class="col-lg-5">
           <div class="d-flex align-items-center justify-content-center">
-            <img [src]="thumbnailImage" alt="image" class="u-img-fluid w-70" />
+            <img [src]="thumbnailImage" alt="image" class="u-img-fluid w-50" />
           </div>
           <div
-            class="border w-100 d-flex align-items-center justify-content-between gap-4"
+            class="w-100 d-flex align-items-center justify-content-between gap-4"
           >
-            <div class="w-50 border" *ngFor="let image of product.images">
+            <div class="w-50" *ngFor="let image of product.images">
               <img
                 [src]="image"
                 alt="image"
@@ -20,7 +20,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-7 border p-5">
+        <div class="col-lg-7 p-5">
           <!--====== Product Right Side Details ======-->
           <div class="pd-detail">
             <div class="mb-2">
