@@ -68,14 +68,14 @@
   left: 2px;
 }
 
-.custom-file-upload {
+.hidenFiles {
   position: relative;
   display: inline-block;
   overflow: hidden;
-  width: 150px; /* Set width according to your design */
+  width: 150px;
 }
 
-.custom-file-upload input[type="file"] {
+.hidenFiles input[type="file"] {
   position: absolute;
   font-size: 100px;
   opacity: 0;
@@ -83,7 +83,7 @@
   top: 0;
 }
 
-.custom-file-upload label {
+.hidenFiles label {
   background-color: #ff4500;
   border: 1px solid #ff4500;
   border-radius: 5px;
@@ -94,8 +94,13 @@
   cursor: pointer;
 }
 
-.custom-file-upload label:hover {
+.hidenFiles label:hover {
   border: 1px solid #ff4500;
   background-color: #fff;
   color: #ff4500;
+}
+
+select,
+option {
+  color: #7f7f7f;
 }
