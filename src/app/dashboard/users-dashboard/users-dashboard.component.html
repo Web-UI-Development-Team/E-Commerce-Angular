@@ -1,7 +1,7 @@
-<div class="container" *ngIf="!loading">
+<div class="container" >
   <div class="row d-flex justify-content-between align-items-center mb-4">
     <div class="col-xl-6 col-sm-3 col-12">
-      <form class="position-relative w-75">
+      <form class="position-relative w-75" >
         <label for="w-100 "></label>
 
         <input class="input-text input-text--border-radius input-text--style-1" type="search" id="main-search"
@@ -10,78 +10,76 @@
         <button class="btn btn--icon fas fa-search main-search-button" type="submit"></button>
       </form>
     </div>
-    <div class="col-xl-3 col-sm-3 col-12">
+    <div class="col-xl-3 col-sm-3 col-12" *ngIf="!loading">
       <button class="btn button" (click)="openAddUserPopup()">
         Add New User
       </button>
     </div>
   </div>
 
-  <div>
-
-    <table class="table ">
-      <thead >
-        <tr>
-          <th class="text-center" scope="col" style="width: 10% !important">
-            Image
-          </th>
-          <th class="text-center" scope="col" style="width: 25% !important">
-            Name
-          </th>
-          <th class="text-center" scope="col" style="width: 20% !important">
-            E-mail
-          </th>
-          <th class="text-center" scope="col" style="width: 10% !important">
-            Phone
-          </th>
-          <th class="text-center" scope="col" style="width: 10% !important">
-            IsAdmin
-          </th>
-          <th class="text-center" scope="col" style="width: 10% !important">
-            IsDeleted
-          </th>
-          <th class="text-center" scope="col" style="width: 5% !important"></th>
-          <th class="text-center" scope="col" style="width: 5% !important"></th>
-        </tr>
-      </thead>
-      <tbody >
-        <tr *ngFor="let user of allUsers" [class.deleted-user]="user.isDeleted">
-          <td scope="col" class="text-center" >
-            <img [src]="user.imagePath" alt="userImg" width="100%" class="rounded-circle" />
-          </td>
-          <td scope="col" class="text-center" >
-            <p [title]="user.name" class="d-inline-block text-truncate" style="max-width: 150px">
-              {{ user.name }}
-            </p>
-          </td>
-          <td scope="col" class="text-center" >
-            <p [title]="user.email" class="d-inline-block text-truncate" style="max-width: 150px">
-              {{ user.email }}
-            </p>
-          </td>
-          <td scope="col" class="text-center" >
-            {{ user.phone }}
-          </td>
-          <td scope="col" class="text-center" >
-            {{ user.isAdmin }}
-          </td>
-          <td scope="col" class="text-center" >
-            {{ user.isDeleted }}
-          </td>
-          <td scope="col" class="text-center" style="width: 5% !important">
-            <div (click)="openEditUserPopup(user)" class="text-center">
-              <i class="fa-solid fa-pen-to-square icon"></i>
-            </div>
-          </td>
-          <td scope="col" class="text-center" style="width: 5% !important">
-            <div class="text-center" (click)="deleteUser(user)">
-              <i class="fa-solid fa-trash icon"></i>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  
+  <table class="table " *ngIf="!loading">
+    <thead >
+      <tr>
+        <th class="text-center" scope="col" style="width: 10% !important">
+          Image
+        </th>
+        <th class="text-center" scope="col" style="width: 25% !important">
+          Name
+        </th>
+        <th class="text-center" scope="col" style="width: 20% !important">
+          E-mail
+        </th>
+        <th class="text-center" scope="col" style="width: 10% !important">
+          Phone
+        </th>
+        <th class="text-center" scope="col" style="width: 10% !important">
+          IsAdmin
+        </th>
+        <th class="text-center" scope="col" style="width: 10% !important">
+          IsDeleted
+        </th>
+        <th class="text-center" scope="col" style="width: 5% !important"></th>
+        <th class="text-center" scope="col" style="width: 5% !important"></th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let user of allUsers" [class.deleted-user]="user.isDeleted">
+        <td scope="col" class="text-center" >
+          <img [src]="user.imagePath" alt="userImg" width="100%" class="rounded-circle" />
+        </td>
+        <td scope="col" class="text-center" >
+          <p [title]="user.name" class="d-inline-block text-truncate" style="max-width: 150px">
+            {{ user.name }}
+          </p>
+        </td>
+        <td scope="col" class="text-center" >
+          <p [title]="user.email" class="d-inline-block text-truncate" style="max-width: 150px">
+            {{ user.email }}
+          </p>
+        </td>
+        <td scope="col" class="text-center" >
+          {{ user.phone }}
+        </td>
+        <td scope="col" class="text-center" >
+          {{ user.isAdmin }}
+        </td>
+        <td scope="col" class="text-center" >
+          {{ user.isDeleted }}
+        </td>
+        <td scope="col" class="text-center" style="width: 5% !important">
+          <div (click)="openEditUserPopup(user)" class="text-center">
+            <i class="fa-solid fa-pen-to-square icon"></i>
+          </div>
+        </td>
+        <td scope="col" class="text-center" style="width: 5% !important">
+          <div class="text-center" (click)="deleteUser(user)">
+            <i class="fa-solid fa-trash icon"></i>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <nav aria-label="Page navigation example" style="bottom: 0; left: 0; right: 0; position: fixed">
     <ul class="pagination justify-content-center">
       <li class="page-item" *ngIf="page > 1">
@@ -105,8 +103,8 @@
 
 <div class="d-flex justify-content-between align-items-center" *ngIf="loading">
 
-  <ngx-skeleton-loader count="1" appearance="line" [theme]="{width:'300px',height:'35px'}"></ngx-skeleton-loader>
-
+  <!-- <ngx-skeleton-loader count="1" appearance="line" [theme]="{width:'300px',height:'35px'}"></ngx-skeleton-loader> -->
+<div></div>
   <div>
     <ngx-skeleton-loader count="1" appearance="line" [theme]="{width:'150px',height:'50px'}"></ngx-skeleton-loader>
   </div>
