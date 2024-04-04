@@ -160,11 +160,17 @@ button:hover{
 
 .product-o__name {
   color: #333333;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   transition: color 0.5s;
 }
 
+.title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1; 
+}
 .product-o__rating {
   margin-bottom: 4px;
 }

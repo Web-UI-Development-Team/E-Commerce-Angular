@@ -50,6 +50,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loading = true;
 
+    if(this.cartService.cartItems.includes(this.productDetails._id)){
+      this.cartItem.quantity+=1
+    }
+
     this.subscription = this.activatedRouter.params.subscribe({
       next: (data) => this.getProductById(data['id']),
     });

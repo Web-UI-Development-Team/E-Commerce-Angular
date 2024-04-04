@@ -10,3 +10,14 @@
 fa-icon {
     cursor: pointer;
 }
+.add,.update {
+    background-color:orangered;
+    border: none;
+    color: white;
+    width: 20%;
+    padding: 5px;
+}
+.update {
+    width: 10%;
+
+}
