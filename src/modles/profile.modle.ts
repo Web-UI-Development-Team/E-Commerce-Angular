@@ -14,7 +14,7 @@ export interface IEditProfile {
   password?: string,
   confirmPassword?: string,
   phone?: string,
-  imagePath?: string,
+  image?: string,
 }
 
 export interface IWishlist {

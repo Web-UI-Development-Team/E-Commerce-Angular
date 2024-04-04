@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   product: IProduct;
   cartRequest: Observable<any>;
 
-  isClicked:boolean=false;
+  isClicked: boolean = false;
   next = false;
   prev = false;
   firstIndex = 0;
@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
       Experience groundbreaking performance with the all-new M2 chip. Tackle demanding workflows
             with ease. Edit videos, render 3D graphics, and code like a pro. The new MacBook Pro is built for those who
             push boundaries.`,
+      src: '/user/productDetails/660e45f8e91488689a0a0b01',
     },
     {
       img: '../../../assets/banner-images/2.jpg',
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit {
         'Capture Every Detail: Stunning Photos with the New Nikon Z Series Camera',
       desc: `Experience exceptional clarity and detail with the new Nikon Z Series camera. Its advanced
       image sensor and powerful processor deliver stunning photos and videos, even in low-light conditions.`,
+      src: '/user/productDetails/660de75e630d0119506a1e17',
     },
     {
       img: '../../../assets/banner-images/3.jpg',
@@ -48,12 +50,14 @@ export class HomeComponent implements OnInit {
       desc: `Tired of the same old tech? We've got a selection of groundbreaking products that will
       transform the way you interact with the world. Discover innovative solutions designed to streamline your
       life, boost productivity, and unlock new possibilities.`,
+      src: '/user/productDetails/660de670630d0119506a1dfd',
     },
     {
       img: '../../../assets/banner-images/4.jpg',
       title: 'Immerse Yourself in Sound: Experience the New Boss Headphones',
       desc: `Get lost in the details of your music with the new Boss headphones. Featuring premium
       drivers and advanced noise cancellation, these headphones deliver an exceptional listening experience.`,
+      src: '/user/productDetails/660de136d70ff53430145a55',
     },
   ];
 
@@ -66,7 +70,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.categoryRequestsServices
       .getAllCategoriesRequest()
       .subscribe((data: any) => {
@@ -76,7 +79,7 @@ export class HomeComponent implements OnInit {
 
     if (this.cartService.productIds.includes(this.allProducts._id)) {
       this.isClicked = true;
-    } 
+    }
   }
 
   toggleCart(productId: string) {
@@ -108,8 +111,8 @@ export class HomeComponent implements OnInit {
 
     this.cartService.productIds = this.cartService.cartItems.map(
       (cart) => cart.product._id
-);
-}
+    );
+  }
 
   getProductsByCategory(category: ICategory) {
     console.log(category);

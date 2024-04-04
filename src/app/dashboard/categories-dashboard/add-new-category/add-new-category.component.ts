@@ -40,6 +40,8 @@ export class AddNewCategoryComponent {
     ),
   });
 
+  imageData: String = "https://cdn.icon-icons.com/icons2/1863/PNG/512/category_119307.png";
+
   initialFormValues = {
     nameCategory: '',
     description: '',
@@ -77,13 +79,43 @@ export class AddNewCategoryComponent {
       });
   }
 
+  onFileSelect(event: Event) {
+    let file = (event.target as HTMLInputElement).files?.[0];
+
+    const allowedMimeTypes = [
+      'image/png',
+      'image/jpeg',
+      'image/jpg',
+      'image/webp',
+    ];
+
+    this.categoryForm.patchValue({ icon: file });
+
+    if (file && allowedMimeTypes.includes(file.type)) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageData = reader.result as string;
+
+        console.log(this.imageData);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   addNewCategory() {
     if (this.categoryForm.valid) {
+
+      let catData = new FormData();
+
+      catData.append('nameCategory', this.categoryForm.value.nameCategory);
+      catData.append('description', this.categoryForm.value.description);
+      catData.append('icon', this.categoryForm.value.icon);
+
       console.log(this.categoryForm.value);
       this.categoryRequestsService
-        .addNewCategoryUpdate(this.categoryForm.value)
+        .addNewCategoryUpdate(catData)
         .subscribe(
-          (category: ICategory) => {
+          (category) => {
             if (category) {
               console.log(category);
               this.openSuccessPopUp();

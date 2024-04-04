@@ -24,7 +24,7 @@ export class CategoryRequestsService {
     );
   }
 
-  addNewCategoryUpdate(data: ICategory) {
+  addNewCategoryUpdate(data: any) {
     console.log(data);
     return this.httpClient.post<ICategory>(
       'http://localhost:3010/api/v1/categories',

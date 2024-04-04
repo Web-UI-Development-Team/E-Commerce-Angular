@@ -1,5 +1,5 @@
-<div class="container h-">
-  <div class="row flex-column justify-content-center">
+<div class="container">
+  <div class="row flex-column justify-content-center align-items-center">
     <div class="col-md-6">
       <div class="photo-container d-flex justify-content-center">
         <div
@@ -55,7 +55,9 @@
             </small>
           </div>
         </div>
-        <button [disabled]="updateForm.invalid" type="submit" class="btn btn-primary">Update</button>
+        <div class="d-flex justify-content-center">
+          <button [disabled]="updateForm.invalid" type="submit" class="btn color-btn">Update</button>
+        </div>
       </form>
     </div>
   </div>

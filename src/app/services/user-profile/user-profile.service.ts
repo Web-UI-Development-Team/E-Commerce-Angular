@@ -21,22 +21,32 @@ export class UserProfileService {
 
   wishListProductIds: string[] = [];
 
-  patchUser(userModel: object) {
-    this.userProfileRequestService
-      .patchUserRequest(userModel)
-      .subscribe({
-        next: (data) => console.log(data),
-        error: (error) => console.log(error),
-        complete: () => console.log('done'),
-      });
+  patchUser(userModel: any) {
+    this.userProfileRequestService.patchUserRequest(userModel).subscribe({
+      next: (data) => {
+        if (data.name) {
+          this.user.name = data.name;
+        }
+
+        if (data.imagePath) {
+          this.user.imagePath = data.imagePath;
+        }
+
+        if (data.phone) {
+          this.user.phone = data.phone;
+        }
+      },
+      error: (error) => console.log(error),
+      complete: () => console.log('done'),
+    });
   }
 
   getWishlist() {
     this.userProfileRequestService.getWishlist().subscribe({
-      next: (data) => this.wishList = data.wishList,
+      next: (data) => (this.wishList = data.wishList),
       error: (error) => console.log(error),
-      complete: () => console.log(this.wishList)
-    })
+      complete: () => console.log(this.wishList),
+    });
   }
 
   removeProductFromWishlist(productId: string, index: number) {

@@ -57,7 +57,9 @@ export class ProductsComponent implements OnInit {
   }
 
   sortProductByPrice() {
+    console.log(this.allProducts)
     this.allProducts.sort((a, b) => a.price - b.price);
+    this.products.sort((a, b) => a.price - b.price);
   }
   getProducts() {
     this.loading = true;

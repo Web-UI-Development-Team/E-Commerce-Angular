@@ -44,19 +44,12 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userProfileService.user;
+    this.imageData = this.user.imagePath;
 
     this.updateForm = this.formBuilder.group({
-      name: [
-        this.user.name,
-        [Validators.pattern('[A-Z a-z]{3,20}')],
-      ],
-      phone: [
-        this.user.phone,
-        [Validators.pattern(phoneNumberRegex)],
-      ],
-      imgae: [
-        ''
-      ]
+      name: [this.user.name, [Validators.pattern('[A-Z a-z]{3,20}')]],
+      phone: [this.user.phone, [Validators.pattern(phoneNumberRegex)]],
+      image: [''],
     });
   }
 
@@ -72,18 +65,16 @@ export class UserFormComponent implements OnInit {
 
     this.updateForm.patchValue({ image: file });
 
-    if (file && allowedMimeTypes.includes(file.type))
-    {
+    if (file && allowedMimeTypes.includes(file.type)) {
       const reader = new FileReader();
 
       reader.onload = () => {
         this.imageData = reader.result as String;
-      }
+      };
 
       reader.readAsDataURL(file);
     }
   }
-
 
   get name() {
     return this.updateForm.get('name');
@@ -99,8 +90,19 @@ export class UserFormComponent implements OnInit {
 
     let userData = new FormData();
 
+    if (userModel.name) {
+      userData.append('name', userModel.name);
+    }
 
-    this.userProfileService.patchUser(userModel);
+    if (userModel.image) {
+      userData.append('image', userModel.image);
+    }
+
+    if (userModel.phone) {
+      userData.append('phone', userModel.phone);
+    }
+
+    this.userProfileService.patchUser(userData);
     this.location.back();
   }
 }

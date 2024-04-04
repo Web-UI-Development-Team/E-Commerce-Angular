@@ -8,7 +8,7 @@
           <div class="title">{{ bannerData[firstIndex].title }}</div>
           <div class="desc">{{ bannerData[firstIndex].desc }}</div>
           <div class="buttons">
-            <button class="btn p-2 mx-2"  >SEE MORE</button>
+            <button class="btn p-2 mx-2" [routerLink]="bannerData[firstIndex].src" >SEE MORE</button>
             <button class="btn p-2" routerLink="/user/products">ALL PRODUCTS</button>
           </div>
         </div>
@@ -21,8 +21,8 @@
           <div class="title">{{ bannerData[secIndex].title }}</div>
           <div class="desc">{{ bannerData[secIndex].desc }}</div>
           <div class="buttons">
-            <button>SEE MORE</button>
-            <button>ALL PRODUCTS</button>
+            <button  [routerLink]="bannerData[secIndex].src" >SEE MORE</button>
+            <button routerLink="/user/products" >ALL PRODUCTS</button>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@
                       [ngClass]="{ 'is-in-cart': isClicked }"
                     ></i>
                   </button>
-                 
+
                   <li>
                     <a
                       data-tooltip="tooltip"
@@ -150,10 +150,10 @@
             </div>
 
             <span class="product-o__price"
-              >EGP {{product.price - (product.price * (product.discount/100))  }} 
+              >EGP {{product.price - (product.price * (product.discount/100))  }}
 
               <span class="product-o__discount">{{
-                product.price 
+                product.price
               }}</span></span
             >
           </div>

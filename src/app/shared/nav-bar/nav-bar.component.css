@@ -150,3 +150,9 @@ body{
   color: var(--secondery);
   font-weight: bold;
 }
+
+.logo {
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 20px;
+}
