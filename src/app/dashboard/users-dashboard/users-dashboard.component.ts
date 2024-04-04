@@ -72,12 +72,14 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
   }
 
   loadUsers(search: string): Observable<any> {
+    
     if (search) {
       return createHttpObservable(
         `http://localhost:3010/api/v1/users/search/user/${search}`
       ).pipe(
         map((res) => {
           console.log(res);
+          
           this.allUsers = res;
           console.log(this.allUsers);
           return res['payload'];

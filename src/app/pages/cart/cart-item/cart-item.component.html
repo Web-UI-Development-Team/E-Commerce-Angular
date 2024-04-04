@@ -15,12 +15,12 @@
 
   <app-quantity class="col-2 align-self-center" [item]="cartItem"></app-quantity>
 
-  <button title="remove" (click)="onClickHeartIcon(cartItem.product._id)" class="remove col-1 align-self-center">
+  <button  (click)="onClickHeartIcon(cartItem.product._id)" class="remove col-1 align-self-center">
     <i class="fa-solid fa-heart" [ngClass]="{'is-in-wishlist': isInWishList}"></i>
   </button>
 
-  <button title="remove" (click)="onClickRemove(cartItem.product._id)" class="remove col-1 align-self-center">
-    <i class="fa-solid fa-trash"></i>
+  <button title="remove" (click)="onClickRemove(cartItem.product._id)" class="remove  col-1 align-self-center">
+   <i class="fa-solid fa-trash text-danger"></i>
   </button>
 
 </div>

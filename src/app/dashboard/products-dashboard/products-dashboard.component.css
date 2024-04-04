@@ -251,3 +251,12 @@
 .gl-rating-style-2 > i:first-child {
   margin-left: 0;
 }
+
+
+.title{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+
+}

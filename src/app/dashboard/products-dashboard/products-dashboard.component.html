@@ -1,4 +1,5 @@
-<div class="container">
+
+<div class="container" >
   <div class="row d-flex justify-content-between align-items-center mb-4">
     <div class="col-xl-6 col-sm-3 col-12">
       <form class="position-relative w-75">
@@ -42,7 +43,7 @@
           product.category.nameCategory
           }}</span>
 
-        <span class="product-o__name">{{ product.title }}</span>
+        <span class="product-o__name title">{{ product.title }}</span>
         <div class="product-o__rating gl-rating-style">
           <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
             class="fas fa-star-half-alt"></i>
@@ -50,13 +51,22 @@
           <span class="product-o__review">(23)</span>
         </div>
 
-        <span class="product-o__price">{{ product.price }}
 
-          <span class="product-o__discount">{{ product.discount }}</span></span>
+        <span class="product-o__price"
+              >EGP {{product.price - (product.price * (product.discount/100))  }}
+
+              <span class="product-o__discount">{{
+                product.price
+              }}</span></span
+            >
       </div>
     </div>
   </div>
-  <nav *ngIf="!isLoading" aria-label="Page navigation example" style="bottom: 0; left: 0; right: 0">
+
+  <nav *ngIf="!isLoading"
+    aria-label="Page navigation example"
+    style="bottom: 0; left: 0; right: 0"
+  >
     <ul class="pagination justify-content-center">
       <li class="page-item" *ngIf="selectedPage > 1" style="cursor: pointer">
         <a class="page-link" (click)="prevPage(selectedPage)" aria-label="Previous" style="color: #ff4500">
@@ -79,11 +89,10 @@
 
 <div class="d-flex justify-content-between align-items-center" *ngIf="isLoading">
 
-  <ngx-skeleton-loader count="1" appearance="line" [theme]="{width:'300px',height:'35px'}"></ngx-skeleton-loader>
-
-  <div>
-    <ngx-skeleton-loader count="1" appearance="line" [theme]="{width:'150px',height:'50px'}"></ngx-skeleton-loader>
-  </div>
+  <div></div>
+<div>
+  <ngx-skeleton-loader count="1" appearance="line" [theme]="{width:'150px',height:'50px'}"></ngx-skeleton-loader>
+</div>
 </div>
 
 <div class="d-flex justify-content-evenly align-items-center" *ngIf="isLoading">

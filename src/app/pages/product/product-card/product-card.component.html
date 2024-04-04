@@ -52,10 +52,13 @@
           data-tooltip="tooltip"
           data-placement="top"
           title="Add to Cart"
-         [class.click]="isClicked"
+          [class.click]="isClicked"
           (click)="toggleCart(prd._id)"
         >
-          <i class="fas fa-shopping-cart" [ngClass]="{'is-in-cart':isClicked}"></i>
+          <i
+            class="fas fa-shopping-cart"
+            [ngClass]="{ 'is-in-cart': isClicked }"
+          ></i>
         </button>
 
         <button
@@ -77,20 +80,22 @@
   <!-- <span class="product-o__category">
     {{ prd.category }}</span> -->
 
-  <span class="product-o__name card-title"> {{ prd.title }}</span>
+  <span class="product-o__name card-title title"> {{ prd.title }}</span>
 
   <p class="product-o__name mb-0">Brand: {{ prd.brand }}</p>
-  <span class="product-o__price text">
-    ${{ prd.price }}
-
-    <span class="product-o__discount">{{ prd.discount }}</span></span
-  >
-
+  
   <div class="product-o__rating gl-rating-style">
     <i class="fas fa-star"></i><i class="fas fa-star"></i
-    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-    ><i class="fas fa-star-half-alt"></i>
+      ><i class="fas fa-star"></i><i class="fas fa-star"></i
+        ><i class="fas fa-star-half-alt"></i>
+        
+        <span class="product-o__review">(23)</span>
+      </div>
+      <span class="product-o__price"
+              >EGP {{prd.price - (prd.price * (prd.discount/100))  }} 
 
-    <span class="product-o__review">(23)</span>
-  </div>
+              <span class="product-o__discount">{{
+                prd.price 
+              }}</span></span
+            >
 </div>
