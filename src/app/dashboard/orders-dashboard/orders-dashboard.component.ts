@@ -16,18 +16,17 @@ export class OrdersDashboardComponent implements OnInit {
   allOrders: any = [];
   options: string[] = ['Accepted', 'Pending', 'Canceled'];
   selectedOption: string;
-  loading:boolean=false;
+  loading: boolean = false;
 
   ngOnInit() {
-    this.loading=true;
+    this.loading = true;
     this.ordersRequestsServices.getAllOrders().subscribe((data: any) => {
       this.allOrders = data;
-      this.loading=false;
+      this.loading = false;
       this.allOrders.forEach((data: any) => {
         data.dateOfOrder = data.dateOfOrder.split('T')[0];
         console.log(data.dateOfOrder);
         this.selectedOption = data.status;
-        this.giveStatusColor(data.status);
       });
     });
   }
@@ -36,19 +35,6 @@ export class OrdersDashboardComponent implements OnInit {
     const target = event.target as HTMLSelectElement;
     console.log(target.value);
     return target.value;
-  }
-
-  giveStatusColor(status: string): string {
-    switch (status) {
-      case 'Accepted':
-        return '#00CC00';
-      case 'Pending':
-        return '#0080FF';
-      case 'Canceled':
-        return '#FF0000';
-      default:
-        return 'black';
-    }
   }
 
   updateOrderStatus(id: string, status: string) {

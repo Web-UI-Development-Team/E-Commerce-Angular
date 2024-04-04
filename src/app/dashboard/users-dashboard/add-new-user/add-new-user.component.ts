@@ -24,6 +24,7 @@ import { PopUpErrorComponent } from '../../../shared/pop-up-error/pop-up-error.c
 export class AddNewUserComponent {
   imageData: String =
     'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png';
+  allUsers: any = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,7 +65,12 @@ export class AddNewUserComponent {
     //wishList: [''],
   };
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userRequestService.getAllUsersRequest().subscribe((data) => {
+      console.log(data);
+      this.allUsers = data;
+    });
+  }
 
   getFormControl(controlName: string) {
     return this.userForm.get(controlName);

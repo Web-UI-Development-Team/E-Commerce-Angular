@@ -11,6 +11,7 @@ import { ProductsRequestsService } from '../../../../services/product/products-r
 import { SuccessPopUpComponent } from '../../../../shared/success-pop-up/success-pop-up.component';
 import { take, timer } from 'rxjs';
 import { PopUpErrorComponent } from '../../../../shared/pop-up-error/pop-up-error.component';
+import { CategoryRequestsService } from '../../../../services/category/category-requests.service';
 
 @Component({
   selector: 'app-add-product',
@@ -24,6 +25,7 @@ export class AddProductComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private productRequestServices: ProductsRequestsService,
+    private categoryRequestsService: CategoryRequestsService,
     private dialog: MatDialog,
     public dialogRef: MatDialogRef<AddProductComponent>
   ) {}
@@ -64,8 +66,16 @@ export class AddProductComponent implements OnInit {
     images: new FormControl([[]], [Validators.required]),
   });
 
-  ngOnInit(): void {
-    //this.productService.addNewProduct(this.initialFormValues);
+  categories: any = [];
+
+  ngOnInit() {
+    this.categoryRequestsService
+      .getAllCategoriesRequest()
+      .subscribe((data: any) => {
+        console.log(data);
+        this.categories = data.data;
+        console.log(this.categories);
+      });
   }
 
   onFileSelect(event: Event) {
@@ -139,8 +149,8 @@ export class AddProductComponent implements OnInit {
           }
         },
         (error) => {
-          this.openErrorPopUp();
           console.log(error);
+          this.openErrorPopUp();
         }
       );
   }
