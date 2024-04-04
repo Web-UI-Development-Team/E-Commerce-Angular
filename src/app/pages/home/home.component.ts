@@ -74,8 +74,11 @@ export class HomeComponent implements OnInit {
       .getAllCategoriesRequest()
       .subscribe((data: any) => {
         this.allCategories = data.data;
+        this.selectedCategory = this.allCategories[0];
       });
     this.getAllProducts();
+
+    this.getProductsByCategory(this.allCategories[0])
 
     if (this.cartService.productIds.includes(this.allProducts._id)) {
       this.isClicked = true;

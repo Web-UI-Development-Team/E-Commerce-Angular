@@ -155,4 +155,5 @@ body{
   text-decoration: none;
   color: var(--primary);
   font-size: 20px;
+  font-weight: bold;
 }
