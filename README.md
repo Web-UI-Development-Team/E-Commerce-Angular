@@ -32,4 +32,4 @@
     </il>
 </ul>
 
-<h2>Backend: https://github.com/Web-UI-Development-Team/E-Commerce-NodeJS</h2>
+<h2>Back-end: https://github.com/Web-UI-Development-Team/E-Commerce-NodeJS</h2>
