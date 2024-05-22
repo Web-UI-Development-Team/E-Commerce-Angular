@@ -25,7 +25,7 @@
         - Mariam: Products ( Pagination - Sorting By Price, Category (RxJS) ), Navbar<br>
     </il>
     <il>
-        - Esraa: Orders, Order Details<br>
+        - Esraa: Orders, Order Details, Review<br>
     </il>
     <il>
         - Nadine: Authentication ( Sign In & Sign Up (Interceptor - Guards) ), About, Contact Us<br>
