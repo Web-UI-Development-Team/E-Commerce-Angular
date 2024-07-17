@@ -33,3 +33,5 @@
 </ul>
 
 <h2>Back-end: https://github.com/Web-UI-Development-Team/E-Commerce-NodeJS</h2>
+
+// the demo https://hero-tech.vercel.app/user/home
